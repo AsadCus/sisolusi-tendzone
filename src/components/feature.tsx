@@ -51,7 +51,7 @@ export default function WhyChooseUs() {
             src="/images/office/office.png"
             alt="Why Choose Us"
             fill
-            className="object-cover"
+            className="object-cover transition duration-200 hover:scale-105"
           />
         </div>
         <div className="space-y-2">
@@ -66,7 +66,7 @@ export default function WhyChooseUs() {
             </p>
           </div>
 
-          <div className="space-y-5">
+          <div className="space-y-3">
             {features.map((item, index) => {
               const Icon = item.icon;
               return (
@@ -74,8 +74,10 @@ export default function WhyChooseUs() {
                   key={index}
                   className="flex gap-2 group p-2 rounded-2xl bg-white hover:bg-red-50 transition duration-300 shadow-sm hover:shadow-md"
                 >
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-600 text-white shrink-0 group-hover:bg-red-700 transition">
+                  <div className="flex items-center justify-center">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-600 text-white shrink-0 group-hover:bg-red-700 transition duration-200 group-hover:transform-3d group-hover:-rotate-y-180">
                     <Icon size={20} />
+                  </div>
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 group-hover:text-red-600 transition">
