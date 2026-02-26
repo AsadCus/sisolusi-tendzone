@@ -293,7 +293,7 @@ export default function NavbarLanding(){
                   ref={searchRef}
                   type="text"
                   placeholder="Search..."
-                  className="w-full bg-[#1e1e1e] text-sm text-neutral-200 placeholder-neutral-500 px-3 py-2 outline-none"
+                  className="w-full bg-gray-200 text-sm text-neutral-200 placeholder-neutral-500 px-3 py-2 outline-none"
                   onBlur={() => setSearchOpen(false)}
                 />
               </div>
@@ -321,7 +321,7 @@ export default function NavbarLanding(){
         </nav>
 
         <div
-          className={`lg:hidden fixed inset-x-0 bottom-0 z-40 bg-[#0f0f0f]/98 backdrop-blur-lg transition-all duration-300 overflow-y-auto
+          className={`lg:hidden fixed inset-x-0 bottom-0 z-40 bg-gray-200/98 backdrop-blur-lg transition-all duration-300 overflow-y-auto
             ${mobileOpen
               ? "opacity-100 translate-y-0 pointer-events-auto top-25"
               : "opacity-0 -translate-y-2 pointer-events-none top-25"
@@ -332,7 +332,7 @@ export default function NavbarLanding(){
               <input
                 type="text"
                 placeholder="Search..."
-                className="flex-1 bg-[#1e1e1e] border border-white/10 text-sm text-neutral-200 placeholder-neutral-500 px-3 py-2 rounded outline-none focus:border-red-500/50 transition-colors"
+                className="flex-1 bg-gray-200 border border-white/10 text-sm text-neutral-900 placeholder-neutral-500 px-3 py-2 rounded outline-none focus:border-red-500/50 transition-colors"
               />
               <button className="w-9 h-9 flex items-center justify-center bg-red-600 rounded text-white">
                 <Search size={15} strokeWidth={2.5} />
@@ -351,7 +351,7 @@ export default function NavbarLanding(){
             : setMobileOpen(false)
         }
         className={`w-full flex items-center justify-between px-3 py-3 text-sm font-semibold tracking-wide transition-colors
-          ${link.active ? "text-red-500" : "text-neutral-300 hover:text-red-500"}
+          ${link.active ? "text-red-500" : "text-neutral-900 hover:text-red-500"}
         `}
       >
         <span>{link.label}</span>
@@ -370,7 +370,7 @@ export default function NavbarLanding(){
               key={item}
               href="#"
               onClick={() => setMobileOpen(false)}
-              className="text-sm text-neutral-400 hover:text-red-500 transition"
+              className="text-sm text-neutral-900 hover:text-red-500 transition"
             >
               {item}
             </Link>
@@ -382,22 +382,22 @@ export default function NavbarLanding(){
         <div className="pl-4 pb-4 grid grid-cols-1 gap-4">
           <div>
             <p className="text-red-500 text-xs font-semibold mb-1">Audio Processor</p>
-            <Link href="/products/open-dsp" className="block text-sm text-neutral-400 hover:text-red-500">Open Architecture DSP</Link>
-            <Link href="/products/web-dsp" className="block text-sm text-neutral-400 hover:text-red-500">Web Based Audio Processors</Link>
-            <Link href="/products/fixed-dsp" className="block text-sm text-neutral-400 hover:text-red-500">Fixed Audio Processors</Link>
+            <Link href="/products/open-dsp" className="block text-sm text-neutral-900 hover:text-red-500">Open Architecture DSP</Link>
+            <Link href="/products/web-dsp" className="block text-sm text-neutral-900 hover:text-red-500">Web Based Audio Processors</Link>
+            <Link href="/products/fixed-dsp" className="block text-sm text-neutral-900 hover:text-red-500">Fixed Audio Processors</Link>
           </div>
 
           <div>
             <p className="text-red-500 text-xs font-semibold mb-1">Network Audio</p>
-            <Link href="/products/audio-over-ip" className="block text-sm text-neutral-400 hover:text-red-500">Audio Over IP</Link>
-            <Link href="/products/network-mic" className="block text-sm text-neutral-400 hover:text-red-500">Network Microphone</Link>
-            <Link href="/products/network-speaker" className="block text-sm text-neutral-400 hover:text-red-500">Network Speaker</Link>
+            <Link href="/products/audio-over-ip" className="block text-sm text-neutral-900 hover:text-red-500">Audio Over IP</Link>
+            <Link href="/products/network-mic" className="block text-sm text-neutral-900 hover:text-red-500">Network Microphone</Link>
+            <Link href="/products/network-speaker" className="block text-sm text-neutral-900 hover:text-red-500">Network Speaker</Link>
           </div>
 
           <div>
             <p className="text-red-500 text-xs font-semibold mb-1">Conference System</p>
-            <Link href="/products/conference-network" className="block text-sm text-neutral-400 hover:text-red-500">Network Conference</Link>
-            <Link href="/products/conference-24g" className="block text-sm text-neutral-400 hover:text-red-500">2.4G Wireless</Link>
+            <Link href="/products/conference-network" className="block text-sm text-neutral-900 hover:text-red-500">Network Conference</Link>
+            <Link href="/products/conference-24g" className="block text-sm text-neutral-900 hover:text-red-500">2.4G Wireless</Link>
           </div>
         </div>
       )}
@@ -408,14 +408,14 @@ export default function NavbarLanding(){
             <div className="mt-6 pt-4 border-t border-white/10 flex flex-col gap-3">
               <Link
                 href="tel:8613632976066"
-                className="flex items-center gap-2 text-sm text-neutral-400 hover:text-red-500 transition-colors no-underline"
+                className="flex items-center gap-2 text-sm text-neutral-900 hover:text-red-500 transition-colors no-underline"
               >
                 <Phone size={14} strokeWidth={2} />
                 <span>8613632976066</span>
               </Link>
               <Link
                 href="mailto:sales@tendzone.net"
-                className="flex items-center gap-2 text-sm text-neutral-400 hover:text-red-500 transition-colors no-underline"
+                className="flex items-center gap-2 text-sm text-neutral-900 hover:text-red-500 transition-colors no-underline"
               >
                 <Mail size={14} strokeWidth={2} />
                 <span>sales@tendzone.net</span>
