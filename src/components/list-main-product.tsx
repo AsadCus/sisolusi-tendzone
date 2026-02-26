@@ -48,7 +48,7 @@ const productCategories = [
 export default function MainProduct() {
   return (
     <section className="w-full py-16">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="py-4 space-y-2">
           <h1 className="text-center lg:text-5xl text-xl">Main Product</h1>
           <p className="text-center lg:text-xl text-md text-gray-600 font-light">

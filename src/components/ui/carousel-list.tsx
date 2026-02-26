@@ -12,25 +12,27 @@ import { motion, Transition, useMotionValue } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+
 export type CarouselContextType = {
   index: number;
   setIndex: (newIndex: number) => void;
   itemsCount: number;
   setItemsCount: (newItemsCount: number) => void;
+  visibleItemsCount: number;
+  setVisibleItemsCount: (n: number) => void;
   disableDrag: boolean;
 };
 
-const CarouselContext = createContext<CarouselContextType | undefined>(
-  undefined
-);
+const CarouselContext = createContext<CarouselContextType | undefined>(undefined);
 
 function useCarousel() {
   const context = useContext(CarouselContext);
   if (!context) {
-    throw new Error('useCarousel must be used within an CarouselProvider');
+    throw new Error('useCarousel must be used within a CarouselProvider');
   }
   return context;
 }
+
 
 export type CarouselProviderProps = {
   children: ReactNode;
@@ -47,6 +49,7 @@ function CarouselProvider({
 }: CarouselProviderProps) {
   const [index, setIndex] = useState<number>(initialIndex);
   const [itemsCount, setItemsCount] = useState<number>(0);
+  const [visibleItemsCount, setVisibleItemsCount] = useState<number>(1);
 
   const handleSetIndex = (newIndex: number) => {
     setIndex(newIndex);
@@ -64,6 +67,8 @@ function CarouselProvider({
         setIndex: handleSetIndex,
         itemsCount,
         setItemsCount,
+        visibleItemsCount,
+        setVisibleItemsCount,
         disableDrag,
       }}
     >
@@ -71,6 +76,7 @@ function CarouselProvider({
     </CarouselContext.Provider>
   );
 }
+
 
 export type CarouselProps = {
   children: ReactNode;
@@ -113,6 +119,7 @@ function Carousel({
   );
 }
 
+
 export type CarouselNavigationProps = {
   className?: string;
   classNameButton?: string;
@@ -124,73 +131,60 @@ function CarouselNavigation({
   classNameButton,
   alwaysShow,
 }: CarouselNavigationProps) {
-  const { index, setIndex, itemsCount } = useCarousel();
+  const { index, setIndex, itemsCount, visibleItemsCount } = useCarousel();
+  const maxIndex = itemsCount - visibleItemsCount;
 
   return (
-   <div
-  className={cn(
-    "pointer-events-none absolute inset-0 flex items-center justify-between px-4",
-    className
-  )}
->
+    <div
+      className={cn(
+        'pointer-events-none absolute inset-0 flex items-center justify-between px-4',
+        className
+      )}
+    >
+      {/* Prev */}
       <button
         type='button'
         aria-label='Previous slide'
+        onClick={() => setIndex(index <= 0 ? maxIndex : index - 1)}
         className={cn(
-          'pointer-events-auto h-fit w-fit rounded-full bg-red-500 p-2 transition-opacity duration-300 dark:bg-red-500',
+          'pointer-events-auto h-fit w-fit rounded-full bg-red-500 p-2 transition-opacity duration-300',
           alwaysShow
-            ? 'opacity-100'
-            : 'opacity-0 group-hover/hover:opacity-100',
-          alwaysShow
-            ? 'disabled:opacity-40'
-            : 'group-hover/hover:disabled:opacity-40',
+            ? 'opacity-100 disabled:opacity-40'
+            : 'opacity-0 group-hover/hover:opacity-100 group-hover/hover:disabled:opacity-40',
           classNameButton
         )}
-       onClick={() => {
-  setIndex(index === itemsCount - 1 ? 0 : index + 1);
-}}      >
-        <ChevronLeft
-          className='stroke-zinc-600 dark:stroke-zinc-50'
-          size={16}
-        />
+      >
+        <ChevronLeft className='stroke-zinc-50' size={16} />
       </button>
+
+      {/* Next */}
       <button
         type='button'
+        aria-label='Next slide'
+        onClick={() => setIndex(index >= maxIndex ? 0 : index + 1)}
         className={cn(
           'pointer-events-auto h-fit w-fit rounded-full bg-zinc-50 p-2 transition-opacity duration-300 dark:bg-red-500',
           alwaysShow
-            ? 'opacity-100'
-            : 'opacity-0 group-hover/hover:opacity-100',
-          alwaysShow
-            ? 'disabled:opacity-40'
-            : 'group-hover/hover:disabled:opacity-40',
+            ? 'opacity-100 disabled:opacity-40'
+            : 'opacity-0 group-hover/hover:opacity-100 group-hover/hover:disabled:opacity-40',
           classNameButton
         )}
-        aria-label='Next slide'
-      onClick={() => {
-  const maxIndex = itemsCount - 1;
-  setIndex(index >= maxIndex ? 0 : index + 1);
-}}
       >
-        <ChevronRight
-          className='stroke-zinc-900 dark:stroke-zinc-50'
-          size={16}
-        />
+        <ChevronRight className='stroke-zinc-900 dark:stroke-zinc-50' size={16} />
       </button>
     </div>
   );
 }
+
 
 export type CarouselIndicatorProps = {
   className?: string;
   classNameButton?: string;
 };
 
-function CarouselIndicator({
-  className,
-  classNameButton,
-}: CarouselIndicatorProps) {
-  const { index, itemsCount, setIndex } = useCarousel();
+function CarouselIndicator({ className, classNameButton }: CarouselIndicatorProps) {
+  const { index, itemsCount, visibleItemsCount, setIndex } = useCarousel();
+  const maxIndex = itemsCount - visibleItemsCount;
 
   return (
     <div
@@ -200,7 +194,7 @@ function CarouselIndicator({
       )}
     >
       <div className='flex space-x-2'>
-        {Array.from({ length: itemsCount }, (_, i) => (
+        {Array.from({ length: maxIndex + 1 }, (_, i) => (
           <button
             key={i}
             type='button'
@@ -220,97 +214,83 @@ function CarouselIndicator({
   );
 }
 
+
 export type CarouselContentProps = {
   children: ReactNode;
   className?: string;
   transition?: Transition;
 };
 
-function CarouselContent({
-  children,
-  className,
-  transition,
-}: CarouselContentProps) {
-  const { index, setIndex, setItemsCount, disableDrag } = useCarousel();
-  const [visibleItemsCount, setVisibleItemsCount] = useState(1);
+function CarouselContent({ children, className, transition }: CarouselContentProps) {
+  const { index, setIndex, setItemsCount, setVisibleItemsCount, disableDrag } =
+    useCarousel();
+  const [visibleItemsCount, setLocalVisibleCount] = useState(1);
   const dragX = useMotionValue(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsLength = Children.count(children);
-
-  useEffect(() => {
   const maxIndex = itemsLength - visibleItemsCount;
-  if (index > maxIndex) {
-    setIndex(maxIndex);
-  }
-}, [visibleItemsCount, itemsLength]);
 
+  // Sync visibleItemsCount ke context
   useEffect(() => {
-    if (!containerRef.current) {
-      return;
+    setVisibleItemsCount(visibleItemsCount);
+  }, [visibleItemsCount, setVisibleItemsCount]);
+
+  // Clamp index saat resize / visible count berubah
+  useEffect(() => {
+    if (index > maxIndex) {
+      setIndex(Math.max(0, maxIndex));
     }
+  }, [visibleItemsCount, itemsLength]);
 
-    const options = {
-      root: containerRef.current,
-      threshold: 0.5,
-    };
+  // Observe berapa item yang terlihat
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-    const observer = new IntersectionObserver((entries) => {
-      const visibleCount = entries.filter(
-        (entry) => entry.isIntersecting
-      ).length;
-      setVisibleItemsCount(visibleCount);
-    }, options);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleCount = entries.filter((e) => e.isIntersecting).length;
+        setLocalVisibleCount(visibleCount);
+      },
+      { root: containerRef.current, threshold: 0.5 }
+    );
 
-    const childNodes = containerRef.current.children;
-    Array.from(childNodes).forEach((child) => observer.observe(child));
+    Array.from(containerRef.current.children).forEach((child) =>
+      observer.observe(child)
+    );
 
     return () => observer.disconnect();
-  }, [children, setItemsCount]);
+  }, [children]);
 
+  // Set total items ke context
   useEffect(() => {
-    if (!itemsLength) {
-      return;
-    }
-
-    setItemsCount(itemsLength);
+    if (itemsLength) setItemsCount(itemsLength);
   }, [itemsLength, setItemsCount]);
 
-const maxIndex = itemsLength - visibleItemsCount;
-
-const onDragEnd = () => {
-  const x = dragX.get();
-
-  if (x <= -10) {
-    setIndex(index >= maxIndex ? 0 : index + 1);
-  } else if (x >= 10) {
-    setIndex(index <= 0 ? maxIndex : index - 1);
-  }
-};
+  const onDragEnd = () => {
+    const x = dragX.get();
+    if (x <= -10) {
+      setIndex(index >= maxIndex ? 0 : index + 1);
+    } else if (x >= 10) {
+      setIndex(index <= 0 ? maxIndex : index - 1);
+    }
+  };
 
   return (
     <motion.div
+      ref={containerRef}
       drag={disableDrag ? false : 'x'}
-      dragConstraints={
-        disableDrag
-          ? undefined
-          : {
-              left: 0,
-              right: 0,
-            }
-      }
+      dragConstraints={disableDrag ? undefined : { left: 0, right: 0 }}
       dragMomentum={disableDrag ? undefined : false}
-      style={{
-        x: disableDrag ? undefined : dragX,
-      }}
+      style={{ x: disableDrag ? undefined : dragX }}
       animate={{
         translateX: `-${index * (100 / visibleItemsCount)}%`,
       }}
       onDragEnd={disableDrag ? undefined : onDragEnd}
       transition={
-        transition || {
+        transition ?? {
+          type: 'spring',
           damping: 18,
           stiffness: 90,
-          type: 'spring',
           duration: 0.2,
         }
       }
@@ -319,12 +299,12 @@ const onDragEnd = () => {
         !disableDrag && 'cursor-grab active:cursor-grabbing',
         className
       )}
-      ref={containerRef}
     >
       {children}
     </motion.div>
   );
 }
+
 
 export type CarouselItemProps = {
   children: ReactNode;
@@ -334,15 +314,13 @@ export type CarouselItemProps = {
 function CarouselItem({ children, className }: CarouselItemProps) {
   return (
     <motion.div
-      className={cn(
-        'w-full min-w-0 shrink-0 grow-0 overflow-hidden',
-        className
-      )}
+      className={cn('w-full min-w-0 shrink-0 grow-0 overflow-hidden', className)}
     >
       {children}
     </motion.div>
   );
 }
+
 
 export {
   Carousel,

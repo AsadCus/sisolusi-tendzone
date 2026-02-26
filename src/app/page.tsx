@@ -12,6 +12,11 @@ import WhyChooseUs from "@/components/feature";
 import OdmOemSection from "@/components/oem-odm"
 import BannerCarousel from "@/components/banner-product";
 import CertifiedBy from "@/components/certified"
+import ApplicationAreasSection from "@/components/application-areas";
+import TestimoniesAreasSection from "@/components/testminonies";
+import SponsoredBy from "@/components/sponsored";
+import BlogSection from "@/components/blog";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
@@ -23,6 +28,13 @@ export default function Home() {
       <AboutSection />
       <WhyChooseUs />
       <OdmOemSection/>
+      <ApplicationAreasSection/>
+      <TestimoniesAreasSection/>
+      <div className="bg-white p-12">
+      <SponsoredBy/>
+      <BlogSection/>
+      </div>
+      <Footer/>
     </div>
   );
 }

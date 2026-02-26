@@ -154,7 +154,7 @@ export default function NavbarLanding(){
   }, [mobileOpen]);
   return (
  <div className="font-sans">
-  <header className="fixed top-0 left-0 w-full z-50">
+  <header className="fixed top-0 left-0 w-full z-999">
     <div className={cn(
   "bg-none transition-all duration-300",
   scrolled ? "h-0 opacity-0" : "h-8 md:h-10 opacity-100"

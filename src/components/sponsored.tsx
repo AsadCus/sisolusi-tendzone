@@ -1,6 +1,6 @@
 import { Marquee } from "./ui/marquee";
 
-export default function SertifiedBy(){
+export default function SponsoredBy(){
    const reviews = [
   {
     img: "https://avatar.vercel.sh/jack",
@@ -36,8 +36,8 @@ function ReviewCard({ img }: { img: string }) {
 
 function MarqueeDemo() {
   return (
-    <div className="relative w-fullmax-w-5xl overflow-hidden">
-      <Marquee pauseOnHover className="[--duration:20s]">
+    <div className="relative w-full">
+      <Marquee pauseOnHover className="[--duration:5s]">
         {firstRow.map((r) => (
           <ReviewCard key={r.img} {...r} />
         ))}
@@ -47,12 +47,8 @@ function MarqueeDemo() {
 }
    
     return (
-       <div className="w-full bg-white py-16">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
-            <h2 className="text-4xl font-bold whitespace-nowrap">
-              Certified By
-            </h2>
-
+       <div className="w-full py-16">
+          <div className="w-full max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-10">
             <div className="flex-1 overflow-hidden">
               <MarqueeDemo />
             </div>
