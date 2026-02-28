@@ -207,7 +207,7 @@ export default function NavbarLanding(){
     <Link
   href={link.href}
   className={cn(
-    "flex items-center gap-1 px-3 h-16 text-sm font-semibold transition-colors relative",
+    "flex items-center gap-1 px-3 h-16 text-sm font-medium transition-colors relative",
     scrolled ? "text-black hover:text-red-500" : "text-white hover:text-red-500",
     link.active ? "text-red-500" : ""
   )}
@@ -269,7 +269,7 @@ export default function NavbarLanding(){
             </div>
 
             <div className="p-3 text-center">
-              <p className="text-sm font-semibold text-neutral-800 group-hover:text-red-600 transition">
+              <p className="text-sm font-medium text-neutral-800 group-hover:text-red-600 transition">
                 {cat.name}
               </p>
             </div>
@@ -350,7 +350,7 @@ export default function NavbarLanding(){
             ? setActiveMobileMenu(isOpen ? null : link.label)
             : setMobileOpen(false)
         }
-        className={`w-full flex items-center justify-between px-3 py-3 text-sm font-semibold tracking-wide transition-colors
+        className={`w-full flex items-center justify-between px-3 py-3 text-sm font-medium tracking-wide transition-colors
           ${link.active ? "text-red-500" : "text-neutral-900 hover:text-red-500"}
         `}
       >
@@ -381,21 +381,21 @@ export default function NavbarLanding(){
       {isOpen && link.label === "Products" && (
         <div className="pl-4 pb-4 grid grid-cols-1 gap-4">
           <div>
-            <p className="text-red-500 text-xs font-semibold mb-1">Audio Processor</p>
+            <p className="text-red-500 text-xs font-medium mb-1">Audio Processor</p>
             <Link href="/products/open-dsp" className="block text-sm text-neutral-900 hover:text-red-500">Open Architecture DSP</Link>
             <Link href="/products/web-dsp" className="block text-sm text-neutral-900 hover:text-red-500">Web Based Audio Processors</Link>
             <Link href="/products/fixed-dsp" className="block text-sm text-neutral-900 hover:text-red-500">Fixed Audio Processors</Link>
           </div>
 
           <div>
-            <p className="text-red-500 text-xs font-semibold mb-1">Network Audio</p>
+            <p className="text-red-500 text-xs font-medium mb-1">Network Audio</p>
             <Link href="/products/audio-over-ip" className="block text-sm text-neutral-900 hover:text-red-500">Audio Over IP</Link>
             <Link href="/products/network-mic" className="block text-sm text-neutral-900 hover:text-red-500">Network Microphone</Link>
             <Link href="/products/network-speaker" className="block text-sm text-neutral-900 hover:text-red-500">Network Speaker</Link>
           </div>
 
           <div>
-            <p className="text-red-500 text-xs font-semibold mb-1">Conference System</p>
+            <p className="text-red-500 text-xs font-medium mb-1">Conference System</p>
             <Link href="/products/conference-network" className="block text-sm text-neutral-900 hover:text-red-500">Network Conference</Link>
             <Link href="/products/conference-24g" className="block text-sm text-neutral-900 hover:text-red-500">2.4G Wireless</Link>
           </div>
