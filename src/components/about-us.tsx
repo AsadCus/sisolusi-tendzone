@@ -44,7 +44,6 @@ export default function AboutSection() {
             className="object-cover transition duration-300 hover:scale-105"
           />
         </div>
-
       </div>
     </section>
   );

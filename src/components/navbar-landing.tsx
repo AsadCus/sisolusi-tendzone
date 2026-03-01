@@ -133,7 +133,7 @@ export default function NavbarLanding() {
 
   return (
     <>
-      {/* Keyframe styles injected once */}
+
       <style>{`
         @keyframes slideDown {
           from { opacity: 0; transform: translateY(-6px); }
@@ -147,9 +147,9 @@ export default function NavbarLanding() {
       `}</style>
 
       <div className="font-sans">
-        <header className="fixed top-0 left-0 w-full z-50">
+        <header className="fixed top-0 left-0 w-full z-100">
 
-          {/* ── TOP INFO BAR ── */}
+
           <div className={cn(
             "transition-all duration-500 overflow-hidden",
             scrolled ? "h-0 opacity-0" : "h-9 opacity-100"
@@ -165,12 +165,11 @@ export default function NavbarLanding() {
                 </Link>
               </div>
               <div className="flex items-center gap-3 ml-auto">
-                {/* YouTube pill */}
+
                 <Link href="/" className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 transition-colors px-2.5 py-1 rounded-full text-white text-xs font-medium">
                   <Youtube size={12} fill="white" strokeWidth={0} />
                   <span>YouTube</span>
                 </Link>
-                {/* Language pill */}
                 <button className="flex items-center gap-1 text-xs text-white/80 hover:text-white transition-colors border border-white/20 hover:border-white/40 px-2.5 py-1 rounded-full">
                   <Globe size={11} strokeWidth={2} /><span>EN</span><ChevronDown size={10} />
                 </button>
@@ -178,13 +177,10 @@ export default function NavbarLanding() {
             </div>
           </div>
 
-          {/* ── MAIN NAV ── */}
           <nav className={cn(
             "transition-all duration-300 mx-4 rounded-2xl",
             scrolled
-              // glassmorphism pill when scrolled
               ? "bg-white/90 backdrop-blur-xl shadow-lg shadow-black/10 mt-2 border border-gray-200/60"
-              // transparent when at top
               : "bg-transparent mt-0 border border-transparent"
           )}>
             <div className="max-w-7xl mx-auto px-5 flex items-center h-14">
@@ -225,9 +221,10 @@ export default function NavbarLanding() {
                     </Link>
 
                     {link.label === "Products" && (
-                      <div className="fixed left-4 right-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50"
+                      <div className="fixed left-4 right-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                         style={{
                           top: scrolled ? "72px" : "96px",
+                          zIndex: 100, 
                           transition: "opacity 180ms ease, visibility 180ms ease, top 300ms ease"
                         }}>
                         <div className="mega-enter bg-white rounded-3xl shadow-2xl shadow-black/15 overflow-hidden border border-gray-100">
@@ -269,9 +266,9 @@ export default function NavbarLanding() {
                     )}
 
                     {link.label !== "Products" && link.dropdown && megaData[link.label as keyof typeof megaData] && (
-                      <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-50"
+                      <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-100"
                         style={{ transition: "opacity 150ms ease, visibility 150ms ease" }}>
-                        <div className="mega-enter bg-white rounded-2xl shadow-xl shadow-black/10 border border-gray-100 overflow-hidden min-w-[190px]">
+                        <div className="mega-enter bg-white rounded-2xl shadow-xl shadow-black/10 border border-gray-100 overflow-hidden min-w-47.5">
                           <div className="px-5 pt-4 pb-2.5">
                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
                               {megaData[link.label as keyof typeof megaData].title}
@@ -342,9 +339,10 @@ export default function NavbarLanding() {
             </div>
           </nav>
 
+
           <div className={cn(
-            "lg:hidden fixed inset-x-3 bottom-3 z-40 bg-white rounded-2xl shadow-2xl overflow-y-auto transition-all duration-300 border border-gray-100",
-            mobileOpen ? "opacity-100 pointer-events-auto top-30" : "opacity-0 pointer-events-none top-[120px]"
+            "lg:hidden fixed inset-x-3 bottom-3 z-100 bg-white rounded-2xl shadow-2xl overflow-y-auto transition-all duration-300 border border-gray-100",
+            mobileOpen ? "opacity-100 pointer-events-auto top-30" : "opacity-0 pointer-events-none top-30"
           )}>
             <div className="px-4 py-5 flex flex-col">
               <div className="flex items-center gap-2 mb-5 bg-gray-50 rounded-xl px-3 py-2">
@@ -415,7 +413,6 @@ export default function NavbarLanding() {
               </div>
             </div>
           </div>
-
         </header>
       </div>
     </>

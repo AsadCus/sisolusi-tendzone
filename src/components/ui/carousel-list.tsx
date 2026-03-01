@@ -141,20 +141,20 @@ function CarouselNavigation({
         className
       )}
     >
-      {/* Prev */}
+
       <button
         type='button'
         aria-label='Previous slide'
         onClick={() => setIndex(index <= 0 ? maxIndex : index - 1)}
         className={cn(
-          'pointer-events-auto h-fit w-fit rounded-full bg-red-500 p-2 transition-opacity duration-300',
+          'pointer-events-auto h-fit w-fit transition-all duration-300 text-red-500 hover:text-red-700',
           alwaysShow
-            ? 'opacity-100 disabled:opacity-40'
-            : 'opacity-0 group-hover/hover:opacity-100 group-hover/hover:disabled:opacity-40',
+            ? 'opacity-100'
+            : 'opacity-0 group-hover/hover:opacity-100',
           classNameButton
         )}
       >
-        <ChevronLeft className='stroke-zinc-50' size={16} />
+        <ChevronLeft size={28} strokeWidth={1.5} />
       </button>
 
       {/* Next */}
@@ -163,14 +163,14 @@ function CarouselNavigation({
         aria-label='Next slide'
         onClick={() => setIndex(index >= maxIndex ? 0 : index + 1)}
         className={cn(
-          'pointer-events-auto h-fit w-fit rounded-full bg-zinc-50 p-2 transition-opacity duration-300 dark:bg-red-500',
+          'pointer-events-auto h-fit w-fit transition-all duration-300 text-red-500 hover:text-red-700',
           alwaysShow
-            ? 'opacity-100 disabled:opacity-40'
-            : 'opacity-0 group-hover/hover:opacity-100 group-hover/hover:disabled:opacity-40',
+            ? 'opacity-100'
+            : 'opacity-0 group-hover/hover:opacity-100',
           classNameButton
         )}
       >
-        <ChevronRight className='stroke-zinc-900 dark:stroke-zinc-50' size={16} />
+        <ChevronRight size={28} strokeWidth={1.5} />
       </button>
     </div>
   );

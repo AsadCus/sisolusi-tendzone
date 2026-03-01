@@ -19,9 +19,7 @@ const getProductImage = (product: Product) => {
   ) {
     return product.galleries[0].file_url;
   }
-
   return "/images/categories/placeholder.jpg";
-
 };
 
 export default function MainProduct() {
@@ -30,30 +28,25 @@ export default function MainProduct() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(
-          process.env.NEXT_PUBLIC_API_PRODUCT_URL!
-        );
+        const res = await fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL!);
         const data = await res.json();
-         const banners = data.data || data;
-
-      const filtered = banners.filter(
-        (item: any) => item.supplier?.name === "TendZone"
-      );
-      
+        const banners = data.data || data;
+        const filtered = banners.filter(
+          (item: any) => item.supplier?.name === "TendZone",
+        );
         setProducts(filtered);
       } catch (err) {
         console.error("Fetch product error:", err);
       }
     }
-
     fetchData();
   }, []);
 
   return (
     <section className="w-full py-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="py-4 space-y-2">
-          <h1 className="text-center lg:text-5xl text-xl">
+      <div className="max-w-7xl mx-auto px-6 lg:px-24">
+        <div className="py-4 space-y-2 mb-6">
+          <h1 className="text-center lg:text-5xl text-xl font-semibold tracking-tight text-gray-900">
             Main Product
           </h1>
           <p className="text-center lg:text-xl text-md text-gray-600 font-light">
@@ -61,27 +54,26 @@ export default function MainProduct() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map((product) => (
             <Link
               key={product.id}
               href={`/products/${product.slug}`}
-              className="group rounded-xl overflow-hidden border border-neutral-200 hover:border-red-500 transition bg-white"
+              className="group rounded-xl overflow-hidden border border-neutral-200 hover:border-red-500 transition-colors duration-300 bg-white"
             >
-              <div className="relative h-80 w-full overflow-hidden">
+              <div className="relative w-full aspect-square overflow-hidden">
                 <Image
                   unoptimized
                   src={getProductImage(product)}
                   alt={product.name}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-              </div>
-
-              <div className="p-3 text-center">
-                <p className="text-sm font-semibold text-neutral-800 group-hover:text-red-600 transition">
-                  {product.name}
-                </p>
+                <div className="absolute inset-x-0 bottom-0 bg-red-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out flex items-center justify-center px-3 py-3">
+                  <p className="text-xs sm:text-sm font-medium text-white text-center line-clamp-2">
+                    {product.name}
+                  </p>
+                </div>
               </div>
             </Link>
           ))}

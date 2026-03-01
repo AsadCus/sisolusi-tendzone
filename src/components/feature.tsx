@@ -9,6 +9,12 @@ import {
   BadgeCheck,
 } from "lucide-react";
 import { LucideIcon } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const features: {
   icon: LucideIcon;
@@ -56,44 +62,45 @@ export default function WhyChooseUs() {
           />
         </div>
 
+   
         <div className="space-y-4">
           <div>
-            <h2 className="text-4xl md:text-5xl font-semibold text-gray-900">
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
               Why Choose Us
             </h2>
-            <p className="text-base mt-4 text-gray-600 leading-relaxed">
+            <p className="text-sm mt-3 text-gray-600 leading-relaxed">
               Our factory specializes in the design, development, and production
               of advanced AV products that cater to a wide range of applications.
             </p>
           </div>
 
-          <div className="space-y-3">
+          <Accordion type="single" collapsible defaultValue="item-0">
             {features.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div
+                <AccordionItem
                   key={index}
-                  className="flex gap-3 group p-3 rounded-2xl bg-white hover:bg-red-50 transition duration-300 shadow-sm hover:shadow-md"
+                  value={`item-${index}`}
+                  className="bg-white rounded-2xl shadow-sm mb-2 px-4 border-none"
                 >
-                  <div className="flex items-center justify-center shrink-0">
-                    <div className="flex items-center justify-center w-9 h-9 rounded-full bg-red-600 text-white group-hover:bg-red-700 transition duration-200">
-                      <Icon size={18} />
+                  <AccordionTrigger className="hover:no-underline group py-2.5">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-red-600 text-white group-hover:bg-red-700 transition duration-200 shrink-0">
+                        <Icon size={14} />
+                      </div>
+                      <span className="text-sm font-medium text-gray-900 group-hover:text-red-600 transition text-left">
+                        {item.title}
+                      </span>
                     </div>
-                  </div>
-                  <div>
-                    <h3 className="text-base font-semibold text-gray-900 group-hover:text-red-600 transition">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed mt-0.5 text-sm">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600 text-md leading-relaxed pl-10">
+                    {item.desc}
+                  </AccordionContent>
+                </AccordionItem>
               );
             })}
-          </div>
+          </Accordion>
         </div>
-        
       </div>
     </section>
   );
