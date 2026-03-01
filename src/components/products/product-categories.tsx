@@ -21,7 +21,7 @@ const categories: Category[] = [
     name: "All-in-one Solution",
     description:
       "Integrated audio system in a single rack-mountable chassis. Combines DSP processing, amplification, and network distribution for streamlined deployment.",
-    image: "/images/categories/all-in-one.jpg",
+    image: "/images/product/2k60-hdmi.png",
     slug: "all-in-one",
     badge: "Flagship",
   },
@@ -94,11 +94,11 @@ export default function ProductCategoriesSection() {
   return (
     <section className="w-full py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-center text-3xl md:text-4xl font-black tracking-tight text-gray-900 leading-none">
-              Products<br />
-              <span className="text-red-600">Categories</span>
+            <h2 className="text-center text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 leading-none">
+              Products 
+              <span className="text-red-600"> Categories</span>
             </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
           {categories.map((category) => (
             <Link
               key={category.id}
@@ -107,33 +107,24 @@ export default function ProductCategoriesSection() {
             >
               <Card className="h-full overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 shadow-none hover:shadow-xl hover:shadow-gray-200/80 hover:-translate-y-1 transition-all duration-300">
 
-                <div className="relative h-48 w-full bg-white overflow-hidden">
+                <div className="relative h-56 w-full bg-white overflow-hidden">
                   <Image
                     src={category.image}
                     alt={category.name}
-                    fill
-                    className="object-contain p-8 transition-transform duration-500 group-hover:scale-105"
+                    width={300}
+                    height={200}
+                    className="cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </div>
 
                 <CardContent className="p-5 flex flex-col gap-3">
-                  <div className="flex items-center justify-between">
-                    {category.badge && (
-                      <Badge
-                        variant="secondary"
-                        className="rounded-full text-[10px] font-bold tracking-widest uppercase px-2.5 py-0.5 bg-gray-200 text-gray-500 group-hover:bg-red-50 group-hover:text-red-600 transition-colors duration-300"
-                      >
-                        {category.badge}
-                      </Badge>
-                    )}
-                    <ArrowUpRight className="w-4 h-4 text-gray-300 group-hover:text-red-600 transition-colors duration-300 ml-auto" />
-                  </div>
-                  <h3 className="text-base font-bold text-gray-900 leading-snug group-hover:text-red-600 transition-colors duration-300">
+                 
+                  <h3 className="text-base font-medium text-gray-900 leading-snug group-hover:text-red-600 transition-colors duration-300">
                     {category.name}
                   </h3>
 
-                  <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
+                  <p className="text-xs font-light text-gray-500 leading-relaxed line-clamp-3">
                     {category.description}
                   </p>
                 </CardContent>

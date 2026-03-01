@@ -27,7 +27,7 @@ export default function SertifiedBy() {
           Certified By
         </h2>
 
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-x-hidden w-full max-w-xs lg:max-w-7xl">
           <Marquee pauseOnHover className="[--duration:20s]">
             {reviews.map((r) => (
               <ReviewCard key={r.img} {...r} />
