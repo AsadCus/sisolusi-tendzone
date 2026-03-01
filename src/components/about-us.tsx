@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function AboutSection() {
   return (
     <section className="w-full bg-gray-100 py-20">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="space-y-6">
+      <div className="max-w-6xl mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="space-y-6 text-justify">
           <h2 className="text-4xl md:text-5xl font-semibold text-gray-900">
             About Us
           </h2>
@@ -35,12 +35,13 @@ export default function AboutSection() {
             read more &gt;&gt;
           </Link>
         </div>
-        <div className="relative w-full h-87.5 md:h-112.5 lg:h-125 rounded-xl overflow-hidden shadow-lg">
+
+        <div className="relative w-full aspect-4/3 lg:aspect-auto lg:self-stretch rounded-xl overflow-hidden shadow-lg">
           <Image
             src="/images/office/loby.png"
             alt="About Tendzone"
             fill
-            className="object-cover  transition duration-150 hover:scale-105"
+            className="object-cover transition duration-300 hover:scale-105"
           />
         </div>
 

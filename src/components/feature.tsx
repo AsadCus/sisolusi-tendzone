@@ -45,8 +45,9 @@ const features: {
 export default function WhyChooseUs() {
   return (
     <section className="w-full bg-gray-100 py-20">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="relative w-full h-87.5 md:h-122.5 lg:h-125 rounded-xl overflow-hidden shadow-lg">
+      <div className="max-w-6xl mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+        <div className="relative w-full aspect-4/3 lg:aspect-auto lg:self-stretch rounded-xl overflow-hidden shadow-lg">
           <Image
             src="/images/office/office.png"
             alt="Why Choose Us"
@@ -54,15 +55,15 @@ export default function WhyChooseUs() {
             className="object-cover transition duration-200 hover:scale-105"
           />
         </div>
-        <div className="space-y-2">
+
+        <div className="space-y-4">
           <div>
-            <h2 className="text-md md:text-5xl font-semibold text-gray-900">
+            <h2 className="text-4xl md:text-5xl font-semibold text-gray-900">
               Why Choose Us
             </h2>
-            <p className="text-md mt-4 text-gray-600 leading-relaxed">
+            <p className="text-base mt-4 text-gray-600 leading-relaxed">
               Our factory specializes in the design, development, and production
-              of advanced AV products that cater to a wide range of
-              applications.
+              of advanced AV products that cater to a wide range of applications.
             </p>
           </div>
 
@@ -72,18 +73,18 @@ export default function WhyChooseUs() {
               return (
                 <div
                   key={index}
-                  className="flex gap-2 group p-2 rounded-2xl bg-white hover:bg-red-50 transition duration-300 shadow-sm hover:shadow-md"
+                  className="flex gap-3 group p-3 rounded-2xl bg-white hover:bg-red-50 transition duration-300 shadow-sm hover:shadow-md"
                 >
-                  <div className="flex items-center justify-center">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-600 text-white shrink-0 group-hover:bg-red-700 transition duration-200 group-hover:transform-3d group-hover:-rotate-y-180">
-                    <Icon size={20} />
-                  </div>
+                  <div className="flex items-center justify-center shrink-0">
+                    <div className="flex items-center justify-center w-9 h-9 rounded-full bg-red-600 text-white group-hover:bg-red-700 transition duration-200">
+                      <Icon size={18} />
+                    </div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-red-600 transition">
+                    <h3 className="text-base font-semibold text-gray-900 group-hover:text-red-600 transition">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed mt-1 text-sm">
+                    <p className="text-gray-600 leading-relaxed mt-0.5 text-sm">
                       {item.desc}
                     </p>
                   </div>
@@ -92,6 +93,7 @@ export default function WhyChooseUs() {
             })}
           </div>
         </div>
+
       </div>
     </section>
   );

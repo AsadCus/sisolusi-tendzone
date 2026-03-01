@@ -53,17 +53,6 @@ export default function BlogSection() {
             </h3>
             <p className="text-xs text-indigo-600 font-medium mt-1">Product Design</p>
           </div>
-          <div className="max-w-72 w-full hover:-translate-y-0.5 transition duration-300">
-            <img
-              className="rounded-xl"
-              src="https://images.unsplash.com/photo-1713947501966-34897f21162e?w=1200&h=800&auto=format&fit=crop&q=60"
-              alt=""
-            />
-            <h3 className="text-base text-slate-900 font-medium mt-3">
-              Design Thinking in Practice: How to Solve Real User Problems
-            </h3>
-            <p className="text-xs text-indigo-600 font-medium mt-1">Product Design</p>
-          </div>
         </div>
       </div>
     </>

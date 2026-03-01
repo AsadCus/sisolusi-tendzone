@@ -1,30 +1,30 @@
 import { AnimatedTestimonials } from "./ui/animated-testimonials";
 
 const testimonials = [
-  {
-    quote: "Faced with the severe situation of heavy project tasks and tight time, Dongwei's technical comrades overcame difficulties and worked overtime to carry out the work, effectively ensuring the smooth progress of major activities and providing strong support for our unit to complete the renovation and construction of a core site and technical support work. Here, I would like to express my sincere gratitude for your strong support!",
-    name: "Air Force Command College Warfighting Laboratory",
-    designation: "Judicial System",
-    src: "/images/apllications/office.png",
-  },
-  {
-    quote: "They work conscientiously and responsibly, respond to needs in a timely manner, and take the initiative to provide support with strong technical capabilities. They sacrifice a lot of personal rest time, work overtime to deploy equipment and develop and debug systems, and have made important contributions to the information construction of our department. For this, we would like to express our sincere gratitude to the above-mentioned personnel for their hard work, and thank your company for its strong support to our department.",
-    name: "Operations Laboratory",
-    designation: "Corporate Sector",
-    src: "/images/apllications/office2.png",
-  },
-  {
-    quote: "Professional AV setup for large scale events.",
-    name: "Event Support",
-    designation: "Event Industry",
-    src: "/images/apllications/office3.png",
-  },
-  {
-    quote: "Reliable safety communication systems.",
-    name: "Fire Protection",
-    designation: "Safety Infrastructure",
-    src: "/images/apllications/office4.png",
-  },
+ {
+  quote: "Despite tight deadlines and complex project demands, the team worked diligently and ensured every major activity ran smoothly. Their professionalism and strong technical support made a significant contribution to our project’s success.",
+  name: "Air Force Command College Warfighting Laboratory",
+  designation: "Judicial System",
+  src: "/images/apllications/office.png",
+},
+{
+  quote: "They are highly responsible, responsive, and technically capable. Their dedication and consistent support have played an important role in strengthening our department’s information systems.",
+  name: "Operations Laboratory",
+  designation: "Corporate Sector",
+  src: "/images/apllications/office2.png",
+},
+{
+  quote: "Their professional AV setup transformed our large-scale event into a seamless and unforgettable experience. The sound quality, visual clarity, and technical support were absolutely outstanding. From planning to execution, every detail was handled with precision and professionalism.",
+  name: "Event Support",
+  designation: "Event Industry",
+  src: "/images/apllications/office3.png",
+},
+{
+  quote: "We rely on their safety communication systems for maximum protection and efficiency. The reliability, fast response, and advanced technology give us complete peace of mind. Their commitment to safety standards and consistent performance truly sets them apart in the industry.",
+  name: "Fire Protection",
+  designation: "Safety Infrastructure",
+  src: "/images/apllications/office4.png",
+},
 ];
 
 

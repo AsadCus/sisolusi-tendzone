@@ -1,58 +1,74 @@
 import { Marquee } from "./ui/marquee";
 
-export default function SponsoredBy(){
-   const reviews = [
-  {
-    img: "https://avatar.vercel.sh/jack",
-  },
-  {
-    img: "https://avatar.vercel.sh/jill",
-  },
-  {
-    img: "https://avatar.vercel.sh/john",
-  },
-  {
-    img: "https://avatar.vercel.sh/jane",
-  },
-  {
-    img: "https://avatar.vercel.sh/jenny",
-  },
-  {
-    img: "https://avatar.vercel.sh/james",
-  },
-];
+const reviews = [
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo11.jpg?size=226x0"
 
-const firstRow = reviews.slice(0, reviews.length / 2);
+   },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo13.jpg?size=226x0" 
+
+  },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo2.jpg?size=226x0" 
+
+  },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo6.jpg?size=226x0" 
+
+  },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo10.jpg?size=226x0" 
+
+  },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo14.jpg?size=226x0"
+
+   },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo12.jpg?size=226x0"
+
+   },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo1.jpg?size=226x0"
+
+   },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo9.jpg?size=226x0"
+
+   },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo15.jpg?size=226x0" 
+
+  },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo3.jpg?size=226x0"
+
+   },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo4.jpg?size=226x0" 
+
+  },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo8.jpg?size=226x0"
+
+   },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo5.jpg?size=226x0"
+
+   },
+  { img: "https://www.tendzone.net/uploads/43135/index/homelogo/logo16.jpg?size=226x0"
+   },
+];
 
 function ReviewCard({ img }: { img: string }) {
   return (
-    <figure>
-      <div className="flex items-center gap-2">
-        <img src={img} width={80} height={80} className="rounded-full" />
-      </div>
+    <figure className="mx-4">
+      <img
+        src={img}
+        className="object-contain h-14 w-auto rounded-md"
+        style={{ maxWidth: "120px" }}
+      />
     </figure>
   );
 }
 
-function MarqueeDemo() {
+export default function SponsoredBy() {
   return (
-    <div className="relative w-full">
-      <Marquee pauseOnHover className="[--duration:5s]">
-        {firstRow.map((r) => (
-          <ReviewCard key={r.img} {...r} />
-        ))}
-      </Marquee>
+    <div className="w-full py-10">
+      <div className="max-w-6xl mx-auto px-12 overflow-hidden">
+        <Marquee pauseOnHover className="[--duration:20s]">
+          {reviews.map((r) => (
+            <ReviewCard key={r.img} {...r} />
+          ))}
+        </Marquee>
+      </div>
     </div>
   );
-}
-   
-    return (
-       <div className="w-full py-16">
-          <div className="w-full max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-10">
-            <div className="flex-1 overflow-hidden">
-              <MarqueeDemo />
-            </div>
-          </div>
-        </div> 
-    )
 }

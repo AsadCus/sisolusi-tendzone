@@ -21,6 +21,7 @@ const getProductImage = (product: Product) => {
   }
 
   return "/images/categories/placeholder.jpg";
+
 };
 
 export default function MainProduct() {
@@ -33,7 +34,13 @@ export default function MainProduct() {
           process.env.NEXT_PUBLIC_API_PRODUCT_URL!
         );
         const data = await res.json();
-        setProducts(data.data);
+         const banners = data.data || data;
+
+      const filtered = banners.filter(
+        (item: any) => item.supplier?.name === "TendZone"
+      );
+      
+        setProducts(filtered);
       } catch (err) {
         console.error("Fetch product error:", err);
       }

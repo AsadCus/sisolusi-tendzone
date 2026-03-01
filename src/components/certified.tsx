@@ -1,62 +1,40 @@
 import { Marquee } from "./ui/marquee";
 
-export default function SertifiedBy(){
-   const reviews = [
-  {
-    img: "https://avatar.vercel.sh/jack",
-  },
-  {
-    img: "https://avatar.vercel.sh/jill",
-  },
-  {
-    img: "https://avatar.vercel.sh/john",
-  },
-  {
-    img: "https://avatar.vercel.sh/jane",
-  },
-  {
-    img: "https://avatar.vercel.sh/jenny",
-  },
-  {
-    img: "https://avatar.vercel.sh/james",
-  },
-];
+export default function SertifiedBy() {
+  const reviews = [
+    { img: "https://css02.v15cdn.com/m432/imgs/logo-1.webp" },
+    { img: "https://www.tendzone.net/Content/uploads/20241101384/202411221655012535337f5511487286b71430c3bb569b.png" },
+    { img: "https://css02.v15cdn.com/m432/imgs/logo-4.webp" },
+    { img: "https://www.tendzone.net/Content/uploads/20241101384/20241122165457b98aa2f641924392b8a3953887d4251b.png" },
+  ];
 
-const firstRow = reviews.slice(0, reviews.length / 2);
+  function ReviewCard({ img }: { img: string }) {
+    return (
+      <figure className="mx-4">
+        <img
+          src={img}
+          className="object-contain h-10 w-auto"
+          style={{ maxWidth: "110px" }}
+        />
+      </figure>
+    );
+  }
 
-function ReviewCard({ img }: { img: string }) {
   return (
-    <figure>
-      <div className="flex items-center gap-2">
-        <img src={img} width={80} height={80} className="rounded-full" />
+    <div className="w-full bg-white py-8">
+      <div className="max-w-6xl mx-auto px-12 flex flex-col md:flex-row items-center gap-8">
+        <h2 className="text-sm font-semibold text-gray-400 tracking-widest uppercase whitespace-nowrap">
+          Certified By
+        </h2>
+
+        <div className="flex-1 overflow-hidden">
+          <Marquee pauseOnHover className="[--duration:20s]">
+            {reviews.map((r) => (
+              <ReviewCard key={r.img} {...r} />
+            ))}
+          </Marquee>
+        </div>
       </div>
-    </figure>
-  );
-}
-
-function MarqueeDemo() {
-  return (
-    <div className="relative w-fullmax-w-5xl overflow-hidden">
-      <Marquee pauseOnHover className="[--duration:20s]">
-        {firstRow.map((r) => (
-          <ReviewCard key={r.img} {...r} />
-        ))}
-      </Marquee>
     </div>
   );
-}
-   
-    return (
-       <div className="w-full bg-white py-16">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
-            <h2 className="text-4xl font-bold whitespace-nowrap">
-              Certified By
-            </h2>
-
-            <div className="flex-1 overflow-hidden">
-              <MarqueeDemo />
-            </div>
-          </div>
-        </div> 
-    )
 }
