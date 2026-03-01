@@ -4,7 +4,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselNavigation,
-  CarouselIndicator,
   CarouselItem,
 } from "@/components/ui/carousel-list";
 import Image from "next/image";
@@ -13,52 +12,51 @@ export default function ApplicationAreasSection() {
   const areas = [
     { title: "Courts", image: "/images/apllications/office.png" },
     { title: "Enterprises", image: "/images/apllications/office2.png" },
-    { title: "/images/application/event.jpg", image: "/images/apllications/office3.png" },
-    { title: "Fire Protection", image: "/images/apllications/office4.png" },
-    { title: "Courts", image: "/images/apllications/office.png" },
-    { title: "Enterprises", image: "/images/apllications/office2.png" },
-    { title: "/images/application/event.jpg", image: "/images/apllications/office3.png" },
+    { title: "Events", image: "/images/apllications/office3.png" },
     { title: "Fire Protection", image: "/images/apllications/office4.png" },
   ];
 
+  const loopedAreas = [...areas, ...areas, ...areas];
+
   return (
-    <section className="lg:w-full bg-[#f5f5f5] py-20 overflow-x-hidden">
-      <div className="text-center mb-14 px-4">
-        <h2 className="text-4xl md:text-5xl font-semibold">
+    <section className="w-full bg-[#f5f5f5] py-20">
+      <div className="text-center mb-12 px-4">
+        <h2 className="text-3xl md:text-4xl font-medium text-gray-900">
           Application Areas
         </h2>
-        <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+        <p className="mt-3 text-sm text-gray-500 max-w-xl mx-auto">
           Tendzone is committed to delivering high-performance AV solutions for
           a wide range of applications.
         </p>
       </div>
 
-      <div className="relative w-full lg:px-32 px-16">
-        <Carousel  className="w-full">
+      <div className="relative w-full px-16 lg:px-32">
+        <Carousel className="w-full" initialIndex={4}>
           <CarouselContent>
-            {areas.map((area, i) => (
+            {loopedAreas.map((area, i) => (
               <CarouselItem
                 key={i}
-                className="md:basis-1/2 lg:basis-1/4 px-4"
+                className="basis-1/2 sm:basis-1/3 lg:basis-1/4 px-2"
               >
-                <div className="flex flex-col items-center">
-                  <div className="relative w-full h-64 overflow-hidden">
-                    <Image
-                      src={area.image}
-                      alt={area.title}
-                      fill
-                      className="object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                  </div>
-                  <h3 className="mt-4 text-lg font-medium text-gray-800">
+                <div className="group relative w-full aspect-square overflow-hidden rounded-xl">
+                  <Image
+                    src={area.image}
+                    alt={area.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+                  <h3 className="absolute bottom-3 left-0 right-0 text-center text-sm font-medium text-white">
                     {area.title}
                   </h3>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-
-          <CarouselNavigation alwaysShow className="absolute flex items-center justify-between px-2" />
+          <CarouselNavigation
+            alwaysShow
+            className="absolute inset-y-0 -left-10 -right-10 flex items-center justify-between pointer-events-none *:pointer-events-auto"
+          />
         </Carousel>
       </div>
     </section>
