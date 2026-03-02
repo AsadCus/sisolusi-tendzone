@@ -18,8 +18,8 @@ export default function SendInquirySection() {
         <form className="space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="space-y-1.5">
-              <Label className="text-xs font-bold tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
-                <User className="w-3 h-3" /> Your Name
+              <Label className="text-xs font-light tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
+                <User className="w-3 h-3" /> Name
               </Label>
               <Input
                 placeholder="Your full name"
@@ -27,7 +27,7 @@ export default function SendInquirySection() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label className="text-xs font-bold tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
+              <Label className="text-xs font-light tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
                 <Mail className="w-3 h-3" /> E-mail <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -40,7 +40,7 @@ export default function SendInquirySection() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="space-y-1.5">
-              <Label className="text-xs font-bold tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
+              <Label className="text-xs font-light tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
                 <Phone className="w-3 h-3" /> Phone / WhatsApp
               </Label>
               <Input
@@ -49,7 +49,7 @@ export default function SendInquirySection() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label className="text-xs font-bold tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
+              <Label className="text-xs font-light tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
                 <Building2 className="w-3 h-3" /> Company
               </Label>
               <Input
@@ -59,7 +59,7 @@ export default function SendInquirySection() {
             </div>
           </div>
           <div className="space-y-1.5">
-            <Label className="text-xs font-bold tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
+            <Label className="text-xs font-light tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
               <FileText className="w-3 h-3" /> Subject
             </Label>
             <Input
@@ -68,7 +68,7 @@ export default function SendInquirySection() {
             />
           </div>
           <div className="space-y-1.5">
-            <Label className="text-xs font-bold tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
+            <Label className="text-xs font-light tracking-widest uppercase text-gray-400 flex items-center gap-1.5">
               <Mail className="w-3 h-3" /> Message <span className="text-red-500">*</span>
             </Label>
             <Textarea
@@ -80,11 +80,11 @@ export default function SendInquirySection() {
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
             <p className="text-xs text-gray-400">
-              Fields marked <span className="text-red-500 font-bold">*</span> are required.
+              Fields marked <span className="text-red-500 font-light">*</span> are required.
             </p>
             <Button
               type="submit"
-              className="w-full sm:w-auto rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white font-bold tracking-widest uppercase text-xs px-8 h-11 flex items-center gap-2 transition-all duration-200"
+              className="w-full sm:w-auto rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white font-medium tracking-widest uppercase text-xs px-8 h-11 flex items-center gap-2 transition-all duration-200"
             >
               <Send className="w-3.5 h-3.5" />
               Leave a Message
