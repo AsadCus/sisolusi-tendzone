@@ -30,7 +30,7 @@ const categories: Category[] = [
     name: "Audio Processor",
     description:
       "High-performance DSP engine with multi-channel matrix mixing, equalization, and dynamic control for professional installations.",
-    image: "/images/categories/audio-processor.jpg",
+    image: "/images/product/2x2-dante.png",
     slug: "audio-processor",
     badge: "Processing",
   },
@@ -39,7 +39,7 @@ const categories: Category[] = [
     name: "Network Audio Distribution",
     description:
       "IP-based audio transport delivering lossless multi-zone sound over standard Ethernet infrastructure with ultra-low latency.",
-    image: "/images/categories/network-audio-distributor.jpg",
+    image: "/images/product/expansion-midis.png",
     slug: "network-audio-distribution",
     badge: "Distribution",
   },
@@ -48,7 +48,7 @@ const categories: Category[] = [
     name: "Digital Conference System",
     description:
       "Delegate and chairman units with built-in DSP, voting modules, and simultaneous interpretation for boardrooms and assemblies.",
-    image: "/images/categories/conference.jpg",
+    image: "/images/product/premium-recording.png",
     slug: "digital-conference-system",
     badge: "Conference",
   },

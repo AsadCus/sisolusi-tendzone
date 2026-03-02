@@ -11,6 +11,7 @@ import {
 
 import { Home } from "lucide-react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 interface PageHeroProps {
   title: string;
@@ -23,9 +24,10 @@ export default function PageHero({
 }: PageHeroProps) {
   const pathname = usePathname();
 
+  const pathSegments = pathname.split("/").filter(Boolean);
+
   return (
     <>
-      {/* HERO */}
       <section
         className="relative w-full h-62.5 bg-cover bg-center flex items-center"
         style={{
@@ -33,29 +35,48 @@ export default function PageHero({
         }}
       >
         <div className="absolute inset-0 bg-black/40" />
-
         <div className="relative max-w-7xl mx-auto px-6">
           <h1 className="text-4xl font-bold text-white">{title}</h1>
         </div>
       </section>
 
-      {/* BREADCRUMB */}
       <section className="w-full bg-gray-100 border-t">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/" className="flex items-center gap-1">
-                  <Home className="h-4 w-4" />
-                  Home
+                <BreadcrumbLink asChild>
+                  <Link href="/" className="flex items-center gap-1">
+                    <Home className="h-4 w-4" />
+                    Home
+                  </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
 
-              <BreadcrumbSeparator />
+              {pathSegments.map((segment, index) => {
+                const href = "/" + pathSegments.slice(0, index + 1).join("/");
+                const isLast = index === pathSegments.length - 1;
 
-              <BreadcrumbItem>
-                <BreadcrumbPage>{title}</BreadcrumbPage>
-              </BreadcrumbItem>
+                return (
+                  <div key={href} className="flex items-center">
+                    <BreadcrumbSeparator />
+
+                    <BreadcrumbItem>
+                      {isLast ? (
+                        <BreadcrumbPage className="capitalize">
+                          {segment.replace("-", " ")}
+                        </BreadcrumbPage>
+                      ) : (
+                        <BreadcrumbLink asChild>
+                          <Link href={href} className="capitalize">
+                            {segment.replace("-", " ")}
+                          </Link>
+                        </BreadcrumbLink>
+                      )}
+                    </BreadcrumbItem>
+                  </div>
+                );
+              })}
             </BreadcrumbList>
           </Breadcrumb>
 
