@@ -1,6 +1,9 @@
 import PageHero from "@/components/layout/pageHero"
 import NavbarLanding from "@/components/navbar-landing"
 import CategoryNav from "@/components/layout/buttonnav"
+import HonorQualification from "@/components/section/honor-qualification"
+import SendInquirySection from "@/components/section/SendInquirySection"
+import FAQSection from "@/components/section/faq"
 
 export default function AllInOneAudioVisualSolutionsPage() {
     return(
@@ -8,6 +11,9 @@ export default function AllInOneAudioVisualSolutionsPage() {
         <NavbarLanding />
         <PageHero title="All in One Solutions"/>
         <CategoryNav />
+        <HonorQualification />
+        <FAQSection/>
+        <SendInquirySection/>
         </>
     )
 }
