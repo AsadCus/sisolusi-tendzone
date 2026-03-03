@@ -62,7 +62,7 @@ function ReviewCard({ img }: { img: string }) {
 export default function SponsoredBy() {
   return (
     <div className="w-full py-10">
-      <div className="max-w-6xl mx-auto px-12 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-28 overflow-hidden">
         <Marquee pauseOnHover className="[--duration:20s]">
           {reviews.map((r) => (
             <ReviewCard key={r.img} {...r} />

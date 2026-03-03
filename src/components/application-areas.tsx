@@ -22,7 +22,7 @@ const areas = [
 
 export default function ApplicationAreasSection() {
   return (
-    <section className="w-full bg-[#f5f5f5] py-20">
+    <section className="w-full bg-[#f5f5f5] py-20 px-5">
       <div className="text-center mb-12 px-4">
         <h2 className="text-3xl md:text-4xl font-medium text-gray-900">
           Application Areas

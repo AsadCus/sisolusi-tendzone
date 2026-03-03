@@ -1,64 +1,136 @@
 "use client";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
 import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const areas = [
-  { title: "Courts", image: "/images/apllications/office.png" },
-  { title: "Enterprises", image: "/images/apllications/office2.png" },
-  { title: "Events", image: "/images/apllications/office3.png" },
-  { title: "Fire Protection", image: "/images/apllications/office4.png" },
-  { title: "Courts", image: "/images/apllications/office.png" },
-  { title: "Enterprises", image: "/images/apllications/office2.png" },
-  { title: "Events", image: "/images/apllications/office3.png" },
-  { title: "Fire Protection", image: "/images/apllications/office4.png" },
-];
+interface Product {
+  id: number;
+  name: string;
+  slug: string;
+  galleries?: { file_url: string }[];
+  supplier?: { name: string };
+}
 
-export default function PopularProductsSection() {
+const getProductImage = (product: Product) => {
+  if (
+    product.galleries &&
+    product.galleries.length > 0 &&
+    product.galleries[0].file_url
+  ) {
+    return product.galleries[0].file_url;
+  }
+  return "/images/categories/placeholder.jpg";
+};
+
+export default function PopularProductsCarousel() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const itemsPerView = 4;
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(
+          process.env.NEXT_PUBLIC_API_PRODUCT_URL!
+        );
+        const data = await res.json();
+        const list = data.data || data;
+
+        const filtered = list.filter(
+          (item: Product) => item.supplier?.name === "TendZone"
+        );
+
+        setProducts(filtered);
+      } catch (err) {
+        console.error("Fetch product error:", err);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const nextSlide = () => {
+    if (currentIndex < products.length - itemsPerView) {
+      setCurrentIndex(currentIndex + itemsPerView);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - itemsPerView);
+    }
+  };
+
   return (
-    <section className="w-full bg-[#f5f5f5] py-20">
-      <div className="text-center mb-12 px-4">
-        <h2 className="text-3xl md:text-4xl font-medium text-gray-900">
-          Popular Products
-        </h2>
-        <p className="mt-3 text-sm text-gray-500 max-w-xl mx-auto">
-          Tendzone is committed to delivering high-performance AV solutions for
-          a wide range of applications.
-        </p>
-      </div>
+    <section className="w-full py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-24">
 
-      <div className="relative w-full px-16 lg:px-32">
-        <Carousel opts={{ loop: true }} className="w-full">
-          <CarouselContent>
-            {areas.map((area, i) => (
-              <CarouselItem key={i} className="basis-1/2 sm:basis-1/3 lg:basis-1/4">
-                <div className="px-2">
-                  <div className="group relative w-full aspect-square overflow-hidden rounded-xl">
+        <div className="flex items-center justify-between mb-12">
+          <h2 className="text-2xl lg:text-4xl font-semibold text-gray-900 tracking-tight">
+            Popular Products
+          </h2>
+
+          <div className="flex gap-3">
+            <button
+              onClick={prevSlide}
+              disabled={currentIndex === 0}
+              className="w-10 h-10 flex items-center justify-center border border-neutral-300 rounded-full hover:border-red-500 hover:text-red-500 transition disabled:opacity-30"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <button
+              onClick={nextSlide}
+              disabled={currentIndex >= products.length - itemsPerView}
+              className="w-10 h-10 flex items-center justify-center border border-neutral-300 rounded-full hover:border-red-500 hover:text-red-500 transition disabled:opacity-30"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+
+        <div className="overflow-hidden">
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{
+              transform: `translateX(-${
+                (100 / itemsPerView) * currentIndex
+              }%)`,
+            }}
+          >
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="w-1/2 sm:w-1/3 lg:w-1/4 px-3 shrink-0"
+              >
+                <Link
+                  href={`/products/${product.slug}`}
+                  className="group block bg-white border border-neutral-200 rounded-2xl hover:border-red-500 hover:shadow-lg transition-all duration-300 overflow-hidden"
+                >
+                  <div className="relative w-full h-56 bg-gray-50 flex items-center justify-center">
                     <Image
-                      src={area.image}
-                      alt={area.title}
+                      src={getProductImage(product)}
+                      alt={product.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      unoptimized
+                      className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-                    <h3 className="absolute bottom-3 left-0 right-0 text-center text-sm font-medium text-white">
-                      {area.title}
+                  </div>
+
+                  <div className="px-4 py-4">
+                    <h3 className="text-sm font-medium text-gray-800 line-clamp-2 group-hover:text-red-600 transition-colors">
+                      {product.name}
                     </h3>
                   </div>
-                </div>
-              </CarouselItem>
+                </Link>
+              </div>
             ))}
-          </CarouselContent>
+          </div>
+        </div>
 
-          <CarouselPrevious className="-left-10" />
-          <CarouselNext className="-right-10" />
-        </Carousel>
       </div>
     </section>
   );
