@@ -34,13 +34,11 @@ export default function PageHero({
           backgroundImage: `url('${backgroundImage}')`,
         }}
       >
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative max-w-7xl mx-auto px-6">
-          <h1 className="text-4xl font-bold text-white">{title}</h1>
-        </div>
+        
+        
       </section>
 
-      <section className="w-full bg-gray-100 border-t">
+      <section className="w-full bg-gray-100 border-b border-2">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Breadcrumb>
             <BreadcrumbList>
