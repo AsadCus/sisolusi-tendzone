@@ -27,8 +27,8 @@ const megaData = {
 };
 
 const productFlat = [
-  { category: "All-in-one Solution", href: "/products/all-in-one-solution",
-    items: [{ label: "All-in-one Audio Visual Solutions", href: "/products/all-in-one-solution/all-in-one-audio-visual-solutions" }] },
+  { category: "All-in-one Solution", href: "/all-in-one-solution",
+    items: [{ label: "All-in-one Audio Visual Solutions", href: "/all-in-one-solution/all-in-one-audio-visual-solutions" }] },
   { category: "Audio Processor", href: "/products/audio-processor",
     items: [
       { label: "Open Architecture DSP", href: "/products/open-dsp" },
@@ -36,9 +36,9 @@ const productFlat = [
       { label: "Fixed Audio Processors", href: "/products/fixed-dsp" },
       { label: "Digital Audio Processor", href: "/products/digital-audio" },
     ] },
-  { category: "Network Audio Distribution", href: "/products/network-audio-distribution",
+  { category: "Network Audio Distribution", href: "/network-audio-distribution",
     items: [
-      { label: "Audio Over IP", href: "/products/network-audio-distribution/audio-over-ip" },
+      { label: "Audio Over IP", href: "/network-audio-distribution/audio-over-ip" },
       { label: "Network Input And Output Interface", href: "/products/network-io" },
       { label: "Network Adapters", href: "/products/network-adapters" },
       { label: "Network Microphone", href: "/products/network-mic" },
