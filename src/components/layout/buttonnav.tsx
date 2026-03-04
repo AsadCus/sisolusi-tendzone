@@ -232,7 +232,7 @@ export default function CategoryNav() {
   return (
     <div
       ref={navRef}
-      className="w-full bg-white border border-gray-100 rounded-xl px-5 py-5 shadow-sm"
+      className="w-full bg-white px-5 py-5 shadow-sm"
     >
       <div className="flex flex-wrap gap-2 justify-center">
         {categories.map((cat, index) => (

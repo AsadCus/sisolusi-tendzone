@@ -12,7 +12,7 @@ import {
 import { Home } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-
+import CategoryNav from "./buttonnav";
 interface PageHeroProps {
   title: string;
   backgroundImage?: string;
@@ -38,7 +38,7 @@ export default function PageHero({
         
       </section>
 
-      <section className="w-full bg-gray-100 border-b border-2">
+      <section className="w-full bg-gray-100 ">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Breadcrumb>
             <BreadcrumbList>
@@ -82,6 +82,7 @@ export default function PageHero({
             {title}
           </h2>
         </div>
+      <CategoryNav />
       </section>
     </>
   );
