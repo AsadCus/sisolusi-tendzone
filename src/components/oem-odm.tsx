@@ -76,7 +76,7 @@ function ServiceCard({
   return (
     <div className="bg-white p-8 flex flex-col gap-6">
       <div>
-        <span>
+        <span className="inline-block px-3 py-1 bg-red-50 text-red-600 text-xs font-medium rounded-full">
           {tag}
         </span>
         <h3 className="text-xl font-medium text-gray-900">{title}</h3>
