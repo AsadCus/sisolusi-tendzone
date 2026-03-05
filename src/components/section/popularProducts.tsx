@@ -65,8 +65,8 @@ export default function PopularProductsCarousel() {
   };
 
   return (
-    <section className="w-full py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-24">
+    <section className="w-full py-20 bg-gray-100">
+      <div className="max-w-5xl mx-auto px-8 md:px-10">
 
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-2xl lg:text-4xl font-semibold text-gray-900 tracking-tight">

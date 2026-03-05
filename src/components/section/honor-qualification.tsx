@@ -29,7 +29,7 @@ const certificates: Certificate[] = [
 export default function HonorQualification() {
   return (
     <section className="w-full bg-gray-100 py-16">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-16">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
             Honor And Qualification
@@ -37,24 +37,21 @@ export default function HonorQualification() {
           <div className="w-16 h-1 bg-red-500 mx-auto mt-3 rounded-full" />
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          {certificates.map((item) => (            
-               <div
-                key={item.id}
+          {certificates.map((item) => (
+            <div
+              key={item.id}
               className="group rounded-xl overflow-hidden border border-neutral-200 hover:border-red-500 transition-colors duration-300 bg-white"
-
             >
-                <div className="flex items-center justify-end">
-              <div className="relative w-full  overflow-hidden ">
+              <div className="relative w-full overflow-hidden">
                 <Image
                   unoptimized
                   src={item.image}
                   alt={item.title || `Certificate ${item.id}`}
                   width={400}
-                  height={600}
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  height={560}
+                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
-                  </div>
             </div>
           ))}
         </div>

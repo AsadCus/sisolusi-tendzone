@@ -18,7 +18,7 @@ const navLinks = [
 export default function Footer() {
   return (
     <footer className="bg-gray-100 text-gray-900 border-t border-gray-100">
-      <div className="max-w-7xl mx-auto px-6 py-14">
+      <div className="max-w-7xl mx-35 px-6 py-14">
 
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
           <div>

@@ -8,7 +8,7 @@ import { Send, Mail, Phone, User, Building2, FileText } from "lucide-react";
 
 export default function SendInquirySection() {
   return (
-    <section className="w-full bg-white py-8">
+    <section className="w-full bg-gray-100 py-8">
       <div className="max-w-5xl mx-auto px-6">
         <div className="mb-12">
             <h2 className="text-2xl text-center md:text-3xl font-medium tracking-tight text-gray-900 leading-none">
