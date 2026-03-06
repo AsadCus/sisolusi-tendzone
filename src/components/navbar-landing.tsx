@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils"
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { Phone, Mail, Youtube, Globe, Search, ChevronDown, Menu, X } from "lucide-react";
+import { Phone, Mail, Youtube, Globe, Search, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import Link from "next/link"
 import Image from "next/image";
 
@@ -117,11 +117,45 @@ export default function NavbarLanding() {
   const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
+  // ─── helpers ────────────────────────────────────────────────────────────────
+
+  /** True when the nav-link itself (top-level) should be highlighted */
   const isActive = (href: string) => {
     if (href === "#") return false;
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
+
+  /**
+   * True when the current pathname matches a product category href exactly
+   * (used to highlight category headings in the mega-menu / mobile list)
+   */
+  const isCategoryActive = (href: string) => {
+    if (!href || href === "#") return false;
+    return pathname === href || pathname.startsWith(href + "/");
+  };
+
+  /**
+   * True when the current pathname matches a sub-item href exactly.
+   * A sub-item href like "/products/open-dsp" is exact, so we do a strict check.
+   */
+  const isSubItemActive = (href: string) => {
+    if (!href || href === "#") return false;
+    return pathname === href;
+  };
+
+  /**
+   * True when ANY sub-item (or the category itself) inside a productFlat group
+   * is active — used to auto-expand the accordion in mobile.
+   */
+  const isCategoryGroupActive = (group: typeof productFlat[0]) => {
+    return (
+      isCategoryActive(group.href) ||
+      group.items.some((item) => isSubItemActive(item.href))
+    );
+  };
+
+  // ─── effects ────────────────────────────────────────────────────────────────
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -139,6 +173,17 @@ export default function NavbarLanding() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  // Auto-expand "Products" accordion if we're on a product page
+  useEffect(() => {
+    const onProductPage = productFlat.some((g) => isCategoryGroupActive(g));
+    if (onProductPage && activeMobileMenu !== "Products") {
+      setActiveMobileMenu("Products");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  // ─── render ─────────────────────────────────────────────────────────────────
+
   return (
     <>
       <style>{`
@@ -154,6 +199,7 @@ export default function NavbarLanding() {
       <div className="font-sans">
         <header className="fixed top-0 left-0 w-full z-100">
 
+          {/* ── Top utility bar ─────────────────────────────────────────────── */}
           <div className={cn(
             "transition-all duration-500 overflow-hidden",
             scrolled ? "h-0 opacity-0" : "h-9 opacity-100"
@@ -180,6 +226,7 @@ export default function NavbarLanding() {
             </div>
           </div>
 
+          {/* ── Main nav ────────────────────────────────────────────────────── */}
           <nav className={cn(
             "transition-all duration-300 mx-4 rounded-2xl",
             scrolled
@@ -195,6 +242,7 @@ export default function NavbarLanding() {
 
               <div className={cn("hidden lg:block w-px h-5 mr-5 transition-colors duration-300", scrolled ? "bg-gray-200" : "bg-white/20")} />
 
+              {/* ── Desktop nav links ──────────────────────────────────────── */}
               <ul className="hidden lg:flex flex-1 items-center gap-0.5">
                 {navLinks.map((link) => {
                   const active = isActive(link.href);
@@ -222,6 +270,7 @@ export default function NavbarLanding() {
                         )} />
                       </Link>
 
+                      {/* ── Products mega-menu (desktop) ───────────────────── */}
                       {link.label === "Products" && (
                         <div className="fixed left-4 right-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                           style={{
@@ -239,32 +288,60 @@ export default function NavbarLanding() {
                             </div>
                             <div className="px-8 py-6 overflow-y-auto no-scrollbar" style={{ maxHeight: "62vh" }}>
                               <div className="grid grid-cols-4 gap-x-8 gap-y-7">
-                                {productFlat.map((group) => (
-                                  <div key={group.category} className="group/cat">
-                                    <Link href={group.href} className="flex items-center gap-1.5 mb-2.5 group/heading">
-                                      <span className="w-1 h-3.5 rounded-full bg-red-500 shrink-0 transition-all duration-200 group-hover/heading:h-5" />
-                                      <span className="text-[13px] font-bold text-gray-800 group-hover/heading:text-red-600 transition-colors duration-200">
-                                        {group.category}
-                                      </span>
-                                    </Link>
-                                    <ul className="space-y-1.5 pl-3.5">
-                                      {group.items.map((item) => (
-                                        <li key={item.label}>
-                                          <Link href={item.href}
-                                            className="text-[13px] text-gray-500 hover:text-red-500 transition-colors duration-150 block leading-snug">
-                                            {item.label}
-                                          </Link>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                ))}
+                                {productFlat.map((group) => {
+                                  const catActive = isCategoryActive(group.href);
+                                  return (
+                                    <div key={group.category} className="group/cat">
+                                      <Link href={group.href} className="flex items-center gap-1.5 mb-2.5 group/heading">
+                                        <span className={cn(
+                                          "w-1 rounded-full bg-red-500 shrink-0 transition-all duration-200 group-hover/heading:h-5",
+                                          catActive ? "h-5" : "h-3.5"
+                                        )} />
+                                        <span className={cn(
+                                          "text-[13px] font-bold transition-colors duration-200",
+                                          catActive
+                                            ? "text-red-600"
+                                            : "text-gray-800 group-hover/heading:text-red-600"
+                                        )}>
+                                          {group.category}
+                                        </span>
+                                        {catActive && (
+                                          <span className="ml-auto w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
+                                        )}
+                                      </Link>
+                                      <ul className="space-y-1.5 pl-3.5">
+                                        {group.items.map((item) => {
+                                          const subActive = isSubItemActive(item.href);
+                                          return (
+                                            <li key={item.label}>
+                                              <Link
+                                                href={item.href}
+                                                className={cn(
+                                                  "text-[13px] transition-colors duration-150 block leading-snug flex items-center gap-1",
+                                                  subActive
+                                                    ? "text-red-500 font-semibold"
+                                                    : "text-gray-500 hover:text-red-500"
+                                                )}
+                                              >
+                                                {subActive && (
+                                                  <span className="w-1 h-1 rounded-full bg-red-500 shrink-0" />
+                                                )}
+                                                {item.label}
+                                              </Link>
+                                            </li>
+                                          );
+                                        })}
+                                      </ul>
+                                    </div>
+                                  );
+                                })}
                               </div>
                             </div>
                           </div>
                         </div>
                       )}
 
+                      {/* ── Other dropdowns (desktop) ──────────────────────── */}
                       {link.label !== "Products" && link.dropdown && megaData[link.label as keyof typeof megaData] && (
                         <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-100"
                           style={{ transition: "opacity 150ms ease, visibility 150ms ease" }}>
@@ -293,6 +370,7 @@ export default function NavbarLanding() {
                 })}
               </ul>
 
+              {/* ── Desktop right actions ──────────────────────────────────── */}
               <div className="hidden lg:flex items-center gap-2 ml-2">
                 <div className={cn(
                   "flex items-center transition-all duration-300 rounded-xl overflow-hidden",
@@ -327,6 +405,7 @@ export default function NavbarLanding() {
                 </Link>
               </div>
 
+              {/* ── Mobile hamburger ──────────────────────────────────────── */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={cn(
@@ -339,11 +418,13 @@ export default function NavbarLanding() {
             </div>
           </nav>
 
+          {/* ── Mobile drawer ───────────────────────────────────────────────── */}
           <div className={cn(
             "lg:hidden fixed inset-x-3 bottom-3 z-100 bg-white rounded-2xl shadow-2xl overflow-y-auto transition-all duration-300 border border-gray-100",
             mobileOpen ? "opacity-100 pointer-events-auto top-30" : "opacity-0 pointer-events-none top-30"
           )}>
             <div className="px-4 py-5 flex flex-col">
+              {/* Search */}
               <div className="flex items-center gap-2 mb-5 bg-gray-50 rounded-xl px-3 py-2">
                 <Search size={14} className="text-gray-400 shrink-0" />
                 <input type="text" placeholder="Search products..."
@@ -355,38 +436,98 @@ export default function NavbarLanding() {
                 const isOpen = activeMobileMenu === link.label;
                 return (
                   <div key={link.label}>
-                    <button
-                      onClick={() => link.dropdown ? setActiveMobileMenu(isOpen ? null : link.label) : setMobileOpen(false)}
-                      className={cn(
-                        "w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-colors",
-                        active ? "text-red-600 bg-red-50" : "text-gray-700 hover:bg-gray-50"
-                      )}
-                    >
-                      <span>{link.label}</span>
+                    {/* Row: Link navigates, chevron button toggles accordion */}
+                    <div className={cn(
+                      "flex items-center rounded-xl transition-colors",
+                      active ? "bg-red-50" : "hover:bg-gray-50"
+                    )}>
+                      <Link
+                        href={link.href === "#" ? "#" : link.href}
+                        onClick={() => !link.dropdown && setMobileOpen(false)}
+                        className={cn(
+                          "flex-1 px-3 py-3 text-sm font-medium transition-colors",
+                          active ? "text-red-600" : "text-gray-700"
+                        )}
+                      >
+                        {link.label}
+                      </Link>
                       {link.dropdown && (
-                        <ChevronDown size={13} className={cn("text-gray-400 transition-transform", isOpen && "rotate-180 text-red-400")} />
+                        <button
+                          onClick={() => setActiveMobileMenu(isOpen ? null : link.label)}
+                          className="px-3 py-3 flex items-center justify-center"
+                        >
+                          <ChevronDown size={13} className={cn("text-gray-400 transition-transform", isOpen && "rotate-180 text-red-400")} />
+                        </button>
                       )}
-                    </button>
+                    </div>
 
+                    {/* ── Products accordion (mobile) ──────────────────────── */}
                     {isOpen && link.label === "Products" && (
                       <div className="mx-3 mb-3 mt-1 bg-gray-50 rounded-xl p-4 flex flex-col gap-4">
-                        {productFlat.map((group) => (
-                          <div key={group.category}>
-                            <p className="text-[13px] font-bold text-gray-800 mb-1.5 flex items-center gap-1.5">
-                              <span className="w-1 h-3 rounded-full bg-red-500 shrink-0" />
-                              {group.category}
-                            </p>
-                            {group.items.map((item) => (
-                              <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)}
-                                className="block text-[13px] text-gray-500 hover:text-red-500 py-0.5 pl-3.5">
-                                {item.label}
+                        {productFlat.map((group) => {
+                          const catActive = isCategoryActive(group.href);
+                          const groupHasActiveChild = isCategoryGroupActive(group);
+                          return (
+                            <div key={group.category}>
+                              {/*
+                                Category heading row:
+                                - Left side: colored dot + label (clickable → navigate to category page)
+                                - Right side: arrow icon to hint it's a link
+                              */}
+                              <Link
+                                href={group.href}
+                                onClick={() => setMobileOpen(false)}
+                                className={cn(
+                                  "flex items-center justify-between mb-1.5 rounded-lg px-1 py-0.5 -mx-1 transition-colors",
+                                  catActive ? "text-red-600" : "text-gray-800 hover:text-red-600"
+                                )}
+                              >
+                                <span className="flex items-center gap-1.5 text-[13px] font-bold">
+                                  <span className={cn(
+                                    "w-1 rounded-full bg-red-500 shrink-0 transition-all duration-200",
+                                    groupHasActiveChild ? "h-4" : "h-3"
+                                  )} />
+                                  {group.category}
+                                </span>
+                                <ArrowRight
+                                  size={12}
+                                  strokeWidth={2.5}
+                                  className={cn(
+                                    "shrink-0 transition-colors",
+                                    catActive ? "text-red-400" : "text-gray-300"
+                                  )}
+                                />
                               </Link>
-                            ))}
-                          </div>
-                        ))}
+
+                              {/* Sub-items */}
+                              {group.items.map((item) => {
+                                const subActive = isSubItemActive(item.href);
+                                return (
+                                  <Link
+                                    key={item.label}
+                                    href={item.href}
+                                    onClick={() => setMobileOpen(false)}
+                                    className={cn(
+                                      "flex items-center gap-1.5 text-[13px] py-0.5 pl-3.5 transition-colors",
+                                      subActive
+                                        ? "text-red-500 font-semibold"
+                                        : "text-gray-500 hover:text-red-500"
+                                    )}
+                                  >
+                                    {subActive && (
+                                      <span className="w-1 h-1 rounded-full bg-red-500 shrink-0" />
+                                    )}
+                                    {item.label}
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
 
+                    {/* ── Other dropdowns (mobile) ─────────────────────────── */}
                     {isOpen && link.label !== "Products" && megaData[link.label as keyof typeof megaData] && (
                       <div className="mx-3 mb-3 mt-1 bg-gray-50 rounded-xl px-4 py-2 flex flex-col">
                         {megaData[link.label as keyof typeof megaData].items.map((item) => (
@@ -401,6 +542,7 @@ export default function NavbarLanding() {
                 );
               })}
 
+              {/* Contact info */}
               <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-3">
                 <Link href="tel:8613632976066" className="flex items-center gap-2 text-[13px] text-gray-500 hover:text-red-500 transition-colors">
                   <Phone size={13} strokeWidth={2} /><span>8613632976066</span>
