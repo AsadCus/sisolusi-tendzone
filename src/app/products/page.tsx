@@ -14,11 +14,11 @@ export default function AllInOneAudioVisualSolutionsPage() {
         <>
         <NavbarLanding />
         <PageHero title="Products"/>
-        {/* <WhyChooseUs />
+        <WhyChooseUs />
         <HonorQualification />
-        <PopularProductsCarousel /> */}
+        <PopularProductsCarousel />
         <SendInquirySection/>
-        {/* <FAQSection/> */}
+        <FAQSection/>
         <Footer/>
         </>
     )

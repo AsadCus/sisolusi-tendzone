@@ -184,6 +184,10 @@ export default function NavbarLanding() {
 
   // ─── render ─────────────────────────────────────────────────────────────────
 
+  // On home page: transparent until scrolled. On all other pages: always white.
+  const isHome = pathname === "/";
+  const isTransparent = isHome && !scrolled;
+
   return (
     <>
       <style>{`
@@ -197,30 +201,27 @@ export default function NavbarLanding() {
       `}</style>
 
       <div className="font-sans">
-        <header className="fixed top-0 left-0 w-full z-100">
+        <header className="fixed top-0 left-0 w-full z-50">
 
-          {/* ── Top utility bar ─────────────────────────────────────────────── */}
+          {/* ── Top utility bar ──────────────────────────────────────────────── */}
+          {/* Hidden on home (transparent mode), visible on other pages & after scroll */}
           <div className={cn(
-            "transition-all duration-500 overflow-hidden",
-            scrolled ? "h-0 opacity-0" : "h-9 opacity-100"
+            "transition-all duration-300 overflow-hidden",
+            isTransparent ? "h-0 opacity-0" : "h-9 opacity-100 bg-white border-b border-gray-100"
           )}>
-            <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-full">
-              <div className="hidden md:flex items-center gap-5 text-xs text-white/80">
-                <Link href="tel:8613632976066" className="flex items-center gap-1.5 hover:text-white transition-colors duration-200">
+            <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-9">
+              <div className="flex items-center gap-5 text-xs text-gray-500">
+                <Link href="tel:8613632976066" className="flex items-center gap-1.5 hover:text-red-500 transition-colors duration-200">
                   <Phone size={12} strokeWidth={2} /><span>8613632976066</span>
                 </Link>
-                <span className="w-px h-3 bg-white/20" />
-                <Link href="mailto:sales@tendzone.net" className="flex items-center gap-1.5 hover:text-white transition-colors duration-200">
+                <span className="w-px h-3 bg-gray-200" />
+                <Link href="mailto:sales@tendzone.net" className="flex items-center gap-1.5 hover:text-red-500 transition-colors duration-200">
                   <Mail size={12} strokeWidth={2} /><span>sales@tendzone.net</span>
                 </Link>
               </div>
-              <div className="flex items-center gap-3 ml-auto">
-                <Link href="/" className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 transition-colors px-2.5 py-1 rounded-full text-white text-xs font-medium">
-                  <Youtube size={12} fill="white" strokeWidth={0} />
-                  <span>YouTube</span>
-                </Link>
-                <button className="flex items-center gap-1 text-xs text-white/80 hover:text-white transition-colors border border-white/20 hover:border-white/40 px-2.5 py-1 rounded-full">
-                  <Globe size={11} strokeWidth={2} /><span>EN</span><ChevronDown size={10} />
+              <div className="flex items-center gap-3">
+                <button className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800 transition-colors">
+                  <Globe size={11} strokeWidth={2} /><span>Language</span><ChevronDown size={10} />
                 </button>
               </div>
             </div>
@@ -228,22 +229,23 @@ export default function NavbarLanding() {
 
           {/* ── Main nav ────────────────────────────────────────────────────── */}
           <nav className={cn(
-            "transition-all duration-300 mx-4 rounded-2xl",
-            scrolled
-              ? "bg-white/90 backdrop-blur-xl shadow-lg shadow-black/10 mt-2 border border-gray-200/60"
-              : "bg-transparent mt-0 border border-transparent"
+            "transition-all duration-300",
+            isTransparent
+              ? "bg-transparent"
+              : "bg-white shadow-sm border-b border-gray-100"
           )}>
-            <div className="max-w-7xl mx-auto px-5 flex items-center h-14">
+            <div className="max-w-7xl mx-auto px-6 flex items-center h-16">
 
-              <Link href="/" className="mr-5 shrink-0">
-                <Image src="/images/logo/tendzone.png" alt="Tendzone" width={72} height={72}
-                  className={cn("transition-all duration-300", scrolled ? "brightness-100" : "brightness-0 invert")} />
+              <Link href="/" className="mr-8 shrink-0">
+                <Image src="/images/logo/tendzone.png" alt="Tendzone" width={130} height={40}
+                  className={cn(
+                    "h-10 w-auto object-contain transition-all duration-300",
+                    isTransparent ? "brightness-0 invert" : "brightness-100"
+                  )} />
               </Link>
 
-              <div className={cn("hidden lg:block w-px h-5 mr-5 transition-colors duration-300", scrolled ? "bg-gray-200" : "bg-white/20")} />
-
               {/* ── Desktop nav links ──────────────────────────────────────── */}
-              <ul className="hidden lg:flex flex-1 items-center gap-0.5">
+              <ul className="hidden lg:flex flex-1 items-center gap-0">
                 {navLinks.map((link) => {
                   const active = isActive(link.href);
                   return (
@@ -251,30 +253,31 @@ export default function NavbarLanding() {
                       <Link
                         href={link.href}
                         className={cn(
-                          "relative flex items-center gap-1 px-3 py-2 rounded-xl text-[13px] font-medium transition-all duration-200",
+                          "relative flex items-center gap-0.5 px-3 py-2 text-[13.5px] font-medium transition-all duration-200",
                           active
-                            ? "text-red-600"
-                            : scrolled
-                              ? "text-gray-600 hover:text-gray-900"
-                              : "text-white/80 hover:text-white",
+                            ? isTransparent ? "text-white" : "text-red-600"
+                            : isTransparent
+                              ? "text-white/85 hover:text-white"
+                              : "text-gray-700 hover:text-red-600",
                         )}
                       >
                         {link.label}
                         {link.dropdown && (
                           <ChevronDown size={12} strokeWidth={2.5}
-                            className="transition-transform duration-200 group-hover:rotate-180 opacity-60" />
+                            className="transition-transform duration-200 group-hover:rotate-180 opacity-60 mt-px" />
                         )}
                         <span className={cn(
-                          "absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300 origin-left bg-red-500",
+                          "absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300 origin-left",
+                          isTransparent ? "bg-white" : "bg-red-500",
                           active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                         )} />
                       </Link>
 
                       {/* ── Products mega-menu (desktop) ───────────────────── */}
                       {link.label === "Products" && (
-                        <div className="fixed left-4 right-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
+                        <div className="fixed left-0 right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                           style={{
-                            top: scrolled ? "72px" : "96px",
+                            top: isTransparent ? "64px" : "100px",
                             zIndex: 100,
                             transition: "opacity 180ms ease, visibility 180ms ease, top 300ms ease"
                           }}>
@@ -374,16 +377,16 @@ export default function NavbarLanding() {
               <div className="hidden lg:flex items-center gap-2 ml-2">
                 <div className={cn(
                   "flex items-center transition-all duration-300 rounded-xl overflow-hidden",
-                  scrolled ? "bg-gray-100" : "bg-white/10 border border-white/20",
-                  searchOpen ? "w-24 pr-0" : "w-9"
+                  isTransparent ? "bg-white/10 border border-white/25" : "bg-gray-100",
+                  searchOpen ? "w-36 pr-0" : "w-9"
                 )}>
                   <button
                     onClick={() => setSearchOpen(!searchOpen)}
-                    className="w-9 h-9 shrink-0 flex items-center justify-center text-current transition-colors"
+                    className="w-9 h-9 shrink-0 flex items-center justify-center transition-colors"
                   >
                     {searchOpen
-                      ? <X size={14} strokeWidth={2.5} className={scrolled ? "text-gray-500" : "text-white ml-4"} />
-                      : <Search size={14} strokeWidth={2.5} className={scrolled ? "text-gray-500" : "text-white"} />
+                      ? <X size={14} strokeWidth={2.5} className={isTransparent ? "text-white ml-4" : "text-gray-500"} />
+                      : <Search size={14} strokeWidth={2.5} className={isTransparent ? "text-white" : "text-gray-500"} />
                     }
                   </button>
                   {searchOpen && (
@@ -392,8 +395,8 @@ export default function NavbarLanding() {
                       type="text"
                       placeholder="Search..."
                       className={cn(
-                        "flex-1 text-[13px] placeholder-gray-400 pr-3 py-2 outline-none bg-transparent",
-                        scrolled ? "text-gray-800" : "text-white placeholder-white/50"
+                        "flex-1 text-[13px] pr-3 py-2 outline-none bg-transparent",
+                        isTransparent ? "text-white placeholder-white/60" : "text-gray-800 placeholder-gray-400"
                       )}
                       onBlur={() => setSearchOpen(false)}
                     />
@@ -410,7 +413,9 @@ export default function NavbarLanding() {
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={cn(
                   "lg:hidden ml-auto flex items-center justify-center w-9 h-9 rounded-xl transition-colors",
-                  scrolled ? "text-gray-700 bg-gray-100 hover:bg-gray-200" : "text-white border border-white/30 hover:border-white/60"
+                  isTransparent
+                    ? "text-white border border-white/30 hover:border-white/60"
+                    : "text-gray-700 bg-gray-100 hover:bg-gray-200"
                 )}
               >
                 {mobileOpen ? <X size={17} strokeWidth={2} /> : <Menu size={17} strokeWidth={2} />}
