@@ -39,10 +39,10 @@ const productFlat = [
   { category: "Network Audio Distribution", href: "/network-audio-distribution",
     items: [
       { label: "Audio Over IP", href: "/network-audio-distribution/audio-over-ip" },
-      { label: "Network Input And Output Interface", href: "/products/network-io" },
-      { label: "Network Adapters", href: "/products/network-adapters" },
-      { label: "Network Microphone", href: "/products/network-mic" },
-      { label: "Network Speaker", href: "/products/network-speaker" },
+      { label: "Network Input And Output Interface", href: "/network-audio-distribution/network-input-and-output-interface" },
+      { label: "Network Adapters", href: "/network-audio-distribution/network-adapters" },
+      { label: "Network Microphone", href: "/network-audio-distribution/network-microphone" },
+      { label: "Network Speaker", href: "/network-audio-distribution/network-speaker" },
     ] },
   { category: "Digital Conference System", href: "/products/conference-network",
     items: [
@@ -113,41 +113,28 @@ export default function NavbarLanding() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [utilityVisible, setUtilityVisible] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const lastScrollY = useRef(0);
 
-  // ─── helpers ────────────────────────────────────────────────────────────────
-
-  /** True when the nav-link itself (top-level) should be highlighted */
   const isActive = (href: string) => {
     if (href === "#") return false;
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
 
-  /**
-   * True when the current pathname matches a product category href exactly
-   * (used to highlight category headings in the mega-menu / mobile list)
-   */
   const isCategoryActive = (href: string) => {
     if (!href || href === "#") return false;
     return pathname === href || pathname.startsWith(href + "/");
   };
 
-  /**
-   * True when the current pathname matches a sub-item href exactly.
-   * A sub-item href like "/products/open-dsp" is exact, so we do a strict check.
-   */
   const isSubItemActive = (href: string) => {
     if (!href || href === "#") return false;
     return pathname === href;
   };
 
-  /**
-   * True when ANY sub-item (or the category itself) inside a productFlat group
-   * is active — used to auto-expand the accordion in mobile.
-   */
   const isCategoryGroupActive = (group: typeof productFlat[0]) => {
     return (
       isCategoryActive(group.href) ||
@@ -155,10 +142,18 @@ export default function NavbarLanding() {
     );
   };
 
-  // ─── effects ────────────────────────────────────────────────────────────────
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 20);
+      // Hide utility bar when scrolling down past 60px, show when scrolling up
+      if (currentY > 60) {
+        setUtilityVisible(currentY < lastScrollY.current);
+      } else {
+        setUtilityVisible(true);
+      }
+      lastScrollY.current = currentY;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -173,7 +168,6 @@ export default function NavbarLanding() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // Auto-expand "Products" accordion if we're on a product page
   useEffect(() => {
     const onProductPage = productFlat.some((g) => isCategoryGroupActive(g));
     if (onProductPage && activeMobileMenu !== "Products") {
@@ -182,11 +176,11 @@ export default function NavbarLanding() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  // ─── render ─────────────────────────────────────────────────────────────────
-
-  // On home page: transparent until scrolled. On all other pages: always white.
   const isHome = pathname === "/";
   const isTransparent = isHome && !scrolled;
+
+  // Utility bar is shown on non-home pages when scrolled up (or near top)
+  const showUtilityBar = !isTransparent && utilityVisible;
 
   return (
     <>
@@ -201,13 +195,12 @@ export default function NavbarLanding() {
       `}</style>
 
       <div className="font-sans">
-        <header className="fixed top-0 left-0 w-full z-50">
+        <header className="fixed top-0 left-0 w-full z-50 flex flex-col">
 
           {/* ── Top utility bar ──────────────────────────────────────────────── */}
-          {/* Hidden on home (transparent mode), visible on other pages & after scroll */}
           <div className={cn(
-            "transition-all duration-300 overflow-hidden",
-            isTransparent ? "h-0 opacity-0" : "h-9 opacity-100 bg-white border-b border-gray-100"
+            "transition-all duration-300 overflow-hidden bg-white border-b border-gray-100",
+            showUtilityBar ? "h-9 opacity-100" : "h-0 opacity-0"
           )}>
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-9">
               <div className="flex items-center gap-5 text-xs text-gray-500">
@@ -277,7 +270,7 @@ export default function NavbarLanding() {
                       {link.label === "Products" && (
                         <div className="fixed left-0 right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                           style={{
-                            top: isTransparent ? "64px" : "100px",
+                            top: isTransparent ? "64px" : showUtilityBar ? "100px" : "64px",
                             zIndex: 100,
                             transition: "opacity 180ms ease, visibility 180ms ease, top 300ms ease"
                           }}>
@@ -320,7 +313,7 @@ export default function NavbarLanding() {
                                               <Link
                                                 href={item.href}
                                                 className={cn(
-                                                  "text-[13px] transition-colors duration-150 block leading-snug flex items-center gap-1",
+                                                  "text-[13px] transition-colors duration-150 leading-snug flex items-center gap-1",
                                                   subActive
                                                     ? "text-red-500 font-semibold"
                                                     : "text-gray-500 hover:text-red-500"
@@ -429,7 +422,6 @@ export default function NavbarLanding() {
             mobileOpen ? "opacity-100 pointer-events-auto top-30" : "opacity-0 pointer-events-none top-30"
           )}>
             <div className="px-4 py-5 flex flex-col">
-              {/* Search */}
               <div className="flex items-center gap-2 mb-5 bg-gray-50 rounded-xl px-3 py-2">
                 <Search size={14} className="text-gray-400 shrink-0" />
                 <input type="text" placeholder="Search products..."
@@ -441,7 +433,6 @@ export default function NavbarLanding() {
                 const isOpen = activeMobileMenu === link.label;
                 return (
                   <div key={link.label}>
-                    {/* Row: Link navigates, chevron button toggles accordion */}
                     <div className={cn(
                       "flex items-center rounded-xl transition-colors",
                       active ? "bg-red-50" : "hover:bg-gray-50"
@@ -466,7 +457,6 @@ export default function NavbarLanding() {
                       )}
                     </div>
 
-                    {/* ── Products accordion (mobile) ──────────────────────── */}
                     {isOpen && link.label === "Products" && (
                       <div className="mx-3 mb-3 mt-1 bg-gray-50 rounded-xl p-4 flex flex-col gap-4">
                         {productFlat.map((group) => {
@@ -474,11 +464,6 @@ export default function NavbarLanding() {
                           const groupHasActiveChild = isCategoryGroupActive(group);
                           return (
                             <div key={group.category}>
-                              {/*
-                                Category heading row:
-                                - Left side: colored dot + label (clickable → navigate to category page)
-                                - Right side: arrow icon to hint it's a link
-                              */}
                               <Link
                                 href={group.href}
                                 onClick={() => setMobileOpen(false)}
@@ -494,34 +479,20 @@ export default function NavbarLanding() {
                                   )} />
                                   {group.category}
                                 </span>
-                                <ArrowRight
-                                  size={12}
-                                  strokeWidth={2.5}
-                                  className={cn(
-                                    "shrink-0 transition-colors",
-                                    catActive ? "text-red-400" : "text-gray-300"
-                                  )}
-                                />
+                                <ArrowRight size={12} strokeWidth={2.5}
+                                  className={cn("shrink-0 transition-colors", catActive ? "text-red-400" : "text-gray-300")} />
                               </Link>
-
-                              {/* Sub-items */}
                               {group.items.map((item) => {
                                 const subActive = isSubItemActive(item.href);
                                 return (
-                                  <Link
-                                    key={item.label}
-                                    href={item.href}
+                                  <Link key={item.label} href={item.href}
                                     onClick={() => setMobileOpen(false)}
                                     className={cn(
                                       "flex items-center gap-1.5 text-[13px] py-0.5 pl-3.5 transition-colors",
-                                      subActive
-                                        ? "text-red-500 font-semibold"
-                                        : "text-gray-500 hover:text-red-500"
+                                      subActive ? "text-red-500 font-semibold" : "text-gray-500 hover:text-red-500"
                                     )}
                                   >
-                                    {subActive && (
-                                      <span className="w-1 h-1 rounded-full bg-red-500 shrink-0" />
-                                    )}
+                                    {subActive && <span className="w-1 h-1 rounded-full bg-red-500 shrink-0" />}
                                     {item.label}
                                   </Link>
                                 );
@@ -532,7 +503,6 @@ export default function NavbarLanding() {
                       </div>
                     )}
 
-                    {/* ── Other dropdowns (mobile) ─────────────────────────── */}
                     {isOpen && link.label !== "Products" && megaData[link.label as keyof typeof megaData] && (
                       <div className="mx-3 mb-3 mt-1 bg-gray-50 rounded-xl px-4 py-2 flex flex-col">
                         {megaData[link.label as keyof typeof megaData].items.map((item) => (
@@ -547,7 +517,6 @@ export default function NavbarLanding() {
                 );
               })}
 
-              {/* Contact info */}
               <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-3">
                 <Link href="tel:8613632976066" className="flex items-center gap-2 text-[13px] text-gray-500 hover:text-red-500 transition-colors">
                   <Phone size={13} strokeWidth={2} /><span>8613632976066</span>

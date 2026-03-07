@@ -1,11 +1,10 @@
 import PageHero from "@/components/layout/pageHero";
 import NavbarLanding from "@/components/navbar-landing";
 import Footer from "@/components/footer";
-import WhyChooseUsAudioDistribution from "@/components/network-audio-distribution/why-choose-us-distribution";
+import WhyChooseUsCategory from "@/components/section/whyChooseCategory";
 import ProductGridAudioDistribution from "@/components/network-audio-distribution/list-product-audio-distribution";
-import OemOdmAudioDistribution from "@/components/network-audio-distribution/oem-odm-audio-distribution";
+import OemOdmCategory from "@/components/section/oem-odm-category";
 import SpecTableAudioDistribution from "@/components/network-audio-distribution/table-specification";
-import ProductFeatureSection from "@/components/network-audio-distribution/product-feature-audio-distribution";
 import ProductInterfaceSection from "@/components/network-audio-distribution/product-interface";
 import NetworkAudioFeatureSections from "@/components/network-audio-distribution/network-audio-feature";
 import ProductApplicationNetworkAudio from "@/components/network-audio-distribution/application-network-distribution";
@@ -20,11 +19,10 @@ export default function ProductsPage() {
     <>
     <NavbarLanding />
       <PageHero title="Network Audio Distribution" />
-      <WhyChooseUsAudioDistribution />
+      <WhyChooseUsCategory />
       <ProductGridAudioDistribution />
-      <OemOdmAudioDistribution/>
+      <OemOdmCategory />
       <SpecTableAudioDistribution />
-      {/* <ProductFeatureSection />  */}
       <ProductInterfaceSection />
       <NetworkAudioFeatureSections />
       <ProductApplicationNetworkAudio />

@@ -29,7 +29,7 @@ const functions = [
 
 export default function AudioIpFunctionsSection() {
   return (
-    <section className="w-full py-4">
+    <section className="w-full py-">
       <div className="max-w-7xl mx-auto px-6">
         
         <h2 className="text-center text-3xl md:text-4xl font-semibold text-gray-900 mb-16">

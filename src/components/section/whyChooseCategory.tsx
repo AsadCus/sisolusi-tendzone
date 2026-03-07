@@ -39,7 +39,7 @@ const reasons = [
   },
 ];
 
-export default function WhyChooseUsAudioDistribution() {
+export default function WhyChooseUsCategory() {
   return (
    <section className="w-full bg-gray-white pt-24 pb-4 relative overflow-hidden">
       <div
@@ -54,7 +54,7 @@ export default function WhyChooseUsAudioDistribution() {
       <div className="max-w-7xl mx-auto px-8 md:px-6 relative">
 
         <div className="text-center mb-16">
-          <h2 className="text-2xl md:text-[1.85rem] font-bold text-gray-900 leading-snug tracking-tight">
+          <h2 className="text-2xl md:text-[1.85rem] font-medium text-gray-900 leading-snug tracking-tight">
         Your Professional Network Audio Distribution Manufacturer!
 
           </h2>

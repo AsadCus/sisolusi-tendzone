@@ -56,7 +56,7 @@ export default function ProductFeatureSection() {
   const product = products.find((p) => p.id === active) ?? products[0];
 
   return (
-    <section className="w-full bg-white py-24">
+    <section className="w-full bg-white py-16">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Segmented Button */}
@@ -100,7 +100,7 @@ export default function ProductFeatureSection() {
             <ul className="space-y-3">
               {product.features.map((f) => (
                 <li key={f.title} className="flex items-start gap-3">
-                  <span className="mt-1.5 w-2 h-2 rounded-full bg-red-500 flex-shrink-0" />
+                  <span className="mt-1.5 w-2 h-2 rounded-full bg-red-500 shrink-0" />
                   <span className="text-sm text-gray-700">
                     <span className="font-semibold text-gray-900">{f.title}: </span>
                     {f.desc}

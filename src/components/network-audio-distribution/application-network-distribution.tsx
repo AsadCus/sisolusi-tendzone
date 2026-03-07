@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function ProductApplicationNetworkAudio() {
   return (
-    <section className="w-full bg-white py-24">
+    <section className="w-full bg-white py-16">
       <div className="max-w-7xl mx-auto px-6 space-y-24">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

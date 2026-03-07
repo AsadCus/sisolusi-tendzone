@@ -41,7 +41,7 @@ export default function FAQSection() {
           <p className="text-sm font-semibold tracking-widest text-red-600 uppercase mb-3">
             Frequently Asked Questions
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-medium text-gray-900">
             Everything You Need to Know
           </h2>
           <p className="mt-4 text-gray-500 max-w-2xl mx-auto">

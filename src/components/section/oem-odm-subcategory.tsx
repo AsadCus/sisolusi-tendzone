@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { TextureOverlay } from "@/components/ui/texture-overlay";
 
-export default function OemOdmAudioOverIpSection() {
+export default function OemOdmSubcategorySection() {
   return (
     <section className="relative w-full overflow-hidden text-white py-8">
 

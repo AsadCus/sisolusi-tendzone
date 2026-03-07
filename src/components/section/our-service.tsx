@@ -12,7 +12,7 @@ import {
 
 export default function OurServiceSection() {
   return (
-    <section className="w-full py-24 bg-gray-50">
+    <section className="w-full py-8 bg-white">
       <div className="max-w-6xl mx-auto px-6">
 
         <div className="text-center mb-16">

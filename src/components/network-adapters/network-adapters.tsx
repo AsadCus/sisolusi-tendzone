@@ -32,27 +32,29 @@ const categories: Category[] = [
     slug: "audio-processor",
     badge: "Processing",
   },
+  {
+    id: 3,
+    name: "Network Adapters",
+    description:
+      "High-performance network adapters for seamless integration of audio and video signals in modern AV installations.",
+    image: "/images/product/expansion-midis.png",
+    slug: "network-adapters",
+    badge: "Processing",
+  },
 ];
 
-export default function ProductAudioIpPage() {
+export default function ProductNetworkAdaptersPage() {
   return (
-    <section className="w-full py-20">
+    <section className="w-full py-16">
       <div className="max-w-7xl mx-auto px-6">
         
-        <div className="text-center max-w-4xl mx-auto">
+        <div className="text-center max-w-6xl mx-auto">
           <h1 className="text-2xl md:text-xl font-medium text-red-600">
-            Your Professional Audio Over IP Supplier!
+        Your Professional Network Adapters Supplier!
           </h1>
 
           <p className="mt-4 text-gray-600 text-xs md:text-sm">
-            Tendzone, established in 2010, is a global leader in providing 
-            advanced audio-visual (AV) solutions and manufacturing high-quality 
-            AV products. We specialize in a wide range of cutting-edge technologies, 
-            including audio processors, microphones, speakers, power amplifiers, 
-            AV over IP systems, digital conference systems, and MIDIS Distributed 
-            Multimedia Transmission Control Systems. Our solutions are trusted 
-            across industries such as conference rooms, command centers, education, 
-            multi-functional halls, and stadiums.
+           Tendzone, established in 2010, is a global leader in providing advanced audio-visual (AV) solutions and manufacturing high-quality AV products. We specialize in a wide range of cutting-edge technologies, including audio processors, microphones, speakers, power amplifiers, AV over IP systems, digital conference systems, and MIDIS Distributed Multimedia Transmission Control Systems. Our solutions are trusted across industries such as conference rooms, command centers, education, multi-functional halls, and stadiums.
           </p>
         </div>
 

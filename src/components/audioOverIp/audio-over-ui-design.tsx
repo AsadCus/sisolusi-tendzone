@@ -47,10 +47,10 @@ const features = [
 
 export default function AudioOverIPUiDesignSection() {
   return (
-    <section className="w-full py-20 bg-muted/40">
-      <div className="container mx-auto px-6">
+    <section className="w-full  bg-white">
+      <div className="container max-w-7xl py-20 mx-auto px-6">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-medium tracking-tight">
             <span className="text-red-600">■</span> Audio Over IP UI And Design <span className="text-red-600">■</span>
           </h2>
         </div>
@@ -62,10 +62,10 @@ export default function AudioOverIPUiDesignSection() {
               className="transition-all duration-300 border-muted"
             >
               <CardHeader className="flex flex-row items-center gap-2">
-                <div className="text-2xl font-bold text-primary">
+                <div className="text-2xl font-medium text-primary">
                   {feature.number}/
                 </div>
-                <CardTitle className="text-lg font-semibold">
+                <CardTitle className="text-lg font-medium">
                   {feature.title}
                 </CardTitle>
               </CardHeader>

@@ -6,7 +6,7 @@ import FAQSection from "@/components/section/faq"
 import Footer from "@/components/footer"
 import PopularProductsCarousel from "@/components/section/popularProducts"
 import CategoryItem from "@/components/layout/buttonnav"
-import WhyChooseUs from "@/components/section/whyChoose"
+import WhyChooseUs from "@/components/section/whyChooseCategory"
 
 
 export default function AllInOneAudioVisualSolutionsPage() {

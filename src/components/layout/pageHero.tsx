@@ -29,7 +29,7 @@ export default function PageHero({
   return (
     <>
       <section
-        className="relative w-full h-68 bg-cover bg-center flex items-center"
+        className="relative w-full h-72 bg-cover bg-center flex items-center justify-center"
         style={{
           backgroundImage: `url('${backgroundImage}')`,
         }}

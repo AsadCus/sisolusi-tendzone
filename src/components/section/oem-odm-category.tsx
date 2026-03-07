@@ -113,7 +113,7 @@ const BestSellingTabs = () => {
   );
 };
 
-export default function OemOdmAudioDistribution() {
+export default function OemOdmCategory() {
   return (
     <main className="w-full min-h-screen bg-white">
 
