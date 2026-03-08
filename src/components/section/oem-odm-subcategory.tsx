@@ -14,7 +14,7 @@ export default function OemOdmSubcategorySection() {
   return (
     <section className="relative w-full overflow-hidden text-white py-8">
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-4">
           <p className="text-red-500 text-xl font-medium uppercase tracking-widest mb-2">
             OEM/ODM Service

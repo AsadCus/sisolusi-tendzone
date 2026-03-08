@@ -35,8 +35,8 @@ export default function BestSellingSection() {
             <Image
               src="/images/product/2k60-hdmi.png"
               alt="Distributor Audio Over IP"
-              width={600}
-              height={400}
+              width={400}
+              height={200}
               className="object-contain"
             />
           </div>

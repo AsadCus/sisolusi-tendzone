@@ -13,15 +13,19 @@ import HonorQualification from "@/components/section/honor-qualification";
 import FaqSection from "@/components/section/faq";
 import PopularProductsCarousel from "@/components/section/popularProducts";
 import SendInquirySection from "@/components/section/SendInquirySection";
+import NetworkAudioDistributionSection from "@/components/network-audio-distribution/network-audio-distribution";
+import BestSellingNetworkAudioSection from "@/components/network-audio-distribution/best-selling-network-audio";
 
 export default function ProductsPage() {
   return (
     <>
     <NavbarLanding />
       <PageHero title="Network Audio Distribution" />
+        <NetworkAudioDistributionSection />
       <WhyChooseUsCategory />
       <ProductGridAudioDistribution />
       <OemOdmCategory />
+        <BestSellingNetworkAudioSection />
       <SpecTableAudioDistribution />
       <ProductInterfaceSection />
       <NetworkAudioFeatureSections />

@@ -44,11 +44,11 @@ const productFlat = [
       { label: "Network Microphone", href: "/network-audio-distribution/network-microphone" },
       { label: "Network Speaker", href: "/network-audio-distribution/network-speaker" },
     ] },
-  { category: "Digital Conference System", href: "/products/conference-network",
+  { category: "Digital Conference System", href: "/digital-conference-system",
     items: [
-      { label: "Network Digital Conference System", href: "/products/conference-network" },
-      { label: "2.4G Wireless Digital Conference System", href: "/products/conference-24g" },
-      { label: "5G Digital Conference System", href: "/products/conference-5g" },
+      { label: "Network Digital Conference System", href: "/digital-conference-system/network-digital-conference-system" },
+      { label: "2.4G Wireless Digital Conference System", href: "/digital-conference-system/2-4g-wireless-digital-conference-system" },
+      { label: "5G Digital Conference System", href: "/digital-conference-system/5g-digital-conference-system" },
     ] },
   { category: "Wireless Microphone System", href: "/products/uhf-wireless",
     items: [{ label: "UHF Wireless Microphone System", href: "/products/uhf-wireless" }] },
@@ -113,7 +113,6 @@ export default function NavbarLanding() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [utilityVisible, setUtilityVisible] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -146,12 +145,6 @@ export default function NavbarLanding() {
     const onScroll = () => {
       const currentY = window.scrollY;
       setScrolled(currentY > 20);
-      // Hide utility bar when scrolling down past 60px, show when scrolling up
-      if (currentY > 60) {
-        setUtilityVisible(currentY < lastScrollY.current);
-      } else {
-        setUtilityVisible(true);
-      }
       lastScrollY.current = currentY;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -173,14 +166,10 @@ export default function NavbarLanding() {
     if (onProductPage && activeMobileMenu !== "Products") {
       setActiveMobileMenu("Products");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const isHome = pathname === "/";
   const isTransparent = isHome && !scrolled;
-
-  // Utility bar is shown on non-home pages when scrolled up (or near top)
-  const showUtilityBar = !isTransparent && utilityVisible;
 
   return (
     <>
@@ -197,30 +186,43 @@ export default function NavbarLanding() {
       <div className="font-sans">
         <header className="fixed top-0 left-0 w-full z-50 flex flex-col">
 
-          {/* ── Top utility bar ──────────────────────────────────────────────── */}
+          {/* ── Utility bar: always shown, transparent on top / white bg when scrolled ── */}
           <div className={cn(
-            "transition-all duration-300 overflow-hidden bg-white border-b border-gray-100",
-            showUtilityBar ? "h-9 opacity-100" : "h-0 opacity-0"
+            "transition-all duration-300 overflow-hidden",
+            isTransparent
+              ? "bg-transparent border-b border-white/10 h-9 opacity-100"
+              : scrolled
+                ? "h-0 opacity-0"
+                : "bg-white border-b border-gray-100 h-9 opacity-100"
           )}>
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-9">
-              <div className="flex items-center gap-5 text-xs text-gray-500">
-                <Link href="tel:8613632976066" className="flex items-center gap-1.5 hover:text-red-500 transition-colors duration-200">
+              <div className="flex items-center gap-5 text-xs">
+                <Link href="tel:8613632976066" className={cn(
+                  "flex items-center gap-1.5 transition-colors duration-200",
+                  isTransparent ? "text-white/80 hover:text-white" : "text-gray-500 hover:text-red-500"
+                )}>
                   <Phone size={12} strokeWidth={2} /><span>8613632976066</span>
                 </Link>
-                <span className="w-px h-3 bg-gray-200" />
-                <Link href="mailto:sales@tendzone.net" className="flex items-center gap-1.5 hover:text-red-500 transition-colors duration-200">
+                <span className={cn("w-px h-3", isTransparent ? "bg-white/20" : "bg-gray-200")} />
+                <Link href="mailto:sales@tendzone.net" className={cn(
+                  "flex items-center gap-1.5 transition-colors duration-200",
+                  isTransparent ? "text-white/80 hover:text-white" : "text-gray-500 hover:text-red-500"
+                )}>
                   <Mail size={12} strokeWidth={2} /><span>sales@tendzone.net</span>
                 </Link>
               </div>
               <div className="flex items-center gap-3">
-                <button className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-800 transition-colors">
+                <button className={cn(
+                  "flex items-center gap-1 text-xs transition-colors",
+                  isTransparent ? "text-white/80 hover:text-white" : "text-gray-500 hover:text-gray-800"
+                )}>
                   <Globe size={11} strokeWidth={2} /><span>Language</span><ChevronDown size={10} />
                 </button>
               </div>
             </div>
           </div>
 
-          {/* ── Main nav ────────────────────────────────────────────────────── */}
+          {/* ── Main nav ── */}
           <nav className={cn(
             "transition-all duration-300",
             isTransparent
@@ -237,7 +239,6 @@ export default function NavbarLanding() {
                   )} />
               </Link>
 
-              {/* ── Desktop nav links ──────────────────────────────────────── */}
               <ul className="hidden lg:flex flex-1 items-center gap-0">
                 {navLinks.map((link) => {
                   const active = isActive(link.href);
@@ -247,11 +248,13 @@ export default function NavbarLanding() {
                         href={link.href}
                         className={cn(
                           "relative flex items-center gap-0.5 px-3 py-2 text-[13.5px] font-medium transition-all duration-200",
-                          active
-                            ? isTransparent ? "text-white" : "text-red-600"
-                            : isTransparent
-                              ? "text-white/85 hover:text-white"
-                              : "text-gray-700 hover:text-red-600",
+                          isTransparent
+                            ? active
+                              ? "text-white"
+                              : "text-white/80 hover:text-white"
+                            : active
+                              ? "text-red-600"
+                              : "text-gray-700 hover:text-red-600"
                         )}
                       >
                         {link.label}
@@ -259,22 +262,23 @@ export default function NavbarLanding() {
                           <ChevronDown size={12} strokeWidth={2.5}
                             className="transition-transform duration-200 group-hover:rotate-180 opacity-60 mt-px" />
                         )}
+                        {/* underline indicator */}
                         <span className={cn(
                           "absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300 origin-left",
-                          isTransparent ? "bg-white" : "bg-red-500",
+                          isTransparent ? "bg-red-500" : "bg-red-500",
                           active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                         )} />
                       </Link>
 
-                      {/* ── Products mega-menu (desktop) ───────────────────── */}
+                      {/* Products mega menu */}
                       {link.label === "Products" && (
                         <div className="fixed left-0 right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                           style={{
-                            top: isTransparent ? "64px" : showUtilityBar ? "100px" : "64px",
+                            top: isTransparent ? "100px" : "64px",
                             zIndex: 100,
                             transition: "opacity 180ms ease, visibility 180ms ease, top 300ms ease"
                           }}>
-                          <div className="mega-enter bg-white rounded-3xl shadow-2xl shadow-black/15 overflow-hidden border border-gray-100">
+                          <div className="mega-enter bg-white rounded-3xl shadow-2xl shadow-black/15 overflow-hidden border border-red-100">
                             <div className="flex items-center justify-between px-8 py-4 border-b border-gray-100">
                               <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-red-500" />
@@ -337,7 +341,7 @@ export default function NavbarLanding() {
                         </div>
                       )}
 
-                      {/* ── Other dropdowns (desktop) ──────────────────────── */}
+                      {/* Other dropdowns */}
                       {link.label !== "Products" && link.dropdown && megaData[link.label as keyof typeof megaData] && (
                         <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-100"
                           style={{ transition: "opacity 150ms ease, visibility 150ms ease" }}>
@@ -366,7 +370,7 @@ export default function NavbarLanding() {
                 })}
               </ul>
 
-              {/* ── Desktop right actions ──────────────────────────────────── */}
+              {/* Search + CTA */}
               <div className="hidden lg:flex items-center gap-2 ml-2">
                 <div className={cn(
                   "flex items-center transition-all duration-300 rounded-xl overflow-hidden",
@@ -401,7 +405,7 @@ export default function NavbarLanding() {
                 </Link>
               </div>
 
-              {/* ── Mobile hamburger ──────────────────────────────────────── */}
+              {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={cn(
@@ -416,7 +420,7 @@ export default function NavbarLanding() {
             </div>
           </nav>
 
-          {/* ── Mobile drawer ───────────────────────────────────────────────── */}
+          {/* ── Mobile drawer ── */}
           <div className={cn(
             "lg:hidden fixed inset-x-3 bottom-3 z-100 bg-white rounded-2xl shadow-2xl overflow-y-auto transition-all duration-300 border border-gray-100",
             mobileOpen ? "opacity-100 pointer-events-auto top-30" : "opacity-0 pointer-events-none top-30"
@@ -435,7 +439,7 @@ export default function NavbarLanding() {
                   <div key={link.label}>
                     <div className={cn(
                       "flex items-center rounded-xl transition-colors",
-                      active ? "bg-red-50" : "hover:bg-gray-50"
+                      active ? "bg-red-50" : "hover:bg-red-500"
                     )}>
                       <Link
                         href={link.href === "#" ? "#" : link.href}

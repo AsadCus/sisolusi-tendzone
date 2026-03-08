@@ -37,7 +37,7 @@ const features = [
 export default function WhyChooseUsSectionSubcategory() {
   return (
     <section className="w-full py-2">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
 
         <div className="border-t-2 border-dashed border-red-500 mb-12" />
 

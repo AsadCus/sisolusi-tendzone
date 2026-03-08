@@ -56,24 +56,24 @@ export default function FunctionsNetworkSection({
           {title}
         </h2>
 
-        <div className="flex flex-wrap justify-center items-center gap-1">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
           {functions.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div key={index} className="flex items-center gap-1">
-                <Card className="w-38.75 min-h-52.5 border border-gray-200 shadow-none rounded-xl hover:border-red-300 hover:shadow-md transition-all duration-200 group">
-                  <CardContent className="flex flex-col items-center justify-between h-full pt-7 pb-5 px-4 text-center gap-4">
+              <div key={index} className="flex items-center gap-2">
+                <Card className="flex-1 h-52 border border-gray-200 shadow-none rounded-xl hover:border-red-300 hover:shadow-md transition-all duration-200 group">
+                  <CardContent className="flex flex-col items-center justify-between h-full pt-7 pb-5 px-4 text-center">
                     <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors duration-200">
                       <Icon className="w-5 h-5 text-red-500" strokeWidth={1.75} />
                     </div>
 
-                    <p className="text-gray-600 text-xs leading-relaxed flex-1">
+                    <p className="text-gray-600 text-xs leading-relaxed">
                       {item.description}
                     </p>
 
                     <Badge
                       variant="secondary"
-                      className="w-8 h-8 rounded-full p-0 flex items-center justify-center text-xs text-gray-500 bg-gray-100 border-0 font-medium"
+                      className="w-6 h-6 rounded-full p-0 flex items-center justify-center text-[10px] text-gray-500 bg-gray-100 border-0 font-medium"
                     >
                       {index + 1}
                     </Badge>
@@ -81,7 +81,7 @@ export default function FunctionsNetworkSection({
                 </Card>
 
                 {index < functions.length - 1 && (
-                  <ChevronRight className="w-4 h-4 text-gray-300 shrink-0" />
+                  <ChevronRight className="hidden lg:block w-3 h-3 text-gray-300 shrink-0" />
                 )}
               </div>
             );
