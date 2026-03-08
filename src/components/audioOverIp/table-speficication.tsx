@@ -10,7 +10,7 @@ import {
 export default function AudioSpecificationTable() {
   return (
     <section className="w-full py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-semibold text-gray-900">
             Audio Over IP Specification

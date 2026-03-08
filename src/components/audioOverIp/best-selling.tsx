@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function BestSellingSection() {
   return (
-    <section className="w-full bg-white py-24">
+    <section className="w-full bg-white py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">          
           <div>
@@ -35,8 +35,8 @@ export default function BestSellingSection() {
             <Image
               src="/images/product/2k60-hdmi.png"
               alt="Distributor Audio Over IP"
-              width={600}
-              height={400}
+              width={400}
+              height={200}
               className="object-contain"
             />
           </div>

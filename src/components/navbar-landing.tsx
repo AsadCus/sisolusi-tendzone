@@ -39,16 +39,16 @@ const productFlat = [
   { category: "Network Audio Distribution", href: "/network-audio-distribution",
     items: [
       { label: "Audio Over IP", href: "/network-audio-distribution/audio-over-ip" },
-      { label: "Network Input And Output Interface", href: "/products/network-io" },
-      { label: "Network Adapters", href: "/products/network-adapters" },
-      { label: "Network Microphone", href: "/products/network-mic" },
-      { label: "Network Speaker", href: "/products/network-speaker" },
+      { label: "Network Input And Output Interface", href: "/network-audio-distribution/network-input-and-output-interface" },
+      { label: "Network Adapters", href: "/network-audio-distribution/network-adapters" },
+      { label: "Network Microphone", href: "/network-audio-distribution/network-microphone" },
+      { label: "Network Speaker", href: "/network-audio-distribution/network-speaker" },
     ] },
-  { category: "Digital Conference System", href: "/products/conference-network",
+  { category: "Digital Conference System", href: "/digital-conference-system",
     items: [
-      { label: "Network Digital Conference System", href: "/products/conference-network" },
-      { label: "2.4G Wireless Digital Conference System", href: "/products/conference-24g" },
-      { label: "5G Digital Conference System", href: "/products/conference-5g" },
+      { label: "Network Digital Conference System", href: "/digital-conference-system/network-digital-conference-system" },
+      { label: "2.4G Wireless Digital Conference System", href: "/digital-conference-system/2-4g-wireless-digital-conference-system" },
+      { label: "5G Digital Conference System", href: "/digital-conference-system/5g-digital-conference-system" },
     ] },
   { category: "Wireless Microphone System", href: "/products/uhf-wireless",
     items: [{ label: "UHF Wireless Microphone System", href: "/products/uhf-wireless" }] },
@@ -116,38 +116,24 @@ export default function NavbarLanding() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const lastScrollY = useRef(0);
 
-  // ─── helpers ────────────────────────────────────────────────────────────────
-
-  /** True when the nav-link itself (top-level) should be highlighted */
   const isActive = (href: string) => {
     if (href === "#") return false;
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
 
-  /**
-   * True when the current pathname matches a product category href exactly
-   * (used to highlight category headings in the mega-menu / mobile list)
-   */
   const isCategoryActive = (href: string) => {
     if (!href || href === "#") return false;
     return pathname === href || pathname.startsWith(href + "/");
   };
 
-  /**
-   * True when the current pathname matches a sub-item href exactly.
-   * A sub-item href like "/products/open-dsp" is exact, so we do a strict check.
-   */
   const isSubItemActive = (href: string) => {
     if (!href || href === "#") return false;
     return pathname === href;
   };
 
-  /**
-   * True when ANY sub-item (or the category itself) inside a productFlat group
-   * is active — used to auto-expand the accordion in mobile.
-   */
   const isCategoryGroupActive = (group: typeof productFlat[0]) => {
     return (
       isCategoryActive(group.href) ||
@@ -155,10 +141,12 @@ export default function NavbarLanding() {
     );
   };
 
-  // ─── effects ────────────────────────────────────────────────────────────────
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 20);
+      lastScrollY.current = currentY;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -173,16 +161,15 @@ export default function NavbarLanding() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // Auto-expand "Products" accordion if we're on a product page
   useEffect(() => {
     const onProductPage = productFlat.some((g) => isCategoryGroupActive(g));
     if (onProductPage && activeMobileMenu !== "Products") {
       setActiveMobileMenu("Products");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  // ─── render ─────────────────────────────────────────────────────────────────
+  const isHome = pathname === "/";
+  const isTransparent = isHome && !scrolled;
 
   return (
     <>
@@ -197,53 +184,62 @@ export default function NavbarLanding() {
       `}</style>
 
       <div className="font-sans">
-        <header className="fixed top-0 left-0 w-full z-100">
+        <header className="fixed top-0 left-0 w-full z-50 flex flex-col">
 
-          {/* ── Top utility bar ─────────────────────────────────────────────── */}
+          {/* ── Utility bar: always shown, transparent on top / white bg when scrolled ── */}
           <div className={cn(
-            "transition-all duration-500 overflow-hidden",
-            scrolled ? "h-0 opacity-0" : "h-9 opacity-100"
+            "transition-all duration-300 overflow-hidden",
+            isTransparent
+              ? "bg-transparent border-b border-white/10 h-9 opacity-100"
+              : scrolled
+                ? "h-0 opacity-0"
+                : "bg-white border-b border-gray-100 h-9 opacity-100"
           )}>
-            <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-full">
-              <div className="hidden md:flex items-center gap-5 text-xs text-white/80">
-                <Link href="tel:8613632976066" className="flex items-center gap-1.5 hover:text-white transition-colors duration-200">
+            <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-9">
+              <div className="flex items-center gap-5 text-xs">
+                <Link href="tel:8613632976066" className={cn(
+                  "flex items-center gap-1.5 transition-colors duration-200",
+                  isTransparent ? "text-white/80 hover:text-white" : "text-gray-500 hover:text-red-500"
+                )}>
                   <Phone size={12} strokeWidth={2} /><span>8613632976066</span>
                 </Link>
-                <span className="w-px h-3 bg-white/20" />
-                <Link href="mailto:sales@tendzone.net" className="flex items-center gap-1.5 hover:text-white transition-colors duration-200">
+                <span className={cn("w-px h-3", isTransparent ? "bg-white/20" : "bg-gray-200")} />
+                <Link href="mailto:sales@tendzone.net" className={cn(
+                  "flex items-center gap-1.5 transition-colors duration-200",
+                  isTransparent ? "text-white/80 hover:text-white" : "text-gray-500 hover:text-red-500"
+                )}>
                   <Mail size={12} strokeWidth={2} /><span>sales@tendzone.net</span>
                 </Link>
               </div>
-              <div className="flex items-center gap-3 ml-auto">
-                <Link href="/" className="flex items-center gap-1.5 bg-red-600 hover:bg-red-700 transition-colors px-2.5 py-1 rounded-full text-white text-xs font-medium">
-                  <Youtube size={12} fill="white" strokeWidth={0} />
-                  <span>YouTube</span>
-                </Link>
-                <button className="flex items-center gap-1 text-xs text-white/80 hover:text-white transition-colors border border-white/20 hover:border-white/40 px-2.5 py-1 rounded-full">
-                  <Globe size={11} strokeWidth={2} /><span>EN</span><ChevronDown size={10} />
+              <div className="flex items-center gap-3">
+                <button className={cn(
+                  "flex items-center gap-1 text-xs transition-colors",
+                  isTransparent ? "text-white/80 hover:text-white" : "text-gray-500 hover:text-gray-800"
+                )}>
+                  <Globe size={11} strokeWidth={2} /><span>Language</span><ChevronDown size={10} />
                 </button>
               </div>
             </div>
           </div>
 
-          {/* ── Main nav ────────────────────────────────────────────────────── */}
+          {/* ── Main nav ── */}
           <nav className={cn(
-            "transition-all duration-300 mx-4 rounded-2xl",
-            scrolled
-              ? "bg-white/90 backdrop-blur-xl shadow-lg shadow-black/10 mt-2 border border-gray-200/60"
-              : "bg-transparent mt-0 border border-transparent"
+            "transition-all duration-300",
+            isTransparent
+              ? "bg-transparent"
+              : "bg-white shadow-sm border-b border-gray-100"
           )}>
-            <div className="max-w-7xl mx-auto px-5 flex items-center h-14">
+            <div className="max-w-7xl mx-auto px-6 flex items-center h-16">
 
-              <Link href="/" className="mr-5 shrink-0">
-                <Image src="/images/logo/tendzone.png" alt="Tendzone" width={72} height={72}
-                  className={cn("transition-all duration-300", scrolled ? "brightness-100" : "brightness-0 invert")} />
+              <Link href="/" className="mr-8 shrink-0">
+                <Image src="/images/logo/tendzone.png" alt="Tendzone" width={130} height={40}
+                  className={cn(
+                    "h-10 w-auto object-contain transition-all duration-300",
+                    isTransparent ? "brightness-0 invert" : "brightness-100"
+                  )} />
               </Link>
 
-              <div className={cn("hidden lg:block w-px h-5 mr-5 transition-colors duration-300", scrolled ? "bg-gray-200" : "bg-white/20")} />
-
-              {/* ── Desktop nav links ──────────────────────────────────────── */}
-              <ul className="hidden lg:flex flex-1 items-center gap-0.5">
+              <ul className="hidden lg:flex flex-1 items-center gap-0">
                 {navLinks.map((link) => {
                   const active = isActive(link.href);
                   return (
@@ -251,34 +247,38 @@ export default function NavbarLanding() {
                       <Link
                         href={link.href}
                         className={cn(
-                          "relative flex items-center gap-1 px-3 py-2 rounded-xl text-[13px] font-medium transition-all duration-200",
-                          active
-                            ? "text-red-600"
-                            : scrolled
-                              ? "text-gray-600 hover:text-gray-900"
-                              : "text-white/80 hover:text-white",
+                          "relative flex items-center gap-0.5 px-3 py-2 text-[13.5px] font-medium transition-all duration-200",
+                          isTransparent
+                            ? active
+                              ? "text-white"
+                              : "text-white/80 hover:text-white"
+                            : active
+                              ? "text-red-600"
+                              : "text-gray-700 hover:text-red-600"
                         )}
                       >
                         {link.label}
                         {link.dropdown && (
                           <ChevronDown size={12} strokeWidth={2.5}
-                            className="transition-transform duration-200 group-hover:rotate-180 opacity-60" />
+                            className="transition-transform duration-200 group-hover:rotate-180 opacity-60 mt-px" />
                         )}
+                        {/* underline indicator */}
                         <span className={cn(
-                          "absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300 origin-left bg-red-500",
+                          "absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300 origin-left",
+                          isTransparent ? "bg-red-500" : "bg-red-500",
                           active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                         )} />
                       </Link>
 
-                      {/* ── Products mega-menu (desktop) ───────────────────── */}
+                      {/* Products mega menu */}
                       {link.label === "Products" && (
-                        <div className="fixed left-4 right-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
+                        <div className="fixed left-0 right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                           style={{
-                            top: scrolled ? "72px" : "96px",
+                            top: isTransparent ? "100px" : "64px",
                             zIndex: 100,
                             transition: "opacity 180ms ease, visibility 180ms ease, top 300ms ease"
                           }}>
-                          <div className="mega-enter bg-white rounded-3xl shadow-2xl shadow-black/15 overflow-hidden border border-gray-100">
+                          <div className="mega-enter bg-white rounded-3xl shadow-2xl shadow-black/15 overflow-hidden border border-red-100">
                             <div className="flex items-center justify-between px-8 py-4 border-b border-gray-100">
                               <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-red-500" />
@@ -317,7 +317,7 @@ export default function NavbarLanding() {
                                               <Link
                                                 href={item.href}
                                                 className={cn(
-                                                  "text-[13px] transition-colors duration-150 block leading-snug flex items-center gap-1",
+                                                  "text-[13px] transition-colors duration-150 leading-snug flex items-center gap-1",
                                                   subActive
                                                     ? "text-red-500 font-semibold"
                                                     : "text-gray-500 hover:text-red-500"
@@ -341,7 +341,7 @@ export default function NavbarLanding() {
                         </div>
                       )}
 
-                      {/* ── Other dropdowns (desktop) ──────────────────────── */}
+                      {/* Other dropdowns */}
                       {link.label !== "Products" && link.dropdown && megaData[link.label as keyof typeof megaData] && (
                         <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-100"
                           style={{ transition: "opacity 150ms ease, visibility 150ms ease" }}>
@@ -370,20 +370,20 @@ export default function NavbarLanding() {
                 })}
               </ul>
 
-              {/* ── Desktop right actions ──────────────────────────────────── */}
+              {/* Search + CTA */}
               <div className="hidden lg:flex items-center gap-2 ml-2">
                 <div className={cn(
                   "flex items-center transition-all duration-300 rounded-xl overflow-hidden",
-                  scrolled ? "bg-gray-100" : "bg-white/10 border border-white/20",
-                  searchOpen ? "w-24 pr-0" : "w-9"
+                  isTransparent ? "bg-white/10 border border-white/25" : "bg-gray-100",
+                  searchOpen ? "w-36 pr-0" : "w-9"
                 )}>
                   <button
                     onClick={() => setSearchOpen(!searchOpen)}
-                    className="w-9 h-9 shrink-0 flex items-center justify-center text-current transition-colors"
+                    className="w-9 h-9 shrink-0 flex items-center justify-center transition-colors"
                   >
                     {searchOpen
-                      ? <X size={14} strokeWidth={2.5} className={scrolled ? "text-gray-500" : "text-white ml-4"} />
-                      : <Search size={14} strokeWidth={2.5} className={scrolled ? "text-gray-500" : "text-white"} />
+                      ? <X size={14} strokeWidth={2.5} className={isTransparent ? "text-white ml-4" : "text-gray-500"} />
+                      : <Search size={14} strokeWidth={2.5} className={isTransparent ? "text-white" : "text-gray-500"} />
                     }
                   </button>
                   {searchOpen && (
@@ -392,8 +392,8 @@ export default function NavbarLanding() {
                       type="text"
                       placeholder="Search..."
                       className={cn(
-                        "flex-1 text-[13px] placeholder-gray-400 pr-3 py-2 outline-none bg-transparent",
-                        scrolled ? "text-gray-800" : "text-white placeholder-white/50"
+                        "flex-1 text-[13px] pr-3 py-2 outline-none bg-transparent",
+                        isTransparent ? "text-white placeholder-white/60" : "text-gray-800 placeholder-gray-400"
                       )}
                       onBlur={() => setSearchOpen(false)}
                     />
@@ -405,12 +405,14 @@ export default function NavbarLanding() {
                 </Link>
               </div>
 
-              {/* ── Mobile hamburger ──────────────────────────────────────── */}
+              {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={cn(
                   "lg:hidden ml-auto flex items-center justify-center w-9 h-9 rounded-xl transition-colors",
-                  scrolled ? "text-gray-700 bg-gray-100 hover:bg-gray-200" : "text-white border border-white/30 hover:border-white/60"
+                  isTransparent
+                    ? "text-white border border-white/30 hover:border-white/60"
+                    : "text-gray-700 bg-gray-100 hover:bg-gray-200"
                 )}
               >
                 {mobileOpen ? <X size={17} strokeWidth={2} /> : <Menu size={17} strokeWidth={2} />}
@@ -418,13 +420,12 @@ export default function NavbarLanding() {
             </div>
           </nav>
 
-          {/* ── Mobile drawer ───────────────────────────────────────────────── */}
+          {/* ── Mobile drawer ── */}
           <div className={cn(
             "lg:hidden fixed inset-x-3 bottom-3 z-100 bg-white rounded-2xl shadow-2xl overflow-y-auto transition-all duration-300 border border-gray-100",
             mobileOpen ? "opacity-100 pointer-events-auto top-30" : "opacity-0 pointer-events-none top-30"
           )}>
             <div className="px-4 py-5 flex flex-col">
-              {/* Search */}
               <div className="flex items-center gap-2 mb-5 bg-gray-50 rounded-xl px-3 py-2">
                 <Search size={14} className="text-gray-400 shrink-0" />
                 <input type="text" placeholder="Search products..."
@@ -436,10 +437,9 @@ export default function NavbarLanding() {
                 const isOpen = activeMobileMenu === link.label;
                 return (
                   <div key={link.label}>
-                    {/* Row: Link navigates, chevron button toggles accordion */}
                     <div className={cn(
                       "flex items-center rounded-xl transition-colors",
-                      active ? "bg-red-50" : "hover:bg-gray-50"
+                      active ? "bg-red-50" : "hover:bg-red-500"
                     )}>
                       <Link
                         href={link.href === "#" ? "#" : link.href}
@@ -461,7 +461,6 @@ export default function NavbarLanding() {
                       )}
                     </div>
 
-                    {/* ── Products accordion (mobile) ──────────────────────── */}
                     {isOpen && link.label === "Products" && (
                       <div className="mx-3 mb-3 mt-1 bg-gray-50 rounded-xl p-4 flex flex-col gap-4">
                         {productFlat.map((group) => {
@@ -469,11 +468,6 @@ export default function NavbarLanding() {
                           const groupHasActiveChild = isCategoryGroupActive(group);
                           return (
                             <div key={group.category}>
-                              {/*
-                                Category heading row:
-                                - Left side: colored dot + label (clickable → navigate to category page)
-                                - Right side: arrow icon to hint it's a link
-                              */}
                               <Link
                                 href={group.href}
                                 onClick={() => setMobileOpen(false)}
@@ -489,34 +483,20 @@ export default function NavbarLanding() {
                                   )} />
                                   {group.category}
                                 </span>
-                                <ArrowRight
-                                  size={12}
-                                  strokeWidth={2.5}
-                                  className={cn(
-                                    "shrink-0 transition-colors",
-                                    catActive ? "text-red-400" : "text-gray-300"
-                                  )}
-                                />
+                                <ArrowRight size={12} strokeWidth={2.5}
+                                  className={cn("shrink-0 transition-colors", catActive ? "text-red-400" : "text-gray-300")} />
                               </Link>
-
-                              {/* Sub-items */}
                               {group.items.map((item) => {
                                 const subActive = isSubItemActive(item.href);
                                 return (
-                                  <Link
-                                    key={item.label}
-                                    href={item.href}
+                                  <Link key={item.label} href={item.href}
                                     onClick={() => setMobileOpen(false)}
                                     className={cn(
                                       "flex items-center gap-1.5 text-[13px] py-0.5 pl-3.5 transition-colors",
-                                      subActive
-                                        ? "text-red-500 font-semibold"
-                                        : "text-gray-500 hover:text-red-500"
+                                      subActive ? "text-red-500 font-semibold" : "text-gray-500 hover:text-red-500"
                                     )}
                                   >
-                                    {subActive && (
-                                      <span className="w-1 h-1 rounded-full bg-red-500 shrink-0" />
-                                    )}
+                                    {subActive && <span className="w-1 h-1 rounded-full bg-red-500 shrink-0" />}
                                     {item.label}
                                   </Link>
                                 );
@@ -527,7 +507,6 @@ export default function NavbarLanding() {
                       </div>
                     )}
 
-                    {/* ── Other dropdowns (mobile) ─────────────────────────── */}
                     {isOpen && link.label !== "Products" && megaData[link.label as keyof typeof megaData] && (
                       <div className="mx-3 mb-3 mt-1 bg-gray-50 rounded-xl px-4 py-2 flex flex-col">
                         {megaData[link.label as keyof typeof megaData].items.map((item) => (
@@ -542,7 +521,6 @@ export default function NavbarLanding() {
                 );
               })}
 
-              {/* Contact info */}
               <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-3">
                 <Link href="tel:8613632976066" className="flex items-center gap-2 text-[13px] text-gray-500 hover:text-red-500 transition-colors">
                   <Phone size={13} strokeWidth={2} /><span>8613632976066</span>

@@ -28,8 +28,8 @@ const certificates: Certificate[] = [
 
 export default function HonorQualification() {
   return (
-    <section className="w-full bg-gray-100 py-16">
-      <div className="max-w-5xl mx-auto px-16">
+    <section className="w-full bg-white py-16">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
             Honor And Qualification

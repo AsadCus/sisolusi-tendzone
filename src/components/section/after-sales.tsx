@@ -40,10 +40,10 @@ const services = [
 
 export default function AfterSalesSection() {
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-white py-2">
       <div className="max-w-6xl mx-auto px-6">
         
-        <h2 className="text-4xl font-bold text-center mb-16">
+        <h2 className="text-4xl font-medium text-center mb-16">
           After-Sales Services
         </h2>
 

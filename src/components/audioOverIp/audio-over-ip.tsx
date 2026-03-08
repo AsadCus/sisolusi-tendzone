@@ -37,10 +37,10 @@ const categories: Category[] = [
 export default function ProductAudioIpPage() {
   return (
     <section className="w-full py-20">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-semibold text-red-600">
+          <h1 className="text-2xl md:text-xl font-medium text-red-600">
             Your Professional Audio Over IP Supplier!
           </h1>
 
