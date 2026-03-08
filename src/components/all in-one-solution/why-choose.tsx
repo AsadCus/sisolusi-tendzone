@@ -41,7 +41,7 @@ const reasons = [
 
 export default function WhyChooseUs() {
   return (
-   <section className="w-full bg-gray-100 pt-24 pb-4 relative overflow-hidden">
+    <section className="w-full bg-white pt-12 pb-4 relative overflow-hidden">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -53,26 +53,19 @@ export default function WhyChooseUs() {
 
       <div className="max-w-5xl mx-auto px-8 md:px-16 relative">
 
-        <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 mb-4">
-            <span className="w-6 h-px bg-red-400" />
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-red-500">
-              About Us
-            </p>
-            <span className="w-6 h-px bg-red-400" />
-          </span>
-
+        {/* Header */}
+        <div className="text-center mb-8">
           <h2 className="text-2xl md:text-[1.85rem] font-extrabold text-gray-900 leading-snug tracking-tight">
             Your Professional All-in-one Solution Manufacturer
           </h2>
 
-          <div className="flex justify-center mt-3 mb-6">
+          <div className="flex justify-center mt-3 mb-4">
             <span className="block w-12 h-1 rounded-full bg-red-500" />
           </div>
 
           <p
             className="text-[14.5px] text-gray-800 leading-7 max-w-2xl mx-auto"
-            style={{ textAlign: "justify" }}
+            style={{ textAlign: "center" }}
           >
             Tendzone, established in 2010, is a global leader in providing advanced audio-visual
             (AV) solutions and manufacturing high-quality AV products. We specialize in a wide range
@@ -81,37 +74,33 @@ export default function WhyChooseUs() {
             Multimedia Transmission Control Systems.
           </p>
         </div>
-
-        <div className="flex items-center gap-4 mb-10">
+        <div className="flex items-center gap-4 mb-6">
           <span className="flex-1 h-px bg-gray-100" />
-          <div className="flex items-center gap-2.5">
-           
-            <h3 className="text-20px font-bold text-black tracking-widest uppercase">
-              Why Choose Us
-            </h3>
-          
-          </div>
+          <h3 className="text-[15px] font-bold text-black tracking-widest uppercase">
+            Why Choose Us
+          </h3>
           <span className="flex-1 h-px bg-gray-100" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {reasons.map((item) => (
             <div
               key={item.number}
-              className="group relative flex gap-5 items-start rounded-xl border border-gray-100 bg-white px-6 py-5 shadow-sm transition-all duration-300 hover:shadow-md hover:border-red-100 hover:-translate-y-0.5"
+              className="group relative flex gap-4 items-start rounded-xl border border-gray-100 bg-white px-5 py-4 shadow-sm transition-all duration-300 hover:shadow-md hover:border-red-100 hover:-translate-y-0.5"
             >
-              <div className="shrink-0 w-11 h-11 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center group-hover:bg-red-500 group-hover:border-red-500 transition-all duration-300">
+              <div className="shrink-0 w-10 h-10 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center group-hover:bg-red-500 group-hover:border-red-500 transition-all duration-300">
                 <span className="text-[12px] font-black text-red-400 group-hover:text-white transition-colors duration-300 tracking-wide tabular-nums">
                   {item.number}
                 </span>
               </div>
 
               <div>
-                <h4 className="text-[14.5px] font-bold text-gray-800 mb-1.5 group-hover:text-red-600 transition-colors duration-300">
+                <h4 className="text-[13.5px] font-bold text-gray-800 mb-1 group-hover:text-red-600 transition-colors duration-300">
                   {item.title}
                 </h4>
                 <p
-                  className="text-[13px] text-gray-800 leading-relaxed"
+                  className="text-[12.5px] text-gray-600 leading-relaxed"
                   style={{ textAlign: "justify" }}
                 >
                   {item.description}

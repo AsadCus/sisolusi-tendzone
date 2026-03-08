@@ -27,30 +27,37 @@ const getProductImage = (product: Product) => {
 export default function PopularProductsCarousel() {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(4);
 
-  const itemsPerView = 4;
+  useEffect(() => {
+    function updateItemsPerView() {
+      setItemsPerView(window.innerWidth < 640 ? 2 : 4);
+    }
+    updateItemsPerView();
+    window.addEventListener("resize", updateItemsPerView);
+    return () => window.removeEventListener("resize", updateItemsPerView);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(
-          process.env.NEXT_PUBLIC_API_PRODUCT_URL!
-        );
+        const res = await fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL!);
         const data = await res.json();
         const list = data.data || data;
-
         const filtered = list.filter(
           (item: Product) => item.supplier?.name === "TendZone"
         );
-
         setProducts(filtered);
       } catch (err) {
         console.error("Fetch product error:", err);
       }
     }
-
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [itemsPerView]);
 
   const nextSlide = () => {
     if (currentIndex < products.length - itemsPerView) {
@@ -65,7 +72,7 @@ export default function PopularProductsCarousel() {
   };
 
   return (
-    <section className="w-full py-20 bg-gray-100">
+    <section className="w-full py-20 bg-white">
       <div className="max-w-5xl mx-auto px-8 md:px-10">
 
         <div className="flex items-center justify-between mb-12">
@@ -96,32 +103,31 @@ export default function PopularProductsCarousel() {
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${
-                (100 / itemsPerView) * currentIndex
-              }%)`,
+              transform: `translateX(-${(100 / itemsPerView) * currentIndex}%)`,
             }}
           >
             {products.map((product) => (
               <div
                 key={product.id}
-                className="w-1/2 sm:w-1/3 lg:w-1/4 px-3 shrink-0"
+                className="shrink-0 px-3"
+                style={{ width: `${100 / itemsPerView}%` }}
               >
                 <Link
                   href={`/products/${product.slug}`}
                   className="group block bg-white border border-neutral-200 rounded-2xl hover:border-red-500 hover:shadow-lg transition-all duration-300 overflow-hidden"
                 >
-                  <div className="relative w-full h-56 bg-gray-50 flex items-center justify-center">
+                  <div className="relative w-full h-40 sm:h-56 bg-gray-50 flex items-center justify-center">
                     <Image
                       src={getProductImage(product)}
                       alt={product.name}
                       fill
                       unoptimized
-                      className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+                      className="object-contain p-4 sm:p-6 transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 
                   <div className="px-4 py-4">
-                    <h3 className="text-sm font-medium text-gray-800 line-clamp-2 group-hover:text-red-600 transition-colors">
+                    <h3 className="text-xs sm:text-sm font-medium text-gray-800 line-clamp-2 group-hover:text-red-600 transition-colors">
                       {product.name}
                     </h3>
                   </div>
@@ -130,7 +136,7 @@ export default function PopularProductsCarousel() {
             ))}
           </div>
         </div>
-
+        
       </div>
     </section>
   );

@@ -29,21 +29,22 @@ const SkeletonCard = () => (
   </div>
 );
 
-const ProductCard = ({ product }: { product: Product }) => (
+const ProductCard = ({ product, alwaysShowWa = false }: { product: Product; alwaysShowWa?: boolean }) => (
   <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-red-100 transition-all duration-300 overflow-hidden">
-    
-      <a href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in: ${product.name}`)}`}
+
+    <a
+      href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in: ${product.name}`)}`}
       target="_blank"
       rel="noopener noreferrer"
       onClick={(e: React.MouseEvent) => e.stopPropagation()}
-      className="absolute top-3 right-3 z-10 w-8 h-8 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
+      className={`absolute top-3 right-3 z-10 w-8 h-8 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center shadow-md transition-all duration-300 ${alwaysShowWa ? "" : "opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0"}`}
     >
       <MessageCircle size={15} className="text-white" fill="white" />
     </a>
 
     <Link href={`/products/${product.slug}`} className="block">
       <div className="relative w-full h-48 bg-gray-50 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-t from-red-50/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-1" />
+        <div className="absolute inset-0 bg-gradient-to-t from-red-50/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[1]" />
         <Image
           src={getProductImage(product)}
           alt={product.name}
@@ -91,16 +92,13 @@ export default function ProductGrid() {
   }, []);
 
   return (
-    <section className="w-full pt-16 pb-4 bg-gray-100">
+    <section className="w-full pt-16 pb-4 bg-white">
       <div className="max-w-5xl mx-auto px-8 md:px-16">
-        <div>
-        </div>
-
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {loading
             ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
-            : products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+            : products.map((product, index) => (
+                <ProductCard key={product.id} product={product} alwaysShowWa={index === 0} />
               ))}
         </div>
       </div>

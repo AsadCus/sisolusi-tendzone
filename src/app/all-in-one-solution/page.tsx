@@ -7,19 +7,34 @@ import WhyChooseUs from "@/components/all in-one-solution/why-choose"
 import PopularProductsCarousel from "@/components/section/popularProducts"
 import ProductGrid from "@/components/all in-one-solution/productGrid"
 import OemOdmPage from "@/components/all in-one-solution/oem-bestSell"
+import SpecTable from "@/components/all in-one-solution/Thirteen-in-One"
+import TwelveInOnePage from "@/components/all in-one-solution/TwelveInOnePage"
+import NineInOneSpecs from "@/components/all in-one-solution/Nine-in-One"
+import Footer from "@/components/footer"
+import TouchPanelSpec from "@/components/all in-one-solution/TouchPanelSpec"
+import ProductFeatures from "@/components/all in-one-solution/productFeatures"
+import OurService from "@/components/all in-one-solution/ourServices"
+
 
 export default function AllInOneAudioVisualSolutionsPage() {
-    return(
-        <>
-        <NavbarLanding />
-        <PageHero title="All in One Solutions"/>
-        <WhyChooseUs />
-        <ProductGrid />
-        <OemOdmPage />
-        <HonorQualification />
-        <FAQSection/>
-        <PopularProductsCarousel />
-        <SendInquirySection/>
-        </>
-    )
+  return (
+    <div>
+      <NavbarLanding />
+      <PageHero title="All in One Solutions" />
+      <WhyChooseUs />
+      <ProductGrid />
+      <OemOdmPage />
+      <TwelveInOnePage />
+      <SpecTable />
+      <NineInOneSpecs />
+      <TouchPanelSpec/>
+      <ProductFeatures />
+      <OurService />
+      <HonorQualification />
+      <FAQSection />
+      <PopularProductsCarousel />
+      <SendInquirySection />
+      <Footer />
+    </div>
+  )
 }
