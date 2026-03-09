@@ -14,7 +14,7 @@ export default function MicrophoneFunctionsSection({
 }) {
   return (
     <section className="w-full bg-white py-16">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="flex items-center gap-3 mb-4">
           <div className="w-9 h-9 rounded-lg bg-red-50 flex items-center justify-center shrink-0">

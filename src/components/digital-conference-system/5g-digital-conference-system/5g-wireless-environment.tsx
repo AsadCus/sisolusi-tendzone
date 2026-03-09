@@ -51,10 +51,9 @@ const features = [
 
 export default function ProductWirelessEnvironment() {
   return (
-    <section className="w-full py-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full py-12">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
-        {/* Feature List */}
         <p className="text-sm text-gray-600 leading-relaxed mb-6">
           5G wired and wireless conference system is a new type of conference
           solution that integrates the advantages of 5G technology with
@@ -65,13 +64,12 @@ export default function ProductWirelessEnvironment() {
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 mb-12">
           {features.map((feature, index) => (
             <li key={index} className="flex gap-3 text-sm text-gray-700">
-              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-red-600 flex-shrink-0" />
+              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-red-600 shrink-0" />
               {feature}
             </li>
           ))}
         </ul>
 
-        {/* Product Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {categories.map((category) => (
             <Link

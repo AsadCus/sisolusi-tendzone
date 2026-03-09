@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ChevronRight, Cpu } from "lucide-react";
 
 interface Category {
   id: number;
@@ -36,55 +38,54 @@ const categories: Category[] = [
 
 export default function ProductAudioIpPage() {
   return (
-    <section className="w-full py-20">
-      <div className="max-w-7xl mx-auto px-6">
-        
-        <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-2xl md:text-xl font-medium text-red-600">
-            Your Professional Audio Over IP Supplier!
-          </h1>
+    <section className="w-full py-12">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
-          <p className="mt-4 text-gray-600 text-xs md:text-sm">
-            Tendzone, established in 2010, is a global leader in providing 
-            advanced audio-visual (AV) solutions and manufacturing high-quality 
-            AV products. We specialize in a wide range of cutting-edge technologies, 
-            including audio processors, microphones, speakers, power amplifiers, 
-            AV over IP systems, digital conference systems, and MIDIS Distributed 
-            Multimedia Transmission Control Systems. Our solutions are trusted 
-            across industries such as conference rooms, command centers, education, 
+        <div className="flex flex-col items-center gap-3 mb-4 text-center max-w-4xl mx-auto">
+          <h1 className="text-2xl md:text-3xl font-semibold text-gray-700">
+            Your Professional{" "}
+            <span className="text-red-500">Audio Over IP</span> Supplier!
+          </h1>
+          <p className="text-sm text-gray-400 leading-7 text-center">
+            Tendzone, established in 2010, is a global leader in providing
+            advanced audio-visual (AV) solutions and manufacturing high-quality
+            AV products. We specialize in a wide range of cutting-edge technologies,
+            including audio processors, microphones, speakers, power amplifiers,
+            AV over IP systems, digital conference systems, and MIDIS Distributed
+            Multimedia Transmission Control Systems. Our solutions are trusted
+            across industries such as conference rooms, command centers, education,
             multi-functional halls, and stadiums.
           </p>
         </div>
 
-        <div className="border-t-2 border-dashed border-red-500 my-4" />
+        <div className="flex justify-center mb-10">
+          <span className="block w-12 h-0.5 rounded-full bg-red-400" />
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`/products/${category.slug}`}
-              className="group"
-            >
-              <Card className="h-full overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 shadow-xl hover:shadow-xl hover:shadow-gray-200/80 hover:-translate-y-1 transition-all duration-300">
+            <Link key={category.id} href={`/products/${category.slug}`} className="group">
+              <Card className="relative h-full overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 shadow-none hover:shadow-md transition-all duration-300">
+                <span className="absolute top-0 left-0 h-0.5 w-0 bg-red-400 group-hover:w-full transition-all duration-500 ease-out z-10" />
 
                 <div className="relative h-56 w-full bg-white overflow-hidden">
                   <Image
                     src={category.image}
                     alt={category.name}
-                    width={300}
-                    height={200}
-                    className="cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
                   />
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 <CardContent className="p-5 flex flex-col gap-3">
-                 
-                  <h3 className="text-base font-medium text-gray-900 leading-snug group-hover:text-red-600 transition-colors duration-300">
-                    {category.name}
-                  </h3>
-
-                  <p className="text-xs font-light text-gray-500 leading-relaxed line-clamp-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-semibold text-gray-600 leading-snug group-hover:text-red-500 transition-colors duration-200">
+                      {category.name}
+                    </h3>
+                    <ChevronRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-red-400 transition-colors duration-200 shrink-0" />
+                  </div>
+                  <p className="text-xs text-gray-400 leading-relaxed line-clamp-3">
                     {category.description}
                   </p>
                 </CardContent>
@@ -92,6 +93,7 @@ export default function ProductAudioIpPage() {
             </Link>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -45,8 +45,8 @@ const categories: Category[] = [
 
 export default function BestSellingDigitalConferenceSpeakersPage() {
   return (
-    <section className="w-full py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full py-12">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         
         <div className="text-center max-w-6xl mx-auto mb-8">
           <h1 className="text-2xl md:text-xl font-medium text-red-600">

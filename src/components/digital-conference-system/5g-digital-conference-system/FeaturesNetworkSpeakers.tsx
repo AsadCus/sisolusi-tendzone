@@ -15,8 +15,8 @@ export default function ConferenceApplicationSection({
   title?: string;
 }) {
   return (
-    <section className="w-full bg-white py-6">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full bg-white py-12">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight mb-3">

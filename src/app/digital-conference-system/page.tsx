@@ -10,7 +10,7 @@ import PopularProductsCarousel from "@/components/section/popularProducts";
 import SendInquirySection from "@/components/section/SendInquirySection";
 import DigitalReferenceSystem from "@/components/digital-conference-system/digital-reference-system";
 import SpecTableDigitalConference from "@/components/digital-conference-system/table-specification";
-import OurServiceSection from "@/components/section/our-service";
+import OurServiceSection from "@/components/section/ourServices";
 import HonorQualification from "@/components/section/honor-qualification";
 import ConferenceProductFeatures from "@/components/digital-conference-system/product-feature-digital-conference";
 import ProductApplicationFeatureConference from "@/components/digital-conference-system/feature-conference-system";

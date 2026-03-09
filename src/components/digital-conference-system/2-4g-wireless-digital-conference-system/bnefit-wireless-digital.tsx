@@ -49,8 +49,8 @@ const features = [
 
 export default function WirelessDigitalBenefitSection() {
   return (
-    <section className="w-full bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full bg-white py-12">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="flex flex-col items-center gap-3 mb-12">
           <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">

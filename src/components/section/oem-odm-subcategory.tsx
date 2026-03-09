@@ -80,7 +80,7 @@ export default function OemOdmSubcategorySection() {
         </div>
       </section>
 
-      <section className="py-8 px-6 border-t border-gray-100">
+      {/* <section className="py-8 px-6 border-t border-gray-100">
         <div className="max-w-4xl mx-auto">
 
           <div className="flex flex-col items-center text-center mb-8">
@@ -116,7 +116,7 @@ export default function OemOdmSubcategorySection() {
           </div>
 
         </div>
-      </section>
+      </section> */}
 
     </div>
   );

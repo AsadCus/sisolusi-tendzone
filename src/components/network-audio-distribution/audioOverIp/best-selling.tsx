@@ -6,16 +6,12 @@ import { Wifi } from "lucide-react";
 
 export default function BestSellingSection() {
   return (
-    <section className="w-full bg-white py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full bg-white py-12">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-                <Wifi className="w-3 h-3" />
-                Audio Over IP
-              </Badge>
             </div>
 
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-700 mb-3 leading-snug">
