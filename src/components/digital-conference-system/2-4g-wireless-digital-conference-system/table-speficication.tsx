@@ -41,8 +41,8 @@ export default function WirelessDigitalSpecificationTable() {
   ]
 
   return (
-    <section className="w-full py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full py-12 bg-white">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="mb-3 text-center">
           <h2 className="text-xl font-bold text-gray-900">

@@ -22,8 +22,8 @@ export default function BasicPrincipleNetworkSection({
   paragraphs = defaultContent.paragraphs,
 }: BasicPrincipleSectionProps) {
   return (
-    <section className="w-full bg-white py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full bg-white py-12">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="flex items-start gap-4 mb-6">
           <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center shrink-0 mt-1">
