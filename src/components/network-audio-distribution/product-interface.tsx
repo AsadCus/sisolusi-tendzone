@@ -1,97 +1,115 @@
 "use client";
 
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { Layers, Plug, ChevronRight } from "lucide-react";
+
+const products = [
+  {
+    id: 1,
+    badge: "I/O Interface",
+    icon: Layers,
+    title: "8x8 Vailink I/O Interface",
+    subtitle: "Features",
+    image: "/images/product/2x2-dante.png",
+    imageAlt: "8x8 Vailink I/O Interface",
+    imageLeft: true,
+    features: [
+      { label: "Video Matrix", desc: "Connect any of the 8 inputs to any of the 8 outputs" },
+      { label: "Multiple Control Options", desc: "Front panel buttons, IR remote, RS232, Web Interface, and Control 4" },
+      { label: "Audio De-embedding", desc: "De-embed audio from any of the 8 Coax S/PDIF outputs up to 7.1 channel" },
+      { label: "HDCP 2.2", desc: "High-Bandwidth Digital Content Protection supported" },
+      { label: "Crystal Clear Images", desc: "Stunning image quality up to 4K@60Hz 4:4:4" },
+      { label: "EDID Management", desc: "Smart EDID to ensure reliable signal quality" },
+    ],
+  },
+  {
+    id: 2,
+    badge: "Analog Adapter",
+    icon: Plug,
+    title: "Vailink 2CH Analog Input Adapter",
+    subtitle: "Features",
+    image: "/images/product/2k60-hdmi.png",
+    imageAlt: "Vailink 2CH Analog Input Adapter",
+    imageLeft: false,
+    features: [
+      { label: "2-Channel Input", desc: "2 XLR connectors with 2-channel analog audio input" },
+      { label: "Network Config", desc: "Supports DHCP & static IP configuration" },
+      { label: "High Sample Rate", desc: "Input up to 96kHz, Output up to 48kHz (firmware update required)" },
+      { label: "Audio Quality", desc: "S/N ratio >90dB, THD+N <0.005%, excellent dynamic range" },
+      { label: "Dante / AES67", desc: "Dante audio over IP and AES67 RTP transport formats" },
+      { label: "Dual Power", desc: "Dual power input options: POE / USB, power consumption <1W" },
+    ],
+  },
+];
 
 export default function ProductInterfaceSection() {
   return (
-    <section className="w-full bg-white py-16">
-      <div className="max-w-7xl mx-auto px-6 space-y-24">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="bg-white rounded-2xl border border-gray-200 p-10 flex items-center justify-center">
-            <Image
-              src="/images/product/2x2-dante.png"
-              alt="8x8 Vailink I/O Interface"
-              width={400}
-              height={300}
-              className="object-contain"
-            />
-          </div>
-
-          <div>
-            <div className="w-10 h-1 bg-red-600 mb-6 rounded-full" />
-            
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-8">
-              8x8 Vailink I/O Interface Features
-            </h2>
-
-            <div className="space-y-4 text-sm text-gray-600">
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1">Video matrix</h4>
-                <p>Connect any of the 8 inputs to any of the 8 outputs</p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1">Multiple control options</h4>
-                <p>Take control by utilizing front panel buttons, IR remote, RS232, Web Interface, and Control 4</p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1">Audio de-embedding</h4>
-                <p>De-embed audio from any of the 8 Coax S/PDIF outputs up to 7.1 channel</p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1">HDCP 2.2</h4>
-                <p>High-Bandwidth Digital Content Protection Supported</p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1">Crystal clear images</h4>
-                <p>Stunning image quality up to 4K@60Hz 4:4:4</p>
-              </div>
-
-              <div>
-                <h4 className="font-semibold text-gray-800 mb-1">EDID management</h4>
-                <p>Smart EDID to ensure reliable signal quality</p>
+    <section className="w-full bg-white py-22">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
+        {products.map((product) => {
+          const Icon = product.icon;
+          const imageCol = (
+            <div className="relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
+              <Image
+                src={product.image}
+                alt={product.imageAlt}
+                width={400}
+                height={300}
+                className="object-contain w-full h-full p-8 transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl flex items-end p-6">
               </div>
             </div>
-          </div>
-        </div>
+          );
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1">
-            <div className="w-10 h-1 bg-red-600 mb-6 rounded-full" />
-            
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-8">
-              Vailink 2CH Analog Input Adapter Features
-            </h2>
+          const contentCol = (
+            <div className="flex flex-col justify-center h-full">
+              <div className="flex items-center gap-2 mb-4">
+                <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
+                  <Icon className="w-3 h-3" />
+                  {product.badge}
+                </Badge>
+              </div>
 
-            <ul className="space-y-2 text-sm text-gray-600 list-disc list-inside">
-              <li>2 XLR connectors, 2-Channel analog audio input</li>
-              <li>Supports DHCP & static IP configuration</li>
-              <li>Supports Input sample rates up to 96kHz, Output up to 48kHz (firmware update required)</li>
-              <li>S/N ratio: &gt; 90dB, THD+N &lt; 0.005%</li>
-              <li>Easy drop-points for interfacing with overflow areas to a Dante network</li>
-              <li>Dante audio over IP and AES67 RTP transport formats</li>
-              <li>Excellent dynamic range, SNR and RHD performance</li>
-              <li>Dual power input options: POE / USB</li>
-              <li>Power Consumption: &lt; 1W</li>
-              <li>Low latency over long transmission distance</li>
-            </ul>
-          </div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6 leading-snug">
+                {product.title}{" "}
+                <span className="text-red-500">{product.subtitle}</span>
+              </h2>
 
-          <div className="order-1 lg:order-2 bg-white rounded-2xl border border-gray-200 p-10 flex items-center justify-center">
-            <Image
-              src="/images/product/2k60-hdmi.png"
-              alt="Vailink 2CH Analog Input Adapter"
-              width={400}
-              height={300}
-              className="object-contain"
-            />
-          </div>
-        </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {product.features.map((f, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-2.5 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 hover:border-red-100 hover:bg-red-50/30 transition-colors duration-200"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5 text-red-400 mt-0.5 shrink-0" />
+                    <div>
+                      <p className="text-xs font-semibold text-gray-800 leading-snug">{f.label}</p>
+                      <p className="text-xs text-gray-500 leading-relaxed mt-0.5">{f.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
 
+          return (
+            <div key={product.id} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {product.imageLeft ? (
+                <>
+                  {imageCol}
+                  {contentCol}
+                </>
+              ) : (
+                <>
+                  <div className="order-2 lg:order-1">{contentCol}</div>
+                  <div className="order-1 lg:order-2">{imageCol}</div>
+                </>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

@@ -3,7 +3,7 @@ import NavbarLanding from "@/components/navbar-landing"
 import HonorQualification from "@/components/section/honor-qualification"
 import SendInquirySection from "@/components/section/SendInquirySection"
 import FAQSection from "@/components/section/faq"
-import WhyChooseUs from "@/components/all in-one-solution/why-choose"
+import ProductAllInOneSolution from "@/components/all in-one-solution/why-choose"
 import PopularProductsCarousel from "@/components/section/popularProducts"
 import ProductGrid from "@/components/all in-one-solution/productGrid"
 import OemOdmPage from "@/components/all in-one-solution/oem-bestSell"
@@ -13,7 +13,8 @@ import NineInOneSpecs from "@/components/all in-one-solution/Nine-in-One"
 import Footer from "@/components/footer"
 import TouchPanelSpec from "@/components/all in-one-solution/TouchPanelSpec"
 import ProductFeatures from "@/components/all in-one-solution/productFeatures"
-import OurService from "@/components/all in-one-solution/ourServices"
+import OurService from "@/components/section/ourServices"
+import WhyChooseUsCategory from "@/components/section/whyChooseCategory"
 
 
 export default function AllInOneAudioVisualSolutionsPage() {
@@ -21,7 +22,8 @@ export default function AllInOneAudioVisualSolutionsPage() {
     <div>
       <NavbarLanding />
       <PageHero title="All in One Solutions" />
-      <WhyChooseUs />
+      <ProductAllInOneSolution/>
+      <WhyChooseUsCategory />
       <ProductGrid />
       <OemOdmPage />
       <TwelveInOnePage />

@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { Mic2, Speaker, ChevronRight } from "lucide-react";
 
 const products = [
   {
     id: "microphone",
     label: "Condenser Microphone",
+    icon: Mic2,
     heading: "Our Best-Selling Condenser Microphone",
     subheading: "Vailink Rectangular Columnar Condenser Microphone",
     description:
@@ -30,6 +33,7 @@ const products = [
   {
     id: "speaker",
     label: "12″ Network Speaker",
+    icon: Speaker,
     heading: "Our Best-Selling 12″ Full-range Speaker",
     subheading: "12″ Vailink Network Powered Full-range Speaker",
     description:
@@ -54,27 +58,32 @@ const products = [
 export default function ProductFeatureSection() {
   const [active, setActive] = useState(products[0].id);
   const product = products.find((p) => p.id === active) ?? products[0];
+  const Icon = product.icon;
 
   return (
-    <section className="w-full bg-white py-16">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full bg-white py-12">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         {/* Segmented Button */}
         <div className="flex justify-center mb-16">
           <div className="inline-flex rounded-full border border-gray-300 overflow-hidden divide-x divide-gray-300 shadow-sm">
-            {products.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => setActive(p.id)}
-                className={`px-6 py-2.5 text-sm font-medium transition-all duration-200 whitespace-nowrap focus:outline-none
-                  ${active === p.id
-                    ? "bg-red-500 text-white"
-                    : "bg-white text-gray-600 hover:bg-red-50 hover:text-red-500"
-                  }`}
-              >
-                {p.label}
-              </button>
-            ))}
+            {products.map((p) => {
+              const TabIcon = p.icon;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => setActive(p.id)}
+                  className={`flex items-center gap-2 px-6 py-2.5 text-sm font-medium transition-all duration-200 whitespace-nowrap focus:outline-none
+                    ${active === p.id
+                      ? "bg-red-500 text-white"
+                      : "bg-white text-gray-600 hover:bg-red-50 hover:text-red-500"
+                    }`}
+                >
+                  <TabIcon className="w-3.5 h-3.5" />
+                  {p.label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -82,27 +91,36 @@ export default function ProductFeatureSection() {
 
           {/* Left: Text */}
           <div>
-            <div className="w-10 h-1 bg-red-500 mb-6 rounded-full" />
+            {/* Heading badge with icon */}
+            <div className="flex items-center gap-2 mb-4">
+              <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
+                <Icon className="w-3 h-3" />
+                {product.label}
+              </Badge>
+            </div>
 
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-700 mb-3 leading-snug">
               {product.heading}
             </h2>
 
-            <h3 className="text-lg font-medium text-gray-800 mb-4">
+            <h3 className="text-base font-medium text-gray-400 mb-4">
               {product.subheading}
             </h3>
 
-            <p className="text-gray-600 leading-relaxed text-sm md:text-base mb-8">
+            <p className="text-gray-400 leading-relaxed text-sm mb-8">
               {product.description}
             </p>
 
             {/* Feature List */}
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {product.features.map((f) => (
-                <li key={f.title} className="flex items-start gap-3">
-                  <span className="mt-1.5 w-2 h-2 rounded-full bg-red-500 shrink-0" />
-                  <span className="text-sm text-gray-700">
-                    <span className="font-semibold text-gray-900">{f.title}: </span>
+                <li
+                  key={f.title}
+                  className="flex items-start gap-3 px-3 py-2.5 rounded-lg border border-transparent hover:border-t-red-300 hover:border-t-2 hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/40 transition-all duration-200 group"
+                >
+                  <ChevronRight className="w-3.5 h-3.5 text-red-400 mt-0.5 shrink-0" />
+                  <span className="text-sm text-gray-500">
+                    <span className="font-semibold text-gray-600 group-hover:text-red-500 transition-colors duration-200">{f.title}: </span>
                     {f.desc}
                   </span>
                 </li>
