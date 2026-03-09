@@ -6,6 +6,8 @@ import ProductGrid from "@/components/all in-one-solution/productGrid"
 import WhyChooseUs from "@/components/all in-one-solution/All-in-oneAudio/whyChooseUs"
 import OemAndProducts from "@/components/all in-one-solution/All-in-oneAudio/OemAndProducts"
 import TwelveInOnePage from "@/components/all in-one-solution/All-in-oneAudio/twelveInOne"
+import TwelveInOneFunctions from "@/components/all in-one-solution/All-in-oneAudio/twelve-In-One-Functions"
+import TwelveInOneFeatures from "@/components/all in-one-solution/All-in-oneAudio/TwelveInOneFeatures"
 
 export default function AllInOneAudioVisualSolutionsPage() {
     return(
@@ -17,6 +19,8 @@ export default function AllInOneAudioVisualSolutionsPage() {
         <WhyChooseUs />
         <OemAndProducts/>
         <TwelveInOnePage/> 
+        <TwelveInOneFunctions/>
+        <TwelveInOneFeatures/>
         </>
     )
 }
