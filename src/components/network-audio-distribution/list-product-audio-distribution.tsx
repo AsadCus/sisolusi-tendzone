@@ -91,8 +91,8 @@ export default function ProductGridAudioDistribution() {
   }, []);
 
   return (
-    <section className="w-full pt-16 pb-4 bg-white">
-      <div className="max-w-7xl mx-auto px-8 md:px-6">
+    <section className="w-full pt-4 pb-4 bg-white">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div>
         </div>
 

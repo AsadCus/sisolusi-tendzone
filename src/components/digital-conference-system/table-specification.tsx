@@ -81,10 +81,7 @@ const products = [
           { param: "Receiving Sensitivity", value: "≥100dBm" },
           { param: "SNR", value: ">90dB" },
           { param: "Distortion", value: "<0.05%dB" },
-          {
-            param: "Effective Working Distance",
-            value: "≤30m (Omnidirectional antenna) · ≤40m (Directional antenna) · ≤70m (Antenna amplifier + directional antenna)",
-          },
+          { param: "Effective Working Distance", value: "≤30m (Omnidirectional antenna) · ≤40m (Directional antenna) · ≤70m (Antenna amplifier + directional antenna)" },
           { param: "Power", value: "6.5W" },
           { param: "EIA Standard Chassis", value: "Suitable for desktop or rack-mounted installation" },
           { param: "Conference Mode", value: "FIFO, limited speech, chairman only, time-limited speech" },
@@ -142,27 +139,22 @@ export default function SpecTableDigitalConference() {
     <section className="w-full py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
 
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-semibold text-gray-900">
+        <div className="mb-3 text-center">
+          <h2 className="text-xl font-bold text-gray-900">
             {product.label} Specification
           </h2>
-          <div className="flex justify-center gap-2 mt-3">
-            <span className="w-2 h-2 bg-red-500 rounded-full" />
-            <span className="w-2 h-2 bg-red-500 rounded-full" />
-            <span className="w-2 h-2 bg-red-500 rounded-full" />
-          </div>
         </div>
 
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex rounded-full border border-gray-300 overflow-x-auto divide-x divide-gray-300 shadow-sm">
+        <div className="flex justify-center mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 bg-gray-100 p-1 rounded-lg">
             {products.map((p) => (
               <button
                 key={p.id}
                 onClick={() => setActive(p.id)}
-                className={`px-5 py-2.5 text-sm font-medium transition-all duration-200 whitespace-nowrap focus:outline-none
+                className={`px-4 py-2 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap focus:outline-none
                   ${active === p.id
-                    ? "bg-red-500 text-white"
-                    : "bg-white text-gray-600 hover:bg-red-50 hover:text-red-500"
+                    ? "bg-red-500 text-white shadow-sm"
+                    : "text-gray-600 hover:text-red-500"
                   }`}
               >
                 {p.label}
@@ -171,31 +163,34 @@ export default function SpecTableDigitalConference() {
           </div>
         </div>
 
-        <div className="border border-gray-300 rounded-xl overflow-hidden">
-          <table className="w-full border-collapse text-sm">
-            <tbody>
-              {product.sections.map((sec) => (
-                <>
-                  <tr key={sec.title + "-header"} className="bg-gray-100">
-                    <td colSpan={2} className="text-center font-semibold py-3 px-6 text-gray-800">
-                      {sec.title}
-                    </td>
+        <table className="w-full border-collapse text-[13.5px]">
+          <thead>
+            <tr className="border-y-2 border-gray-300 bg-gray-100">
+              <th className="px-4 py-2.5 text-left font-semibold text-gray-600 w-[35%]">Parameter</th>
+              <th className="px-4 py-2.5 text-left font-semibold text-gray-600">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {product.sections.map((sec) => (
+              <>
+                <tr key={sec.title + "-header"} className="border-b border-gray-200 bg-gray-50">
+                  <td colSpan={2} className="px-4 py-2.5 font-semibold text-gray-600">
+                    {sec.title}
+                  </td>
+                </tr>
+                {sec.rows.map((row, i) => (
+                  <tr
+                    key={sec.title + row.param}
+                    className={`border-b border-gray-200 ${i % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+                  >
+                    <td className="px-4 py-2.5 align-top text-gray-600">{row.param}</td>
+                    <td className="px-4 py-2.5 align-top text-gray-900 leading-relaxed">{row.value}</td>
                   </tr>
-                  {sec.rows.map((row, i) => (
-                    <tr key={sec.title + row.param} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                      <td className="w-1/3 font-medium border border-gray-200 py-3 px-6 text-gray-800 align-top">
-                        {row.param}
-                      </td>
-                      <td className="border border-gray-200 py-3 px-6 text-gray-600 leading-relaxed align-top">
-                        {row.value}
-                      </td>
-                    </tr>
-                  ))}
-                </>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                ))}
+              </>
+            ))}
+          </tbody>
+        </table>
 
       </div>
     </section>

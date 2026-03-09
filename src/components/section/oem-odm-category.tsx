@@ -27,8 +27,8 @@ const ServiceCard = ({ title, description, points } : { title: string; descripti
 export default function OemOdmSectionCategory() {
   return (
     <main className="w-full bg-white">
-      <section className="w-full border-b border-gray-100 pt-16 pb-4">
-        <div className="max-w-7xl mx-auto px-8 md:px-6 text-center">
+      <section className="w-full border-b border-gray-100 pt-8 pb-4">
+        <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 text-center">
           <h1 className="text-xl md:text-2xl font-medium text-gray-900 tracking-tight mb-6">
             OEM / ODM Service
           </h1>

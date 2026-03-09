@@ -38,8 +38,8 @@ export default function BestSellingNetworkAudioSection() {
   const current = bestSelling[active];
 
   return (
-    <section className="w-full bg-white py-20">
-      <div className="max-w-7xl mx-auto px-8 md:px-6">
+    <section className="w-full bg-white py-12">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-medium text-gray-900 tracking-tight">
             Our Best-Selling Network Audio Distribution
