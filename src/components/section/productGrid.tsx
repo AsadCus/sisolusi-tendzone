@@ -92,13 +92,8 @@ export default function ProductGrid() {
   }, []);
 
   return (
-<<<<<<< HEAD:src/components/section/productGrid.tsx
-    <section className="w-full pt-16 pb-4 bg-white">
-     <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-=======
     <section className="w-full pt-12 pb-4 bg-white">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
->>>>>>> d792303b411f69e163c2f2d29c4a7481d34c2448:src/components/all in-one-solution/productGrid.tsx
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {loading
             ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)

@@ -5,7 +5,6 @@ import OpenArchitectureDSP from "@/components/audio-processor/Open-DSP/Open-Arch
 import PageHero from "@/components/layout/pageHero";
 import NavbarLanding from "@/components/navbar-landing";
 import ProductGrid from "@/components/section/productGrid";
-import WhyChooseUsCategory from "@/components/section/whyChooseCategory";
 import WhyChooseUsSectionSubcategory from "@/components/section/whyChooseUsSubcategory";
 
     
