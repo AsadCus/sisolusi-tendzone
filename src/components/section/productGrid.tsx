@@ -93,7 +93,7 @@ export default function ProductGrid() {
 
   return (
     <section className="w-full pt-16 pb-4 bg-white">
-      <div className="max-w-5xl mx-auto px-8 md:px-16">
+     <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {loading
             ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)

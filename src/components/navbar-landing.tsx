@@ -29,9 +29,9 @@ const megaData = {
 const productFlat = [
   { category: "All-in-one Solution", href: "/all-in-one-solution",
     items: [{ label: "All-in-one Audio Visual Solutions", href: "/all-in-one-solution/all-in-one-audio-visual-solutions" }] },
-  { category: "Audio Processor", href: "/products/audio-processor",
+  { category: "Audio Processor", href: "/audio-processor",
     items: [
-      { label: "Open Architecture DSP", href: "/products/open-dsp" },
+      { label: "Open Architecture DSP", href: "/audio-processor/Open-Architecture-DSP" },
       { label: "Web Based Audio Processors", href: "/products/web-dsp" },
       { label: "Fixed Audio Processors", href: "/products/fixed-dsp" },
       { label: "Digital Audio Processor", href: "/products/digital-audio" },
