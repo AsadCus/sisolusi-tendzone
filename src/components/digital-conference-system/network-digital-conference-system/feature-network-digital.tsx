@@ -23,10 +23,6 @@ export default function ConferenceFeatures() {
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="flex flex-col items-center gap-3 mb-12">
-          <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-            <Network className="w-3 h-3" />
-            Conference System
-          </Badge>
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 text-center">
             The Main Features Of{" "}
             <span className="text-red-500">Network Digital Conference System</span>
@@ -39,12 +35,12 @@ export default function ConferenceFeatures() {
             return (
               <Card
                 key={index}
-                className="relative overflow-hidden border border-gray-100 rounded-2xl shadow-none transition-all duration-200 group"
+                className="relative overflow-hidden border border-gray-100 rounded-none shadow-none transition-all duration-200 group"
               >
                 <span className="absolute top-0 left-0 h-0.5 w-0 bg-red-400 group-hover:w-full transition-all duration-500 ease-out z-10" />
                 <CardContent className="flex flex-col px-5 pt-6 pb-6 gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors duration-200">
+                    <div className="w-10 h-10 rounded-none bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors duration-200">
                       <Icon className="w-5 h-5 text-red-500" strokeWidth={1.75} />
                     </div>
                     <h3 className="text-sm font-semibold text-gray-600 group-hover:text-red-500 transition-colors duration-200">

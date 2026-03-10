@@ -44,12 +44,14 @@ export default function ProductWirelessDigitalPage() {
           Your Professional 2.4G Wireless Digital Conference System Supplier!
           </h1>
 
+            <div className="flex justify-center mt-3 mb-6">
+            <span className="block w-12 h-1 rounded-full bg-red-500" />
+          </div>
+
           <p className="mt-4 text-gray-600 text-xs md:text-sm">
            Tendzone, established in 2010, is a global leader in providing advanced audio-visual (AV) solutions and manufacturing high-quality AV products. We specialize in a wide range of cutting-edge technologies, including audio processors, microphones, speakers, power amplifiers, AV over IP systems, digital conference systems, and MIDIS Distributed Multimedia Transmission Control Systems. Our solutions are trusted across industries such as conference rooms, command centers, education, multi-functional halls, and stadiums.
           </p>
         </div>
-
-        <div className="border-t-2 border-dashed border-red-500 my-4" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {categories.map((category) => (

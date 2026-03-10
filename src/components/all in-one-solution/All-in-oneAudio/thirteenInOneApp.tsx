@@ -3,20 +3,14 @@
 export default function ThirteenInOneApplications() {
   return (
     <section className="bg-white py-6 px-6 font-sans">
-      <div className="max-w-4xl mx-auto">
-
-        {/* Header */}
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="mb-4">
-          <div className="w-7 h-[2px] bg-red-500 mb-3" />
+          <div className="w-7 h-0.5 bg-red-500 mb-3" />
           <h2 className="text-[18px] font-bold text-gray-900">
             Applications of Thirteen-In-One Integrated Processors
           </h2>
         </div>
-
-        {/* Content */}
         <div className="grid grid-cols-2 gap-8 items-center">
-
-          {/* Image — left */}
           <div className="bg-gray-50 border border-gray-100 overflow-hidden">
             <img
               src="https://www.tendzone.net/uploads/43135/nine-in-one-integrated-processora0570.jpg"
@@ -24,8 +18,6 @@ export default function ThirteenInOneApplications() {
               className="w-full object-contain p-4"
             />
           </div>
-
-          {/* Text — right */}
           <div className="space-y-4">
             <p className="text-[12px] text-gray-500 leading-relaxed text-justify">
               The widespread application of thirteen-in-one integrated processors is due to their powerful processing

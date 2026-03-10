@@ -1,7 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   ShieldCheck,
   Network,
@@ -9,6 +7,7 @@ import {
   ServerCog,
   Zap,
   Speaker,
+  ChevronRight,
 } from "lucide-react";
 
 const features = [
@@ -48,41 +47,36 @@ export default function SpeakerFeatureSection({
     <section className="w-full bg-white py-12">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
-        <div className="flex flex-col items-center gap-3 mb-12">
-          <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-            <Speaker className="w-3 h-3" />
-            Network Speaker
-          </Badge>
+        <div className="flex flex-col items-center text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 text-center">
             Feature of <span className="text-red-500">Network Speaker</span>
           </h2>
+          <div className="mt-3 w-7 h-0.5 bg-red-500" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
           {features.map((item, index) => {
             const Icon = item.icon;
-            const num = String(index + 1).padStart(2, "0");
-
             return (
-              <Card
+              <div
                 key={index}
-                className="relative overflow-hidden border border-gray-100 rounded-2xl shadow-none transition-all duration-200 group"
+                className="group relative flex flex-col justify-between bg-white border border-gray-200 hover:border-red-300 transition-colors duration-200 overflow-hidden p-5 min-h-50"
               >
-                <span className="absolute top-0 left-0 h-0.5 w-0 bg-red-400 group-hover:w-full transition-all duration-500 ease-out z-10" />
-                <CardContent className="flex flex-col items-center text-center px-5 pt-8 pb-10 gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors duration-200">
-                    <Icon className="w-5 h-5 text-red-500" strokeWidth={1.75} />
-                  </div>
+                <div className="absolute top-0 left-0 w-full h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
-                  <p className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-600 transition-colors duration-200">
-                    {item.description}
-                  </p>
+                <div className="flex items-start justify-between mb-3">
+                  <Icon className="w-5 h-5 text-red-500" strokeWidth={1.7} />
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-red-400 transition-colors duration-200" />
+                </div>
 
-                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-6xl font-black text-red-100 select-none pointer-events-none leading-none group-hover:text-red-200 transition-colors duration-200">
-                    {num}
-                  </span>
-                </CardContent>
-              </Card>
+                <p className="text-[11px] text-gray-400 leading-relaxed group-hover:text-gray-600 transition-colors duration-200 flex-1">
+                  {item.description}
+                </p>
+
+                <span className="self-end text-[28px] font-bold text-gray-100 group-hover:text-red-100 leading-none select-none transition-colors duration-200 mt-2">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
             );
           })}
         </div>

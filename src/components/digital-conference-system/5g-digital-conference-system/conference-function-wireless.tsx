@@ -91,7 +91,7 @@ export default function DigitalConferenceFunctionWirelessSection() {
             <button
               key={item.id}
               onClick={() => setActive(i)}
-              className={`flex flex-col items-center justify-center gap-1 px-2 py-3 rounded-xl text-center transition-all duration-200 border ${
+              className={`flex flex-col items-center justify-center gap-1 px-2 py-3 rounded-none text-center transition-all duration-200 border ${
                 active === i
                   ? "bg-red-500 border-red-500 text-white shadow-md"
                   : "bg-gray-50 border-gray-200 text-gray-500 hover:bg-gray-100 hover:border-gray-300"
@@ -112,10 +112,10 @@ export default function DigitalConferenceFunctionWirelessSection() {
         </div>
 
         {/* Content Card */}
-        <div className="rounded-2xl border border-gray-100 shadow-sm bg-white p-8">
+        <div className="rounded-none border border-gray-100 shadow-sm bg-white p-8">
           <div key={active} className="flex flex-col md:flex-row gap-8 items-start">
             <div className="shrink-0">
-              <div className="w-10 h-10 rounded-xl bg-red-500 flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 rounded-none bg-red-500 flex items-center justify-center shadow-md">
                 <span className="text-[13px] font-black text-white">
                   {String(active + 1).padStart(2, "0")}
                 </span>

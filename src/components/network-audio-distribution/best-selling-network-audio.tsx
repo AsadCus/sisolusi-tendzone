@@ -72,7 +72,7 @@ export default function BestSellingNetworkAudioSection() {
           <div key={active} className="bg-white p-8">
             <div className="flex flex-col md:flex-row gap-8 items-start">
               <div className="shrink-0">
-                <div className="w-10 h-10 rounded-xl bg-red-500 flex items-center justify-center shadow-md">
+                <div className="w-10 h-10 rounded-none bg-red-500 flex items-center justify-center shadow-md">
                   <span className="text-[13px] font-black text-white">
                     {String(active + 1).padStart(2, "0")}
                   </span>

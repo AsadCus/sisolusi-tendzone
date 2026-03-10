@@ -39,7 +39,7 @@ export default function BasicPrincipleNetworkSpeaker() {
             </div>
           </div>
 
-          <div className="relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
+          <div className="relative group cursor-pointer rounded-none overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
             <Image
               src="/images/product/2k60-hdmi.png"
               alt="Network Speaker"
@@ -47,7 +47,7 @@ export default function BasicPrincipleNetworkSpeaker() {
               height={200}
               className="object-contain w-full h-full p-8 transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl flex items-end p-6">
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-none flex items-end p-6">
               <p className="text-white text-sm font-medium">Network Speaker</p>
             </div>
           </div>

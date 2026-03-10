@@ -146,12 +146,12 @@ export default function SpecTableDigitalConference() {
         </div>
 
         <div className="flex justify-center mb-8">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 bg-gray-100 p-1 rounded-lg">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 bg-gray-100 p-1 rounded-none">
             {products.map((p) => (
               <button
                 key={p.id}
                 onClick={() => setActive(p.id)}
-                className={`px-4 py-2 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap focus:outline-none
+                className={`px-4 py-2 text-xs font-medium rounded-none transition-all duration-200 whitespace-nowrap focus:outline-none
                   ${active === p.id
                     ? "bg-red-500 text-white shadow-sm"
                     : "text-gray-600 hover:text-red-500"

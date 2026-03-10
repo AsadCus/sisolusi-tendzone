@@ -17,11 +17,9 @@ const features = [
 export default function ThirteenInOneFeatures() {
   return (
     <section className="bg-white py-10 px-6 font-sans">
-      <div className="max-w-4xl mx-auto">
-
-        {/* Header */}
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="mb-6">
-          <div className="w-7 h-[2px] bg-red-500 mb-3" />
+          <div className="w-7 h-0.5 bg-red-500 mb-3" />
           <h2 className="text-[18px] font-bold text-gray-900 leading-snug">
             Key Features of Thirteen-In-One Integrated Processor
           </h2>
@@ -29,11 +27,7 @@ export default function ThirteenInOneFeatures() {
             A professional-grade all-in-one AV processor built for performance, flexibility, and seamless integration.
           </p>
         </div>
-
-        {/* Main card — horizontal split */}
         <div className="border border-gray-100 overflow-hidden">
-
-          {/* Image strip */}
           <div className="w-full h-36 bg-gray-50 border-b border-gray-100 overflow-hidden">
             <img
               src="https://www.tendzone.net/uploads/43135/thirteen-in-one-integrated-processor6ace4.jpg"
@@ -41,8 +35,6 @@ export default function ThirteenInOneFeatures() {
               className="w-full h-full object-cover object-center"
             />
           </div>
-
-          {/* Features — row by row, 3 cols */}
           <div className="divide-y divide-gray-100">
             {Array.from({ length: Math.ceil(features.length / 3) }).map((_, rowIdx) => (
               <div key={rowIdx} className="grid grid-cols-3 divide-x divide-gray-100">
@@ -51,11 +43,11 @@ export default function ThirteenInOneFeatures() {
                   return (
                     <div
                       key={col}
-                      className="group flex items-start gap-2.5 px-4 py-3.5 hover:bg-gray-50 transition-colors duration-150 min-h-[48px]"
+                      className="group flex items-start gap-2.5 px-4 py-3.5 hover:bg-gray-50 transition-colors duration-150 min-h-12"
                     >
                       {item ? (
                         <>
-                          <span className="w-1 h-1 rounded-full bg-red-500 flex-shrink-0 mt-[6px]" />
+                          <span className="w-1 h-1 rounded-full bg-red-500 shrink-0 mt-1.5" />
                           <p className="text-[12.5px] text-gray-500 leading-relaxed group-hover:text-gray-800 transition-colors duration-150">
                             {item}
                           </p>

@@ -1,6 +1,6 @@
 "use client";
 
-import OemOdmPage from "@/components/all in-one-solution/oem-bestSell";
+import OemOdmPage from "@/components/section/oem-odm-subcategory";
 import OpenArchitectureDSP from "@/components/audio-processor/Open-DSP/Open-Architecture-DSP";
 import PageHero from "@/components/layout/pageHero";
 import NavbarLanding from "@/components/navbar-landing";

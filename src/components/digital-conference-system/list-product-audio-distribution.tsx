@@ -29,7 +29,7 @@ const getProductImage = (product: Product): string =>
   product.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
 
 const SkeletonCard = () => (
-  <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 animate-pulse">
+  <div className="bg-white rounded-none overflow-hidden border border-gray-100 animate-pulse">
     <div className="h-48 bg-gray-100" />
     <div className="p-4 space-y-2">
       <div className="h-3 bg-gray-100 rounded w-3/4" />
@@ -39,7 +39,7 @@ const SkeletonCard = () => (
 );
 
 const ProductCard = ({ product }: { product: Product }) => (
-  <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-red-100 transition-all duration-300 overflow-hidden">
+  <div className="group relative bg-white rounded- border border-gray-100 shadow-sm hover:shadow-lg hover:border-red-100 transition-all duration-300 overflow-hidden">
     
       <a href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in: ${product.name}`)}`}
       target="_blank"

@@ -59,7 +59,7 @@ export default function AudioOverIPUiDesignSection() {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="transition-all duration-300 border-muted"
+              className="transition-all duration-300 border-muted rounded-none"
             >
               <CardHeader className="flex flex-row items-center gap-2">
                 <div className="text-2xl font-medium text-primary">

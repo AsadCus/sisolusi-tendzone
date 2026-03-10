@@ -54,14 +54,14 @@ export default function ProductFeatureSection() {
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="flex justify-center mb-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 bg-gray-100 p-1 rounded-lg w-full max-w-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 bg-gray-100 p-1 rounded-none w-full max-w-sm">
             {products.map((p) => {
               const TabIcon = p.icon;
               return (
                 <button
                   key={p.id}
                   onClick={() => setActive(p.id)}
-                  className={`flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-200 whitespace-nowrap focus:outline-none
+                  className={`flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-none transition-all duration-200 whitespace-nowrap focus:outline-none
                     ${active === p.id
                       ? "bg-red-500 text-white shadow-sm"
                       : "text-gray-600 hover:text-red-500"
@@ -77,10 +77,6 @@ export default function ProductFeatureSection() {
 
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-              <Icon className="w-3 h-3" />
-              {product.label}
-            </Badge>
           </div>
 
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-700 mb-2 leading-snug">
@@ -90,10 +86,10 @@ export default function ProductFeatureSection() {
             {product.features.map((f) => (
               <li
                 key={f.title}
-                className="flex items-start gap-3 px-3 py-2.5 rounded-lg border border-transparent hover:border-t-2 hover:border-t-red-300 hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/40 transition-all duration-200 group"
+                className="flex items-start gap-3 px-3 py-2.5 rounded-none hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/40 transition-all duration-200 group"
               >
-                <ChevronRight className="w-3.5 h-3.5 text-red-400 mt-0.5 shrink-0" />
                 <span className="text-sm text-gray-500">
+                  <div className="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0" />
                   <span className="font-semibold text-gray-600 group-hover:text-red-500 transition-colors duration-200">
                     {f.title}:{" "}
                   </span>

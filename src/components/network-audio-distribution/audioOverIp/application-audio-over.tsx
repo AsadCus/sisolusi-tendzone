@@ -74,10 +74,10 @@ export default function ApplicationsSection() {
             return (
               <Card
                 key={index}
-                className="border border-gray-100 shadow-none rounded-2xl hover:border-t-2 hover:border-t-red-300 hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/30 transition-all duration-200 group"
+                className="border border-gray-100 shadow-none rounded-none hover:border-t-2 hover:border-t-red-300 hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/30 transition-all duration-200 group"
               >
                 <CardContent className="p-6 flex flex-col gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors duration-200">
+                  <div className="w-9 h-9 rounded-none bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors duration-200">
                     <Icon className="w-4 h-4 text-red-500" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-sm font-semibold text-gray-600 group-hover:text-red-500 transition-colors duration-200">

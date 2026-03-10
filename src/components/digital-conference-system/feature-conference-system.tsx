@@ -60,7 +60,7 @@ export default function ProductApplicationFeatureConference() {
           const Icon = section.icon;
 
           const imageCol = (
-            <div className="relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
+            <div className="relative group cursor-pointer rounded-none overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
               <Image
                 src={section.image}
                 alt={section.imageAlt}
@@ -68,7 +68,7 @@ export default function ProductApplicationFeatureConference() {
                 height={280}
                 className="object-contain w-full h-full p-8 transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl flex items-end p-6">
+              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-none flex items-end p-6">
                 <p className="text-white text-sm font-medium">{section.imageAlt}</p>
               </div>
             </div>
@@ -76,13 +76,6 @@ export default function ProductApplicationFeatureConference() {
 
           const contentCol = (
             <div className="flex flex-col justify-center">
-              <div className="flex items-center gap-2 mb-4">
-                <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-                  <Icon className="w-3 h-3" />
-                  {section.badge}
-                </Badge>
-              </div>
-
               <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-6 leading-snug">
                 {section.title}{" "}
                 <span className="text-red-500">{section.subtitle}</span>
@@ -92,7 +85,7 @@ export default function ProductApplicationFeatureConference() {
                 {section.features.map((f, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-3 px-3 rounded-lg border border-transparent hover:border-t-2 hover:border-t-red-300 hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/40 transition-all duration-200 group"
+                    className="flex items-start gap-3 px-3 rounded-none border border-transparent hover:border-t-2 hover:border-t-red-300 hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/40 transition-all duration-200 group"
                   >
                     <Check className="w-3.5 h-3.5 text-red-400 mt-0.5 shrink-0" />
                     <span className="text-sm text-gray-400 leading-relaxed group-hover:text-gray-600 transition-colors duration-200">

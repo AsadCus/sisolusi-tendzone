@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ChevronRight, Wifi, CheckCircle2 } from "lucide-react";
 
 interface Category {
   id: number;
@@ -10,7 +12,6 @@ interface Category {
   description: string;
   image: string;
   slug: string;
-  badge?: string;
 }
 
 const categories: Category[] = [
@@ -54,52 +55,55 @@ export default function ProductWirelessEnvironment() {
     <section className="w-full py-12">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
-        <p className="text-sm text-gray-600 leading-relaxed mb-6">
-          5G wired and wireless conference system is a new type of conference
-          solution that integrates the advantages of 5G technology with
-          traditional conference systems, emerging amidst the trend of
-          intelligent office environments.
-        </p>
+        <div className="flex flex-col items-center gap-3 mb-8 text-center">
+          <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
+            <Wifi className="w-3 h-3" />
+            5G Wireless Conference
+          </Badge>
+          <p className="text-sm text-gray-400 leading-relaxed max-w-3xl">
+            5G wired and wireless conference system is a new type of conference
+            solution that integrates the advantages of 5G technology with
+            traditional conference systems, emerging amidst the trend of
+            intelligent office environments.
+          </p>
+        </div>
 
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-2.5 mb-12">
           {features.map((feature, index) => (
-            <li key={index} className="flex gap-3 text-sm text-gray-700">
-              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-red-600 shrink-0" />
-              {feature}
-            </li>
+            <div key={index} className="flex items-start gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-red-400 mt-0.5 shrink-0" />
+              <span className="text-sm text-gray-400 leading-relaxed">{feature}</span>
+            </div>
           ))}
-        </ul>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`/products/${category.slug}`}
-              className="group"
-            >
-              <Card className="h-full overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 shadow-xl hover:shadow-xl hover:shadow-gray-200/80 hover:-translate-y-1 transition-all duration-300">
+            <Link key={category.id} href={`/products/${category.slug}`} className="group">
+              <Card className="relative h-full overflow-hidden rounded-none border border-gray-100 bg-gray-50 shadow-none hover:shadow-md transition-all duration-300">
+                <span className="absolute top-0 left-0 h-0.5 w-0 bg-red-400 group-hover:w-full transition-all duration-500 ease-out z-10" />
 
                 <div className="relative h-56 w-full bg-white overflow-hidden">
                   <Image
                     src={category.image}
                     alt={category.name}
-                    width={300}
-                    height={200}
-                    className="cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
                   />
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 <CardContent className="p-5 flex flex-col gap-3">
-                  <h3 className="text-base font-medium text-gray-900 leading-snug group-hover:text-red-600 transition-colors duration-300">
-                    {category.name}
-                  </h3>
-
-                  <p className="text-xs font-light text-gray-500 leading-relaxed line-clamp-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-semibold text-gray-600 leading-snug group-hover:text-red-500 transition-colors duration-200">
+                      {category.name}
+                    </h3>
+                    <ChevronRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-red-400 transition-colors duration-200 shrink-0" />
+                  </div>
+                  <p className="text-xs text-gray-400 leading-relaxed line-clamp-3">
                     {category.description}
                   </p>
                 </CardContent>
-
               </Card>
             </Link>
           ))}

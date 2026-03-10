@@ -163,8 +163,8 @@ function Section({ data, index }: { data: SpecSection; index: number }) {
 
 export default function SpecTable() {
   return (
-    <section className="bg-white pt-4 pb-10 px-6 font-sans">
-      <div className="max-w-4xl mx-auto">
+    <section className="bg-white pt-8 px-6 font-sans">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="text-center mb-3">
           <h2 className="text-2xl font-semibold text-gray-900">

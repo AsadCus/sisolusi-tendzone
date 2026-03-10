@@ -104,7 +104,7 @@ function FeatureCard({ product }: { product: (typeof products)[0] }) {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-black/20" />
-        <div className="absolute bottom-0 left-0 w-full h-[2px] bg-red-600" />
+        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-red-600" />
       </div>
 
       <div className="flex flex-col flex-1 p-5">
@@ -114,7 +114,7 @@ function FeatureCard({ product }: { product: (typeof products)[0] }) {
         <ul className="space-y-1.5">
           {product.features.map((f, i) => (
             <li key={i} className="flex items-start gap-2">
-              <span className="mt-[7px] shrink-0 w-[3px] h-[3px] rounded-full bg-red-500" />
+              <span className="mt-1.75 shrink-0 w-0.75 h-0.75 rounded-full bg-red-500" />
               <span className="text-[11.5px] text-gray-500 leading-relaxed">{f}</span>
             </li>
           ))}
@@ -127,8 +127,8 @@ function FeatureCard({ product }: { product: (typeof products)[0] }) {
 
 export default function ProductFeatures() {
   return (
-    <section className="bg-white pt-4 pb-10 px-6 font-sans">
-      <div className="max-w-4xl mx-auto">
+    <section className="bg-white pt-8 px-6 font-sans">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {products.map((p) => (

@@ -10,13 +10,13 @@ import TwelveInOneFeatures from "@/components/all in-one-solution/All-in-oneAudi
 import ThirteenInOneSpec from "@/components/all in-one-solution/All-in-oneAudio/thirteenInOne"
 import ThirteenInOneFeatures from "@/components/all in-one-solution/All-in-oneAudio/keyFeatures"
 import ThirteenInOneApplications from "@/components/all in-one-solution/All-in-oneAudio/thirteenInOneApp"
-import AfterSalesServices from "@/components/all in-one-solution/All-in-oneAudio/After-Sales"
 import PackagingShipping from "@/components/all in-one-solution/All-in-oneAudio/packagingShipping"
 import HonorQualification from "@/components/all in-one-solution/All-in-oneAudio/honorQualification"
 import FAQSection from "@/components/section/faq"
 import PopularProductsCarousel from "@/components/section/popularProducts"
 import SendInquirySection from "@/components/section/SendInquirySection"
 import Footer from "@/components/footer"
+import AfterSalesServices from "@/components/section/after-sales"
 
 export default function AllInOneAudioVisualSolutionsPage() {
     return(

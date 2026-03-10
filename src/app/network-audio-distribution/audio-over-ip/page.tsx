@@ -11,7 +11,7 @@ import HonorQualification from "@/components/section/honor-qualification";
 import AudioIpFunctionsSection from "@/components/network-audio-distribution/audioOverIp/functionAudioOverIp";
 import AudioOverIPUiDesignSection from "@/components/network-audio-distribution/audioOverIp/audio-over-ui-design";
 import ApplicationsSection from "@/components/network-audio-distribution/audioOverIp/application-audio-over";
-import AfterSalesSection from "@/components/section/after-sales";
+import AfterSalesServices from "@/components/section/after-sales";
 import PackagingAndShippingSection from "@/components/section/Packaging and Shipping";
 
 export default function ProductsPage() {
@@ -26,7 +26,7 @@ export default function ProductsPage() {
       <TableSpecification />
       <AudioIpFunctionsSection/>
       <AudioOverIPUiDesignSection />
-      <AfterSalesSection />
+      <AfterSalesServices />
       <ApplicationsSection/>
       <PackagingAndShippingSection />
       <HonorQualification />

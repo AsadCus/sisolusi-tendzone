@@ -57,9 +57,9 @@ const productFlat = [
       { label: "Ceiling Array Microphones", href: "/products/ceiling-array" },
       { label: "Analog Condenser Microphones", href: "/products/condenser-mic" },
     ] },
-  { category: "Power Amplifier", href: "/products/digital-amplifier",
-    items: [{ label: "Digital Power Amplifiers", href: "/products/digital-amplifier" }] },
-  { category: "Speaker", href: "/products/ceiling-speaker",
+  { category: "Power Amplifier", href: "/power-amplifer",
+    items: [{ label: "Digital Power Amplifiers", href: "/power-amplifer/digital-power-amplifiers" }] },
+  { category: "Speaker", href: "/power-amplifer/digital-power-amplifiers",
     items: [
       { label: "Ceiling Speakers", href: "/products/ceiling-speaker" },
       { label: "Conference Speakers", href: "/products/conference-speaker" },
