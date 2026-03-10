@@ -24,19 +24,15 @@ const items = [
 export default function PackagingShipping() {
   return (
     <section className="bg-white py-8 px-6 font-sans">
-      <div className="max-w-4xl mx-auto">
-
-        {/* Header */}
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="flex flex-col items-center text-center mb-8">
           <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Packaging & Shipping</h2>
-          <div className="mt-3 w-7 h-[2px] bg-red-500" />
+          <div className="mt-3 w-7 h-0.5 bg-red-500" />
         </div>
-
-        {/* Cards */}
         <div className="grid grid-cols-2 gap-4">
           {items.map((item, i) => (
             <div key={i} className="border border-gray-100 bg-gray-50 px-6 py-5 flex items-start gap-4 group hover:border-red-200 hover:bg-red-50 transition-colors duration-200">
-              <div className="flex-shrink-0 w-9 h-9 bg-white border border-gray-100 flex items-center justify-center text-gray-400 group-hover:text-red-500 group-hover:border-red-200 transition-colors duration-200">
+              <div className="shrink-0 w-9 h-9 bg-white border border-gray-100 flex items-center justify-center text-gray-400 group-hover:text-red-500 group-hover:border-red-200 transition-colors duration-200">
                 {item.icon}
               </div>
               <div>
@@ -46,7 +42,6 @@ export default function PackagingShipping() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

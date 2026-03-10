@@ -36,7 +36,7 @@ export default function BestSellingSection() {
             </p>
           </div>
 
-          <div className="relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
+          <div className="relative group cursor-pointer rounded-none overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
             <Image
               src="/images/product/2k60-hdmi.png"
               alt="Distributor Audio Over IP"

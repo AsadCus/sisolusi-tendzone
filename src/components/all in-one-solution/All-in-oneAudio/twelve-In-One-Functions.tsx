@@ -14,11 +14,9 @@ const features = [
 
 export default function TwelveInOneFunctions() {
   return (
-    <section className="bg-white pt-4 pb-8 px-6 font-sans">
-      <div className="max-w-4xl mx-auto">
+    <section className="bg-white pt-8 px-6 font-sans">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
-
-          {/* Left — Text */}
           <div>
             <h2 className="text-[18px] font-bold text-gray-900 leading-snug mb-4">
               Functions of Twelve-In-One<br />Integrated Processor
@@ -38,12 +36,10 @@ export default function TwelveInOneFunctions() {
               and efficient operation — configurable as a hyper-converged all-in-one device with a
               built-in OPS computer, wireless screen projection, and wireless microphone modules.
             </p>
-
-            {/* Feature list */}
             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
               {features.map((f, i) => (
                 <div key={i} className="flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-red-500 flex-shrink-0" />
+                  <span className="w-1 h-1 rounded-full bg-red-500 shrink-0" />
                   <span className="text-[11.5px] text-gray-500">{f}</span>
                 </div>
               ))}

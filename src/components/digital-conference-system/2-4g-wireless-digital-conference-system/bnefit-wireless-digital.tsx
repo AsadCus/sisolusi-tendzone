@@ -53,10 +53,6 @@ export default function WirelessDigitalBenefitSection() {
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="flex flex-col items-center gap-3 mb-12">
-          <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-            <Wifi className="w-3 h-3" />
-            Wireless Conference
-          </Badge>
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 text-center">
             Benefits of{" "}
             <span className="text-red-500">2.4G Wireless Digital Conference System</span>
@@ -69,12 +65,12 @@ export default function WirelessDigitalBenefitSection() {
             return (
               <Card
                 key={index}
-                className="relative overflow-hidden border border-gray-100 rounded-2xl shadow-none transition-all duration-200 group"
+                className="relative overflow-hidden border border-gray-100 rounded-none shadow-none transition-all duration-200 group"
               >
                 <span className="absolute top-0 left-0 h-0.5 w-0 bg-red-400 group-hover:w-full transition-all duration-500 ease-out z-10" />
                 <CardContent className="p-6 flex flex-col gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors duration-200">
+                    <div className="w-9 h-9 rounded-none bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors duration-200">
                       <Icon className="w-4 h-4 text-red-500" strokeWidth={1.75} />
                     </div>
                     <div className="flex items-center gap-2">

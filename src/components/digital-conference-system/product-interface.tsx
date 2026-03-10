@@ -8,7 +8,7 @@ export default function ProductInterfaceSection() {
       <div className="max-w-7xl mx-auto px-6 space-y-24">
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="bg-white rounded-2xl border border-gray-200 p-10 flex items-center justify-center">
+          <div className="bg-white rounded-none border border-gray-200 p-10 flex items-center justify-center">
             <Image
               src="/images/product/2x2-dante.png"
               alt="8x8 Vailink I/O Interface"
@@ -81,7 +81,7 @@ export default function ProductInterfaceSection() {
             </ul>
           </div>
 
-          <div className="order-1 lg:order-2 bg-white rounded-2xl border border-gray-200 p-10 flex items-center justify-center">
+          <div className="order-1 lg:order-2 bg-white rounded-none border border-gray-200 p-10 flex items-center justify-center">
             <Image
               src="/images/product/2k60-hdmi.png"
               alt="Vailink 2CH Analog Input Adapter"

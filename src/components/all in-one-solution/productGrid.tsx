@@ -44,7 +44,7 @@ const ProductCard = ({ product, alwaysShowWa = false }: { product: Product; alwa
 
     <Link href={`/products/${product.slug}`} className="block">
       <div className="relative w-full h-48 bg-gray-50 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-red-50/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[1]" />
+        <div className="absolute inset-0 bg-linear-to-t from-red-50/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-1" />
         <Image
           src={getProductImage(product)}
           alt={product.name}
@@ -92,8 +92,8 @@ export default function ProductGrid() {
   }, []);
 
   return (
-    <section className="w-full pt-16 pb-4 bg-white">
-      <div className="max-w-5xl mx-auto px-8 md:px-16">
+    <section className="w-full pt-12 pb-4 bg-white">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {loading
             ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)

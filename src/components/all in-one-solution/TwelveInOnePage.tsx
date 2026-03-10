@@ -45,8 +45,8 @@ export default function TwelveInOnePage() {
   const tdValClass = "px-4 py-2.5 align-top text-gray-900";
 
   return (
-    <div className="min-h-screen bg-white px-8 pt-4 pb-12 font-sans">
-      <div className="mx-auto max-w-225">
+    <div className="min-h-screen bg-white px-8 pt-8 font-sans">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="mb-4 text-center">
           <h1 className="mb-2 text-[20px] font-bold text-gray-900">
             Twelve-in-One Integrated Processor Specification

@@ -11,13 +11,6 @@ export default function BestSellingNetworkAudioInputOutputSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-                <Network className="w-3 h-3" />
-                Network I/O Interface
-              </Badge>
-            </div>
-
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-700 mb-3 leading-snug">
               Our Best-Selling{" "}
               <span className="text-red-500">Network Input And Output Interface</span>
@@ -32,7 +25,7 @@ export default function BestSellingNetworkAudioInputOutputSection() {
             </p>
           </div>
 
-          <div className="relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
+          <div className="relative group cursor-pointer rounded-none overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
             <Image
               src="/images/product/2k60-hdmi.png"
               alt="8x8 Vailink I/O Interface"

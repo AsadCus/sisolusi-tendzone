@@ -9,7 +9,7 @@ import NetworkAdaptersSpecificationTable from "@/components/network-audio-distri
 import HonorQualification from "@/components/section/honor-qualification";
 import FunctionsNetworkSection from "@/components/network-audio-distribution/network-input-and-output-interface/functionNetworkInOut";
 import NetworkAdapterApplicationsSection from "@/components/network-audio-distribution/network-adapters/application-network";
-import AfterSalesSection from "@/components/section/after-sales";
+import AfterSalesServices from "@/components/section/after-sales";
 import ProductNetworkAdaptersPage from "@/components/network-audio-distribution/network-adapters/network-adapters";
 import NetworkAdapterTipsSection from "@/components/network-audio-distribution/network-adapters/basic-principle-network-section";
 import FeaturesNetworkAdaptersSection from "@/components/network-audio-distribution/network-adapters/features-product-adapters";
@@ -32,7 +32,7 @@ export default function ProductsPage() {
       {/* <FunctionsNetworkSection /> */}
       <NetworkAdapterApplicationsSection />
       <NetworkAdapterTipsSection />
-      <AfterSalesSection />
+      <AfterSalesServices />
       <PackagingAndShippingSection />
       <HonorQualification />
        <FAQSection />

@@ -7,7 +7,7 @@ import OemOdmSubcategorySection from "@/components/section/oem-odm-subcategory";
 import BestSellingNetworkSpeakersPage from "@/components/digital-conference-system/5g-digital-conference-system/best-selling";
 import MicrophoneDigitalConferenceSpecificationTable from "@/components/digital-conference-system/5g-digital-conference-system/table-speficication";
 import HonorQualification from "@/components/section/honor-qualification";
-import AfterSalesSection from "@/components/section/after-sales";
+import AfterSalesServices from "@/components/section/after-sales";
 import ProductWirelessEnvironment from "@/components/digital-conference-system/5g-digital-conference-system/5g-wireless-environment";
 import PackagingAndShippingSection from "@/components/section/Packaging and Shipping";
 import PopularProductsCarousel from "@/components/section/popularProducts";
@@ -29,7 +29,7 @@ export default function ProductsPage() {
       <DigitalConferenceApplicationSection />
       <DigitalConferenceFunctionsSection />
       <DigitalConferenceFunctionWirelessSection />
-      <AfterSalesSection />
+      <AfterSalesServices />
       <PackagingAndShippingSection />
       <HonorQualification />
       <FAQSection />

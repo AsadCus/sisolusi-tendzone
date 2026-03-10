@@ -36,7 +36,7 @@ export default function MicrophoneApplicationSection({
           {applications.map((app, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 hover:border-red-200 hover:bg-red-50 transition-all duration-200 group"
+              className="flex items-center gap-3 px-5 py-3.5 rounded-none border border-gray-200 hover:border-red-200 hover:bg-red-50 transition-all duration-200 group"
             >
               <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 group-hover:scale-110 transition-transform duration-200" strokeWidth={2} />
               <span className="text-lg text-gray-700 group-hover:text-red-600 transition-colors duration-200">

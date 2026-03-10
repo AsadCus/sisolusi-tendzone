@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Users,
   Tv2,
@@ -48,46 +47,45 @@ export default function ApplicationNetworkSection({
   title?: string;
 }) {
   return (
-    <section className="w-full bg-white py-12">
+    <section className="w-full bg-white py-16">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 text-center mb-12 tracking-tight">
-          {title}
-        </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="flex flex-col items-center text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 text-center">
+            {title.split(" ").slice(0, 1).join(" ")}{" "}
+            <span className="text-red-500">{title.split(" ").slice(1).join(" ")}</span>
+          </h2>
+          <div className="mt-3 w-7 h-0.5 bg-red-500" />
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {applications.map((app, index) => {
             const Icon = app.icon;
-            const num = String(index + 1).padStart(2, "0");
-
             return (
-              <Card
+              <div
                 key={index}
-                className="relative overflow-hidden border border-gray-200 rounded-2xl shadow-none hover:shadow-md transition-all duration-200 group"
+                className="group relative flex flex-col justify-between bg-white border border-gray-200 hover:border-red-300 transition-colors duration-200 overflow-hidden p-5 min-h-45"
               >
-                {/* Border top animasi kiri ke kanan */}
-                <span className="absolute top-0 left-0 h-0.5 w-0 bg-red-400 group-hover:w-full transition-all duration-500 ease-out z-10" />
+                <div className="absolute top-0 left-0 w-full h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
-                <CardContent className="flex flex-col items-center text-center px-5 pt-8 pb-6 gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-1 group-hover:bg-red-100 transition-colors duration-200">
-                    <Icon className="w-5 h-5 text-red-500" strokeWidth={1.75} />
-                  </div>
-
-                  <h3 className="text-sm font-semibold text-gray-900 leading-snug">
+                <div>
+                  <Icon className="w-5 h-5 text-red-500 mb-3" strokeWidth={1.7} />
+                  <h3 className="text-[12px] font-bold text-gray-700 mb-2 group-hover:text-red-500 transition-colors duration-200">
                     {app.title}
                   </h3>
-
-                  <p className="text-xs text-gray-500 leading-relaxed">
+                  <p className="text-[11px] text-gray-400 leading-relaxed group-hover:text-gray-600 transition-colors duration-200">
                     {app.description}
                   </p>
+                </div>
 
-                  <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-6xl font-black text-red-100 select-none pointer-events-none leading-none group-hover:text-red-200 transition-colors duration-200">
-                    {num}
-                  </span>
-                </CardContent>
-              </Card>
+                <span className="self-end text-[28px] font-bold text-gray-100 group-hover:text-red-100 leading-none select-none transition-colors duration-200 mt-2">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
             );
           })}
         </div>
+
       </div>
     </section>
   );

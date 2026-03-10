@@ -66,10 +66,6 @@ export default function ProductInterfaceSection() {
           const contentCol = (
             <div className="flex flex-col justify-center h-full">
               <div className="flex items-center gap-2 mb-4">
-                <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-                  <Icon className="w-3 h-3" />
-                  {product.badge}
-                </Badge>
               </div>
 
               <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6 leading-snug">
@@ -81,9 +77,8 @@ export default function ProductInterfaceSection() {
                 {product.features.map((f, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-2.5 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 hover:border-red-100 hover:bg-red-50/30 transition-colors duration-200"
+                    className="flex items-start gap-2.5 bg-gray-50 rounded-none px-4 py-3 border border-gray-100 hover:border-red-100 hover:bg-red-50/30 transition-colors duration-200"
                   >
-                    <ChevronRight className="w-3.5 h-3.5 text-red-400 mt-0.5 shrink-0" />
                     <div>
                       <p className="text-xs font-semibold text-gray-800 leading-snug">{f.label}</p>
                       <p className="text-xs text-gray-500 leading-relaxed mt-0.5">{f.desc}</p>

@@ -62,10 +62,10 @@ export default function ApplicationNetworkSection({
             return (
               <Card
                 key={index}
-                className="relative overflow-hidden border border-gray-200 rounded-2xl shadow-none hover:border-red-200 hover:shadow-md transition-all duration-200 group"
+                className="relative overflow-hidden border border-gray-200 rounded-none shadow-none hover:border-red-200 hover:shadow-md transition-all duration-200 group"
               >
                 <CardContent className="flex flex-col items-center text-center px-5 pt-8 pb-6 gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mb-1 group-hover:bg-red-100 transition-colors duration-200">
+                  <div className="w-12 h-12 rounded-none bg-red-50 flex items-center justify-center mb-1 group-hover:bg-red-100 transition-colors duration-200">
                     <Icon className="w-5 h-5 text-red-500" strokeWidth={1.75} />
                   </div>
 

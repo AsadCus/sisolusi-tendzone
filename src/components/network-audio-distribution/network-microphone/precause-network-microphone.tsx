@@ -45,12 +45,12 @@ export default function MicrophonePrecautionsSection({
             return (
               <Card
                 key={i}
-                className="relative overflow-hidden border border-gray-100 rounded-2xl shadow-none transition-all duration-200 group"
+                className="relative overflow-hidden border border-gray-100 rounded-none shadow-none transition-all duration-200 group"
               >
                 <span className="absolute top-0 left-0 h-0.5 w-0 bg-red-400 group-hover:w-full transition-all duration-500 ease-out z-10" />
                 <CardContent className="px-6 py-7 flex flex-col gap-4">
                   <div className="flex items-center gap-4">
-                  <div className="w-9 h-9 rounded-lg bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors duration-200">
+                  <div className="w-9 h-9 rounded-none bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors duration-200">
                     <Icon className="w-4 h-4 text-red-500" strokeWidth={1.5} />
                   </div>
                   <p className="text-sm text-gray-600 leading-relaxed group-hover:text-gray-900 transition-colors duration-200">

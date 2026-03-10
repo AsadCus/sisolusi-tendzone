@@ -28,7 +28,7 @@ export default function BestSellingNetworkDigital() {
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          <div className="relative group cursor-pointer rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
+          <div className="relative group cursor-pointer rounded-none overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
             <Image
               src="/images/product/2k60-hdmi.png"
               alt="Network Digital Conference System"
@@ -36,19 +36,12 @@ export default function BestSellingNetworkDigital() {
               height={200}
               className="object-contain w-full h-full p-8 transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-2xl flex items-end p-6">
+            <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-none flex items-end p-6">
               <p className="text-white text-sm font-medium">Network Digital Conference System</p>
             </div>
           </div>
 
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-                <Mic2 className="w-3 h-3" />
-                Digital Conference
-              </Badge>
-            </div>
-
             <h2 className="text-xl md:text-2xl font-semibold text-gray-700 mb-6 leading-snug">
               Our Best-Selling{" "}
               <span className="text-red-500">Network Digital Conference System</span>
@@ -60,9 +53,9 @@ export default function BestSellingNetworkDigital() {
                 return (
                   <div
                     key={i}
-                    className="flex items-start gap-3 px-3 py-3 rounded-lg border border-transparent hover:border-t-2 hover:border-t-red-300 hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/40 transition-all duration-200 group"
+                    className="flex items-start gap-3 px-3 py-3 rounded-none border border-transparent hover:border-t-2 hover:border-t-red-300 hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/40 transition-all duration-200 group"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors duration-200">
+                    <div className="w-7 h-7 rounded-none bg-red-50 flex items-center justify-center shrink-0 group-hover:bg-red-100 transition-colors duration-200">
                       <Icon className="w-3.5 h-3.5 text-red-400" strokeWidth={1.75} />
                     </div>
                     <span className="text-sm text-gray-400 leading-relaxed">

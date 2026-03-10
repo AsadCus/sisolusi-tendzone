@@ -45,6 +45,10 @@ export default function NetworkDigitalPage() {
 
           </h1>
 
+            <div className="flex justify-center mt-3 mb-6">
+            <span className="block w-12 h-1 rounded-full bg-red-500" />
+          </div>
+
           <p className="mt-4 text-gray-600 text-xs md:text-sm">
 Tendzone, established in 2010, is a global leader in providing advanced audio-visual (AV) solutions and manufacturing 
 high-quality AV products. We specialize in a wide range of cutting-edge technologies, including audio processors, 
@@ -54,8 +58,6 @@ multi-functional halls, and stadiums.
           </p>
         </div>
 
-        <div className="border-t-2 border-dashed border-red-500 my-4" />
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {categories.map((category) => (
             <Link
@@ -63,7 +65,7 @@ multi-functional halls, and stadiums.
               href={`/products/${category.slug}`}
               className="group"
             >
-              <Card className="h-full overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 shadow-xl hover:shadow-xl hover:shadow-gray-200/80 hover:-translate-y-1 transition-all duration-300">
+              <Card className="h-full overflow-hidden rounded-none border border-gray-100 bg-gray-50 shadow-xl hover:shadow-xl hover:shadow-gray-200/80 hover:-translate-y-1 transition-all duration-300">
 
                 <div className="relative h-56 w-full bg-white overflow-hidden">
                   <Image

@@ -46,23 +46,21 @@ const features = [
 export default function TwelveInOneFeatures() {
   return (
     <section className="bg-white py-10 px-6 font-sans">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="flex flex-col items-center text-center mb-8">
           <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
             Features of Twelve-In-One Integrated Processor
           </h2>
-          <div className="mt-3 w-7 h-[2px] bg-red-500" />
+          <div className="mt-3 w-7 h-0.5 bg-red-500" />
         </div>
-
-        {/* Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           {features.map((f, i) => (
             <div
               key={i}
               className="group relative flex flex-col justify-between bg-white border border-gray-200 hover:border-red-600 transition-colors duration-200 overflow-hidden px-4 pt-4 pb-3"
             >
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
               <span className="text-red-500 mb-2">{f.icon}</span>
 

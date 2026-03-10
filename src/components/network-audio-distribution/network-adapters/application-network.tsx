@@ -44,10 +44,10 @@ export default function NetworkAdapterApplicationsSection({
             return (
               <Card
                 key={i}
-                className="border border-gray-200 rounded-2xl shadow-none hover:border-red-200 hover:shadow-sm transition-all duration-200 group"
+                className="border border-gray-200 rounded-none shadow-none hover:border-red-200 hover:shadow-sm transition-all duration-200 group"
               >
                 <CardContent className="flex flex-col items-center text-center px-8 py-2 gap-5">
-                  <div className="w-14 h-14 rounded-xl bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors duration-200">
+                  <div className="w-14 h-14 rounded-none bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors duration-200">
                     <Icon className="w-6 h-6 text-red-500" strokeWidth={1.75} />
                   </div>
                   <p className="text-sm text-gray-600 leading-relaxed">

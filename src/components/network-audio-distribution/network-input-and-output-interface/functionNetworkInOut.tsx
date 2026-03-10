@@ -1,7 +1,5 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Cpu,
   SlidersHorizontal,
@@ -50,43 +48,44 @@ export default function FunctionsNetworkSection({
   title?: string;
 }) {
   return (
-    <section className="w-full bg-white py-12">
+    <section className="w-full bg-white py-16">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 text-center mb-12 tracking-tight">
-          {title}
-        </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+        <div className="flex flex-col items-center text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 text-center">
+            {title.split(" ").slice(0, 1).join(" ")}{" "}
+            <span className="text-red-500">{title.split(" ").slice(1).join(" ")}</span>
+          </h2>
+          <div className="mt-3 w-7 h-0.5 bg-red-500" />
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {functions.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div key={index} className="flex items-center gap-2">
-                <Card className="flex-1 h-52 border border-gray-200 shadow-none rounded-xl hover:border-red-300 hover:shadow-md transition-all duration-200 group">
-                  <CardContent className="flex flex-col items-center justify-between h-full pt-7 pb-5 px-4 text-center">
-                    <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors duration-200">
-                      <Icon className="w-5 h-5 text-red-500" strokeWidth={1.75} />
-                    </div>
+              <div
+                key={index}
+                className="group relative flex flex-col justify-between bg-white border border-gray-200 hover:border-red-300 transition-colors duration-200 overflow-hidden p-5 min-h-37.5"
+              >
+                <div className="absolute top-0 left-0 w-full h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
-                    <p className="text-gray-600 text-xs leading-relaxed">
-                      {item.description}
-                    </p>
+                <div className="flex items-start justify-between mb-3">
+                  <Icon className="w-5 h-5 text-red-500" strokeWidth={1.7} />
+                  <ChevronRight className="w-3.5 h-3.5 text-gray-300 group-hover:text-red-400 transition-colors duration-200" />
+                </div>
 
-                    <Badge
-                      variant="secondary"
-                      className="w-6 h-6 rounded-full p-0 flex items-center justify-center text-[10px] text-gray-500 bg-gray-100 border-0 font-medium"
-                    >
-                      {index + 1}
-                    </Badge>
-                  </CardContent>
-                </Card>
+                <p className="text-[11.5px] text-gray-600 leading-relaxed group-hover:text-gray-900 transition-colors duration-200 flex-1">
+                  {item.description}
+                </p>
 
-                {index < functions.length - 1 && (
-                  <ChevronRight className="hidden lg:block w-3 h-3 text-gray-300 shrink-0" />
-                )}
+                <span className="self-end text-[28px] font-bold text-gray-100 group-hover:text-red-100 leading-none select-none transition-colors duration-200 mt-2">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
               </div>
             );
           })}
         </div>
+
       </div>
     </section>
   );

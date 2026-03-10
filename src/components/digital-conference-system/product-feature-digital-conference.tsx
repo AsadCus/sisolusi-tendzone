@@ -56,7 +56,7 @@ export default function ProductFeatureSection() {
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="flex justify-center mb-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 bg-gray-100 p-1 rounded-lg w-full max-w-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 bg-gray-100 p-1 rounded-none w-full max-w-sm">
             {products.map((p) => {
               const TabIcon = p.icon;
               return (
@@ -78,13 +78,7 @@ export default function ProductFeatureSection() {
         </div>
 
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <Badge className="bg-red-50 text-red-500 border border-red-100 hover:bg-red-100 gap-1.5 px-3 py-1 text-xs font-medium">
-              <Icon className="w-3 h-3" />
-              {product.label}
-            </Badge>
-          </div>
-
+        
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-6 leading-snug">
             {product.heading}
           </h2>

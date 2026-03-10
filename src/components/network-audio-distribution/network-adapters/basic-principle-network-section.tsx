@@ -21,7 +21,7 @@ export default function NetworkAdapterTipsSection({
 
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 rounded-none bg-red-50 flex items-center justify-center shrink-0">
                 <Lightbulb className="w-4 h-4 text-red-500" strokeWidth={1.75} />
               </div>
               <h2 className="text-lg md:text-2xl font-semibold text-gray-900 tracking-tight">

@@ -60,7 +60,7 @@ export default function BestSellingNetworkSpeakersPage() {
               href={`/products/${category.slug}`}
               className="group"
             >
-              <Card className="h-full overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 shadow-xl hover:shadow-xl hover:shadow-gray-200/80 hover:-translate-y-1 transition-all duration-300">
+              <Card className="h-full overflow-hidden rounded-none border border-gray-100 bg-gray-50 shadow-xl hover:shadow-xl hover:shadow-gray-200/80 hover:-translate-y-1 transition-all duration-300">
 
                 <div className="relative h-56 w-full flex items-center justify-center bg-white overflow-hidden">
                   <Image
