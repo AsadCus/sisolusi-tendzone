@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils"
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { Phone, Mail, Youtube, Globe, Search, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
+import { Phone, Mail, Globe, Search, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import Link from "next/link"
 import Image from "next/image";
 
@@ -26,95 +26,22 @@ const megaData = {
   "About Us": { title: "About", items: ["Company", "Careers", "Culture"] },
 };
 
-const productFlat = [
-  { category: "All-in-one Solution", href: "/all-in-one-solution",
-    items: [
-      { label: "All in One Video Conference Camera With Built-in Speakerphone", href: "/all-in-one-solution/all-in-one-audio-visual-solutions" },
-      { label: "Twelve-in-one Integrated Processor", href: "/all-in-one-solution/all-in-one-audio-visual-solutions" },
-      { label: "Embedded Wired Control Touch Panel", href: "/all-in-one-solution/all-in-one-audio-visual-solutions" },
-      { label: "Wired Control Touch Panel", href: "/all-in-one-solution/all-in-one-audio-visual-solutions" },
-      { label: "Thirteen-in-one Integrated Processor", href: "/all-in-one-solution/all-in-one-audio-visual-solutions" },
-      { label: "Nine-in-one Integrated Processor", href: "/all-in-one-solution/all-in-one-audio-visual-solutions" },
-      { label: "All-in-one Integrated Processor", href: "/all-in-one-solution/all-in-one-audio-visual-solutions" }
-    ] },
-  { category: "Audio Processor", href: "/audio-processor",
-    items: [
-      { label: "Open Architecture DSP", href: "/audio-processor/Open-Architecture-DSP" },
-      { label: "Web Based Audio Processors", href: "/products/web-dsp" },
-      { label: "Fixed Audio Processors", href: "/products/fixed-dsp" },
-      { label: "Digital Audio Processor", href: "/products/digital-audio" },
-    ] },
-  { category: "Network Audio Distribution", href: "/network-audio-distribution",
-    items: [
-      { label: "Audio Over IP", href: "/network-audio-distribution/audio-over-ip" },
-      { label: "Network Input And Output Interface", href: "/network-audio-distribution/network-input-and-output-interface" },
-      { label: "Network Adapters", href: "/network-audio-distribution/network-adapters" },
-      { label: "Network Microphone", href: "/network-audio-distribution/network-microphone" },
-      { label: "Network Speaker", href: "/network-audio-distribution/network-speaker" },
-    ] },
-  { category: "Digital Conference System", href: "/digital-conference-system",
-    items: [
-      { label: "Network Digital Conference System", href: "/digital-conference-system/network-digital-conference-system" },
-      { label: "2.4G Wireless Digital Conference System", href: "/digital-conference-system/2-4g-wireless-digital-conference-system" },
-      { label: "5G Digital Conference System", href: "/digital-conference-system/5g-digital-conference-system" },
-    ] },
-  { category: "Wireless Microphone System", href: "/products/uhf-wireless",
-    items: [{ label: "UHF Wireless Microphone System", href: "/products/uhf-wireless" }] },
-  { category: "Microphone", href: "/products/ceiling-array",
-    items: [
-      { label: "Ceiling Array Microphones", href: "/products/ceiling-array" },
-      { label: "Analog Condenser Microphones", href: "/products/condenser-mic" },
-    ] },
-  { category: "Power Amplifier", href: "/power-amplifer",
-    items: [{ label: "Digital Power Amplifiers", href: "/power-amplifer/digital-power-amplifiers" }] },
-  { category: "Speaker", href: "/speaker",
-    items: [
-      { label: "Ceiling Speakers", href: "/products/ceiling-speaker" },
-      { label: "Conference Speakers", href: "/products/conference-speaker" },
-      { label: "Point Source Speakers", href: "/products/point-source" },
-      { label: "Column Speakers", href: "/products/column-speaker" },
-      { label: "Monitor Speaker", href: "/products/monitor-speaker" },
-    ] },
-  { category: "Audio Accessories", href: "/products/dante-interface",
-    items: [
-      { label: "Dante Interface", href: "/products/dante-interface" },
-      { label: "Dante Adapters", href: "/products/dante-adapters" },
-      { label: "Audio Control Panels", href: "/products/audio-control" },
-    ] },
-  { category: "MIDIS AV Over IP Systems", href: "/products/midis-av",
-    items: [
-      { label: "MIDIS AV Over IP Systems", href: "/products/midis-av" },
-      { label: "AV Over IP Encoder Decoder", href: "/products/av-encoder" },
-    ] },
-  { category: "Video Matrix", href: "/video-matrix",
-    items: [
-      { label: "IP Matrix", href: "/products/ip-matrix" },
-      { label: "Seamless Video Matrix", href: "/products/seamless-matrix" },
-      { label: "Seamed Video Matrix", href: "/products/seamed-matrix" },
-      { label: "Modular Matrix", href: "/products/modular-matrix" },
-    ] },
-  { category: "Video Wall Controller", href: "/products/video-wall",
-    items: [{ label: "Hybrid Modular Video Wall Controller", href: "/products/video-wall" }] },
-  { category: "HDMI Products", href: "/products/hdmi-extender",
-    items: [
-      { label: "HDMI Extenders", href: "/products/hdmi-extender" },
-      { label: "HDMI Distributors", href: "/products/hdmi-distributor" },
-      { label: "HDMI Switcher", href: "/products/hdmi-switcher" },
-    ] },
-  { category: "Video Accessories", href: "/products/wireless-presentation",
-    items: [
-      { label: "Wireless Presentation", href: "/products/wireless-presentation" },
-      { label: "BYOD Switcher", href: "/products/byod-switcher" },
-    ] },
-  { category: "Education Solution", href: "/products/education-platform",
-    items: [
-      { label: "Education Application Platform", href: "/products/education-platform" },
-      { label: "Education Terminals", href: "/products/education-terminals" },
-      { label: "Microphones And Speakers", href: "/products/edu-mic-speaker" },
-      { label: "Teaching Cameras", href: "/products/teaching-camera" },
-      { label: "IOT Control Products", href: "/products/iot-control" },
-      { label: "Control Panels", href: "/products/control-panels" },
-    ] },
+const productCategories = [
+  { category: "All-in-one Solution", href: "/all-in-one-solution" },
+  { category: "Audio Processor", href: "/audio-processor" },
+  { category: "Network Audio Distribution", href: "/network-audio-distribution" },
+  { category: "Digital Conference System", href: "/digital-conference-system" },
+  { category: "Wireless Microphone System", href: "/products/uhf-wireless" },
+  { category: "Microphone", href: "/products/ceiling-array" },
+  { category: "Power Amplifier", href: "/power-amplifer" },
+  { category: "Speaker", href: "/speaker" },
+  { category: "Audio Accessories", href: "/products/dante-interface" },
+  { category: "MIDIS AV Over IP Systems", href: "/products/midis-av" },
+  { category: "Video Matrix", href: "/video-matrix" },
+  { category: "Video Wall Controller", href: "/video-wall-controller" },
+  { category: "HDMI Products", href: "/products/hdmi-extender" },
+  { category: "Video Accessories", href: "/products/wireless-presentation" },
+  { category: "Education Solution", href: "/products/education-platform" },
 ];
 
 export default function NavbarProductLanding() {
@@ -124,7 +51,6 @@ export default function NavbarProductLanding() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
-  const lastScrollY = useRef(0);
 
   const isActive = (href: string) => {
     if (href === "#") return false;
@@ -137,24 +63,8 @@ export default function NavbarProductLanding() {
     return pathname === href || pathname.startsWith(href + "/");
   };
 
-  const isSubItemActive = (href: string) => {
-    if (!href || href === "#") return false;
-    return pathname === href;
-  };
-
-  const isCategoryGroupActive = (group: typeof productFlat[0]) => {
-    return (
-      isCategoryActive(group.href) ||
-      group.items.some((item) => isSubItemActive(item.href))
-    );
-  };
-
   useEffect(() => {
-    const onScroll = () => {
-      const currentY = window.scrollY;
-      setScrolled(currentY > 20);
-      lastScrollY.current = currentY;
-    };
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -168,13 +78,6 @@ export default function NavbarProductLanding() {
     else document.body.style.overflow = "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
-
-  useEffect(() => {
-    const onProductPage = productFlat.some((g) => isCategoryGroupActive(g));
-    if (onProductPage && activeMobileMenu !== "Products") {
-      setActiveMobileMenu("Products");
-    }
-  }, [pathname]);
 
   const isHome = pathname === "/";
   const isTransparent = isHome && !scrolled;
@@ -194,7 +97,7 @@ export default function NavbarProductLanding() {
       <div className="font-sans">
         <header className="fixed top-0 left-0 w-full z-50 flex flex-col">
 
-          {/* ── Utility bar: always shown, transparent on top / white bg when scrolled ── */}
+          {/* Utility bar */}
           <div className={cn(
             "transition-all duration-300 overflow-hidden",
             isTransparent
@@ -219,23 +122,19 @@ export default function NavbarProductLanding() {
                   <Mail size={12} strokeWidth={2} /><span>sales@tendzone.net</span>
                 </Link>
               </div>
-              <div className="flex items-center gap-3">
-                <button className={cn(
-                  "flex items-center gap-1 text-xs transition-colors",
-                  isTransparent ? "text-white/80 hover:text-white" : "text-gray-500 hover:text-gray-800"
-                )}>
-                  <Globe size={11} strokeWidth={2} /><span>Language</span><ChevronDown size={10} />
-                </button>
-              </div>
+              <button className={cn(
+                "flex items-center gap-1 text-xs transition-colors",
+                isTransparent ? "text-white/80 hover:text-white" : "text-gray-500 hover:text-gray-800"
+              )}>
+                <Globe size={11} strokeWidth={2} /><span>Language</span><ChevronDown size={10} />
+              </button>
             </div>
           </div>
 
-          {/* ── Main nav ── */}
+          {/* Main nav */}
           <nav className={cn(
             "transition-all duration-300",
-            isTransparent
-              ? "bg-transparent"
-              : "bg-white shadow-sm border-b border-gray-100"
+            isTransparent ? "bg-transparent" : "bg-white shadow-sm border-b border-gray-100"
           )}>
             <div className="max-w-7xl mx-auto px-6 flex items-center h-16">
 
@@ -257,12 +156,8 @@ export default function NavbarProductLanding() {
                         className={cn(
                           "relative flex items-center gap-0.5 px-3 py-2 text-[13.5px] font-medium transition-all duration-200",
                           isTransparent
-                            ? active
-                              ? "text-white"
-                              : "text-white/80 hover:text-white"
-                            : active
-                              ? "text-red-600"
-                              : "text-gray-700 hover:text-red-600"
+                            ? active ? "text-white" : "text-white/80 hover:text-white"
+                            : active ? "text-red-600" : "text-gray-700 hover:text-red-600"
                         )}
                       >
                         {link.label}
@@ -270,77 +165,49 @@ export default function NavbarProductLanding() {
                           <ChevronDown size={12} strokeWidth={2.5}
                             className="transition-transform duration-200 group-hover:rotate-180 opacity-60 mt-px" />
                         )}
-                        {/* underline indicator */}
                         <span className={cn(
-                          "absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300 origin-left",
-                          isTransparent ? "bg-red-500" : "bg-red-500",
+                          "absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300 origin-left bg-red-500",
                           active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                         )} />
                       </Link>
 
-                      {/* Products mega menu */}
+                      {/* Products mega menu — categories only */}
                       {link.label === "Products" && (
-                        <div className="fixed left-0 right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
+                        <div className="fixed left-0 right-0 flex justify-center opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                           style={{
                             top: isTransparent ? "100px" : "64px",
                             zIndex: 100,
                             transition: "opacity 180ms ease, visibility 180ms ease, top 300ms ease"
                           }}>
-                          <div className="mega-enter bg-white rounded-3xl shadow-2xl shadow-black/15 overflow-hidden border border-red-100">
+                          <div className="mega-enter bg-white max-w-6xl w-full mx-4 rounded-sm shadow-2xl shadow-black/15 overflow-hidden border border-red-100">
                             <div className="flex items-center justify-between px-8 py-4 border-b border-gray-100">
                               <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-red-500" />
                                 <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">All Products</span>
                               </div>
-                              <span className="text-xs text-gray-400">{productFlat.length} categories</span>
+                              <span className="text-xs text-gray-400">{productCategories.length} categories</span>
                             </div>
-                            <div className="px-8 py-6 overflow-y-auto no-scrollbar" style={{ maxHeight: "62vh" }}>
-                              <div className="grid grid-cols-4 gap-x-8 gap-y-7">
-                                {productFlat.map((group) => {
-                                  const catActive = isCategoryActive(group.href);
+                            <div className="px-8 py-6">
+                              <div className="grid grid-cols-5 gap-x-6 gap-y-3">
+                                {productCategories.map((cat) => {
+                                  const catActive = isCategoryActive(cat.href);
                                   return (
-                                    <div key={group.category} className="group/cat">
-                                      <Link href={group.href} className="flex items-center gap-1.5 mb-2.5 group/heading">
-                                        <span className={cn(
-                                          "w-1 rounded-full bg-red-500 shrink-0 transition-all duration-200 group-hover/heading:h-5",
-                                          catActive ? "h-5" : "h-3.5"
-                                        )} />
-                                        <span className={cn(
-                                          "text-[13px] font-bold transition-colors duration-200",
-                                          catActive
-                                            ? "text-red-600"
-                                            : "text-gray-800 group-hover/heading:text-red-600"
-                                        )}>
-                                          {group.category}
-                                        </span>
-                                        {catActive && (
-                                          <span className="ml-auto w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
-                                        )}
-                                      </Link>
-                                      <ul className="space-y-1.5 pl-3.5">
-                                        {group.items.map((item) => {
-                                          const subActive = isSubItemActive(item.href);
-                                          return (
-                                            <li key={item.label}>
-                                              <Link
-                                                href={item.href}
-                                                className={cn(
-                                                  "text-[13px] transition-colors duration-150 leading-snug flex items-center gap-1",
-                                                  subActive
-                                                    ? "text-red-500 font-semibold"
-                                                    : "text-gray-500 hover:text-red-500"
-                                                )}
-                                              >
-                                                {subActive && (
-                                                  <span className="w-1 h-1 rounded-full bg-red-500 shrink-0" />
-                                                )}
-                                                {item.label}
-                                              </Link>
-                                            </li>
-                                          );
-                                        })}
-                                      </ul>
-                                    </div>
+                                    <Link
+                                      key={cat.category}
+                                      href={cat.href}
+                                      className={cn(
+                                        "flex items-center gap-2 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150 group/cat",
+                                        catActive
+                                          ? "bg-red-50 text-red-600"
+                                          : "text-gray-600 hover:bg-gray-50 hover:text-red-600"
+                                      )}
+                                    >
+                                      <span className={cn(
+                                        "w-1 h-1 rounded-full bg-red-500 shrink-0 transition-all duration-200",
+                                        catActive ? "opacity-100" : "opacity-0 group-hover/cat:opacity-100"
+                                      )} />
+                                      {cat.category}
+                                    </Link>
                                   );
                                 })}
                               </div>
@@ -378,33 +245,27 @@ export default function NavbarProductLanding() {
                 })}
               </ul>
 
-              {/* Search + CTA */}
+              {/* Search  */}
               <div className="hidden lg:flex items-center gap-2 ml-2">
                 <div className={cn(
                   "flex items-center transition-all duration-300 rounded-xl overflow-hidden",
                   isTransparent ? "bg-white/10 border border-white/25" : "bg-gray-100",
                   searchOpen ? "w-36 pr-0" : "w-9"
                 )}>
-                  <button
-                    onClick={() => setSearchOpen(!searchOpen)}
-                    className="w-9 h-9 shrink-0 flex items-center justify-center transition-colors"
-                  >
+                  <button onClick={() => setSearchOpen(!searchOpen)}
+                    className="w-9 h-9 shrink-0 flex items-center justify-center transition-colors">
                     {searchOpen
                       ? <X size={14} strokeWidth={2.5} className={isTransparent ? "text-white ml-4" : "text-gray-500"} />
                       : <Search size={14} strokeWidth={2.5} className={isTransparent ? "text-white" : "text-gray-500"} />
                     }
                   </button>
                   {searchOpen && (
-                    <input
-                      ref={searchRef}
-                      type="text"
-                      placeholder="Search..."
+                    <input ref={searchRef} type="text" placeholder="Search..."
                       className={cn(
                         "flex-1 text-[13px] pr-3 py-2 outline-none bg-transparent",
                         isTransparent ? "text-white placeholder-white/60" : "text-gray-800 placeholder-gray-400"
                       )}
-                      onBlur={() => setSearchOpen(false)}
-                    />
+                      onBlur={() => setSearchOpen(false)} />
                   )}
                 </div>
                 <Link href="/contact"
@@ -428,7 +289,7 @@ export default function NavbarProductLanding() {
             </div>
           </nav>
 
-          {/* ── Mobile drawer ── */}
+          {/* Mobile drawer */}
           <div className={cn(
             "lg:hidden fixed inset-x-3 bottom-3 z-100 bg-white rounded-2xl shadow-2xl overflow-y-auto transition-all duration-300 border border-gray-100",
             mobileOpen ? "opacity-100 pointer-events-auto top-30" : "opacity-0 pointer-events-none top-30"
@@ -447,7 +308,7 @@ export default function NavbarProductLanding() {
                   <div key={link.label}>
                     <div className={cn(
                       "flex items-center rounded-xl transition-colors",
-                      active ? "bg-red-50" : "hover:bg-red-500"
+                      active ? "bg-red-50" : "hover:bg-gray-50"
                     )}>
                       <Link
                         href={link.href === "#" ? "#" : link.href}
@@ -469,47 +330,29 @@ export default function NavbarProductLanding() {
                       )}
                     </div>
 
+                    {/* Mobile Products — categories only */}
                     {isOpen && link.label === "Products" && (
-                      <div className="mx-3 mb-3 mt-1 bg-gray-50 rounded-xl p-4 flex flex-col gap-4">
-                        {productFlat.map((group) => {
-                          const catActive = isCategoryActive(group.href);
-                          const groupHasActiveChild = isCategoryGroupActive(group);
+                      <div className="mx-3 mb-3 mt-1 bg-gray-50 rounded-xl p-3 grid grid-cols-2 gap-1">
+                        {productCategories.map((cat) => {
+                          const catActive = isCategoryActive(cat.href);
                           return (
-                            <div key={group.category}>
-                              <Link
-                                href={group.href}
-                                onClick={() => setMobileOpen(false)}
-                                className={cn(
-                                  "flex items-center justify-between mb-1.5 rounded-lg px-1 py-0.5 -mx-1 transition-colors",
-                                  catActive ? "text-red-600" : "text-gray-800 hover:text-red-600"
-                                )}
-                              >
-                                <span className="flex items-center gap-1.5 text-[13px] font-bold">
-                                  <span className={cn(
-                                    "w-1 rounded-full bg-red-500 shrink-0 transition-all duration-200",
-                                    groupHasActiveChild ? "h-4" : "h-3"
-                                  )} />
-                                  {group.category}
-                                </span>
-                                <ArrowRight size={12} strokeWidth={2.5}
-                                  className={cn("shrink-0 transition-colors", catActive ? "text-red-400" : "text-gray-300")} />
-                              </Link>
-                              {group.items.map((item) => {
-                                const subActive = isSubItemActive(item.href);
-                                return (
-                                  <Link key={item.label} href={item.href}
-                                    onClick={() => setMobileOpen(false)}
-                                    className={cn(
-                                      "flex items-center gap-1.5 text-[13px] py-0.5 pl-3.5 transition-colors",
-                                      subActive ? "text-red-500 font-semibold" : "text-gray-500 hover:text-red-500"
-                                    )}
-                                  >
-                                    {subActive && <span className="w-1 h-1 rounded-full bg-red-500 shrink-0" />}
-                                    {item.label}
-                                  </Link>
-                                );
-                              })}
-                            </div>
+                            <Link
+                              key={cat.category}
+                              href={cat.href}
+                              onClick={() => setMobileOpen(false)}
+                              className={cn(
+                                "flex items-center gap-1.5 px-3 py-2 rounded-lg text-[12px] font-medium transition-colors",
+                                catActive
+                                  ? "bg-red-50 text-red-600"
+                                  : "text-gray-600 hover:text-red-500 hover:bg-white"
+                              )}
+                            >
+                              <ArrowRight size={10} strokeWidth={2.5} className={cn(
+                                "shrink-0 transition-colors",
+                                catActive ? "text-red-400" : "text-gray-300"
+                              )} />
+                              {cat.category}
+                            </Link>
                           );
                         })}
                       </div>

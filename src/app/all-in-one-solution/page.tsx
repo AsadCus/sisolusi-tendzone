@@ -1,5 +1,5 @@
 import PageHero from "@/components/layout/pageHero"
-import NavbarLanding from "@/components/navbar-landing"
+import NavbarProductLanding from "@/components/navbar-landing-product"
 import HonorQualification from "@/components/section/honor-qualification"
 import SendInquirySection from "@/components/section/SendInquirySection"
 import FAQSection from "@/components/section/faq"
@@ -20,7 +20,7 @@ import AllInOneSolutionFAQ from "@/components/all in-one-solution/all-in-one-sol
 export default function AllInOneAudioVisualSolutionsPage() {
   return (
     <div>
-      <NavbarLanding />
+      <NavbarProductLanding />
       <PageHero title="All in One Solutions" />
       <WhyChooseUsCategory />
       <ProductGrid />
