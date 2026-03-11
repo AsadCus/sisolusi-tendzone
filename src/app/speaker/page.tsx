@@ -4,37 +4,36 @@ import Footer from "@/components/footer";
 import SendInquirySection from "@/components/section/SendInquirySection";
 import WhyChooseUsSectionSubcategory from "@/components/section/whyChooseUsSubcategory";
 import OemOdmSubcategorySection from "@/components/section/oem-odm-subcategory";
-import BestSellingPowerAmplifiersPage from "@/components/power-amplifier/best-selling";
-import PowerAmplifierSpecificationTable from "@/components/power-amplifier/table-speficication";
+import BestSellingSpeakers from "@/components/speaker/best-selling";
+import SpeakerSpecTable from "@/components/speaker/table-speficication";
 import HonorQualification from "@/components/section/honor-qualification";
-import NetworkAdapterApplicationsSection from "@/components/network-audio-distribution/network-adapters/application-network";
 import AfterSalesServices from "@/components/section/after-sales";
-import ProductNetworkAdaptersPage from "@/components/network-audio-distribution/network-adapters/network-adapters";
-import NetworkAdapterTipsSection from "@/components/network-audio-distribution/network-adapters/basic-principle-network-section";
-import FeaturesNetworkAdaptersSection from "@/components/network-audio-distribution/network-adapters/features-product-adapters";
 import PackagingAndShippingSection from "@/components/section/Packaging and Shipping";
 import PopularProductsCarousel from "@/components/section/popularProducts";
 import FAQSection from "@/components/section/faq";
-import ProductPowerAmplifier from "@/components/power-amplifier/power-amplifier";
+import ProductSpeaker from "@/components/speaker/speaker";
 import FeaturesPowersAmplifier from "@/components/power-amplifier/FeaturesPowerAmplifier";
 import PowerAmplifierClassesSection from "@/components/power-amplifier/power-amplifier-classes";
 import PowerAmplifierApplicationType from "@/components/power-amplifier/power-amplifier-application";
 import NavbarProductLanding from "@/components/navbar-landing-product";
+import SpeakerBenefits from "@/components/speaker/speaker-bnefit";
+import ApllicationSpeakers from "@/components/speaker/speaker-application";
+import SafetyInstructionsSpeakerSection from "@/components/speaker/instruction-speaker";
 
 export default function ProductsPage() {
   return (
     <>
-    <NavbarProductLanding/>
+    <NavbarProductLanding />
       <PageHero title="Network Adapters" />
-    <ProductPowerAmplifier />
+    <ProductSpeaker />
       <WhyChooseUsSectionSubcategory />
       <OemOdmSubcategorySection/>
-        <BestSellingPowerAmplifiersPage />
-      < PowerAmplifierSpecificationTable />
-      <FeaturesPowersAmplifier />
+        <BestSellingSpeakers />
+      <SpeakerSpecTable />
+      <SpeakerBenefits />
       {/* <FunctionsNetworkSection /> */}
-        <PowerAmplifierClassesSection />
-        <PowerAmplifierApplicationType />
+        <ApllicationSpeakers />
+        <SafetyInstructionsSpeakerSection />
       <AfterSalesServices />
       <PackagingAndShippingSection />
       <HonorQualification />

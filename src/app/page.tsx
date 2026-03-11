@@ -3,7 +3,7 @@
 import { Header } from "@/components/ui/header-1";
 import { Marquee } from "@/components/ui/marquee";
 import { cn } from "@/lib/utils";
-import NavbarLanding from "@/components/navbar-landing";
+import NavbarProductLanding from "@/components/navbar-landing-product";
 import Image from "next/image";
 import Link from "next/link";
 import MainProduct from "@/components/list-main-product";
@@ -21,7 +21,7 @@ import Footer from "@/components/footer";
 export default function Home() {
   return (
     <div className="bg-gray-100">
-      <NavbarLanding />
+      <NavbarProductLanding />
       <BannerCarousel/>
       <MainProduct />
      <CertifiedBy/>

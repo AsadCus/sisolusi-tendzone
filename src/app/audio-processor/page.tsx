@@ -16,12 +16,13 @@ import AudioProcessorFAQ from "@/components/audio-processor/audio-Processor-FAQ"
 import PopularProductsCarousel from "@/components/section/popularProducts";
 import SendInquirySection from "@/components/section/SendInquirySection";
 import Footer from "@/components/footer";
+import NavbarProductLanding from "@/components/navbar-landing-product";
 
 
 export default function AudioProcessorPage() {
     return(
         <>
-         <NavbarLanding />
+         <NavbarProductLanding />
          <PageHero title="Audio Processor"/>
         <AboutAudioProcessor />
         <WhyChooseUsCategory />

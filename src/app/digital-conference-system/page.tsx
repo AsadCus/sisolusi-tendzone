@@ -14,11 +14,12 @@ import OurServiceSection from "@/components/section/ourServices";
 import HonorQualification from "@/components/section/honor-qualification";
 import ConferenceProductFeatures from "@/components/digital-conference-system/product-feature-digital-conference";
 import ProductApplicationFeatureConference from "@/components/digital-conference-system/feature-conference-system";
+import NavbarProductLanding from "@/components/navbar-landing-product";
 
 export default function ProductsPage() {
   return (
     <>
-    <NavbarLanding />
+    <NavbarProductLanding />
       <PageHero title="digital-conference-system" />
       <DigitalReferenceSystem />
       <WhyChooseUsCategory />

@@ -15,11 +15,12 @@ import PopularProductsCarousel from "@/components/section/popularProducts";
 import SendInquirySection from "@/components/section/SendInquirySection";
 import NetworkAudioDistributionSection from "@/components/network-audio-distribution/network-audio-distribution";
 import BestSellingNetworkAudioSection from "@/components/network-audio-distribution/best-selling-network-audio";
+import NavbarProductLanding from "@/components/navbar-landing-product";
 
 export default function ProductsPage() {
   return (
     <>
-    <NavbarLanding />
+    <NavbarProductLanding/>
       <PageHero title="Network Audio Distribution" />
         <NetworkAudioDistributionSection />
       <WhyChooseUsCategory />
