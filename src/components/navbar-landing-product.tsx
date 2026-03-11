@@ -86,7 +86,7 @@ const productFlat = [
       { label: "MIDIS AV Over IP Systems", href: "/products/midis-av" },
       { label: "AV Over IP Encoder Decoder", href: "/products/av-encoder" },
     ] },
-  { category: "Video Matrix", href: "/products/ip-matrix",
+  { category: "Video Matrix", href: "/video-matrix",
     items: [
       { label: "IP Matrix", href: "/products/ip-matrix" },
       { label: "Seamless Video Matrix", href: "/products/seamless-matrix" },

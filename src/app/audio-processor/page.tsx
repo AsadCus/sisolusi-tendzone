@@ -4,7 +4,7 @@ import AboutAudioProcessor from "@/components/audio-processor/product-audio-proc
 import PageHero from "@/components/layout/pageHero";
 import NavbarLanding from "@/components/navbar-landing";
 import WhyChooseUsCategory from "@/components/section/whyChooseCategory";
-import ProductGrid from "@/components/section/productGrid";
+import ProductGrid from "@/components/all in-one-solution/productGrid";
 import OemOdmSectionCategory from "@/components/section/oem-odm-category";
 import BestSellingAudioProcessor from "@/components/audio-processor/best-Selling-Audio";
 import AudioProcessorSpec from "@/components/audio-processor/audio-processor-spec";

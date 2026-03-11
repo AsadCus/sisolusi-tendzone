@@ -78,30 +78,26 @@ const sections = [
 
 export default function AudioProcessorSpec() {
   return (
-    <div className="bg-white px-4 py-8 font-sans">
-      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-15">
+    <div className="bg-white mx-auto py-8 font-sans">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl  mx-auto px-4">
 
-        {/* Header */}
         <div className="mb-6">
           <h2 className="text-2xl md:text-xl font-medium text-center text-red-600">
             Audio Processor Specification
           </h2>
         </div>
 
-        {/* Sections */}
         <div className="space-y-4">
           {sections.map((section, si) => (
             <div key={si} className="border border-gray-100 overflow-hidden">
 
-              {/* Section header */}
               <div className="flex items-center gap-3 px-4 py-2.5 bg-gray-50 border-b border-gray-100">
-                <div className="w-1 h-4 bg-red-500 rounded-sm flex-shrink-0" />
+                <div className="w-1 h-4 bg-red-500 rounded-sm shrink-0" />
                 <h3 className="text-[11px] font-bold text-gray-700 uppercase tracking-wider">
                   {section.title}
                 </h3>
               </div>
 
-              {/* Rows */}
               <div className="divide-y divide-gray-100">
                 {section.rows.map((row, ri) => (
                   <div key={ri} className={`grid grid-cols-3 ${ri % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}>

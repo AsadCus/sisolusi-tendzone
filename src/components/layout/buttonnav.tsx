@@ -170,7 +170,7 @@ function CategoryItem({
       <button
         onClick={onToggle}
         className={[
-          "inline-flex items-center gap-1.5 px-3.5 py-[7px]",
+          "inline-flex items-center gap-1.5 px-3.5 py-1.75",
           "text-[13px] font-medium rounded-md border-[1.5px]",
           "transition-all duration-150 whitespace-nowrap select-none cursor-pointer",
           isOpen
@@ -185,7 +185,7 @@ function CategoryItem({
       <div
         className={[
           "absolute top-full left-0 mt-1.5 z-50",
-          "min-w-[210px] bg-white border border-gray-100 rounded-md overflow-hidden",
+          "min-w-52.5 bg-white border border-gray-100 rounded-md overflow-hidden",
           "shadow-[0_4px_20px_rgba(0,0,0,0.08)]",
           "transition-all duration-150 origin-top",
           isOpen
@@ -205,7 +205,7 @@ function CategoryItem({
               group
             "
           >
-            <span className="w-1 h-1 rounded-full bg-gray-300 group-hover:bg-red-500 transition-colors duration-100 flex-shrink-0" />
+            <span className="w-1 h-1 rounded-full bg-gray-300 group-hover:bg-red-500 transition-colors duration-100 shrink-0" />
             {item.label}
           </Link>
         ))}

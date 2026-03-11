@@ -4,7 +4,7 @@ import OemOdmPage from "@/components/section/oem-odm-subcategory";
 import OpenArchitectureDSP from "@/components/audio-processor/Open-DSP/Open-Architecture-DSP";
 import PageHero from "@/components/layout/pageHero";
 import NavbarLanding from "@/components/navbar-landing";
-import ProductGrid from "@/components/section/productGrid";
+import ProductGrid from "@/components/all in-one-solution/productGrid";
 import WhyChooseUsSectionSubcategory from "@/components/section/whyChooseUsSubcategory";
 
     

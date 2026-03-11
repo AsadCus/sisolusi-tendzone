@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface Product {
   id: number;
@@ -14,20 +15,30 @@ interface Product {
 }
 
 const getProductImage = (product: Product) => {
-  if (
-    product.galleries &&
-    product.galleries.length > 0 &&
-    product.galleries[0].file_url
-  ) {
+  if (product.galleries && product.galleries.length > 0 && product.galleries[0].file_url) {
     return product.galleries[0].file_url;
   }
   return "/images/categories/placeholder.jpg";
 };
 
+const SkeletonCard = () => (
+  <Card className="rounded-none border border-gray-100 overflow-hidden animate-pulse">
+    <div className="h-40 sm:h-56 bg-gray-100" />
+    <CardContent className="p-5 space-y-2">
+      <div className="h-3 bg-gray-100 rounded w-3/4" />
+      <div className="h-3 bg-gray-100 rounded w-1/2" />
+      <div className="mt-3 pt-3 border-t border-gray-100 flex justify-end">
+        <div className="h-3 bg-gray-100 rounded w-1/4" />
+      </div>
+    </CardContent>
+  </Card>
+);
+
 export default function PopularProductsCarousel() {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(4);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     function updateItemsPerView() {
@@ -50,6 +61,8 @@ export default function PopularProductsCarousel() {
         setProducts(filtered);
       } catch (err) {
         console.error("Fetch product error:", err);
+      } finally {
+        setLoading(false);
       }
     }
     fetchData();
@@ -72,8 +85,8 @@ export default function PopularProductsCarousel() {
   };
 
   return (
-   <section className="w-full py-6 bg-white">
-  <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
+    <section className="w-full py-6 bg-white">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-2xl lg:text-4xl font-semibold text-gray-900 tracking-tight">
@@ -88,7 +101,6 @@ export default function PopularProductsCarousel() {
             >
               <ChevronLeft size={18} />
             </button>
-
             <button
               onClick={nextSlide}
               disabled={currentIndex >= products.length - itemsPerView}
@@ -100,43 +112,61 @@ export default function PopularProductsCarousel() {
         </div>
 
         <div className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${(100 / itemsPerView) * currentIndex}%)`,
-            }}
-          >
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="shrink-0 px-3"
-                style={{ width: `${100 / itemsPerView}%` }}
-              >
-                <Link
-                  href={`/products/${product.slug}`}
-                  className="group block bg-white border border-neutral-200 rounded-2xl hover:border-red-500 hover:shadow-lg transition-all duration-300 overflow-hidden"
+          {loading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <SkeletonCard key={i} />
+              ))}
+            </div>
+          ) : (
+            <div
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{
+                transform: `translateX(-${(100 / itemsPerView) * currentIndex}%)`,
+              }}
+            >
+              {products.map((product) => (
+                <div
+                  key={product.id}
+                  className="shrink-0 px-2"
+                  style={{ width: `${100 / itemsPerView}%` }}
                 >
-                  <div className="relative w-full h-40 sm:h-56 bg-gray-50 flex items-center justify-center">
-                    <Image
-                      src={getProductImage(product)}
-                      alt={product.name}
-                      fill
-                      unoptimized
-                      className="object-contain p-4 sm:p-6 transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
+                  <Link href={`/products/${product.slug}`} className="group block">
+                    <Card className="h-full overflow-hidden rounded-none border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
 
-                  <div className="px-4 py-4">
-                    <h3 className="text-xs sm:text-sm font-medium text-gray-800 line-clamp-2 group-hover:text-red-600 transition-colors">
-                      {product.name}
-                    </h3>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+                      {/* Image */}
+                      <div className="relative h-40 sm:h-56 w-full bg-white overflow-hidden">
+                        <Image
+                          src={getProductImage(product)}
+                          alt={product.name}
+                          fill
+                          unoptimized
+                          className="object-contain p-4 sm:p-6 transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                      </div>
+
+                      {/* Content */}
+                      <CardContent className="p-5 flex flex-col gap-3">
+                        <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-red-600 transition-colors duration-300 leading-snug">
+                          {product.name}
+                        </h3>
+
+                        <div className="mt-1 flex items-center justify-end pt-3 border-t border-gray-100">
+                          <span className="text-xs font-semibold text-gray-700 group-hover:text-red-600 transition-colors duration-300 tracking-wide uppercase">
+                            Selengkapnya
+                          </span>
+                        </div>
+                      </CardContent>
+
+                    </Card>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        
+
       </div>
     </section>
   );

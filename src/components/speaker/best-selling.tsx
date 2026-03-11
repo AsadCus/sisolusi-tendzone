@@ -70,7 +70,7 @@ export default function BestSellingSpeakers() {
               })}
             </div>
           </div>
-          <div className="relative group cursor-pointer overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-100">
+          <div className="relative group cursor-pointer overflow-hidden border border-gray-100 bg-white flex items-center justify-center h-100">
             <Image
               src="https://www.tendzone.net/uploads/43135/dual-8-full-range-point-source-speaker4b804.jpg?size=380x0"
               alt="Best Selling Speaker"
