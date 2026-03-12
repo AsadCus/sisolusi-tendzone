@@ -194,7 +194,6 @@ export default function NavbarProductLanding() {
       <div className="font-sans">
         <header className="fixed top-0 left-0 w-full z-50 flex flex-col">
 
-          {/* ── Utility bar: always shown, transparent on top / white bg when scrolled ── */}
           <div className={cn(
             "transition-all duration-300 overflow-hidden",
             isTransparent
@@ -230,7 +229,6 @@ export default function NavbarProductLanding() {
             </div>
           </div>
 
-          {/* ── Main nav ── */}
           <nav className={cn(
             "transition-all duration-300",
             isTransparent
@@ -270,7 +268,6 @@ export default function NavbarProductLanding() {
                           <ChevronDown size={12} strokeWidth={2.5}
                             className="transition-transform duration-200 group-hover:rotate-180 opacity-60 mt-px" />
                         )}
-                        {/* underline indicator */}
                         <span className={cn(
                           "absolute bottom-0 left-3 right-3 h-0.5 rounded-full transition-all duration-300 origin-left",
                           isTransparent ? "bg-red-500" : "bg-red-500",
@@ -278,7 +275,6 @@ export default function NavbarProductLanding() {
                         )} />
                       </Link>
 
-                      {/* Products mega menu */}
                       {link.label === "Products" && (
                         <div className="fixed left-0 right-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                           style={{
@@ -349,7 +345,6 @@ export default function NavbarProductLanding() {
                         </div>
                       )}
 
-                      {/* Other dropdowns */}
                       {link.label !== "Products" && link.dropdown && megaData[link.label as keyof typeof megaData] && (
                         <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-100"
                           style={{ transition: "opacity 150ms ease, visibility 150ms ease" }}>
@@ -378,7 +373,6 @@ export default function NavbarProductLanding() {
                 })}
               </ul>
 
-              {/* Search + CTA */}
               <div className="hidden lg:flex items-center gap-2 ml-2">
                 <div className={cn(
                   "flex items-center transition-all duration-300 rounded-xl overflow-hidden",
@@ -413,7 +407,6 @@ export default function NavbarProductLanding() {
                 </Link>
               </div>
 
-              {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={cn(
@@ -428,7 +421,6 @@ export default function NavbarProductLanding() {
             </div>
           </nav>
 
-          {/* ── Mobile drawer ── */}
           <div className={cn(
             "lg:hidden fixed inset-x-3 bottom-3 z-100 bg-white rounded-2xl shadow-2xl overflow-y-auto transition-all duration-300 border border-gray-100",
             mobileOpen ? "opacity-100 pointer-events-auto top-30" : "opacity-0 pointer-events-none top-30"

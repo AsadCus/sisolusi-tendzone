@@ -1,64 +1,53 @@
 "use client";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
-import Image from "next/image";
+import CircularGallery from "@/components/CircularGallery";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const areas = [
-  { title: "Courts", image: "/images/apllications/office.png" },
-  { title: "Enterprises", image: "/images/apllications/office2.png" },
-  { title: "Events", image: "/images/apllications/office3.png" },
-  { title: "Fire Protection", image: "/images/apllications/office4.png" },
-  { title: "Courts", image: "/images/apllications/office.png" },
-  { title: "Enterprises", image: "/images/apllications/office2.png" },
-  { title: "Events", image: "/images/apllications/office3.png" },
-  { title: "Fire Protection", image: "/images/apllications/office4.png" },
+  { image: "/images/gambar-1.webp", text: "Courts" },
+  { image: "/images/gambar-2.webp", text: "Enterprises" },
+  { image: "/images/gambar-3.webp", text: "Events" },
+  { image: "/images/gambar-4.webp", text: "Fire Protection" },
+  { image: "/images/gambar-5.webp", text: "Construction" },
+  { image: "/images/gambar-6.webp", text: "Education" },
 ];
 
 export default function ApplicationAreasSection() {
   return (
-    <section className="w-full bg-[#f5f5f5] py-20 px-5">
-      <div className="text-center mb-12 px-4">
-        <h2 className="text-3xl md:text-4xl font-medium text-gray-900">
-          Application Areas
-        </h2>
-        <p className="mt-3 text-sm text-gray-500 max-w-xl mx-auto">
-          Tendzone is committed to delivering high-performance AV solutions for
-          a wide range of applications.
+    <section className="w-full bg-white py-10">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 mb-6">
+        <div className="flex items-end justify-between">
+          <div>
+            <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-red-500 mb-2">
+              Where We Work
+            </p>
+            <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+              Application Areas
+            </h2>
+          </div>
+          <Link
+            href="/application"
+            className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-gray-400 hover:text-red-500 transition-colors duration-200"
+          >
+            View All <ArrowRight size={14} />
+          </Link>
+        </div>
+        <p className="text-gray-400 text-[14px] mt-2 max-w-lg leading-relaxed">
+          High-performance AV solutions across a wide range of industries — hover to explore.
         </p>
       </div>
 
-      <div className="relative w-full px-16 lg:px-32">
-        <Carousel opts={{ loop: true }} className="w-full">
-          <CarouselContent>
-            {areas.map((area, i) => (
-              <CarouselItem key={i} className="basis-1/2 sm:basis-1/3 lg:basis-1/4">
-                <div className="px-2">
-                  <div className="group relative w-full aspect-square overflow-hidden rounded-xl">
-                    <Image
-                      src={area.image}
-                      alt={area.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-                    <h3 className="absolute bottom-3 left-0 right-0 text-center text-sm font-medium text-white">
-                      {area.title}
-                    </h3>
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-
-          <CarouselPrevious className="-left-10" />
-          <CarouselNext className="-right-10" />
-        </Carousel>
+      <div style={{ height: "420px", width: "100%" }}>
+        <CircularGallery
+          items={areas}
+          bend={3}
+          textColor="#ffffff"
+          borderRadius={0}
+          font="bold 28px sans-serif"
+          scrollSpeed={2}
+          scrollEase={0.05}
+        />
       </div>
     </section>
   );

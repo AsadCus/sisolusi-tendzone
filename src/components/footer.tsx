@@ -20,7 +20,6 @@ export default function Footer() {
     <footer className="bg-white text-gray-900 border-t border-gray-100 font-sans">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 py-8">
 
-        {/* Top row */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
           <div>
             <p className="text-base font-bold tracking-tight text-gray-900">Tendzone</p>
@@ -43,7 +42,6 @@ export default function Footer() {
           </Link>
         </div>
 
-        {/* Nav links */}
         <nav className="flex flex-wrap gap-x-5 gap-y-2 mb-6">
           {navLinks.map((link) => (
             <Link
@@ -56,10 +54,7 @@ export default function Footer() {
           ))}
         </nav>
 
-        {/* Divider */}
         <div className="border-t border-gray-100 mb-5" />
-
-        {/* Bottom row */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[12px] font-medium text-gray-500">
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             <div className="flex items-center gap-1.5">
