@@ -41,7 +41,7 @@ const productCategories = [
   { category: "Video Wall Controller", href: "/video-wall-controller" },
   { category: "HDMI Products", href: "/products/hdmi-extender" },
   { category: "Video Accessories", href: "/products/wireless-presentation" },
-  { category: "Education Solution", href: "/products/education-platform" },
+  { category: "Education Solution", href: "/education-solution" },
 ];
 
 export default function NavbarProductLanding() {
