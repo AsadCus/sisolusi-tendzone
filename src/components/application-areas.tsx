@@ -18,7 +18,7 @@ export default function ApplicationAreasSection() {
     <section className="w-full bg-white py-10">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
-        {/* Header */}
+    
         <div className="mb-6">
           <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-red-500 mb-2">
             Where We Work

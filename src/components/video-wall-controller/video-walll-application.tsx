@@ -33,7 +33,6 @@ export default function ApplicationVideoWallController() {
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-          {/* Image */}
           <div className="relative group cursor-pointer overflow-hidden border border-gray-100 bg-white flex items-center justify-center h-100">
             <Image
               src="https://www.tendzone.net/uploads/43135/dual-8-full-range-point-source-speaker4b804.jpg?size=380x0"
@@ -46,8 +45,6 @@ export default function ApplicationVideoWallController() {
             <span className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
           </div>
-
-          {/* Content */}
           <div>
             <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-red-500 mb-3">
               Use Cases
