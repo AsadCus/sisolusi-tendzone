@@ -20,9 +20,9 @@ interface Category {
 const categories: Category[] = [
   {
     id: 1,
-    name: "Dual 8' Full-range Point Source Speaker",
-    description: "The Tendzone VL-208 speaker is a full-range sound source system specifically",
-    image: "https://www.tendzone.net/uploads/43135/small/dual-8-full-range-point-source-speaker4b804.jpg?size=380x0",
+    name: "Hybrid Modular Video Matrix",
+    description: "Product Overview This high-performance professional switching device effectively manages audio and",
+    image: "https://www.tendzone.net/uploads/43135/small/hybrid-modular-video-matrix557ba.jpg?size=380x0",
     slug: "all-in-one",
     badge: "Best Selling",
     badgeType: "bestselling",
@@ -31,9 +31,9 @@ const categories: Category[] = [
   },
   {
     id: 2,
-    name: "8' Full-range Point Source Speaker",
-    description: "The Tendzone VL-108 speaker is a full-range sound source system designed",
-    image: "https://www.tendzone.net/uploads/43135/small/8-full-range-point-source-speakerc3149.jpg?size=380x0",
+    name: "Fixed Seamless Video Matrix",
+    description: "Product Overview The FSVM1616-HD430 is a high-performance 4K HDMI seamless switching matrix that is",
+    image: "https://www.tendzone.net/uploads/43135/small/fixed-seamless-video-matrixac1a6.jpg?size=380x0",
     slug: "audio-processor",
     badge: "Hot",
     badgeType: "hot",
@@ -42,9 +42,9 @@ const categories: Category[] = [
   },
   {
     id: 3,
-    name: "Dual 6.5' Full-range Point Source Speakers",
-    description: "The Tendzone VL-206 speaker is a full-frequency point source system designed to create the most realistic",
-    image: "https://www.tendzone.net/uploads/43135/small/dual-6-5-full-range-point-source-speakersdaec1.jpg?size=380x0",
+    name: "8x8 Fixed Seamless Video Matrix",
+    description: "Product Overview FSVM88-HD430 is a professional 4K HD fixed seamless",
+    image: "https://www.tendzone.net/uploads/43135/small/8x8-fixed-seamless-video-matrix5bf8c.jpg?size=380x0",
     slug: "audio-processor",
     badge: "Best Selling",
     badgeType: "bestselling",
@@ -53,30 +53,11 @@ const categories: Category[] = [
   },
   {
     id: 4,
-    name: "15' Full-range Conference Speaker",
-    description: "The Tendzone EX-15 speaker is a multifunction audio speaker that",
-    image: "https://www.tendzone.net/uploads/43135/small/15-full-range-conference-speakerbad6a.jpg?size=380x0",
+    name: "4x4 Fixed Seamless Video Matrix",
+    description: "Product Overview FSVM44-HD430 is a professional 4K HD fixed seamless switching matrix, which supports 4",
+    image: "https://www.tendzone.net/uploads/43135/small/4x4-fixed-seamless-video-matrixdddf2.jpg?size=380x0",
     slug: "audio-processor",
-    badge: "Hot",
-    badgeType: "hot",
-    logo: "/icon.png",
-    company: "Tendzone",
-  },
-  {
-    id: 5,
-    name: "12' Full-range Conference Speaker",
-    description: "ACS series of new generation ceiling speakers adopt coaxial drive technology, use a full-band speaker",
-    image: "https://www.tendzone.net/uploads/43135/small/12-full-range-conference-speakerd2c06.jpg?size=380x0",
-    slug: "audio-processor",
-    logo: "/icon.png",
-    company: "Tendzone",
-  },
-  {
-    id: 6,
-    name: "Coaxial Ceiling Speaker",
-    description: "The Tendzone AMD4350 amplifier is a 4-channel fixed impedance digital.",
-    image: "https://www.tendzone.net/uploads/43135/small/coaxial-ceiling-speakerbba82.jpg?size=380x0",
-    slug: "audio-processor",
+    badge: "",
     logo: "/icon.png",
     company: "Tendzone",
   },
@@ -89,7 +70,7 @@ const badgeStyles: Record<string, string> = {
   new: "bg-amber-50 text-amber-600 border border-amber-200",
 };
 
-export default function ProductSpeaker() {
+export default function ProductVideoMatrix() {
   return (
     <section className="w-full py-2">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
@@ -98,14 +79,14 @@ export default function ProductSpeaker() {
           <div className="flex items-center justify-center gap-2 mb-3">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-semibold tracking-widest uppercase bg-red-50 text-red-500 border border-red-200">
               <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
-              Speaker Collection
+              Matrix Collection
             </span>
           </div>
           <h1 className="text-2xl md:text-xl font-medium text-red-600">
-            Your Professional Speaker Supplier!
+        Your Professional Video Matrix Supplier!
           </h1>
           <p className="mt-4 text-gray-600 text-xs md:text-sm">
-            Tendzone, established in 2010, is a global leader in providing advanced audio-visual (AV) solutions and manufacturing high-quality AV products. We specialize in a wide range of cutting-edge technologies, including audio processors, microphones, speakers, power amplifiers, AV over IP systems, digital conference systems, and MIDIS Distributed Multimedia Transmission Control Systems.
+         Tendzone, established in 2010, is a global leader in providing advanced audio-visual (AV) solutions and manufacturing high-quality AV products. We specialize in a wide range of cutting-edge technologies, including audio processors, microphones, speakers, power amplifiers, AV over IP systems, digital conference systems, and MIDIS Distributed Multimedia Transmission Control Systems. Our solutions are trusted across industries such as conference rooms, command centers, education, multi-functional halls, and stadiums.
           </p>
         </div>
 

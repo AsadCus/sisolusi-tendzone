@@ -1,7 +1,7 @@
 import PageHero from "@/components/layout/pageHero"
 import NavbarLanding from "@/components/navbar-landing"
 import AboutSection from "@/components/all in-one-solution/All-in-oneAudio/AudioVisual-solutions"
-import ProductGrid from "@/components/section/productGrid"
+import ProductGrid from "@/components/all in-one-solution/productGrid"
 import WhyChooseUsSectionSubcategory from "@/components/section/whyChooseUsSubcategory"
 import OemOdmSubcategorySection from "@/components/section/oem-odm-subcategory"
 import TwelveInOnePage from "@/components/all in-one-solution/All-in-oneAudio/twelveInOne"

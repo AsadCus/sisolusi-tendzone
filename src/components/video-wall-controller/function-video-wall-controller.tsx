@@ -1,49 +1,63 @@
 "use client";
 
 import Image from "next/image";
-import { Speaker, Mic2, Radio } from "lucide-react";
+import { MonitorPlay, Layers, LayoutGrid, Move, Cpu } from "lucide-react";
 
-const products = [
+const functions = [
   {
-    icon: Radio,
+    icon: Cpu,
     tag: "01",
-    title: "Ceiling Speakers",
+    title: "Signal Processing",
     description:
-      "Designed to be a permanent audio solution that will provide excellent, aesthetically-pleasing sound for many years to come.",
+      "Receives different input signals through HDMI, DVI, SDI, video, or LAN cables, acting as a compatible computer chassis with OS handling all inputs and outputs.",
   },
   {
-    icon: Mic2,
+    icon: Layers,
     tag: "02",
-    title: "Conference Speakers",
+    title: "Multiple Display Outputs",
     description:
-      "Specialized audio devices designed to provide clear and high-quality sound during conference calls or video meetings.",
+      "Controls multiple monitors or screens simultaneously — supporting coherent arrangements like 4×4, 6×2, 8×2, or up to 172×44 display configurations.",
   },
   {
-    icon: Speaker,
+    icon: LayoutGrid,
     tag: "03",
-    title: "Point Source Speakers",
+    title: "Unified Resolution",
     description:
-      "Designed to radiate sound from a single point, providing uniform dispersion in all directions for smaller venues.",
+      "The total resolution of the video wall is the sum of all individual monitors, allowing content to span seamlessly across any position regardless of monitor borders.",
+  },
+  {
+    icon: MonitorPlay,
+    tag: "04",
+    title: "Windows Desktop Display",
+    description:
+      "Displays a large coherent Windows 11 or Windows Server 2022 desktop across the entire video wall, enabling any standard application to be rendered on screen.",
+  },
+  {
+    icon: Move,
+    tag: "05",
+    title: "Drag & Drop Management",
+    description:
+      "Any window or application can be freely moved and repositioned across the entire video wall surface with a simple drag and drop operation.",
   },
 ];
 
-export default function BestSellingSpeakers() {
+export default function FunctionVideoWall() {
   return (
     <section className="w-full bg-white py-16">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          {/* Left */}
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-red-500 mb-3">
-              Product Range
-            </p>
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2 leading-snug">
-              Our Best-Selling{" "}
-              <span className="text-red-500">Speaker Types</span>
+              Function of{" "}
+              <span className="text-red-500">Video Wall Controllers</span>
             </h2>
             <div className="w-10 h-0.5 bg-red-500 mb-8" />
+
             <div className="flex flex-col gap-0">
-              {products.map((product, i) => {
-                const Icon = product.icon;
+              {functions.map((item, i) => {
+                const Icon = item.icon;
                 return (
                   <div
                     key={i}
@@ -55,14 +69,14 @@ export default function BestSellingSpeakers() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="text-[10px] font-bold text-gray-300 tracking-widest tabular-nums">
-                          {product.tag}
+                          {item.tag}
                         </span>
                         <h3 className="text-sm font-semibold text-gray-800 group-hover:text-red-500 transition-colors duration-300">
-                          {product.title}
+                          {item.title}
                         </h3>
                       </div>
                       <p className="text-xs text-gray-400 leading-relaxed">
-                        {product.description}
+                        {item.description}
                       </p>
                     </div>
                   </div>
@@ -70,10 +84,12 @@ export default function BestSellingSpeakers() {
               })}
             </div>
           </div>
+
+          {/* Right — Image */}
           <div className="relative group cursor-pointer overflow-hidden border border-gray-100 bg-white flex items-center justify-center h-100">
             <Image
               src="https://www.tendzone.net/uploads/43135/dual-8-full-range-point-source-speaker4b804.jpg?size=380x0"
-              alt="Best Selling Speaker"
+              alt="Video Wall Controller"
               width={400}
               height={300}
               className="object-contain w-full h-full p-10 transition-transform duration-500 group-hover:scale-105"

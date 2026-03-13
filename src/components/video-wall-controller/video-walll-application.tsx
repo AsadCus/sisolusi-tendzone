@@ -1,34 +1,43 @@
 "use client";
 
 import Image from "next/image";
-import { Building2, Trees } from "lucide-react";
+import { MonitorCheck, Building2, ShoppingBag } from "lucide-react";
 
-const products = [
+const applications = [
   {
-    icon: Building2,
+    icon: MonitorCheck,
     tag: "01",
-    title: "Indoor Venues",
+    title: "Control Rooms",
     description:
-      "Perfect for conference halls, auditoriums, and theaters — clear, even sound dispersion ensures every attendee hears without distortion, enhancing movies, plays, and live performances alike.",
+      "Used by emergency services, transportation hubs, and security operations to monitor multiple data feeds simultaneously.",
   },
   {
-    icon: Trees,
+    icon: Building2,
     tag: "02",
-    title: "Outdoor Events",
+    title: "Corporate Environments",
     description:
-      "Ideal for festivals, concerts, and weddings. Projects sound over long distances in open-air spaces, cutting through ambient noise so music and announcements reach everyone clearly.",
+      "Enhances presentations, video conferences, and digital signage in lobbies and meeting rooms.",
+  },
+  {
+    icon: ShoppingBag,
+    tag: "03",
+    title: "Retail Spaces",
+    description:
+      "Captivates customers with dynamic advertisements, product showcases, and interactive displays.",
   },
 ];
 
-export default function ApplicationScenarios() {
+export default function ApplicationVideoWallController() {
   return (
     <section className="w-full bg-white py-16">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          {/* Image */}
           <div className="relative group cursor-pointer overflow-hidden border border-gray-100 bg-white flex items-center justify-center h-100">
             <Image
               src="https://www.tendzone.net/uploads/43135/dual-8-full-range-point-source-speaker4b804.jpg?size=380x0"
-              alt="Dual 8-inch Speaker"
+              alt="Video Wall Controller"
               width={400}
               height={300}
               className="object-contain w-full h-full p-10 transition-transform duration-500 group-hover:scale-105"
@@ -37,19 +46,21 @@ export default function ApplicationScenarios() {
             <span className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
           </div>
+
+          {/* Content */}
           <div>
             <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-red-500 mb-3">
               Use Cases
             </p>
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2 leading-snug">
-              Ideal Application{" "}
-              <span className="text-red-500">Scenarios</span>
+              Application of{" "}
+              <span className="text-red-500">Video Wall Controller</span>
             </h2>
             <div className="w-10 h-0.5 bg-red-500 mb-8" />
 
             <div className="flex flex-col gap-0">
-              {products.map((product, i) => {
-                const Icon = product.icon;
+              {applications.map((item, i) => {
+                const Icon = item.icon;
                 return (
                   <div
                     key={i}
@@ -61,14 +72,14 @@ export default function ApplicationScenarios() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="text-[10px] font-bold text-gray-300 tracking-widest tabular-nums">
-                          {product.tag}
+                          {item.tag}
                         </span>
                         <h3 className="text-sm font-semibold text-gray-800 group-hover:text-red-500 transition-colors duration-300">
-                          {product.title}
+                          {item.title}
                         </h3>
                       </div>
                       <p className="text-xs text-gray-400 leading-relaxed">
-                        {product.description}
+                        {item.description}
                       </p>
                     </div>
                   </div>

@@ -50,12 +50,9 @@ export default function BestSellingAudioProcessor() {
               key={i}
               className="group border border-gray-100 bg-gray-50 hover:border-red-200 hover:bg-red-50 transition-colors duration-200 px-5 py-5 flex gap-4"
             >
-              {/* Number */}
-              <span className="text-[28px] font-bold text-gray-100 group-hover:text-red-100 leading-none select-none flex-shrink-0 transition-colors duration-200">
+              <span className="text-[28px] font-bold text-gray-100 group-hover:text-red-100 leading-none select-none shrink-0 transition-colors duration-200">
                 {p.tag}
               </span>
-
-              {/* Content */}
               <div>
                 <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mb-1">
                   {p.model}
