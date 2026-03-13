@@ -1,42 +1,47 @@
 "use client";
 
 import Image from "next/image";
-import { MonitorCheck, Building2, ShoppingBag } from "lucide-react";
+import { Briefcase, Building2, GraduationCap, Laptop, Trees, Tv2 } from "lucide-react";
 
 const applications = [
   {
-    icon: MonitorCheck,
+    icon: Briefcase,
     tag: "01",
-    title: "Control Rooms",
+    title: "Business Meetings & Presentations",
     description:
-      "Used by emergency services, transportation hubs, and security operations to monitor multiple data feeds simultaneously.",
+      "Ideal for conference rooms where multiple users need to connect laptops, tablets, or smartphones to a shared 4K display.",
   },
   {
-    icon: Building2,
+    icon: GraduationCap,
     tag: "02",
-    title: "Corporate Environments",
+    title: "Educational Settings",
     description:
-      "Enhances presentations, video conferences, and digital signage in lobbies and meeting rooms.",
+      "Enhances classroom and lecture hall presentations by allowing seamless switching between devices.",
   },
   {
-    icon: ShoppingBag,
+    icon: Laptop,
     tag: "03",
-    title: "Retail Spaces",
+    title: "BYOD Environments",
     description:
-      "Captivates customers with dynamic advertisements, product showcases, and interactive displays.",
+      "Perfect for corporate and collaborative workspaces, enabling users to connect their own devices without compatibility concerns.",
+  },
+  {
+    icon:   Tv2,
+    tag: "04",
+    title: "Multimedia & Entertainment",
+    description:
+      "Supports high-quality 4K HDR and Dolby Vision for an immersive viewing experience in home theaters or media centers.",
   },
 ];
-
-export default function ApplicationVideoWallController() {
+export default function VideoAccessoriesApplication() {
   return (
     <section className="w-full bg-white py-16">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
           <div className="relative group cursor-pointer overflow-hidden border border-gray-100 bg-white flex items-center justify-center h-100">
             <Image
-              src="https://www.tendzone.net/uploads/43135/dual-8-full-range-point-source-speaker4b804.jpg?size=380x0"
-              alt="Video Wall Controller"
+              src="https://www.tendzone.net/uploads/43135/byod-video-switcherd85ff.jpg"
+              alt="Dual 8-inch Speaker"
               width={400}
               height={300}
               className="object-contain w-full h-full p-10 transition-transform duration-500 group-hover:scale-105"
@@ -50,14 +55,14 @@ export default function ApplicationVideoWallController() {
               Use Cases
             </p>
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2 leading-snug">
-              Application of{" "}
-              <span className="text-red-500">Video Wall Controller</span>
+              Ideal Application{" "}
+              <span className="text-red-500">Scenarios</span>
             </h2>
             <div className="w-10 h-0.5 bg-red-500 mb-8" />
 
             <div className="flex flex-col gap-0">
-              {applications.map((item, i) => {
-                const Icon = item.icon;
+              {applications.map((app, i) => {
+                const Icon = app.icon;
                 return (
                   <div
                     key={i}
@@ -69,14 +74,14 @@ export default function ApplicationVideoWallController() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="text-[10px] font-bold text-gray-300 tracking-widest tabular-nums">
-                          {item.tag}
+                          {app.tag}
                         </span>
                         <h3 className="text-sm font-semibold text-gray-800 group-hover:text-red-500 transition-colors duration-300">
-                          {item.title}
+                          {app.title}
                         </h3>
                       </div>
                       <p className="text-xs text-gray-400 leading-relaxed">
-                        {item.description}
+                        {app.description}
                       </p>
                     </div>
                   </div>

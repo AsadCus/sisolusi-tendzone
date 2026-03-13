@@ -11,111 +11,148 @@ interface Product {
   galleries?: { file_url: string }[];
 }
 
-const getProductImage = (product: Product) => {
-  if (
-    product.galleries &&
-    product.galleries.length > 0 &&
-    product.galleries[0].file_url
-  ) {
-    return product.galleries[0].file_url;
-  }
-  return "/images/categories/placeholder.jpg";
-};
+const BADGES = ["Best Seller", "Hot", "Popular", "New", "Top Pick"];
+const TAGLINES = [
+  "Premium Quality",
+  "High Durability",
+  "Best Value",
+  "Trusted Choice",
+  "Top Rated",
+];
+
+const getImage = (p: Product) =>
+  p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
 
 export default function MainProduct() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL!);
-        const data = await res.json();
-        const banners = data.data || data;
-        const filtered = banners.filter(
-          (item: any) => item.supplier?.name === "TendZone",
-        );
-        setProducts(filtered);
-      } catch (err) {
-        console.error("Fetch product error:", err);
-      }
-    }
-    fetchData();
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL!)
+      .then((r) => r.json())
+      .then((data) => {
+        const list = data.data || data;
+        setProducts(list.filter((x: any) => x.supplier?.name === "TendZone"));
+      })
+      .catch(console.error);
   }, []);
 
   return (
-    <section className={`w-full py-16 transition-colors duration-300 ${dark ? "bg-gray-950" : "bg-white"}`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-24">
+    <>
+      <style>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(14px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .card-img {
+          transition: transform 600ms cubic-bezier(.25,.46,.45,.94);
+        }
+        .product-card:hover .card-img {
+          transform: scale(1.06);
+        }
+        .overlay {
+          transform: translateY(100%);
+          transition: transform 320ms ease-out;
+        }
+        .product-card:hover .overlay {
+          transform: translateY(0);
+        }
+      `}</style>
 
-        <div className="flex flex-col items-center text-center mb-10">
-          <h1 className={`text-xl lg:text-4xl font-bold tracking-tight transition-colors duration-300 ${dark ? "text-white" : "text-gray-900"}`}>
-            Main Product
-          </h1>
-          <div className="mt-3 w-7 h-[2px] bg-red-500" />
-          <p className={`mt-3 text-sm font-light transition-colors duration-300 ${dark ? "text-gray-500" : "text-gray-500"}`}>
-            We promise to find you the right equipment
-          </p>
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
 
-          <button
-            onClick={() => setDark(!dark)}
-            className={`mt-5 flex items-center gap-2 px-4 py-1.5 border text-[11px] font-semibold uppercase tracking-widest transition-colors duration-200 ${
-              dark
-                ? "border-gray-700 text-gray-400 hover:border-red-500 hover:text-red-400"
-                : "border-gray-200 text-gray-400 hover:border-red-400 hover:text-red-500"
-            }`}
-          >
-            {dark ? (
-              <>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-                Light Mode
-              </>
-            ) : (
-              <>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-                Dark Mode
-              </>
-            )}
-          </button>
-        </div>
+          <div className="flex flex-col items-center text-center mb-14">
+            <span className="text-red-500 text-[10px] font-bold tracking-[0.35em] uppercase mb-3">
+              Our Collection
+            </span>
+            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 tracking-tight">
+              Main Product
+            </h2>
+            <div className="mt-3 w-8 h-[3px] bg-red-500 rounded-full" />
+            <p className="mt-4 text-sm text-gray-400 font-light max-w-xs leading-relaxed">
+              We promise to find you the right equipment
+            </p>
+          </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {products.map((product) => (
-            <Link
-              key={product.id}
-              href={`/products/${product.slug}`}
-              className={`group relative overflow-hidden border transition-colors duration-300 ${
-                dark
-                  ? "border-gray-800 hover:border-red-500 bg-gray-900"
-                  : "border-gray-100 hover:border-red-400 bg-gray-50"
-              }`}
-            >
-              
-              <div className="relative w-full aspect-square overflow-hidden">
-                <Image
-                  unoptimized
-                  src={getProductImage(product)}
-                  alt={product.name}
-                  fill
-                  className={`object-cover transition-all duration-500 group-hover:scale-105 ${dark ? "opacity-80 group-hover:opacity-100" : "opacity-100"}`}
-                />
-                {dark && (
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950/70 via-transparent to-transparent" />
-                )}
-                <div className="absolute inset-x-0 bottom-0 bg-red-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out flex items-center justify-center px-3 py-3">
-                  <p className="text-xs font-medium text-white text-center line-clamp-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {products.map((product, i) => (
+              <Link
+                key={product.id}
+                href={`/products/${product.slug}`}
+                className="product-card group block"
+                style={{ animation: `fadeUp .45s ${i * 0.04}s ease both` }}
+              >
+                <div className="relative overflow-hidden bg-gray-50" style={{ aspectRatio: "1/1" }}>
+                  <Image
+                    unoptimized fill
+                    src={getImage(product)}
+                    alt={product.name}
+                    className="card-img object-cover"
+                  />
+
+                  <div className="absolute top-2.5 left-2.5 z-10">
+                    <span
+                      className="text-[9px] font-black uppercase tracking-widest px-2 py-1 text-white"
+                      style={{
+                        background: i % 2 === 0
+                          ? "linear-gradient(135deg,#dc2626,#9f1010)"
+                          : "linear-gradient(135deg,#111,#333)",
+                        clipPath: "polygon(0 0,calc(100% - 5px) 0,100% 100%,5px 100%)",
+                      }}
+                    >
+                      {BADGES[i % BADGES.length]}
+                    </span>
+                  </div>
+
+                  <div
+                    className="overlay absolute inset-x-0 bottom-0"
+                    style={{ background: "linear-gradient(to top,rgba(185,17,17,0.94),rgba(220,38,38,0.85))" }}
+                  >
+                    <div className="flex items-center justify-center gap-2 px-3 py-3">
+                      <span className="text-[11px] font-bold text-white uppercase tracking-widest">
+                        View Detail
+                      </span>
+                      <svg width="12" height="12" viewBox="0 0 13 13" fill="none" className="shrink-0">
+                        <path d="M1 6.5h11M7 2l5 4.5L7 11"
+                          stroke="white" strokeWidth="1.6"
+                          strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 px-0.5 pb-1">
+                  <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
                     {product.name}
                   </p>
+                  <p className="text-[11px] text-gray-400 mt-0.5 font-light tracking-wide">
+                    {TAGLINES[i % TAGLINES.length]}
+                  </p>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
 
-      </div>
-    </section>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <Link
+              href="/products"
+              className="group flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-red-600 transition-colors duration-200"
+            >
+              <span className="border-b border-gray-300 group-hover:border-red-500 pb-px transition-colors duration-200">
+                View All Products
+              </span>
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
+                className="transition-transform duration-200 group-hover:translate-x-0.5">
+                <path d="M1 6.5h11M7 2l5 4.5L7 11"
+                  stroke="currentColor" strokeWidth="1.6"
+                  strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          </div>
+
+        </div>
+      </section>
+    </>
   );
 }
