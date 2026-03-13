@@ -23,15 +23,20 @@ const TAGLINES = [
 const getImage = (p: Product) =>
   p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
 
+const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
+
 export default function MainProduct() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL!)
+    fetch("https://product-admin-panel.nterco.id/api/products?supplier_id=2")
       .then((r) => r.json())
       .then((data) => {
-        const list = data.data || data;
-        setProducts(list.filter((x: any) => x.supplier?.name === "TendZone"));
+        const list: Product[] = data.data || data;
+        const withImage    = list.filter(hasImage);
+        const withoutImage = list.filter((p) => !hasImage(p));
+        const merged = [...withImage, ...withoutImage].slice(0, 8);
+        setProducts(merged);
       })
       .catch(console.error);
   }, []);
@@ -78,7 +83,7 @@ export default function MainProduct() {
             {products.map((product, i) => (
               <Link
                 key={product.id}
-                href={`/catalogue/${product.id}`}
+                href={`/catalogue/23`}
                 className="product-card group block"
                 style={{ animation: `fadeUp .45s ${i * 0.04}s ease both` }}
               >

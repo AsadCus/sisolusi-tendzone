@@ -24,11 +24,11 @@ export default function BannerCarousel() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_API_BANNER_URL as string)
+    fetch("https://product-admin-panel.nterco.id/api/banners/supplier/2")
       .then((r) => r.json())
       .then((json) => {
         const list = (json.data || json) as any[];
-        setSlides(list.filter((x) => x.supplier?.name === "TendZone"));
+        setSlides(list);
       })
       .catch(console.error);
   }, []);

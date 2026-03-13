@@ -271,7 +271,7 @@ export default function ProductDetail({ id }: { id: string }) {
       <div className="max-w-7xl mx-auto px-6 py-10">
         <div className="border border-gray-200">
 
-          <div className="flex border-b border-gray-200 overflow-x-auto bg-gray-50">
+          <div className="flex border-b border-gray-200 overflow-x-auto bg-gray-50" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
             {tabs.map((tab) => (
               <button
                 key={tab.key}
