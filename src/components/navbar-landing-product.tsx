@@ -1,6 +1,6 @@
 "use client"
 import { cn } from "@/lib/utils"
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { Phone, Mail, Globe, Search, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import Link from "next/link"
@@ -9,13 +9,13 @@ import Image from "next/image";
 const navLinks = [
   { label: "Home", href: "/", dropdown: false },
   { label: "Products", href: "/products", dropdown: true },
-  { label: "Solution", href: "#", dropdown: true },
-  { label: "Application", href: "#", dropdown: true },
-  { label: "Core Technology", href: "#", dropdown: false },
-  { label: "News", href: "#", dropdown: true },
-  { label: "Contact Us", href: "#", dropdown: true },
-  { label: "About Us", href: "#", dropdown: true },
-  { label: "Article", href: "#", dropdown: false },
+  { label: "Solution", href: "#solusi", dropdown: false },
+  { label: "Application", href: "#application", dropdown: false },
+  { label: "Core Technology", href: "#core-technology", dropdown: false },
+  { label: "News", href: "#news", dropdown: false },
+  { label: "Contact Us", href: "#contact-us", dropdown: false },
+  { label: "About Us", href: "#about-us", dropdown: false },
+  { label: "Article", href: "#article", dropdown: false },
 ];
 
 const megaData = {
@@ -36,11 +36,11 @@ const productCategories = [
   { category: "Power Amplifier", href: "/power-amplifer" },
   { category: "Speaker", href: "/speaker" },
   { category: "Audio Accessories", href: "/products/dante-interface" },
-  { category: "MIDIS AV Over IP Systems", href: "/products/midis-av" },
+  { category: "MIDIS AV Over IP Systems", href: "/midis-distributed-multimedia-transmission-control" },
   { category: "Video Matrix", href: "/video-matrix" },
   { category: "Video Wall Controller", href: "/video-wall-controller" },
-  { category: "HDMI Products", href: "/products/hdmi-extender" },
-  { category: "Video Accessories", href: "/products/wireless-presentation" },
+  { category: "HDMI Products", href: "/hdmi-products" },
+  { category: "Video Accessories", href: "/video-accessories" },
   { category: "Education Solution", href: "/education-solution" },
 ];
 
@@ -54,6 +54,7 @@ export default function NavbarProductLanding() {
 
   const isActive = (href: string) => {
     if (href === "#") return false;
+    if (href.startsWith("#")) return false;
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
@@ -62,6 +63,27 @@ export default function NavbarProductLanding() {
     if (!href || href === "#") return false;
     return pathname === href || pathname.startsWith(href + "/");
   };
+
+  // Smooth scroll handler — compensates for fixed navbar height
+  const handleAnchorClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      if (!href.startsWith("#")) return;
+      e.preventDefault();
+
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      // Navbar height: utility bar (36px) + main nav (64px) = 100px when expanded,
+      // or just 64px when scrolled. Add 16px breathing room.
+      const navHeight = scrolled ? 64 + 16 : 100 + 16;
+      const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+
+      window.scrollTo({ top, behavior: "smooth" });
+      setMobileOpen(false);
+    },
+    [scrolled]
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -150,10 +172,13 @@ export default function NavbarProductLanding() {
               <ul className="hidden lg:flex flex-1 items-center gap-0">
                 {navLinks.map((link) => {
                   const active = isActive(link.href);
+                  const isAnchor = link.href.startsWith("#");
                   return (
                     <li key={link.label} className="relative group">
                       <Link
                         href={link.href}
+                        onClick={isAnchor ? (e) => handleAnchorClick(e, link.href) : undefined}
+                        scroll={!isAnchor}
                         className={cn(
                           "relative flex items-center gap-0.5 px-3 py-2 text-[13.5px] font-medium transition-all duration-200",
                           isTransparent
@@ -173,6 +198,7 @@ export default function NavbarProductLanding() {
                       </Link>
 
                       {/* Products mega menu — z-[210] biar di atas header */}
+                      {/* Products mega menu */}
                       {link.label === "Products" && (
                         <div className="fixed left-0 right-0 flex justify-center opacity-0 invisible group-hover:opacity-100 group-hover:visible"
                           style={{
@@ -246,7 +272,7 @@ export default function NavbarProductLanding() {
                 })}
               </ul>
 
-              {/* Search  */}
+              {/* Search */}
               <div className="hidden lg:flex items-center gap-2 ml-2">
                 <div className={cn(
                   "flex items-center transition-all duration-300 rounded-xl overflow-hidden",
@@ -304,6 +330,7 @@ export default function NavbarProductLanding() {
               {navLinks.map((link) => {
                 const active = isActive(link.href);
                 const isOpen = activeMobileMenu === link.label;
+                const isAnchor = link.href.startsWith("#");
                 return (
                   <div key={link.label}>
                     <div className={cn(
@@ -311,8 +338,11 @@ export default function NavbarProductLanding() {
                       active ? "bg-red-50" : "hover:bg-gray-50"
                     )}>
                       <Link
-                        href={link.href === "#" ? "#" : link.href}
-                        onClick={() => !link.dropdown && setMobileOpen(false)}
+                        href={link.href}
+                        onClick={(e) => {
+                          if (isAnchor) handleAnchorClick(e, link.href);
+                          else if (!link.dropdown) setMobileOpen(false);
+                        }}
                         className={cn(
                           "flex-1 px-3 py-3 text-sm font-medium transition-colors",
                           active ? "text-red-600" : "text-gray-700"
@@ -377,7 +407,7 @@ export default function NavbarProductLanding() {
                   <Phone size={13} strokeWidth={2} /><span>8613632976066</span>
                 </Link>
                 <Link href="mailto:sales@tendzone.net" className="flex items-center gap-2 text-[13px] text-gray-500 hover:text-red-500 transition-colors">
-                  <Mail size={13} strokeWidth={2} /><span>sales@tendzone.net</span>
+                  <Mail size={13} strokeWidth={2}/><span>sales@tendzone.net</span>
                 </Link>
                 <Link href="/contact"
                   className="mt-2 flex items-center justify-center bg-red-600 hover:bg-red-700 transition-colors text-white text-sm font-semibold py-3 rounded-xl">

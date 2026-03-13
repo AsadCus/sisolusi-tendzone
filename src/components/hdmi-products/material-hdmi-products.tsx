@@ -1,33 +1,40 @@
 "use client";
 
 import Image from "next/image";
-import { MonitorCheck, Building2, ShoppingBag } from "lucide-react";
+import { Cpu, Layers, Shield, Zap } from "lucide-react";
 
-const applications = [
+const points = [
   {
-    icon: MonitorCheck,
+    icon: Cpu,
     tag: "01",
-    title: "Control Rooms",
+    title: "Copper Conductors",
     description:
-      "Used by emergency services, transportation hubs, and security operations to monitor multiple data feeds simultaneously.",
+      "Copper is a common conductor material due to its great conductivity and reasonable cost. Some cables use silver-plated copper for the best signal transmissions.",
   },
   {
-    icon: Building2,
+    icon: Layers,
     tag: "02",
-    title: "Corporate Environments",
+    title: "Insulating & Shielding Materials",
     description:
-      "Enhances presentations, video conferences, and digital signage in lobbies and meeting rooms.",
+      "Polyethylene and PVC are used for their dielectric qualities and wear and tear resistance, ensuring long-lasting protection.",
   },
   {
-    icon: ShoppingBag,
+    icon: Shield,
     tag: "03",
-    title: "Retail Spaces",
+    title: "Sturdy Metal Connectors",
     description:
-      "Captivates customers with dynamic advertisements, product showcases, and interactive displays.",
+      "Connectors are usually composed of sturdy metals such as brass or nickel, occasionally coated in gold for maximum performance.",
+  },
+  {
+    icon: Zap,
+    tag: "04",
+    title: "Signal Quality & Durability",
+    description:
+      "The choice of materials influences signal quality, durability, and general efficacy in carrying audio and video information.",
   },
 ];
 
-export default function ApplicationVideoWallController() {
+export default function HDMIProductsMaterials() {
   return (
     <section className="w-full bg-white py-16">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
@@ -35,8 +42,8 @@ export default function ApplicationVideoWallController() {
 
           <div className="relative group cursor-pointer overflow-hidden border border-gray-100 bg-white flex items-center justify-center h-100">
             <Image
-              src="https://www.tendzone.net/uploads/43135/dual-8-full-range-point-source-speaker4b804.jpg?size=380x0"
-              alt="Video Wall Controller"
+              src="https://www.tendzone.net/uploads/43135/byod-video-switcherd85ff.jpg"
+              alt="HDMI Products Materials"
               width={400}
               height={300}
               className="object-contain w-full h-full p-10 transition-transform duration-500 group-hover:scale-105"
@@ -45,19 +52,20 @@ export default function ApplicationVideoWallController() {
             <span className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
           </div>
+
           <div>
             <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-red-500 mb-3">
-              Use Cases
+              Construction
             </p>
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-2 leading-snug">
-              Application of{" "}
-              <span className="text-red-500">Video Wall Controller</span>
+              Materials Used in{" "}
+              <span className="text-red-500">HDMI Products</span>
             </h2>
             <div className="w-10 h-0.5 bg-red-500 mb-8" />
 
             <div className="flex flex-col gap-0">
-              {applications.map((item, i) => {
-                const Icon = item.icon;
+              {points.map((point, i) => {
+                const Icon = point.icon;
                 return (
                   <div
                     key={i}
@@ -69,14 +77,14 @@ export default function ApplicationVideoWallController() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="text-[10px] font-bold text-gray-300 tracking-widest tabular-nums">
-                          {item.tag}
+                          {point.tag}
                         </span>
                         <h3 className="text-sm font-semibold text-gray-800 group-hover:text-red-500 transition-colors duration-300">
-                          {item.title}
+                          {point.title}
                         </h3>
                       </div>
                       <p className="text-xs text-gray-400 leading-relaxed">
-                        {item.description}
+                        {point.description}
                       </p>
                     </div>
                   </div>

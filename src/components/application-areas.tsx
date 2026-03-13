@@ -25,7 +25,8 @@ export default function ApplicationAreasSection() {
       </div>
 
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-        <div style={{ height: "400px", width: "100%" }}>
+
+        <div style={{ height: "420px", width: "100%" }}>
           <CircularGallery
             items={areas}
             bend={3}
