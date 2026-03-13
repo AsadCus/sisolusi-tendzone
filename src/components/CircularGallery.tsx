@@ -3,8 +3,6 @@
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform, type OGLRenderingContext } from "ogl";
 import { useEffect, useRef } from "react";
 
-// ─── Utilities ───────────────────────────────────────────────────────────────
-
 function debounce<T extends (...args: unknown[]) => void>(fn: T, wait: number): T {
   let timer: ReturnType<typeof setTimeout>;
   return function (this: unknown, ...args: Parameters<T>) {
@@ -39,7 +37,6 @@ function createTextTexture(
   return { texture, width: canvas.width, height: canvas.height };
 }
 
-// ─── Shaders ─────────────────────────────────────────────────────────────────
 
 const VERTEX_SHADER = /* glsl */ `
   precision highp float;
@@ -47,14 +44,10 @@ const VERTEX_SHADER = /* glsl */ `
   attribute vec2 uv;
   uniform mat4 modelViewMatrix;
   uniform mat4 projectionMatrix;
-  uniform float uTime;
-  uniform float uSpeed;
   varying vec2 vUv;
   void main() {
     vUv = uv;
-    vec3 p = position;
-    p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `;
 
@@ -82,17 +75,14 @@ const FRAGMENT_SHADER = /* glsl */ `
       vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
     );
     vec4 color = texture2D(tMap, uv);
-
-    // Subtle darken on hover for label readability
-    color.rgb *= 1.0 - uHover * 0.3;
-
+    color.rgb *= 1.0 - uHover * 0.35;
     float d     = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
     float alpha = 1.0 - smoothstep(-0.002, 0.002, d);
     gl_FragColor = vec4(color.rgb, alpha);
   }
 `;
 
-// Label slides up from bottom edge on hover
+
 const TEXT_VERTEX = /* glsl */ `
   attribute vec3 position;
   attribute vec2 uv;
@@ -103,8 +93,7 @@ const TEXT_VERTEX = /* glsl */ `
   void main() {
     vUv = uv;
     vec3 p = position;
-    // When uHover=0: slide down by 0.5 (hidden below); uHover=1: at resting position
-    p.y += (uHover - 1.0) * 0.5;
+    p.y += (uHover - 1.0) * 0.6;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
   }
 `;
@@ -117,19 +106,16 @@ const TEXT_FRAGMENT = /* glsl */ `
   void main() {
     vec4 color = texture2D(tMap, vUv);
     if (color.a < 0.1) discard;
-    // Fade in alongside slide
     gl_FragColor = vec4(color.rgb, color.a * uHover);
   }
 `;
 
-// ─── Types ───────────────────────────────────────────────────────────────────
 
 interface Screen      { width: number; height: number }
 interface Viewport    { width: number; height: number }
 interface GalleryItem { image: string; text: string }
 interface Scroll      { ease: number; current: number; target: number; last: number; position: number }
 
-// ─── Title ───────────────────────────────────────────────────────────────────
 
 interface TitleOptions {
   gl:         OGLRenderingContext;
@@ -159,12 +145,11 @@ class Title {
     this.mesh = new Mesh(gl, { geometry, program: this.program });
 
     const aspect     = width / height;
-    const textHeight = plane.scale.y * 0.18;
+    const textHeight = plane.scale.y * 0.15;
     const textWidth  = textHeight * aspect;
     this.mesh.scale.set(textWidth, textHeight, 1);
 
-    // Resting position: near bottom inside image
-    this.mesh.position.y = 0;
+    this.mesh.position.y = -(plane.scale.y * 0.35);
     this.mesh.setParent(plane);
   }
 
@@ -173,7 +158,6 @@ class Title {
   }
 }
 
-// ─── Media ───────────────────────────────────────────────────────────────────
 
 interface MediaOptions {
   geometry:      Plane;
@@ -194,7 +178,6 @@ interface MediaOptions {
 
 class Media {
   extra        = 0;
-  speed        = 0;
   width        = 0;
   widthTotal   = 0;
   x            = 0;
@@ -216,7 +199,6 @@ class Media {
 
   private createShader() {
     const texture = new Texture(this.opts.gl, { generateMipmaps: true });
-
     this.program = new Program(this.opts.gl, {
       depthTest:  false,
       depthWrite: false,
@@ -226,8 +208,6 @@ class Media {
         tMap:          { value: texture },
         uPlaneSizes:   { value: [0, 0] },
         uImageSizes:   { value: [0, 0] },
-        uSpeed:        { value: 0 },
-        uTime:         { value: 100 * Math.random() },
         uBorderRadius: { value: this.opts.borderRadius ?? 0 },
         uHover:        { value: 0 },
       },
@@ -292,11 +272,6 @@ class Media {
       }
     }
 
-    this.speed = scroll.current - scroll.last;
-    this.program.uniforms.uTime.value  += 0.04;
-    this.program.uniforms.uSpeed.value  = this.speed;
-
-    // Smooth hover interpolation
     this.hoverCurrent = lerp(this.hoverCurrent, this.hoverTarget, 0.08);
     this.program.uniforms.uHover.value = this.hoverCurrent;
     this.title.setHover(this.hoverCurrent);
@@ -331,7 +306,6 @@ class Media {
   }
 }
 
-// ─── App ─────────────────────────────────────────────────────────────────────
 
 interface AppOptions {
   items?:        GalleryItem[];
@@ -428,7 +402,6 @@ class App {
     );
   }
 
-  // Convert screen coords → world coords
   private screenToWorld(sx: number, sy: number) {
     const x =  ((sx / this.screen.width)  * 2 - 1) * (this.viewport.width  / 2);
     const y = -((sy / this.screen.height) * 2 - 1) * (this.viewport.height / 2);
@@ -525,7 +498,6 @@ class App {
   }
 }
 
-// ─── React Component ─────────────────────────────────────────────────────────
 
 export interface CircularGalleryProps {
   items?:        GalleryItem[];
