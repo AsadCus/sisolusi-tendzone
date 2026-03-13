@@ -19,20 +19,21 @@ export default function ApplicationAreasSection() {
         <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-red-500 mb-2">
           Where We Work
         </p>
-        <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
           Application Areas
         </h2>
       </div>
 
-      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-
-        <div style={{ height: "420px", width: "100%" }}>
+      <div className="w-full px-0 sm:px-4 sm:max-w-5xl sm:lg:max-w-6xl sm:xl:max-w-7xl sm:mx-auto">
+        <div
+          className="h-[280px] sm:h-[340px] md:h-[380px] lg:h-[420px] w-full"
+        >
           <CircularGallery
             items={areas}
             bend={3}
             textColor="#ffffff"
             borderRadius={0}
-            font="bold 28px sans-serif"
+            font="bold 20px sans-serif"
             scrollSpeed={2}
             scrollEase={0.05}
           />
