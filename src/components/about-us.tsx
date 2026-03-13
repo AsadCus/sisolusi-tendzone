@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function AboutSection() {
   return (
-    <section className="w-full bg-gray-100 py-20">
+    <section id="about-us" className="w-full bg-gray-100 py-20">
       <div className="max-w-6xl mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 text-justify">
           <h2 className="text-4xl md:text-5xl font-semibold text-gray-900">
