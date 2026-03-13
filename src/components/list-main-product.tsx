@@ -78,7 +78,7 @@ export default function MainProduct() {
             {products.map((product, i) => (
               <Link
                 key={product.id}
-                href={`/products/${product.slug}`}
+                href={`/catalogue/${product.id}`}
                 className="product-card group block"
                 style={{ animation: `fadeUp .45s ${i * 0.04}s ease both` }}
               >
