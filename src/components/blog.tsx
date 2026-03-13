@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const posts = [
   {
@@ -6,64 +7,90 @@ const posts = [
     title: "TENDZONE Empowers National Laboratory To Build Ultra-Large-Scale Integrated Audio-Visual Application Solution",
     category: "Audio Visual",
     date: "May 12, 2025",
+    href: "/news/1",
   },
   {
     img: "https://www.tendzone.net/uploads/43135/news/n20251203203857f01d7.jpg",
     title: "Tendzone Audio-Visual Solutions: Empowering The Intelligent Transformation Of Emergency Command Centers",
     category: "Emergency Command",
     date: "Apr 28, 2025",
+    href: "/news/2",
   },
   {
     img: "https://www.tendzone.net/uploads/43135/news/n20251212200059b10c0.jpg",
     title: "TENDZONE Smart Transportation Industry Case Studies",
     category: "Smart Transportation",
     date: "Apr 10, 2025",
+    href: "/news/3",
   },
 ];
 
 export default function BlogSection() {
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        * { font-family: 'Poppins', sans-serif; }
-      `}</style>
+    <section className="w-full bg-white py-16">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
-      <div className="flex flex-col items-center w-full px-4 py-16">
-        <p className="text-xs font-semibold text-red-600 uppercase tracking-widest mb-2">Our Blog</p>
-        <h1 className="text-3xl font-semibold text-slate-900">Latest News</h1>
-        <p className="text-sm text-slate-400 mt-2 max-w-md text-center">
-          We promise to find you the right equipment
-        </p>
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-red-500 mb-2">
+              Our Blog
+            </p>
+            <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+              Latest News
+            </h2>
+          </div>
+          <Link
+            href="/news"
+            className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-gray-400 hover:text-red-500 transition-colors duration-200"
+          >
+            View All <ArrowRight size={14} />
+          </Link>
+        </div>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {posts.map((post) => (
-            <div
+            <Link
               key={post.title}
-              className="max-w-72 w-full group cursor-pointer"
+              href={post.href}
+              className="group flex flex-col  bg-gray-50 border border-gray-100 hover:border-red-100 hover:shadow-sm transition-all duration-300 overflow-hidden"
             >
-              <div className="overflow-hidden rounded-2xl">
+              {/* Image */}
+              <div className="overflow-hidden aspect-video">
                 <img
                   src={post.img}
                   alt={post.title}
-                  className="w-full h-44 object-cover group-hover:scale-105 transition duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
-              <div className="flex items-center gap-2 mt-3">
-                <span className="text-[11px] font-semibold text-red-600 bg-red-50 px-2 py-0.5 rounded-full">
-                  {post.category}
-                </span>
-                <span className="text-[11px] text-slate-400">{post.date}</span>
+              <div className="flex flex-col gap-2 p-5 flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10.5px] font-bold uppercase tracking-widest text-red-500 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-100">
+                    {post.category}
+                  </span>
+                  <span className="text-[11px] text-gray-400">{post.date}</span>
+                </div>
+                <h3 className="text-[14px] font-semibold text-gray-800 leading-snug group-hover:text-red-500 transition-colors duration-200 line-clamp-3">
+                  {post.title}
+                </h3>
+                <div className="mt-auto pt-3 flex items-center gap-1 text-[12px] font-semibold text-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  Read More <ArrowRight size={12} />
+                </div>
               </div>
-
-              <h3 className="text-sm text-slate-800 font-medium mt-2 leading-snug group-hover:text-red-600 transition duration-200">
-                {post.title}
-              </h3>
-            </div>
+            </Link>
           ))}
         </div>
+
+        <div className="md:hidden flex justify-center mt-6">
+          <Link
+            href="/news"
+            className="flex items-center gap-1.5 text-[13px] font-semibold text-gray-400 hover:text-red-500 transition-colors duration-200"
+          >
+            View All <ArrowRight size={14} />
+          </Link>
+        </div>
+
       </div>
-    </>
+    </section>
   );
 }

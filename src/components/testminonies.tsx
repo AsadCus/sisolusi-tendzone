@@ -33,7 +33,7 @@ const testimonials = [
 
 export default function TestimoniesAreasSection() {
   return (
-    <section className="bg-[#f5f5f5] py-12 md:py-20 w-full overflow-hidden">
+    <section className="bg-white py-12 md:py-20 w-full overflow-hidden">
       <div className="text-center px-4 sm:px-6 lg:px-8">
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
           What Our Customers Said

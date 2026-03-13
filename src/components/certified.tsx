@@ -1,40 +1,45 @@
 import { Marquee } from "./ui/marquee";
 
-export default function SertifiedBy() {
-  const reviews = [
-    { img: "https://css02.v15cdn.com/m432/imgs/logo-1.webp" },
-    { img: "https://www.tendzone.net/Content/uploads/20241101384/202411221655012535337f5511487286b71430c3bb569b.png" },
-    { img: "https://css02.v15cdn.com/m432/imgs/logo-4.webp" },
-    { img: "https://www.tendzone.net/Content/uploads/20241101384/20241122165457b98aa2f641924392b8a3953887d4251b.png" },
-  ];
+const LOGOS = [
+  { src: "https://css02.v15cdn.com/m432/imgs/logo-1.webp", alt: "Partner Logo 1" },
+  { src: "https://www.tendzone.net/Content/uploads/20241101384/202411221655012535337f5511487286b71430c3bb569b.png", alt: "Partner Logo 2" },
+  { src: "https://css02.v15cdn.com/m432/imgs/logo-4.webp", alt: "Partner Logo 3" },
+  { src: "https://www.tendzone.net/Content/uploads/20241101384/20241122165457b98aa2f641924392b8a3953887d4251b.png", alt: "Partner Logo 4" },
+];
 
-  function ReviewCard({ img }: { img: string }) {
-    return (
-      <figure className="mx-4">
-        <img
-          src={img}
-          className="object-contain h-10 w-auto"
-          style={{ maxWidth: "110px" }}
-        />
-      </figure>
-    );
-  }
-
+function LogoCard({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="w-full bg-white py-8">
-      <div className="max-w-6xl mx-auto px-12 flex flex-col md:flex-row items-center gap-8">
-        <h2 className="text-sm font-semibold text-gray-400 tracking-widest uppercase whitespace-nowrap">
-          Certified By
-        </h2>
+    <figure className="mx-10">
+      <img
+        src={src}
+        alt={alt}
+        className="object-contain h-9 w-auto opacity-40 hover:opacity-90 grayscale hover:grayscale-0 transition-all duration-300"
+        style={{ maxWidth: "130px" }}
+      />
+    </figure>
+  );
+}
 
-        <div className="flex-1 overflow-x-hidden w-full max-w-xs lg:max-w-7xl">
-          <Marquee pauseOnHover className="[--duration:20s]">
-            {reviews.map((r) => (
-              <ReviewCard key={r.img} {...r} />
+export default function CertifiedBy() {
+  return (
+    <section className="w-full bg-white py-6 border-y border-gray-100">
+      <div className="flex items-center gap-10 px-6 md:px-16 lg:px-32 xl:px-48">
+
+        <span className="text-[11px] font-semibold text-gray-300 tracking-[0.2em] uppercase whitespace-nowrap">
+          Certified By
+        </span>
+
+        <div className="relative flex-1 overflow-hidden">
+          <div className="absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+          <Marquee pauseOnHover className="[--duration:24s]">
+            {LOGOS.map((logo) => (
+              <LogoCard key={logo.src} {...logo} />
             ))}
           </Marquee>
         </div>
+
       </div>
-    </div>
+    </section>
   );
 }

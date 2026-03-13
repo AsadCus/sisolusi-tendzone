@@ -241,7 +241,6 @@ export default function NavbarProductLanding() {
                         </div>
                       )}
 
-                      {/* Other dropdowns */}
                       {link.label !== "Products" && link.dropdown && megaData[link.label as keyof typeof megaData] && (
                         <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-100"
                           style={{ transition: "opacity 150ms ease, visibility 150ms ease" }}>
@@ -299,7 +298,6 @@ export default function NavbarProductLanding() {
                 </Link>
               </div>
 
-              {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className={cn(

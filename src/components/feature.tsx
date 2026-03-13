@@ -1,14 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import {
-  LayoutGrid,
-  Wrench,
-  Settings,
-  ShieldCheck,
-  BadgeCheck,
-} from "lucide-react";
-import { LucideIcon } from "lucide-react";
+import { LayoutGrid, Wrench, Settings, ShieldCheck, BadgeCheck } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -16,11 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const features: {
-  icon: LucideIcon;
-  title: string;
-  desc: string;
-}[] = [
+const features: { icon: LucideIcon; title: string; desc: string }[] = [
   {
     icon: LayoutGrid,
     title: "Comprehensive Solutions",
@@ -50,27 +40,26 @@ const features: {
 
 export default function WhyChooseUs() {
   return (
-    <section className="w-full bg-gray-100 py-20">
-      <div className="max-w-6xl mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="w-full bg-white py-16">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
 
-        <div className="relative w-full aspect-4/3 lg:aspect-auto lg:self-stretch rounded-xl overflow-hidden shadow-lg">
+        <div className="relative w-full aspect-video lg:aspect-auto lg:h-[460px]  overflow-hidden shadow-md">
           <Image
             src="/images/office/office.png"
             alt="Why Choose Us"
             fill
-            className="object-cover transition duration-200 hover:scale-105"
+            className="object-cover hover:scale-105 transition-transform duration-500"
           />
         </div>
 
-   
-        <div className="space-y-4">
-          <div>
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
+        <div className="space-y-5">
+          <div className="space-y-2">
+            <h2 className="text-4xl font-bold text-gray-900 leading-tight">
               Why Choose Us
             </h2>
-            <p className="text-sm mt-3 text-gray-600 leading-relaxed">
+            <p className="text-[15px] text-gray-500 leading-relaxed">
               Our factory specializes in the design, development, and production
-              of advanced AV products that cater to a wide range of applications.
+              of advanced AV products for a wide range of applications.
             </p>
           </div>
 
@@ -81,19 +70,19 @@ export default function WhyChooseUs() {
                 <AccordionItem
                   key={index}
                   value={`item-${index}`}
-                  className="bg-white rounded-2xl shadow-sm mb-2 px-4 border-none"
+                  className="bg-white rounded-xl shadow-sm mb-2 px-4 border-none"
                 >
-                  <AccordionTrigger className="hover:no-underline group py-2.5">
+                  <AccordionTrigger className="hover:no-underline group py-3">
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-red-600 text-white group-hover:bg-red-700 transition duration-200 shrink-0">
-                        <Icon size={14} />
+                      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-red-500 text-white shrink-0 group-hover:bg-red-600 transition-colors duration-200">
+                        <Icon size={13} />
                       </div>
-                      <span className="text-sm font-medium text-gray-900 group-hover:text-red-600 transition text-left">
+                      <span className="text-[13.5px] font-semibold text-gray-800 group-hover:text-red-500 transition-colors duration-200 text-left">
                         {item.title}
                       </span>
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="text-gray-600 text-md leading-relaxed pl-10">
+                  <AccordionContent className="text-[13.5px] text-gray-500 leading-relaxed pl-10 pb-3">
                     {item.desc}
                   </AccordionContent>
                 </AccordionItem>
@@ -101,6 +90,7 @@ export default function WhyChooseUs() {
             })}
           </Accordion>
         </div>
+
       </div>
     </section>
   );
