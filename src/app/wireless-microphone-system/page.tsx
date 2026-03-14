@@ -3,37 +3,38 @@ import PageHero from "@/components/layout/pageHero";
 import WhyChooseUsCategory from "@/components/section/whyChooseCategory";
 import OemOdmSectionCategory from "@/components/section/oem-odm-category";
 import Footer from "@/components/footer";
-import MicrophoneProduct from "@/components/microphone/microphone";
+import WirelesMicrophoneProduct from "@/components/wireless-microphone-system/wireless-microphone";
 import MIDISBenefits from "@/components/midis-distributed-multimedia-transmission-control/bnefit-midis";
 import AfterSalesServices from "@/components/section/after-sales";
 import PackagingShipping from "@/components/section/Packaging and Shipping";
 import HalfHonorQualification from "@/components/section/half-honor-qualification";
-import BestSellingMicrophoneSection from "@/components/microphone/best-selling";
-import MicrophoneSpecTable from "@/components/microphone/table-spec";
-import BasicPrincipleMidis from "@/components/midis-distributed-multimedia-transmission-control/basic-principle";
-import ApplicationMIDISAVOverIP from "@/components/midis-distributed-multimedia-transmission-control/midis-application";
+import BestSellingWirelessSection from "@/components/wireless-microphone-system/best-selling";
+import WirelessMicSpecTable from "@/components/wireless-microphone-system/table-spec";
 import MIDISAVOverIPFAQ from "@/components/midis-distributed-multimedia-transmission-control/faq";
-import MicrophoneFeatureSection from "@/components/microphone/microphone-features";
-import MicrophoneTechniquePlacement from "@/components/microphone/microphone-technique";
-import MicrophoneApplication from "@/components/microphone/application-microphone";
+import WirelessMicApplication from "@/components/wireless-microphone-system/wireless-application";
+import WirelessMicFeaturesSection from "@/components/wireless-microphone-system/wireless-microphone-features";
+import WirelessFrequencyRangeSection from "@/components/wireless-microphone-system/system-frequency-wireless";
+import WirelessStartupTimeline from "@/components/wireless-microphone-system/wireless-guide";
+import WirelessMicFAQ from "@/components/wireless-microphone-system/faq";
 
 export default function ProductPage(){
     return(
         <>
             <NavbarProductLanding />
-            <PageHero title="microphone"/>
-            <MicrophoneProduct />
+            <PageHero title="Wireless Microphone System"/>
+            <WirelesMicrophoneProduct />
             <WhyChooseUsCategory />
             <OemOdmSectionCategory />
-            <BestSellingMicrophoneSection />
-            <MicrophoneSpecTable />
-            <MicrophoneFeatureSection />
-            <MicrophoneTechniquePlacement/>
-            <MicrophoneApplication />
+            <BestSellingWirelessSection />
+            <WirelessMicSpecTable />     
+            <WirelessMicFeaturesSection />
+            <WirelessFrequencyRangeSection />
+            <WirelessStartupTimeline />
+            <WirelessMicApplication />
             <AfterSalesServices />
             <PackagingShipping />
             <HalfHonorQualification />
-            <MIDISAVOverIPFAQ />
+            <WirelessMicFAQ />
             <Footer />
         </>
     )
