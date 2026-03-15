@@ -42,8 +42,8 @@ export default function SponsoredBy() {
           </span>
 
           <div className="relative flex-1 overflow-hidden">
-            <div className="absolute left-0 top-0 z-10 h-full w-12 bg-gradient-to-r from-white to-transparent pointer-events-none" />
-            <div className="absolute right-0 top-0 z-10 h-full w-12 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+            <div className="absolute left-0 top-0 z-10 h-full w-12 bg-linear-to-r from-white to-transparent pointer-events-none" />
+            <div className="absolute right-0 top-0 z-10 h-full w-12 bg-linear-to-l from-white to-transparent pointer-events-none" />
             <Marquee pauseOnHover className="[--duration:30s]">
               {LOGOS.map((src) => (
                 <LogoCard key={src} src={src} />

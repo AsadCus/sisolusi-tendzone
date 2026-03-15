@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { LayoutGrid, Wrench, Settings, ShieldCheck, BadgeCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -41,22 +42,36 @@ const features: { icon: LucideIcon; title: string; desc: string }[] = [
 export default function WhyChooseUs() {
   return (
     <section className="w-full bg-white py-16">
-      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
 
-        <div className="relative w-full aspect-video lg:aspect-auto lg:h-[460px]  overflow-hidden shadow-md">
+        {/* IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="relative w-full aspect-video lg:aspect-auto lg:h-115 overflow-hidden shadow-md"
+        >
           <Image
             src="/images/office/office.png"
             alt="Why Choose Us"
             fill
             className="object-cover hover:scale-105 transition-transform duration-500"
           />
-        </div>
+        </motion.div>
 
-        <div className="space-y-5">
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="space-y-6"
+        >
           <div className="space-y-2">
-            <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+            <h2 className="text-4xl font-bold text-gray-900">
               Why Choose Us
             </h2>
+
             <p className="text-[15px] text-gray-500 leading-relaxed">
               Our factory specializes in the design, development, and production
               of advanced AV products for a wide range of applications.
@@ -66,6 +81,7 @@ export default function WhyChooseUs() {
           <Accordion type="single" collapsible defaultValue="item-0">
             {features.map((item, index) => {
               const Icon = item.icon;
+
               return (
                 <AccordionItem
                   key={index}
@@ -74,14 +90,16 @@ export default function WhyChooseUs() {
                 >
                   <AccordionTrigger className="hover:no-underline group py-3">
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-red-500 text-white shrink-0 group-hover:bg-red-600 transition-colors duration-200">
+                      <div className="flex items-center justify-center w-7 h-7 rounded-full bg-red-500 text-white shrink-0 group-hover:bg-red-600 transition-colors">
                         <Icon size={13} />
                       </div>
-                      <span className="text-[13.5px] font-semibold text-gray-800 group-hover:text-red-500 transition-colors duration-200 text-left">
+
+                      <span className="text-[13.5px] font-semibold text-gray-800 group-hover:text-red-500 transition-colors">
                         {item.title}
                       </span>
                     </div>
                   </AccordionTrigger>
+
                   <AccordionContent className="text-[13.5px] text-gray-500 leading-relaxed pl-10 pb-3">
                     {item.desc}
                   </AccordionContent>
@@ -89,7 +107,7 @@ export default function WhyChooseUs() {
               );
             })}
           </Accordion>
-        </div>
+        </motion.div>
 
       </div>
     </section>

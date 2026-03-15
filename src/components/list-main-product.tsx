@@ -3,27 +3,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { LazyMotion, domAnimation, m } from "framer-motion";
+import { MessageCircle } from 'lucide-react';
 
 interface Product {
   id: number;
   name: string;
-  slug: string;
+  category:{
+    id: number;
+    name: string;
+  }
   galleries?: { file_url: string }[];
 }
 
 const BADGES = ["Best Seller", "Hot", "Popular", "New", "Top Pick"];
-const TAGLINES = [
-  "Premium Quality",
-  "High Durability",
-  "Best Value",
-  "Trusted Choice",
-  "Top Rated",
-];
+const TAGLINES = ["Premium Quality", "High Durability", "Best Value", "Trusted Choice", "Top Rated"];
 
-const getImage = (p: Product) =>
-  p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
-
+const getImage = (p: Product) => p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
 const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
+
+const WA_NUMBER = "6281234567890";
 
 export default function MainProduct() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -33,34 +32,20 @@ export default function MainProduct() {
       .then((r) => r.json())
       .then((data) => {
         const list: Product[] = data.data || data;
-        const withImage    = list.filter(hasImage);
+        const withImage = list.filter(hasImage);
         const withoutImage = list.filter((p) => !hasImage(p));
-        const merged = [...withImage, ...withoutImage].slice(0, 8);
-        setProducts(merged);
+        setProducts([...withImage, ...withoutImage].slice(0, 8));
       })
       .catch(console.error);
   }, []);
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       <style>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(14px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .card-img {
-          transition: transform 600ms cubic-bezier(.25,.46,.45,.94);
-        }
-        .product-card:hover .card-img {
-          transform: scale(1.06);
-        }
-        .overlay {
-          transform: translateY(100%);
-          transition: transform 320ms ease-out;
-        }
-        .product-card:hover .overlay {
-          transform: translateY(0);
-        }
+        .card-img { transition: transform 600ms cubic-bezier(.25,.46,.45,.94); }
+        .product-card:hover .card-img { transform: scale(1.06); }
+        .overlay { transform: translateY(100%); transition: transform 320ms ease-out; }
+        .product-card:hover .overlay { transform: translateY(0); }
       `}</style>
 
       <section className="w-full bg-white py-20">
@@ -81,12 +66,15 @@ export default function MainProduct() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {products.map((product, i) => (
-              <Link
+              <m.div
                 key={product.id}
-                href={`/catalogue/23`}
-                className="product-card group block"
-                style={{ animation: `fadeUp .45s ${i * 0.04}s ease both` }}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="product-card group"
               >
+              <Link key={product.id} href={`/catalogue/${product?.category?.name}/${product.id}`} className="product-card group">
                 <div className="relative overflow-hidden bg-gray-50" style={{ aspectRatio: "1/1" }}>
                   <Image
                     unoptimized fill
@@ -109,19 +97,44 @@ export default function MainProduct() {
                     </span>
                   </div>
 
+                  <div className="absolute top-2.5 right-2.5 z-10">
+                    <div className="relative h-5 w-14 bg-white/90 backdrop-blur-sm px-1 py-0.5">
+                      <Image
+                        src="/images/logo/tendzone.png"
+                        alt="Tendzone"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+
                   <div
-                    className="overlay absolute inset-x-0 bottom-0"
-                    style={{ background: "linear-gradient(to top,rgba(185,17,17,0.94),rgba(220,38,38,0.85))" }}
+                    className="overlay absolute inset-x-0 bottom-0 z-20"
                   >
-                    <div className="flex items-center justify-center gap-2 px-3 py-3">
-                      <span className="text-[11px] font-bold text-white uppercase tracking-widest">
-                        View Detail
-                      </span>
-                      <svg width="12" height="12" viewBox="0 0 13 13" fill="none" className="shrink-0">
-                        <path d="M1 6.5h11M7 2l5 4.5L7 11"
-                          stroke="white" strokeWidth="1.6"
-                          strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
+                    <div className="flex items-center gap-2 px-3 py-3 justify-end">
+
+                      {/* View Detail */}
+                      {/* <Link
+                        href="/catalogue/23"
+                        className="flex flex-1 items-center justify-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors duration-150 rounded py-1.5"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest whitespace-nowrap">
+                          View Detail
+                        </span>
+                      </Link> */}
+
+                      <span className="w-px h-5 bg-white/20 shrink-0" />
+                      <a
+                        href={`https://wa.me/${WA_NUMBER}?text=Halo,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                          <MessageCircle size={15} color="white" />
+                      </a>
+
                     </div>
                   </div>
                 </div>
@@ -135,7 +148,8 @@ export default function MainProduct() {
                   </p>
                 </div>
 
-              </Link>
+            </Link>
+              </m.div>
             ))}
           </div>
 
@@ -149,15 +163,13 @@ export default function MainProduct() {
               </span>
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
                 className="transition-transform duration-200 group-hover:translate-x-0.5">
-                <path d="M1 6.5h11M7 2l5 4.5L7 11"
-                  stroke="currentColor" strokeWidth="1.6"
-                  strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M1 6.5h11M7 2l5 4.5L7 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
           </div>
 
         </div>
       </section>
-    </>
+    </LazyMotion>
   );
 }

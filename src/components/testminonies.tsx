@@ -1,3 +1,4 @@
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import { AnimatedTestimonials } from "./ui/animated-testimonials";
 
 const testimonials = [
@@ -33,19 +34,35 @@ const testimonials = [
 
 export default function TestimoniesAreasSection() {
   return (
-    <section className="bg-white py-12 md:py-20 w-full overflow-hidden">
-      <div className="text-center px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
-          What Our Customers Said
-        </h2>
-        <p className="mt-3 md:mt-4 text-gray-600 text-sm sm:text-base max-w-xl sm:max-w-2xl mx-auto px-2">
-          Our dedicated customer support team offers reliable technical support
-        </p>
-      </div>
+    <LazyMotion features={domAnimation}>
+      <section className="bg-white py-12 md:py-20 w-full overflow-hidden">
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
-      </div>
-    </section>
+        <m.div
+          className="text-center px-4 sm:px-6 lg:px-8"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+            What Our Customers Said
+          </h2>
+          <p className="mt-3 md:mt-4 text-gray-600 text-sm sm:text-base max-w-xl sm:max-w-2xl mx-auto px-2">
+            Our dedicated customer support team offers reliable technical support
+          </p>
+        </m.div>
+
+        <m.div
+          className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
+        </m.div>
+
+      </section>
+    </LazyMotion>
   );
 }

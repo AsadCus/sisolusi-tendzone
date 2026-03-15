@@ -111,19 +111,23 @@ export default function ProductDetail({ id }: { id: string }) {
   const [activeTab, setActiveTab] = useState<Tab>("description");
   const [activeImg, setActiveImg] = useState(0);
 
-  useEffect(() => {
-    setProduct({
-      id: Number(id),
-      name: "2.4G Wireless Conference Host",
-      description: "",
-      supplier: { name: "TendZone" },
-      galleries: [
-        { file_url: "https://product-admin-panel.nterco.id/storage/product-galleries/nWLoMURp7KBIIb1UGVYuPtMEQNrqhSoYKSyiX9xb.webp" },
-      ],
-      category: { name: "Conference System" },
-    });
-    setLoading(false);
-  }, [id]);
+ useEffect(() => {
+  fetch(`https://product-admin-panel.nterco.id/api/products/${id}`)
+    .then((r) => r.json())
+    .then((data) => {
+      const p = data.data || data;
+      setProduct({
+        id: p.id,
+        name: p.name,
+        description: p.description ?? "",
+        supplier: { name: p.supplier?.name ?? "TendZone" },
+        galleries: p.galleries ?? [],
+        category: p.category ?? null,
+      });
+    })
+    .catch(console.error)
+    .finally(() => setLoading(false));
+}, [id]);
 
   const tabs: { key: Tab; label: string }[] = [
     { key: "description", label: "Description" },
@@ -163,7 +167,7 @@ export default function ProductDetail({ id }: { id: string }) {
   return (
     <div className="min-h-screen bg-white pt-8" style={{ fontFamily: "'DM Sans', sans-serif" }}>
 
-      <div className="h-[3px] bg-[#D0021B]" />
+      <div className="h-0.75 bg-[#D0021B]" />
 
       <div className="max-w-7xl mx-auto px-6 pt-5 pb-2">
         <nav className="flex items-center gap-2 text-xs text-gray-400">
@@ -209,7 +213,7 @@ export default function ProductDetail({ id }: { id: string }) {
                 <button
                   key={i}
                   onClick={() => setActiveImg(i)}
-                  className={`w-16 h-16 border overflow-hidden flex-shrink-0 transition-all ${
+                  className={`w-16 h-16 border overflow-hidden shrink-0 transition-all ${
                     activeImg === i ? "border-[#D0021B]" : "border-gray-200 hover:border-gray-400"
                   }`}
                 >
@@ -284,7 +288,7 @@ export default function ProductDetail({ id }: { id: string }) {
               >
                 {tab.label}
                 {activeTab === tab.key && (
-                  <span className="absolute top-0 left-0 right-0 h-[2px] bg-[#D0021B]" />
+                  <span className="absolute top-0 left-0 right-0 h-0.5 bg-[#D0021B]" />
                 )}
               </button>
             ))}
