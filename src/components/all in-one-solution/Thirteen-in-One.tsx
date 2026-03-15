@@ -117,7 +117,7 @@ const SECTIONS: SpecSection[] = [
 
 function Row({ label, value, even }: { label: string; value: string; even: boolean }) {
   return (
-    <div className={`grid grid-cols-[260px_1fr] border-b ${even ? "bg-gray-50" : "bg-white"} hover:bg-gray-100`}>
+    <div className={`grid grid-cols-[200px_1fr] border-b ${even ? "bg-gray-50" : "bg-white"} hover:bg-gray-100`}>
       <div className="p-2.5 text-sm text-gray-500 border-r whitespace-pre-line">
         {label}
       </div>
@@ -173,7 +173,7 @@ export default function SpecTable() {
         </div>
 
         <div className="overflow-hidden border shadow-sm">
-          <div className="grid grid-cols-[260px_1fr] text-xs uppercase tracking-widest text-gray-500 bg-gray-50 border-b">
+          <div className="grid grid-cols-[200px_1fr] text-xs uppercase tracking-widest text-gray-500 bg-gray-50 border-b">
             <div className="p-3 border-r">Parameter</div>
             <div className="p-3">Value</div>
           </div>

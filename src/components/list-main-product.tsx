@@ -85,7 +85,7 @@ export default function MainProduct() {
 
                   <div className="absolute top-2.5 left-2.5 z-10">
                     <span
-                      className="text-[9px] font-black uppercase tracking-widest px-2 py-1 text-white"
+                      className="text-[7px] lg:text-[9px] font-black uppercase tracking-widest px-2 py-1 text-white"
                       style={{
                         background: i % 2 === 0
                           ? "linear-gradient(135deg,#dc2626,#9f1010)"
