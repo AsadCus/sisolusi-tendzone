@@ -28,7 +28,7 @@ export default function MainProduct() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch("https://product-admin-panel.nterco.id/api/products?supplier_id=2")
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
       .then((r) => r.json())
       .then((data) => {
         const list: Product[] = data.data || data;
@@ -58,7 +58,7 @@ export default function MainProduct() {
             <h2 className="text-3xl lg:text-4xl font-black text-gray-900 tracking-tight">
               Main Product
             </h2>
-            <div className="mt-3 w-8 h-[3px] bg-red-500 rounded-full" />
+            <div className="mt-3 w-8 h-0.75 bg-red-500 rounded-full" />
             <p className="mt-4 text-sm text-gray-400 font-light max-w-xs leading-relaxed">
               We promise to find you the right equipment
             </p>

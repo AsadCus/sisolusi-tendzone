@@ -3,107 +3,160 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { MessageCircle } from "lucide-react";
-
-const WA_NUMBER = "628XXXXXXXXX";
+import { LazyMotion, domAnimation, m } from "framer-motion";
+import { MessageCircle } from 'lucide-react';
+import { Pagination, PaginationNext, PaginationItem, PaginationContent, PaginationPrevious, PaginationLink } from "../ui/pagination";
 
 interface Product {
   id: number;
   name: string;
-  slug: string;
-  description?: string;
+  category:{
+    id: number;
+    name: string;
+  }
   galleries?: { file_url: string }[];
-  supplier?: { name: string };
 }
 
-const getProductImage = (product: Product): string =>
-  product.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
+const BADGES = ["Best Seller", "Hot", "Popular", "New", "Top Pick"];
+const TAGLINES = ["Premium Quality", "High Durability", "Best Value", "Trusted Choice", "Top Rated"];
 
-const SkeletonCard = () => (
-  <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 animate-pulse">
-    <div className="h-48 bg-gray-100" />
-    <div className="p-4 space-y-2">
-      <div className="h-3 bg-gray-100 rounded w-3/4" />
-      <div className="h-3 bg-gray-100 rounded w-1/2" />
-    </div>
-  </div>
-);
+const getImage = (p: Product) => p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
+const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
 
-const ProductCard = ({ product }: { product: Product }) => (
-  <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-red-100 transition-all duration-300 overflow-hidden">
-    
-      <a href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in: ${product.name}`)}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={(e: React.MouseEvent) => e.stopPropagation()}
-      className="absolute top-3 right-3 z-10 w-8 h-8 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
-    >
-      <MessageCircle size={15} className="text-white" fill="white" />
-    </a>
+const WA_NUMBER = "6281234567890";
 
-    <Link href={`/products/${product.slug}`} className="block">
-      <div className="relative w-full h-68 bg-gray-50 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-t from-red-50/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-1" />
-        <Image
-          src={getProductImage(product)}
-          alt={product.name}
-          fill
-          unoptimized
-          className="object-contain p-5 transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-
-      <div className="h-0.5 w-0 group-hover:w-full bg-red-500 transition-all duration-300" />
-
-      <div className="px-4 py-4">
-        <h3 className="text-[13px] font-semibold text-gray-800 line-clamp-2 group-hover:text-red-600 transition-colors duration-200 leading-snug">
-          {product.name}
-        </h3>
-        {product.description && (
-          <p className="mt-1.5 text-[11.5px] text-gray-800 line-clamp-2 leading-relaxed">
-            {product.description}
-          </p>
-        )}
-      </div>
-    </Link>
-  </div>
-);
-
-export default function ProductGridAudioDistribution() {
+export default function AudioProcessorProduct() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL!);
-        const data = await res.json();
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
+      .then((r) => r.json())
+      .then((data) => {
         const list: Product[] = data.data || data;
-        const filtered = list.filter((item) => item.supplier?.name === "TendZone");
-        setProducts(filtered);
-      } catch (err) {
-        console.error("Fetch product error:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchData();
+        const withImage = list.filter(hasImage);
+        const withoutImage = list.filter((p) => !hasImage(p));
+        setProducts([...withImage, ...withoutImage].slice(0, 8));
+      })
+      .catch(console.error);
   }, []);
 
   return (
-    <section className="w-full pt-4 pb-4 bg-white">
-      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-        <div>
-        </div>
+    <LazyMotion features={domAnimation}>
+      <style>{`
+        .card-img { transition: transform 600ms cubic-bezier(.25,.46,.45,.94); }
+        .product-card:hover .card-img { transform: scale(1.06); }
+        .overlay { transform: translateY(100%); transition: transform 320ms ease-out; }
+        .product-card:hover .overlay { transform: translateY(0); }
+      `}</style>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-          {loading
-            ? Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)
-            : products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {products.map((product, i) => (
+              <m.div
+                key={product.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="product-card group"
+              >
+              <Link key={product.id} href={`/catalogue/${product?.category?.name}/${product.id}`} className="product-card group">
+                <div className="relative overflow-hidden bg-gray-50" style={{ aspectRatio: "1/1" }}>
+                  <Image
+                    unoptimized fill
+                    src={getImage(product)}
+                    alt={product.name}
+                    className="card-img object-cover"
+                  />
+
+                  <div className="absolute top-2.5 left-2.5 z-10">
+                    <span
+                      className="text-[7px] lg:text-[9px] font-black uppercase tracking-widest px-2 py-1 text-white"
+                      style={{
+                        background: i % 2 === 0
+                          ? "linear-gradient(135deg,#dc2626,#9f1010)"
+                          : "linear-gradient(135deg,#111,#333)",
+                        clipPath: "polygon(0 0,calc(100% - 5px) 0,100% 100%,5px 100%)",
+                      }}
+                    >
+                      {BADGES[i % BADGES.length]}
+                    </span>
+                  </div>
+
+                  <div className="absolute top-2.5 right-2.5 z-10">
+                    <div className="relative h-5 w-14 bg-white/90 backdrop-blur-sm px-1 py-0.5">
+                      <Image
+                        src="/images/logo/tendzone.png"
+                        alt="Tendzone"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className="overlay absolute inset-x-0 bottom-0 z-20"
+                  >
+                    <div className="flex items-center gap-2 px-3 py-3 justify-end">
+
+                      {/* View Detail */}
+                      {/* <Link
+                        href="/catalogue/23"
+                        className="flex flex-1 items-center justify-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors duration-150 rounded py-1.5"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest whitespace-nowrap">
+                          View Detail
+                        </span>
+                      </Link> */}
+
+                      <span className="w-px h-5 bg-white/20 shrink-0" />
+                      <a
+                        href={`https://wa.me/${WA_NUMBER}?text=Halo,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                          <MessageCircle size={15} color="white" />
+                      </a>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 px-0.5 pb-1">
+                  <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
+                    {product.name}
+                  </p>
+                  <p className="text-[11px] text-gray-400 mt-0.5 font-light tracking-wide">
+                    {TAGLINES[i % TAGLINES.length]}
+                  </p>
+                </div>
+
+            </Link>
+              </m.div>
+            ))}
+          </div>  
+          <div className="mt-12 flex justify-center">
+            <Link
+              href="/products"
+              className="group flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-red-600 transition-colors duration-200"
+            >
+              <span className="border-b border-gray-300 group-hover:border-red-500 pb-px transition-colors duration-200">
+                View All Products
+              </span>
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
+                className="transition-transform duration-200 group-hover:translate-x-0.5">
+                <path d="M1 6.5h11M7 2l5 4.5L7 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
+
         </div>
-      </div>
-    </section>
+      </section>
+    </LazyMotion>
   );
 }

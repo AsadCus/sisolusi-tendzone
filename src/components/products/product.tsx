@@ -24,7 +24,7 @@ const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
 
 const WA_NUMBER = "6281234567890";
 
-export default function ProductGrid() {
+export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function ProductGrid() {
         const list: Product[] = data.data || data;
         const withImage = list.filter(hasImage);
         const withoutImage = list.filter((p) => !hasImage(p));
-        setProducts([...withImage, ...withoutImage].slice(0, 4));
+        setProducts([...withImage, ...withoutImage].slice(0, 8));
       })
       .catch(console.error);
   }, []);
@@ -51,17 +51,11 @@ export default function ProductGrid() {
       <section className="w-full bg-white py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-16">
 
-          <div className="flex flex-col items-start text-left mb-14">
+          <div className="flex flex-col items-center text-center mb-14">
             <span className="text-red-500 text-[10px] font-bold tracking-[0.35em] uppercase mb-3">
-              Your Professional
+           Products Categories
             </span>
-            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 tracking-tight">
-            All-in-one Solution Manufacturer!
-            </h2>
             <div className="mt-3 w-8 h-0.75 bg-red-500 rounded-full" />
-            <p className="mt-4 text-sm text-gray-400 font-light max-w-7xl leading-relaxed">
-           Tendzone, established in 2010, is a global leader in providing advanced audio-visual (AV) solutions and manufacturing high-quality AV products. We specialize in a wide range of cutting-edge technologies, including audio processors, microphones, speakers, power amplifiers, AV over IP systems, digital conference systems, and MIDIS Distributed Multimedia Transmission Control Systems. Our solutions are trusted across industries such as conference rooms, command centers, education, multi-functional halls, and stadiums.
-            </p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
