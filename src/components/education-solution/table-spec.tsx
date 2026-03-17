@@ -26,7 +26,7 @@ const SECTIONS: SpecSection[] = [
       { key: "Video Codec", val: "8-channel 1080P@30 encoding and 8-channel 1080P@30 decoding" },
       { key: "Audio & Video Protocol", val: "Audio: G.711, G.722, G722.1, G722.1C, AAC, supports decoding audio code stream\nVideo: H.264, H.265" },
       { key: "Video Synthesis", val: "Built-in video splitting: single, double, three, nine, sixteen split screens\nSupports picture-in-picture / picture-out-picture and subtitle overlay" },
-      { key: "Codec Rate", val: "Maximum 16 channels of 1080P codec; 128 Kbps ~ 8 Mbps per channel" },
+      { key: "Codec Rate", val: "Maximum 16 channels of 1080P codec; 128 Kbps to 8 Mbps per channel" },
     ],
   },
   {
@@ -39,20 +39,28 @@ const SECTIONS: SpecSection[] = [
   {
     title: "Power & Environment",
     rows: [
-      { key: "Input Voltage & Current", val: "AC 100 ~ 220V / 50Hz" },
-      { key: "Power Consumption (Typical)", val: "40W — without external speaker output and POE powered device" },
-      { key: "Power Consumption (Full Load)", val: "340W — with two external speakers and external POE powered device connected" },
-      { key: "Operating Temperature", val: "0 ~ 45℃" },
-      { key: "Humidity & Altitude", val: "10% to 90% humidity; altitude ≤ 5000 meters" },
+      { key: "Input Voltage & Current", val: "AC 100 to 220V / 50Hz" },
+      { key: "Power Consumption (Typical)", val: "40W, without external speaker output and POE powered device" },
+      { key: "Power Consumption (Full Load)", val: "340W, with two external speakers and external POE powered device connected" },
+      { key: "Operating Temperature", val: "0 to 45°C" },
+      { key: "Humidity & Altitude", val: "10% to 90% humidity; altitude 5000 meters max" },
     ],
   },
 ];
 
 function Row({ label, value, even }: { label: string; value: string; even: boolean }) {
   return (
-    <div className={`grid grid-cols-[200px_1fr] border-b ${even ? "bg-gray-50" : "bg-white"} hover:bg-gray-100`}>
-      <div className="p-2.5 text-sm text-gray-500 border-r whitespace-pre-line">{label}</div>
-      <div className="p-2.5 text-sm text-gray-800 whitespace-pre-line">{value}</div>
+    <div className={`border-b ${even ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}>
+      {/* Desktop */}
+      <div className="hidden sm:grid sm:grid-cols-[40%_60%]">
+        <div className="p-2.5 text-sm text-gray-500 border-r whitespace-pre-line">{label}</div>
+        <div className="p-2.5 text-sm text-gray-800 whitespace-pre-line">{value}</div>
+      </div>
+      {/* Mobile — stacked */}
+      <div className="sm:hidden px-3 py-2.5 space-y-0.5">
+        <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide leading-snug">{label}</p>
+        <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-line">{value}</p>
+      </div>
     </div>
   );
 }
@@ -93,13 +101,19 @@ export default function EducationSolutionSpecTable() {
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="text-center mb-8">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-semibold tracking-widest uppercase bg-red-50 text-red-500 border border-red-200">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
+              Specifications
+            </span>
+          </div>
           <h2 className="text-2xl md:text-xl font-medium text-red-600">
             Education Solution Specification
           </h2>
         </div>
 
         <div className="overflow-hidden border shadow-sm">
-          <div className="grid grid-cols-[200px_1fr] text-xs uppercase tracking-widest text-gray-500 bg-gray-50 border-b">
+          <div className="hidden sm:grid sm:grid-cols-[40%_60%] text-xs uppercase tracking-widest text-gray-500 bg-gray-50 border-b">
             <div className="p-3 border-r">Parameter</div>
             <div className="p-3">Value</div>
           </div>

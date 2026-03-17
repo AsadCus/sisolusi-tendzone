@@ -22,7 +22,6 @@ export default function AudioProcessorApplication() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
 
-          {/* Left — Image */}
           <div className="bg-gray-50 border border-gray-100 overflow-hidden">
             <img
               src="https://www.tendzone.net/uploads/43135/16ch-4k60-4-4-4-hdr-hdmi-distributor49447.jpg"
@@ -31,7 +30,6 @@ export default function AudioProcessorApplication() {
             />
           </div>
 
-          {/* Right — Content */}
           <div className="flex flex-col justify-center">
             <div className="w-6 h-0.5 bg-red-500 mb-3" />
             <h2 className="text-lg font-semibold text-gray-900 mb-4">

@@ -47,25 +47,22 @@ export default function AudioAccesoriesFAQ() {
                 className="w-full flex items-center justify-between py-4 text-left gap-4 cursor-pointer"
               >
                 <span
-                  className={`text-[13.5px] font-semibold transition-colors duration-150 ${
-                    open === i ? "text-red-500" : "text-gray-800"
-                  }`}
+                  className={`text-[13.5px] font-semibold transition-colors duration-150 ${open === i ? "text-red-500" : "text-gray-800"
+                    }`}
                 >
                   {faq.question}
                 </span>
                 <ChevronDown
                   size={16}
                   strokeWidth={2.5}
-                  className={`shrink-0 transition-transform duration-200 ${
-                    open === i ? "rotate-180 text-red-400" : "text-gray-400"
-                  }`}
+                  className={`shrink-0 transition-transform duration-200 ${open === i ? "rotate-180 text-red-400" : "text-gray-400"
+                    }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  open === i ? "max-h-64 pb-5" : "max-h-0"
-                }`}
+                className={`overflow-hidden transition-all duration-300 ${open === i ? "max-h-64 pb-5" : "max-h-0"
+                  }`}
               >
                 <p className="text-[13px] font-medium text-gray-600 leading-relaxed">
                   {faq.answer}

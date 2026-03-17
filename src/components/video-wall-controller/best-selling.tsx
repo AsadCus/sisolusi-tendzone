@@ -17,9 +17,9 @@ interface Product {
 
 const badgeGradient: Record<BadgeType, string> = {
   bestselling: "linear-gradient(135deg,#111,#333)",
-  flagship:    "linear-gradient(135deg,#111,#333)",
-  hot:         "linear-gradient(135deg,#dc2626,#9f1010)",
-  new:         "linear-gradient(135deg,#dc2626,#9f1010)",
+  flagship: "linear-gradient(135deg,#111,#333)",
+  hot: "linear-gradient(135deg,#dc2626,#9f1010)",
+  new: "linear-gradient(135deg,#dc2626,#9f1010)",
 };
 
 const PRODUCTS: Product[] = [
@@ -54,7 +54,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
     <Link href={`/products/${product.slug}`} className="group block">
       <div className="border border-gray-100 bg-white hover:border-red-200 transition-colors duration-200 overflow-hidden h-full flex flex-col">
 
-        {/* Image */}
+    
         <div className="relative overflow-hidden bg-white aspect-[4/3]">
           <Image
             unoptimized fill
@@ -83,7 +83,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-20" />
         </div>
 
-        {/* Content */}
+       
         <div className="p-5 flex flex-col gap-3 flex-1">
           <h3 className="text-sm font-bold text-gray-900 leading-snug group-hover:text-red-600 transition-colors duration-200">
             {product.name}

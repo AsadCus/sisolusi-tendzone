@@ -5,7 +5,6 @@ import SendInquirySection from "@/components/section/SendInquirySection";
 import WhyChooseUsSectionSubcategory from "@/components/section/whyChooseUsSubcategory";
 import OemOdmSubcategorySection from "@/components/section/oem-odm-subcategory";
 import BestSellingSpeakers from "@/components/speaker/best-selling";
-import SpeakerSpecTable from "@/components/video-wall-controller/table-speficication";
 import HonorQualification from "@/components/section/honor-qualification";
 import AfterSalesServices from "@/components/section/after-sales";
 import PackagingAndShippingSection from "@/components/section/Packaging-and-Shipping";
@@ -19,17 +18,18 @@ import NavbarProductLanding from "@/components/navbar-landing-product";
 import SpeakerBenefits from "@/components/speaker/speaker-bnefit";
 import ApllicationSpeakers from "@/components/speaker/speaker-application";
 import SafetyInstructionsSpeakerSection from "@/components/speaker/instruction-speaker";
+import SpeakerSpecTable from "@/components/speaker/Speaker-spec-table";
 
 export default function ProductsPage() {
   return (
     <>
     <NavbarProductLanding />
-      <PageHero title="Network Adapters" />
+      <PageHero title="Speaker" />
     <ProductSpeaker />
       <WhyChooseUsSectionSubcategory />
       <OemOdmSubcategorySection/>
         <BestSellingSpeakers />
-      <SpeakerSpecTable />
+        <SpeakerSpecTable />
       <SpeakerBenefits />
       {/* <FunctionsNetworkSection /> */}
         <ApllicationSpeakers />

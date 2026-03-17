@@ -17,7 +17,8 @@ import PopularProductsCarousel from "@/components/section/popularProducts";
 import SendInquirySection from "@/components/section/SendInquirySection";
 import Footer from "@/components/footer";
 import NavbarProductLanding from "@/components/navbar-landing-product";
-
+import AudioProcessorProduct from "@/components/audio-processor/audio-processor";
+import AudioAccessoriesProduct from "@/components/audio-accessories/audio-accesories";
 
 export default function AudioProcessorPage() {
     return(
@@ -26,7 +27,7 @@ export default function AudioProcessorPage() {
          <PageHero title="Audio Processor"/>
         <AboutAudioProcessor />
         <WhyChooseUsCategory />
-        <ProductGrid/>
+        <AudioProcessorProduct/>
         <OemOdmSectionCategory />
         <BestSellingAudioProcessor />
         <AudioProcessorSpec />

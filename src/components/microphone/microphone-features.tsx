@@ -6,16 +6,16 @@ import {
 } from "lucide-react";
 
 const features = [
-  { icon: Mic,              description: "Capacitance microphone with cardioid directed electret, can deliver clear sound effect." },
-  { icon: Wind,             description: "Built-in windproof cotton, optimizing the structure design of the acoustic chamber, and bringing better sound quality." },
-  { icon: RotateCcw,        description: "Adjustable microphone angle, convenient for collecting the sound. Highly resistant to mobile phone interference." },
-  { icon: Package,          description: "Black full metal pedestal covered by low-reflectance and grinding coatings." },
-  { icon: Shield,           description: "Stable and thick pedestal with shock-proof insulating rubber pad, effectively reducing friction vibration and mechanical noise." },
-  { icon: Unplug,           description: "3-pin nickel-plated male socket on the back of the pedestal serves as the output terminal of audio signal." },
-  { icon: Zap,              description: "Microphone supports 48V phantom power supply." },
-  { icon: ToggleRight,      description: "Self-locking ON/OFF button available; red indicator lights confirm active status." },
-  { icon: Users,            description: "Suitable for conference, lecture, teaching and other occasions." },
-  { icon: SlidersHorizontal,description: "Can co-work directly with audio processor or mixer." },
+  { icon: Mic, description: "Capacitance microphone with cardioid directed electret, can deliver clear sound effect." },
+  { icon: Wind, description: "Built-in windproof cotton, optimizing the structure design of the acoustic chamber, and bringing better sound quality." },
+  { icon: RotateCcw, description: "Adjustable microphone angle, convenient for collecting the sound. Highly resistant to mobile phone interference." },
+  { icon: Package, description: "Black full metal pedestal covered by low-reflectance and grinding coatings." },
+  { icon: Shield, description: "Stable and thick pedestal with shock-proof insulating rubber pad, effectively reducing friction vibration and mechanical noise." },
+  { icon: Unplug, description: "3-pin nickel-plated male socket on the back of the pedestal serves as the output terminal of audio signal." },
+  { icon: Zap, description: "Microphone supports 48V phantom power supply." },
+  { icon: ToggleRight, description: "Self-locking ON/OFF button available; red indicator lights confirm active status." },
+  { icon: Users, description: "Suitable for conference, lecture, teaching and other occasions." },
+  { icon: SlidersHorizontal, description: "Can co-work directly with audio processor or mixer." },
 ];
 
 export default function MicrophoneFeatureSection() {

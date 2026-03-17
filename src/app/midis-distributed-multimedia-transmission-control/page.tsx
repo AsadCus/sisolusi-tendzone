@@ -18,7 +18,7 @@ export default function ProductPage(){
     return(
         <>
             <NavbarProductLanding />
-            <PageHero title="video-accessories"/>
+            <PageHero title="MIDIS Distributed Multimedia Transmission Control"/>
             <MidisProduct />
             <WhyChooseUsCategory />
             <OemOdmSectionCategory />

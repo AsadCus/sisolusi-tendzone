@@ -1,104 +1,114 @@
 "use client";
 
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { Radio, Mic2, Check } from "lucide-react";
+import { Radio, Mic2 } from "lucide-react";
 
 const sections = [
   {
-    badge: "Conference Host",
     icon: Radio,
+    label: "Conference Host",
     title: "2.4G Wireless Conference Host",
-    subtitle: "Features",
     image: "/images/product/expansion-midis.png",
     imageAlt: "2.4G Wireless Conference Host",
     imageLeft: false,
     features: [
       "Wireless Conference System host (receiver)",
       "2.4G universal wireless control and transmission technology",
-      "One system can support up to 255 wireless microphones (chairman units / delegate units)",
-      "Mature self-adaptive FHSS technology, high privacy and ability of avoiding interference",
-      "Can be used with Wi-Fi and Bluetooth devices without interfering each other",
-      "4 conference modes: First in first out free mode (1–4 speakers programmable), Chairman mode, Time-limiting speech mode",
-      "Support camera tracking function, 4 camera inputs, 2 video outputs",
-      "Support multiple camera communication protocols: PELCO-D, PELCO-P, VISCA",
-      "Intelligent power management — when host is shut down, wireless microphone shuts down automatically",
-      "240×28 display screen with friendly menu setting, easy to use",
-      "Working distance ≥60m",
+      "One system supports up to 255 wireless microphones (chairman + delegate units)",
+      "Mature self-adaptive FHSS technology — high privacy and strong interference avoidance",
+      "Compatible with Wi-Fi and Bluetooth devices without mutual interference",
+      "4 conference modes: Free mode (1–4 speakers), Chairman mode, Time-limiting speech mode",
+      "Camera tracking support — 4 inputs, 2 video outputs; PELCO-D, PELCO-P, VISCA protocols",
+      "Intelligent power management — microphones auto shut down with host",
+      "240×28 display with friendly menu for easy operation",
+      "Working distance ≥ 60m",
     ],
   },
   {
-    badge: "Chairman Unit",
     icon: Mic2,
+    label: "Chairman Unit",
     title: "Desktop Chairman Rectangular Columnar Unit",
-    subtitle: "Features",
     image: "/images/product/premium-recording.png",
     imageAlt: "Desktop Chairman Rectangular Columnar Unit",
     imageLeft: true,
     features: [
-      "Elegant and ergonomic design with exquisite tabletop form factor for ease of use and transport",
-      "Cable coming out of the base for tidier wiring",
+      "Elegant ergonomic design with cable exit from base for tidier wiring",
       "Hi-Fi loudspeaker, priority button, and microphone On/Off button",
       "Braille present on all physical buttons",
       "Rectangular columnar microphone with adjustable pitching angle",
-      "OLED screen with high brightness, high contrast, wide viewing angle, and low power consumption",
+      "OLED screen — high brightness, high contrast, wide viewing angle, low power consumption",
       "\"Closed Loop – Daisy Chain\" connection topology",
-      "Transmits up to 64 channels of high-quality digital audio on a dedicated 8-pin cable",
-      "Supports 48kHz audio sampling rate — all 64 channels reproduce frequencies between 30Hz and 20kHz",
+      "Transmits up to 64 channels of high-quality digital audio on dedicated 8-pin cable",
+      "48kHz audio sampling rate — all channels reproduce 30Hz to 20kHz",
       "Excellent immunity to RF interference from mobile phones",
-      "Separate adjustment of gain and EQ (5-band) per microphone for perfect sound",
-      "Supports \"PnP\" (plug and play)",
+      "Separate gain and 5-band EQ adjustment per microphone",
+      "Supports Plug and Play (PnP)",
     ],
   },
 ];
 
 export default function ProductApplicationFeatureConference() {
   return (
-    <section className="w-full bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6 space-y-20">
+    <section className="w-full bg-white py-16">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 space-y-16">
         {sections.map((section, idx) => {
           const Icon = section.icon;
 
           const imageCol = (
-            <div className="relative group cursor-pointer rounded-none overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center h-80">
+            <div className="bg-white border border-gray-100 flex items-center justify-center aspect-square w-full overflow-hidden group">
               <Image
+                unoptimized
                 src={section.image}
                 alt={section.imageAlt}
-                width={420}
-                height={280}
-                className="object-contain w-full h-full p-8 transition-transform duration-500 group-hover:scale-105"
+                width={480}
+                height={480}
+                className="w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-none flex items-end p-6">
-                <p className="text-white text-sm font-medium">{section.imageAlt}</p>
-              </div>
             </div>
           );
 
           const contentCol = (
-            <div className="flex flex-col justify-center">
-              <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-6 leading-snug">
-                {section.title}{" "}
-                <span className="text-red-500">{section.subtitle}</span>
-              </h2>
+            <div className="flex flex-col justify-center gap-6">
+              {/* Eyebrow */}
+              <div className="flex items-center gap-2">
+                <span className="w-4 h-[2px] bg-red-500 shrink-0" />
+                <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-red-400 flex items-center gap-1.5">
+                  <Icon className="w-3 h-3" />
+                  {section.label}
+                </span>
+              </div>
 
-              <ul className="space-y-1">
+              {/* Title */}
+              <div>
+                <h2 className="text-2xl md:text-[26px] font-bold text-gray-900 leading-snug tracking-tight">
+                  {section.title}
+                </h2>
+                <div className="flex items-center gap-1.5 mt-3">
+                  <span className="w-7 h-[3px] bg-red-500 rounded-full" />
+                  <span className="w-2.5 h-[3px] bg-red-300 rounded-full" />
+                  <span className="w-1.5 h-[3px] bg-red-100 rounded-full" />
+                </div>
+              </div>
+
+              {/* Feature list */}
+              <div className="grid grid-cols-1 gap-px bg-gray-100 border border-gray-100">
                 {section.features.map((f, i) => (
-                  <li
+                  <div
                     key={i}
-                    className="flex items-start gap-3 px-3 rounded-none border border-transparent hover:border-t-2 hover:border-t-red-300 hover:border-x-transparent hover:border-b-transparent hover:bg-red-50/40 transition-all duration-200 group"
+                    className="flex items-start gap-3 bg-white px-4 py-3 hover:bg-red-50/40 transition-colors duration-150 group"
                   >
-                    <Check className="w-3.5 h-3.5 text-red-400 mt-0.5 shrink-0" />
-                    <span className="text-sm text-gray-400 leading-relaxed group-hover:text-gray-600 transition-colors duration-200">
+                    <div className="w-3 h-[2px] bg-red-500 mt-[9px] shrink-0" />
+                    <p className="text-sm text-gray-500 leading-relaxed group-hover:text-gray-700 transition-colors duration-150">
                       {f}
-                    </span>
-                  </li>
+                    </p>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           );
 
           return (
-            <div key={idx} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div key={idx} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               {section.imageLeft ? (
                 <>
                   {imageCol}

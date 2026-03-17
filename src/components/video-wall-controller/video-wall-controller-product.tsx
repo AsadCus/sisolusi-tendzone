@@ -20,9 +20,9 @@ interface Product {
 
 const badgeGradient: Record<BadgeType, string> = {
   bestselling: "linear-gradient(135deg,#111,#333)",
-  flagship:    "linear-gradient(135deg,#111,#333)",
-  hot:         "linear-gradient(135deg,#dc2626,#9f1010)",
-  new:         "linear-gradient(135deg,#dc2626,#9f1010)",
+  flagship: "linear-gradient(135deg,#111,#333)",
+  hot: "linear-gradient(135deg,#dc2626,#9f1010)",
+  new: "linear-gradient(135deg,#dc2626,#9f1010)",
 };
 
 const PRODUCTS: Product[] = [

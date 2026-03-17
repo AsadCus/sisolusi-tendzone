@@ -27,7 +27,7 @@ export default function AudioProcessorFAQ() {
     <div className="bg-white px-4 py-6 font-sans">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto">
 
-        {/* Header */}
+    
         <div className="mb-5">
           <div className="w-6 h-0.5 bg-red-500 mb-3" />
           <h2 className="text-lg font-semibold text-gray-900">
@@ -35,7 +35,7 @@ export default function AudioProcessorFAQ() {
           </h2>
         </div>
 
-        {/* Accordion */}
+       
         <div className="divide-y divide-gray-100">
           {faqs.map((faq, i) => (
             <div key={i}>

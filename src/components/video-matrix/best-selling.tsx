@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 
 type BadgeType = "bestselling" | "hot" | "new" | "flagship";
 
@@ -17,16 +16,16 @@ interface Product {
   badge?: { label: string; type: BadgeType };
 }
 
-// ─── Badge ────────────────────────────────────────────────────────────────────
+
 
 const badgeGradient: Record<BadgeType, string> = {
   bestselling: "linear-gradient(135deg,#111,#333)",
-  flagship:    "linear-gradient(135deg,#111,#333)",
-  hot:         "linear-gradient(135deg,#dc2626,#9f1010)",
-  new:         "linear-gradient(135deg,#dc2626,#9f1010)",
+  flagship: "linear-gradient(135deg,#111,#333)",
+  hot: "linear-gradient(135deg,#dc2626,#9f1010)",
+  new: "linear-gradient(135deg,#dc2626,#9f1010)",
 };
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+
 
 const PRODUCTS: Product[] = [
   {
@@ -58,14 +57,14 @@ const PRODUCTS: Product[] = [
   },
 ];
 
-// ─── Card ─────────────────────────────────────────────────────────────────────
+
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <div className="border border-gray-100 bg-white hover:border-red-200 transition-colors duration-200 overflow-hidden h-full flex flex-col">
 
-        {/* Image */}
+ 
         <div className="relative overflow-hidden bg-white aspect-[4/3]">
           <Image
             unoptimized
@@ -75,7 +74,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             className="object-contain px-6 pt-8 pb-4 transition-transform duration-500 group-hover:scale-105"
           />
 
-          {/* Badge */}
+     
           {product.badge && (
             <div className="absolute top-3 left-3 z-10">
               <span
@@ -87,18 +86,18 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             </div>
           )}
 
-          {/* Number */}
+       
           <div className="absolute bottom-3 right-3 z-10">
             <span className="text-[28px] font-black text-gray-100 leading-none select-none group-hover:text-red-100 transition-colors duration-200">
               {String(index + 1).padStart(2, "0")}
             </span>
           </div>
 
-          {/* Bottom red line */}
+      
           <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-20" />
         </div>
 
-        {/* Content */}
+\
         <div className="p-5 flex flex-col gap-3 flex-1">
           <h3 className="text-sm font-bold text-gray-900 leading-snug group-hover:text-red-600 transition-colors duration-200">
             {product.name}
@@ -123,7 +122,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   );
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
 
 export default function BestSellingVideoMatrix() {
   return (
@@ -141,7 +139,7 @@ export default function BestSellingVideoMatrix() {
             </div>
           </div>
 
-          {/* Grid — 1 col mobile, 3 col desktop */}
+       
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {PRODUCTS.map((product, i) => (
               <m.div

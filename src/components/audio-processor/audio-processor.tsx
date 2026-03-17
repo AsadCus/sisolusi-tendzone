@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import { MessageCircle } from 'lucide-react';
+import { Pagination, PaginationNext, PaginationItem, PaginationContent, PaginationPrevious, PaginationLink } from "../ui/pagination";
 
 interface Product {
   id: number;
@@ -24,8 +25,13 @@ const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
 
 const WA_NUMBER = "6281234567890";
 
-export default function MainProduct() {
+export default function AudioProcessorProduct() {
   const [products, setProducts] = useState<Product[]>([]);
+   const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 4;
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
 
   useEffect(() => {
     fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
@@ -51,21 +57,8 @@ export default function MainProduct() {
       <section className="w-full bg-white py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-16">
 
-          <div className="flex flex-col items-center text-center mb-14">
-            <span className="text-red-500 text-[10px] font-bold tracking-[0.35em] uppercase mb-3">
-              Our Collection
-            </span>
-            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 tracking-tight">
-              Main Product
-            </h2>
-            <div className="mt-3 w-8 h-0.75 bg-red-500 rounded-full" />
-            <p className="mt-4 text-sm text-gray-400 font-light max-w-xs leading-relaxed">
-              We promise to find you the right equipment
-            </p>
-          </div>
-
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-            {products.map((product, i) => (
+            {currentProducts.map((product, i) => (
               <m.div
                 key={product.id}
                 initial={{ opacity: 0, y: 16 }}
@@ -152,6 +145,47 @@ export default function MainProduct() {
               </m.div>
             ))}
           </div>
+                  <div className="mt-10 flex justify-center">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage > 1) setCurrentPage(currentPage - 1);
+                  }}
+                />
+              </PaginationItem>
+              {Array.from({ length: totalPages }).map((_, i) => {
+                const page = i + 1;
+                return (
+                  <PaginationItem key={page}>
+                    <PaginationLink
+                      href="#"
+                      isActive={currentPage === page}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage(page);
+                      }}
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                );
+              })}
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                  }}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
 
           <div className="mt-12 flex justify-center">
             <Link

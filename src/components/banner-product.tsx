@@ -24,7 +24,7 @@ export default function BannerCarousel() {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    fetch("https://product-admin-panel.nterco.id/api/banners/supplier/2")
+    fetch(process.env.NEXT_PUBLIC_API_BANNER_URL || "")
       .then((r) => r.json())
       .then((json) => {
         const list = (json.data || json) as any[];

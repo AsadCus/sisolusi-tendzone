@@ -36,14 +36,13 @@ export default function BestSellingAudioProcessor() {
     <section className="bg-white py-8 px-4 font-sans">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto">
 
-        {/* Header */}
         <div className="mb-6">
           <h2 className="text-2xl md:text-xl mx-15 font-medium text-black">
             Our Best-Selling Audio Processor
           </h2>
         </div>
 
-        {/* Products */}
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {products.map((p, i) => (
             <div

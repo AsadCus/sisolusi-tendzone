@@ -71,7 +71,7 @@ export default function ApplicationMIDISAVOverIP() {
                           {item.title}
                         </h3>
                       </div>
-                      <p className="text-xs text-gray-400 leading-relaxed">
+                      <p className="text-xs text-gray-700 leading-relaxed">
                         {item.description}
                       </p>
                     </div>

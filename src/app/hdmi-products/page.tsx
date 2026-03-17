@@ -18,7 +18,7 @@ export default function ProductPage(){
     return(
         <>
             <NavbarProductLanding />
-            <PageHero title="hdmi-products"/>
+            <PageHero title="HDMI Products"/>
             <HdmiProduct />
             <WhyChooseUsCategory />
             <OemOdmSectionCategory />

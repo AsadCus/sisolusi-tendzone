@@ -2,47 +2,41 @@
 
 import { useState } from "react"
 
-type SpecRow = { key: string; val: string }
+type SpecRow     = { key: string; val: string }
 type SpecSection = { title: string; rows: SpecRow[] }
 
 const SECTIONS: SpecSection[] = [
   {
-    title: "Input",
+    title: "General Performance",
     rows: [
-      { key: "Input", val: "(4) HDMI" },
-      { key: "Signal format", val: "(1) Type-A 19PIN HDMI, (1) Mini DP, (1) Type-C" },
-      { key: "HDMI signal resolution", val: "Up to 4K@60Hz 4:4:4, HDR" },
-      { key: "Mini DP signal resolution", val: "Up to 4K@60Hz 4:4:4" },
-      { key: "Type-C signal resolution", val: "Up to 4K@60Hz 4:4:4" },
-      { key: "HDMI embedded audio", val: "LPCM 7.1 audio, Dolby Atmos®, Dolby® TrueHD, Dolby Digital® Plus, DTS:X™, and DTS-HD® Master Audio™ pass-through" },
-      { key: "HDMI version", val: "2.0" },
-      { key: "DP version", val: "1.2" },
-      { key: "HDCP Standard", val: "2.2" },
-      { key: "HDMI/Mini DP/Type-C Input cable length", val: "0.3m" },
+      { key: "Name",                       val: "Dual 8-inch two-way professional speakers" },
+      { key: "Frequency Response (-10dB)", val: "75 – 20000 Hz" },
+      { key: "Rated Power",                val: "400 W" },
+      { key: "Long Term Maximum Power",    val: "800 W" },
+      { key: "Peak Power",                 val: "1600 W" },
+      { key: "Sensitivity (1W/1m)",        val: "95 dB ± 2 dB" },
+      { key: "Maximum SPL — Continuous",   val: "121 ± 2 dB" },
+      { key: "Maximum SPL — Peak",         val: "131 ± 2 dB" },
+      { key: "Coverage Angle (H × V)",     val: "100° × 60°" },
+      { key: "Impedance",                  val: "4 Ω ± 20%" },
     ],
   },
   {
-    title: "Output",
+    title: "Transducers",
     rows: [
-      { key: "Signal format", val: "HDMI Type-A" },
-      { key: "HDMI version", val: "2.0" },
-      { key: "DP version", val: "1.2" },
-      { key: "HDCP Standard", val: "2.2" },
-      { key: "Signal resolution", val: "Up to 4K@60Hz 4:4:4, HDR" },
-      { key: "HDMI output cable length", val: "3m" },
-      { key: "USB cable length", val: "1.5m" },
+      { key: "Woofer",   val: "2 × 8\"" },
+      { key: "Tweeter",  val: "1.7\"" },
     ],
   },
   {
-    title: "General",
+    title: "Enclosure",
     rows: [
-      { key: "Operating temperature", val: "-10 ℃ ~ +55 ℃" },
-      { key: "Storage temperature", val: "-25 ℃ ~ +70 ℃" },
-      { key: "Relative humidity", val: "10% ~ 90%" },
-      { key: "Power supply", val: "Powered by USB port" },
-      { key: "Power consumption", val: "1.8W" },
-      { key: "Dimensions (W*H*D)", val: "135mm x 83mm x 20mm" },
-      { key: "Net weight", val: "370g" },
+      { key: "Box Material",    val: "High hardness multi-layer plywood" },
+      { key: "Coating",         val: "Water-based coatings" },
+      { key: "Color",           val: "Black" },
+      { key: "Hanging Points",  val: "13 × M8 lifting points" },
+      { key: "Input Method",    val: "2 × NL4 speaker socket" },
+      { key: "Dimensions (W × H × D)", val: "263 × 690 × 265 mm" },
     ],
   },
 ]
@@ -94,20 +88,14 @@ function Section({ data, index }: { data: SpecSection; index: number }) {
   )
 }
 
-export default function VideoAccessoriesSpecTable() {
+export default function SpeakerSpecTable() {
   return (
     <section className="bg-white pt-8 px-6 font-sans">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-semibold tracking-widest uppercase bg-red-50 text-red-500 border border-red-200">
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
-              Specifications
-            </span>
-          </div>
-          <h2 className="text-2xl md:text-xl font-medium text-red-600">
-            BYOD Video Switcher Specification
+        <div className="text-center mb-3">
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Speaker Specification
           </h2>
         </div>
 

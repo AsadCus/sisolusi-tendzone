@@ -30,7 +30,7 @@ export default function BasicPrincipleMidis() {
             <div className="w-10 h-0.5 bg-red-500 mb-8" />
 
             <div className="flex flex-col gap-0">
-              <p className="text-xs text-gray-400 leading-relaxed">
+              <p className="text-xs text-gray-700 leading-relaxed">
              MIDIS AV over IP systems is a technology to transport audio and video over a network. The encoder, also known as a transmitter. It can be one source to one display, or many sources to many displays. Along with audio and video, MIDIS AV over IP systems commonly provides extension/distribution of IR, RS-232, USB, and LAN, allowing KVM applications, control of sources/displays, and extension of the network.
               </p>
             </div>

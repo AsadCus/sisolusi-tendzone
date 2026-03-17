@@ -5,11 +5,11 @@ import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 
-// ─── Config ───────────────────────────────────────────────────────────────────
+
 
 const WA_NUMBER = "628XXXXXXXXX";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+
 
 type BadgeType = "bestselling" | "hot" | "new" | "flagship";
 
@@ -22,16 +22,15 @@ interface Product {
   badge?: { label: string; type: BadgeType };
 }
 
-// ─── Badge styles ─────────────────────────────────────────────────────────────
 
 const badgeGradient: Record<BadgeType, string> = {
   bestselling: "linear-gradient(135deg,#111,#333)",
-  flagship:    "linear-gradient(135deg,#111,#333)",
-  hot:         "linear-gradient(135deg,#dc2626,#9f1010)",
-  new:         "linear-gradient(135deg,#dc2626,#9f1010)",
+  flagship: "linear-gradient(135deg,#111,#333)",
+  hot: "linear-gradient(135deg,#dc2626,#9f1010)",
+  new: "linear-gradient(135deg,#dc2626,#9f1010)",
 };
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+
 
 const PRODUCTS: Product[] = [
   {
@@ -67,7 +66,7 @@ const PRODUCTS: Product[] = [
   },
 ];
 
-// ─── Product card ─────────────────────────────────────────────────────────────
+
 
 function ProductCard({ product }: { product: Product }) {
   return (
@@ -127,7 +126,7 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
-// ─── Main component ───────────────────────────────────────────────────────────
+
 
 export default function ProductVideoMatrix() {
   return (

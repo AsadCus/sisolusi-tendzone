@@ -5,11 +5,9 @@ import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 
-// ─── Config ───────────────────────────────────────────────────────────────────
 
 const WA_NUMBER = "628XXXXXXXXX";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 
 type BadgeType = "bestselling" | "hot" | "new" | "flagship";
 
@@ -22,16 +20,16 @@ interface Product {
   badge?: { label: string; type: BadgeType };
 }
 
-// ─── Badge styles ─────────────────────────────────────────────────────────────
+
 
 const badgeGradient: Record<BadgeType, string> = {
   bestselling: "linear-gradient(135deg,#111,#333)",
-  flagship:    "linear-gradient(135deg,#111,#333)",
-  hot:         "linear-gradient(135deg,#dc2626,#9f1010)",
-  new:         "linear-gradient(135deg,#dc2626,#9f1010)",
+  flagship: "linear-gradient(135deg,#111,#333)",
+  hot: "linear-gradient(135deg,#dc2626,#9f1010)",
+  new: "linear-gradient(135deg,#dc2626,#9f1010)",
 };
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+
 
 const PRODUCTS: Product[] = [
   {
@@ -76,13 +74,12 @@ const PRODUCTS: Product[] = [
   },
 ];
 
-// ─── Product card ─────────────────────────────────────────────────────────────
 
 function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/products/${product.slug}`} className="product-card group block">
 
-      {/* Image area */}
+
       <div className="relative overflow-hidden bg-white aspect-square">
 
         <Image
@@ -93,7 +90,7 @@ function ProductCard({ product }: { product: Product }) {
           className="card-img object-contain px-4 pt-10 pb-4 sm:px-5 sm:pt-11 sm:pb-5"
         />
 
-        {/* Badge */}
+ 
         {product.badge && (
           <div className="absolute top-2 left-2 z-10">
             <span
@@ -105,7 +102,6 @@ function ProductCard({ product }: { product: Product }) {
           </div>
         )}
 
-        {/* WA overlay */}
         <div className="overlay absolute inset-x-0 bottom-0 z-20">
           <div className="flex items-center justify-end gap-2 px-3 py-3">
             <a
@@ -122,11 +118,9 @@ function ProductCard({ product }: { product: Product }) {
           </div>
         </div>
 
-        {/* Bottom red line */}
         <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-30" />
       </div>
 
-      {/* Text area */}
       <div className="pt-3 px-0.5 pb-1">
         <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
           {product.name}
@@ -142,7 +136,7 @@ function ProductCard({ product }: { product: Product }) {
   );
 }
 
-// ─── Main component ───────────────────────────────────────────────────────────
+
 
 export default function MicrophoneProduct() {
   return (
@@ -157,7 +151,7 @@ export default function MicrophoneProduct() {
       <section className="w-full bg-white py-4">
         <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
-          {/* Collection badge */}
+         
           <div className="flex items-center justify-center gap-2 mb-6">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-semibold tracking-widest uppercase bg-red-50 text-red-500 border border-red-200">
               <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
@@ -165,7 +159,7 @@ export default function MicrophoneProduct() {
             </span>
           </div>
 
-          {/* Grid — 2 col mobile, 3 col tablet, 4 col desktop */}
+         
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
             {PRODUCTS.map((product, i) => (
               <m.div

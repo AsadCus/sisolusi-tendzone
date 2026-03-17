@@ -58,28 +58,28 @@ const SECTIONS: SpecSection[] = [
   {
     title: "Network Interface",
     rows: [
-      { key: "Optical Fiber", val: "1 × 1000 Mbps optical fiber network port" },
-      { key: "Ethernet", val: "1 × 1000 Mbps Ethernet port, supporting POE power supply" },
+      { key: "Optical Fiber", val: "1 x 1000 Mbps optical fiber network port" },
+      { key: "Ethernet", val: "1 x 1000 Mbps Ethernet port, supporting POE power supply" },
     ],
   },
   {
     title: "Power",
     rows: [
       { key: "Power Interface", val: "1 DC power interface, 12V / 2A input" },
-      { key: "Power Consumption", val: "≤ 12 W" },
+      { key: "Power Consumption", val: "12 W" },
       { key: "Leakage Protection Current", val: "0.25 mA" },
     ],
   },
   {
     title: "Environment & Physical",
     rows: [
-      { key: "Operating Temperature", val: "0 ~ 45 ℃" },
+      { key: "Operating Temperature", val: "0 ~ 45 °C" },
       { key: "Operating Humidity", val: "10% ~ 90% RH" },
-      { key: "Storage Temperature", val: "-20 ℃ ~ 60 ℃" },
+      { key: "Storage Temperature", val: "-20 °C ~ 60 °C" },
       { key: "Storage Humidity", val: "5% ~ 90% RH" },
       { key: "Installation", val: "Two 1U cabinets installed side by side" },
-      { key: "Product Size", val: "220 × 190 × 45 mm" },
-      { key: "Packing Size", val: "560 × 408 × 135 mm" },
+      { key: "Product Size", val: "220 x 190 x 45 mm" },
+      { key: "Packing Size", val: "560 x 408 x 135 mm" },
       { key: "Net Weight", val: "1.28 KG" },
       { key: "Gross Weight", val: "4.12 KG" },
     ],
@@ -88,9 +88,17 @@ const SECTIONS: SpecSection[] = [
 
 function Row({ label, value, even }: { label: string; value: string; even: boolean }) {
   return (
-    <div className={`grid grid-cols-[200px_1fr] border-b ${even ? "bg-gray-50" : "bg-white"} hover:bg-gray-100`}>
-      <div className="p-2.5 text-sm text-gray-500 border-r whitespace-pre-line">{label}</div>
-      <div className="p-2.5 text-sm text-gray-800 whitespace-pre-line">{value}</div>
+    <div className={`border-b ${even ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 transition-colors`}>
+      {/* Desktop */}
+      <div className="hidden sm:grid sm:grid-cols-[40%_60%]">
+        <div className="p-2.5 text-sm text-gray-500 border-r whitespace-pre-line">{label}</div>
+        <div className="p-2.5 text-sm text-gray-800 whitespace-pre-line">{value}</div>
+      </div>
+      {/* Mobile — stacked */}
+      <div className="sm:hidden px-3 py-2.5 space-y-0.5">
+        <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide leading-snug">{label}</p>
+        <p className="text-sm text-gray-800 leading-relaxed whitespace-pre-line">{value}</p>
+      </div>
     </div>
   )
 }
@@ -131,14 +139,20 @@ export default function MIDISAVSpecTable() {
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="text-center mb-8">
-         
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-semibold tracking-widest uppercase bg-red-50 text-red-500 border border-red-200">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
+              Specifications
+            </span>
+          </div>
           <h2 className="text-2xl md:text-xl font-medium text-red-600">
             MIDIS AV Over IP Systems Specification
           </h2>
         </div>
 
         <div className="overflow-hidden border shadow-sm">
-          <div className="grid grid-cols-[200px_1fr] text-xs uppercase tracking-widest text-gray-500 bg-gray-50 border-b">
+          {/* Header — desktop only */}
+          <div className="hidden sm:grid sm:grid-cols-[40%_60%] text-xs uppercase tracking-widest text-gray-500 bg-gray-50 border-b">
             <div className="p-3 border-r">Parameter</div>
             <div className="p-3">Value</div>
           </div>

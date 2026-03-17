@@ -24,7 +24,7 @@ const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
 
 const WA_NUMBER = "6281234567890";
 
-export default function MainProduct() {
+export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -53,15 +53,9 @@ export default function MainProduct() {
 
           <div className="flex flex-col items-center text-center mb-14">
             <span className="text-red-500 text-[10px] font-bold tracking-[0.35em] uppercase mb-3">
-              Our Collection
+           Products Categories
             </span>
-            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 tracking-tight">
-              Main Product
-            </h2>
             <div className="mt-3 w-8 h-0.75 bg-red-500 rounded-full" />
-            <p className="mt-4 text-sm text-gray-400 font-light max-w-xs leading-relaxed">
-              We promise to find you the right equipment
-            </p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
