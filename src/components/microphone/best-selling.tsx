@@ -50,29 +50,40 @@ export default function BestSellingMicrophoneSection() {
         </div>
 
         <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
-          <div className="flex overflow-x-auto border-b border-gray-100 bg-gray-50">
-            {bestSellingMicrophones.map((item, i) => (
-              <button
-                key={item.id}
-                onClick={() => setActive(i)}
-                className={`shrink-0 px-5 py-4 text-[12px] font-semibold tracking-wide transition-all duration-200 border-b-2 whitespace-nowrap ${
-                  active === i
-                    ? "border-red-500 text-red-600 bg-white"
-                    : "border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-100"
-                }`}
-              >
-                <span className={`mr-2 text-[10px] font-black ${active === i ? "text-red-400" : "text-gray-300"}`}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                {item.tag}
-              </button>
-            ))}
+
+          {/* Tab bar */}
+          <div className="relative bg-gray-50">
+            <div className="flex overflow-x-auto border-b border-gray-100
+              md:[scrollbar-width:none] md:[&::-webkit-scrollbar]:hidden
+              [scrollbar-width:thin] [scrollbar-color:#fca5a5_transparent]
+              [&::-webkit-scrollbar]:h-[3px]
+              [&::-webkit-scrollbar-track]:bg-transparent
+              [&::-webkit-scrollbar-thumb]:bg-red-300
+              [&::-webkit-scrollbar-thumb]:rounded-full">
+              {bestSellingMicrophones.map((item, i) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActive(i)}
+                  className={`shrink-0 px-5 py-4 text-[12px] font-semibold tracking-wide transition-all duration-200 border-b-2 whitespace-nowrap ${
+                    active === i
+                      ? "border-red-500 text-red-600 bg-white"
+                      : "border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <span className={`mr-2 text-[10px] font-black ${active === i ? "text-red-400" : "text-gray-300"}`}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {item.tag}
+                </button>
+              ))}
+            </div>
           </div>
 
+          {/* Content */}
           <div key={active} className="bg-white p-8">
             <div className="flex flex-col md:flex-row gap-8 items-start">
               <div className="shrink-0">
-                <div className="w-10 h-10 rounded-none bg-red-500 flex items-center justify-center shadow-md">
+                <div className="w-10 h-10 bg-red-500 flex items-center justify-center shadow-md">
                   <span className="text-[13px] font-black text-white">
                     {String(active + 1).padStart(2, "0")}
                   </span>
@@ -88,6 +99,7 @@ export default function BestSellingMicrophoneSection() {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

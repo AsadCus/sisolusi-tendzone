@@ -79,7 +79,7 @@ const sections = [
 export default function AudioProcessorSpec() {
   return (
     <div className="bg-white mx-auto py-8 font-sans">
-      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl  mx-auto px-4">
+      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
         <div className="mb-6">
           <h2 className="text-2xl md:text-xl font-medium text-center text-red-600">
@@ -91,6 +91,7 @@ export default function AudioProcessorSpec() {
           {sections.map((section, si) => (
             <div key={si} className="border border-gray-100 overflow-hidden">
 
+              {/* Section header */}
               <div className="flex items-center gap-3 px-4 py-2.5 bg-gray-50 border-b border-gray-100">
                 <div className="w-1 h-4 bg-red-500 rounded-sm shrink-0" />
                 <h3 className="text-[11px] font-bold text-gray-700 uppercase tracking-wider">
@@ -100,13 +101,24 @@ export default function AudioProcessorSpec() {
 
               <div className="divide-y divide-gray-100">
                 {section.rows.map((row, ri) => (
-                  <div key={ri} className={`grid grid-cols-3 ${ri % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}>
-                    <div className="px-4 py-3 border-r border-gray-100">
-                      <p className="text-[13px] font-bold text-gray-800">{row.key}</p>
+                  <div key={ri} className={ri % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+
+                    {/* Desktop — 2 kolom proporsional */}
+                    <div className="hidden sm:grid sm:grid-cols-[40%_60%]">
+                      <div className="px-4 py-3 border-r border-gray-100">
+                        <p className="text-[13px] font-bold text-gray-800">{row.key}</p>
+                      </div>
+                      <div className="px-4 py-3">
+                        <p className="text-[13px] font-medium text-gray-700 leading-relaxed">{row.val}</p>
+                      </div>
                     </div>
-                    <div className="col-span-2 px-4 py-3">
-                      <p className="text-[13px] font-medium text-gray-700 leading-relaxed">{row.val}</p>
+
+                    {/* Mobile — stacked */}
+                    <div className="sm:hidden px-4 py-3 space-y-0.5">
+                      <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide leading-snug">{row.key}</p>
+                      <p className="text-sm text-gray-700 leading-relaxed">{row.val}</p>
                     </div>
+
                   </div>
                 ))}
               </div>

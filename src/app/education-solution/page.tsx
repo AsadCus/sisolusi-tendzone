@@ -10,7 +10,7 @@ import FeaturesEducationSolution from "@/components/education-solution/functiona
 import EducationSolutionFAQ from "@/components/education-solution/faq"
 import AfterSalesServices from "@/components/section/after-sales"
 import HalfHonorQualification from "@/components/section/half-honor-qualification"
-import PackagingShipping from "@/components/section/Packaging and Shipping"
+import PackagingShipping from "@/components/section/Packaging-and-Shipping"
 import SendInquirySection from "@/components/section/SendInquirySection"
 
 export default function PoroductPage() {

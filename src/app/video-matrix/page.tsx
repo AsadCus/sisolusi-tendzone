@@ -5,7 +5,7 @@ import WhyChooseUsSectionSubcategory from "@/components/section/whyChooseUsSubca
 import OemOdmSubcategorySection from "@/components/section/oem-odm-subcategory";
 import HonorQualification from "@/components/section/honor-qualification";
 import AfterSalesServices from "@/components/section/after-sales";
-import PackagingAndShippingSection from "@/components/section/Packaging and Shipping";
+import PackagingAndShippingSection from "@/components/section/Packaging-and-Shipping";
 import PopularProductsCarousel from "@/components/section/popularProducts";
 import FAQSection from "@/components/section/faq";
 import VideoMatrixSpecificationTable from "@/components/video-matrix/table-speficication";
@@ -15,12 +15,14 @@ import BestSellingVideoMatrix from "@/components/video-matrix/best-selling";
 import VideoMatrixFeatures from "@/components/video-matrix/video-matrix-features";
 import BasicPrincipleMatrixVideo from "@/components/video-matrix/basic-principle-video-matrix";
 import VideoMatrixApplication from "@/components/video-matrix/application-video-matrix";
+import AboutVideoMatrix from "@/components/video-matrix/about-videoMatrix";
 
 export default function ProductsPage() {
   return (
     <>
     <NavbarProductLanding />
       <PageHero title="Video Matrix" />
+      <AboutVideoMatrix/> 
     <ProductVideoMatrix />
       <WhyChooseUsSectionSubcategory />
       <OemOdmSubcategorySection/>

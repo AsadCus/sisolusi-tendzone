@@ -5,7 +5,7 @@ import OemOdmSectionCategory from "@/components/section/oem-odm-category";
 import Footer from "@/components/footer";
 import AudioAccessoriesProduct from "@/components/audio-accessories/audio-accesories";
 import AfterSalesServices from "@/components/section/after-sales";
-import PackagingShipping from "@/components/section/Packaging and Shipping";
+import PackagingShipping from "@/components/section/Packaging-and-Shipping";
 import HalfHonorQualification from "@/components/section/half-honor-qualification";
 import SpecTableAudioAccessories from "@/components/audio-accessories/table-spec";
 import MIDISAVOverIPFAQ from "@/components/midis-distributed-multimedia-transmission-control/faq";

@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import WirelesMicrophoneProduct from "@/components/wireless-microphone-system/wireless-microphone";
 import MIDISBenefits from "@/components/midis-distributed-multimedia-transmission-control/bnefit-midis";
 import AfterSalesServices from "@/components/section/after-sales";
-import PackagingShipping from "@/components/section/Packaging and Shipping";
+import PackagingShipping from "@/components/section/Packaging-and-Shipping";
 import HalfHonorQualification from "@/components/section/half-honor-qualification";
 import BestSellingWirelessSection from "@/components/wireless-microphone-system/best-selling";
 import WirelessMicSpecTable from "@/components/wireless-microphone-system/table-spec";

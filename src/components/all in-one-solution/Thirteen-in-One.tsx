@@ -115,18 +115,37 @@ const SECTIONS: SpecSection[] = [
   },
 ]
 
+// ─── Row ──────────────────────────────────────────────────────────────────────
+// Desktop : 2 kolom (40% label | 60% value)
+// Mobile  : stacked — label di atas, value di bawah
+
 function Row({ label, value, even }: { label: string; value: string; even: boolean }) {
   return (
-    <div className={`grid grid-cols-[200px_1fr] border-b ${even ? "bg-gray-50" : "bg-white"} hover:bg-gray-100`}>
-      <div className="p-2.5 text-sm text-gray-500 border-r whitespace-pre-line">
-        {label}
+    <div className={`border-b ${even ? "bg-gray-50" : "bg-white"} hover:bg-gray-100`}>
+      {/* Desktop */}
+      <div className="hidden sm:grid sm:grid-cols-[40%_60%]">
+        <div className="p-2.5 text-sm text-gray-500 border-r whitespace-pre-line">
+          {label}
+        </div>
+        <div className="p-2.5 text-sm text-gray-800 whitespace-pre-line">
+          {value}
+        </div>
       </div>
-      <div className="p-2.5 text-sm text-gray-800 whitespace-pre-line">
-        {value}
+
+      {/* Mobile — stacked */}
+      <div className="sm:hidden px-3 py-2.5 space-y-0.5">
+        <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide leading-snug">
+          {label}
+        </p>
+        <p className="text-sm text-gray-800 whitespace-pre-line leading-relaxed">
+          {value}
+        </p>
       </div>
     </div>
   )
 }
+
+// ─── Section ──────────────────────────────────────────────────────────────────
 
 function Section({ data, index }: { data: SpecSection; index: number }) {
   const [open, setOpen] = useState(true)
@@ -140,7 +159,7 @@ function Section({ data, index }: { data: SpecSection; index: number }) {
         <span className="flex items-center justify-center w-6 h-6 text-xs text-white bg-red-500 rounded">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <span className="flex-1 text-sm font-semibold tracking-wide uppercase text-gray-800">
+        <span className="flex-1 text-sm font-semibold tracking-wide uppercase text-gray-800 text-left">
           {data.title}
         </span>
         <svg
@@ -161,6 +180,8 @@ function Section({ data, index }: { data: SpecSection; index: number }) {
   )
 }
 
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
 export default function SpecTable() {
   return (
     <section className="bg-white pt-8 px-6 font-sans">
@@ -173,7 +194,8 @@ export default function SpecTable() {
         </div>
 
         <div className="overflow-hidden border shadow-sm">
-          <div className="grid grid-cols-[200px_1fr] text-xs uppercase tracking-widest text-gray-500 bg-gray-50 border-b">
+          {/* Table header — desktop only */}
+          <div className="hidden sm:grid sm:grid-cols-[40%_60%] text-xs uppercase tracking-widest text-gray-500 bg-gray-50 border-b">
             <div className="p-3 border-r">Parameter</div>
             <div className="p-3">Value</div>
           </div>

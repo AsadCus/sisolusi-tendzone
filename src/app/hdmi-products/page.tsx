@@ -4,7 +4,7 @@ import WhyChooseUsCategory from "@/components/section/whyChooseCategory";
 import OemOdmSectionCategory from "@/components/section/oem-odm-category";
 import Footer from "@/components/footer";
 import AfterSalesServices from "@/components/section/after-sales";
-import PackagingShipping from "@/components/section/Packaging and Shipping";
+import PackagingShipping from "@/components/section/Packaging-and-Shipping";
 import HalfHonorQualification from "@/components/section/half-honor-qualification";
 import HDMIProductFAQ from "@/components/hdmi-products/faq";
 import HdmiProduct from "@/components/hdmi-products/hdmi-products";

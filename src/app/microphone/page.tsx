@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import MicrophoneProduct from "@/components/microphone/microphone";
 import MIDISBenefits from "@/components/midis-distributed-multimedia-transmission-control/bnefit-midis";
 import AfterSalesServices from "@/components/section/after-sales";
-import PackagingShipping from "@/components/section/Packaging and Shipping";
+import PackagingShipping from "@/components/section/Packaging-and-Shipping";
 import HalfHonorQualification from "@/components/section/half-honor-qualification";
 import BestSellingMicrophoneSection from "@/components/microphone/best-selling";
 import MicrophoneSpecTable from "@/components/microphone/table-spec";
@@ -16,12 +16,14 @@ import MIDISAVOverIPFAQ from "@/components/midis-distributed-multimedia-transmis
 import MicrophoneFeatureSection from "@/components/microphone/microphone-features";
 import MicrophoneTechniquePlacement from "@/components/microphone/microphone-technique";
 import MicrophoneApplication from "@/components/microphone/application-microphone";
+import AboutMicrophone from "@/components/microphone/about-microphone";
 
 export default function ProductPage(){
     return(
         <>
             <NavbarProductLanding />
             <PageHero title="microphone"/>
+            <AboutMicrophone />
             <MicrophoneProduct />
             <WhyChooseUsCategory />
             <OemOdmSectionCategory />

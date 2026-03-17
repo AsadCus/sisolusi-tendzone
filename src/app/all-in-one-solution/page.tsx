@@ -15,6 +15,7 @@ import ProductFeatures from "@/components/all in-one-solution/product-Features"
 import OurService from "@/components/section/ourServices"
 import WhyChooseUsCategory from "@/components/section/whyChooseCategory"
 import AllInOneSolutionFAQ from "@/components/all in-one-solution/all-in-one-solution-faq"
+import AboutSection from "@/components/all in-one-solution/about-all-in-solution"
 
 
 export default function AllInOneAudioVisualSolutionsPage() {
@@ -22,6 +23,7 @@ export default function AllInOneAudioVisualSolutionsPage() {
     <div>
       <NavbarProductLanding />
       <PageHero title="All in One Solutions" />
+      <AboutSection />
       <WhyChooseUsCategory />
       <ProductGrid />
       <OemOdmSectionCategory/>

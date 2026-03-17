@@ -6,7 +6,7 @@ import Footer from "@/components/footer";
 import MidisProduct from "@/components/midis-distributed-multimedia-transmission-control/midis";
 import MIDISBenefits from "@/components/midis-distributed-multimedia-transmission-control/bnefit-midis";
 import AfterSalesServices from "@/components/section/after-sales";
-import PackagingShipping from "@/components/section/Packaging and Shipping";
+import PackagingShipping from "@/components/section/Packaging-and-Shipping";
 import HalfHonorQualification from "@/components/section/half-honor-qualification";
 import BestSellingMIDIS from "@/components/midis-distributed-multimedia-transmission-control/best-selling";
 import MIDISAVSpecTable from "@/components/midis-distributed-multimedia-transmission-control/table-spec";

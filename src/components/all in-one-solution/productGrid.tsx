@@ -3,9 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { LazyMotion, domAnimation, m } from "framer-motion";
+
+// ─── Config ───────────────────────────────────────────────────────────────────
 
 const WA_NUMBER = "628XXXXXXXXX";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 type BadgeType = "bestselling" | "hot" | "new" | "flagship";
 
@@ -18,14 +22,16 @@ interface Product {
   badge?: { label: string; type: BadgeType };
 }
 
-// buat ganti style badges
+// ─── Badge styles ─────────────────────────────────────────────────────────────
 
-const badgeStyles: Record<BadgeType, string> = {
-  bestselling: "bg-gray-50 text-gray-600 border border-gray-200 rounded-xl",
-  hot: "bg-red-50 text-red-500 border border-red-200 rounded-xl",
-  flagship: "bg-blue-50 text-blue-600 border border-blue-200 rounded-xl",
-  new: "bg-amber-50 text-amber-600 border border-amber-200 rounded-xl",
+const badgeGradient: Record<BadgeType, string> = {
+  bestselling: "linear-gradient(135deg,#111,#333)",
+  hot:         "linear-gradient(135deg,#dc2626,#9f1010)",
+  new:         "linear-gradient(135deg,#dc2626,#9f1010)",
+  flagship:    "linear-gradient(135deg,#111,#333)",
 };
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const PRODUCTS: Product[] = [
   {
@@ -92,91 +98,121 @@ const PRODUCTS: Product[] = [
   },
 ];
 
-const ProductCard = ({
-  product,
-  alwaysShowWa = false,
-}: {
-  product: Product;
-  alwaysShowWa?: boolean;
-}) => (
-  <Link href={`/products/${product.slug}`} className="group">
-    <Card className="h-full overflow-hidden rounded-none border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+// ─── Product card ─────────────────────────────────────────────────────────────
 
-      <div className="relative h-56 w-full bg-white overflow-hidden">
+function ProductCard({ product }: { product: Product }) {
+  return (
+    <Link href={`/products/${product.slug}`} className="product-card group block">
+
+      {/* Image area */}
+      <div className="relative overflow-hidden bg-white aspect-square">
+
+        {/* Product image — padding atas lebih besar agar tidak nabrak badge/logo */}
         <Image
+          unoptimized
+          fill
           src={product.image}
           alt={product.name}
-          fill
-          className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+          className="card-img object-contain px-4 pt-10 pb-4 sm:px-5 sm:pt-11 sm:pb-5"
         />
 
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-          {product.badge ? (
-            <span className={`text-[10px] font-semibold px-2 py-0.5 tracking-wide ${badgeStyles[product.badge.type]}`}>
+        {/* Badge — top left */}
+        {product.badge && (
+          <div className="absolute top-2 left-2 z-10">
+            <span
+              className="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 text-white leading-none"
+              style={{ background: badgeGradient[product.badge.type] }}
+            >
               {product.badge.label}
             </span>
-          ) : (
-            <span />
-          )}
+          </div>
+        )}
 
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              window.open(
-                `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in: ${product.name}`)}`,
-                "_blank"
-              );
-            }}
-            className={`w-8 h-8 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center shadow-md transition-all duration-300 ${
-              alwaysShowWa
-                ? ""
-                : "opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0"
-            }`}
-          >
-            <MessageCircle size={15} className="text-white" fill="white" />
-          </button>
+        
+
+        {/* WA overlay — slides up on hover */}
+        <div className="overlay absolute inset-x-0 bottom-0 z-20">
+          <div className="flex items-center justify-end gap-2 px-3 py-3">
+            <a
+              href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
+                `Hi, I'm interested in: ${product.name}`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
+              onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+            >
+              <MessageCircle size={15} color="white" />
+            </a>
+          </div>
         </div>
 
-        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+        {/* Bottom red line on hover */}
+        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-30" />
       </div>
 
-      <CardContent className="p-5 flex flex-col gap-3">
-        <h3 className="text-sm font-semibold text-gray-900 leading-snug group-hover:text-red-600 transition-colors duration-300">
+      {/* Text area */}
+      <div className="pt-3 px-0.5 pb-1">
+        <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
           {product.name}
-        </h3>
-
+        </p>
         {product.description && (
-          <p className="text-xs font-light text-gray-500 leading-relaxed line-clamp-2">
+          <p className="text-[11px] text-gray-400 mt-0.5 font-light leading-relaxed line-clamp-2">
             {product.description}
           </p>
         )}
+      </div>
 
-        <div className="mt-1 flex items-center justify-end pt-3 border-t border-gray-100">
-          <span className="text-xs font-semibold text-gray-700 group-hover:text-red-600 transition-colors duration-300 tracking-wide uppercase">
-            Selengkapnya
-          </span>
-        </div>
-      </CardContent>
+    </Link>
+  );
+}
 
-    </Card>
-  </Link>
-);
+// ─── Main component ───────────────────────────────────────────────────────────
 
 export default function ProductGrid() {
   return (
-    <section className="w-full pt-12 pb-4 bg-white">
-      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {PRODUCTS.map((product, index) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              alwaysShowWa={index === 0}
-            />
-          ))}
+    <LazyMotion features={domAnimation}>
+      <style>{`
+        .card-img { transition: transform 600ms cubic-bezier(.25,.46,.45,.94); }
+        .product-card:hover .card-img { transform: scale(1.06); }
+        .overlay { transform: translateY(100%); transition: transform 320ms ease-out; }
+        .product-card:hover .overlay { transform: translateY(0); }
+      `}</style>
+
+      <section className="w-full bg-white py-16">
+        <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6">
+
+          {/* Section header */}
+          <div className="flex flex-col items-center text-center mb-12">
+            <span className="text-red-500 text-[10px] font-bold tracking-[0.35em] uppercase mb-3">
+              Our Collection
+            </span>
+            <h2 className="text-3xl lg:text-4xl font-black text-gray-900 tracking-tight">
+              Featured Products
+            </h2>
+            <div className="mt-3 w-8 h-[3px] bg-red-500 rounded-full" />
+            <p className="mt-4 text-sm text-gray-400 font-light max-w-xs leading-relaxed">
+              We promise to find you the right equipment
+            </p>
+          </div>
+
+          {/* Grid — 2 col mobile, 4 col desktop */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+            {PRODUCTS.map((product, i) => (
+              <m.div
+                key={product.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+              >
+                <ProductCard product={product} />
+              </m.div>
+            ))}
+          </div>
+
         </div>
-      </div>
-    </section>
+      </section>
+    </LazyMotion>
   );
 }

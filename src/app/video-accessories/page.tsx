@@ -9,7 +9,7 @@ import VideoAccessoriesSpecTable from "@/components/video-accessories/table-spec
 import VideoAccessoriesFeatures from "@/components/video-accessories/video-features-features";
 import VideoAccessoriesApplication from "@/components/video-accessories/video-accessories-application";
 import AfterSalesServices from "@/components/section/after-sales";
-import PackagingShipping from "@/components/section/Packaging and Shipping";
+import PackagingShipping from "@/components/section/Packaging-and-Shipping";
 import HalfHonorQualification from "@/components/section/half-honor-qualification";
 import VideoAccessoriesFAQ from "@/components/video-accessories/faq";
 

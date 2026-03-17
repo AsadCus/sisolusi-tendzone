@@ -8,7 +8,7 @@ import BestSellingPowerAmplifiersPage from "@/components/power-amplifier/best-se
 import PowerAmplifierSpecificationTable from "@/components/power-amplifier/table-speficication";
 import HonorQualification from "@/components/section/honor-qualification";
 import AfterSalesServices from "@/components/section/after-sales";
-import PackagingAndShippingSection from "@/components/section/Packaging and Shipping";
+import PackagingAndShippingSection from "@/components/section/Packaging-and-Shipping";
 import PopularProductsCarousel from "@/components/section/popularProducts";
 import FAQSection from "@/components/section/faq";
 import ProductPowerAmplifier from "@/components/power-amplifier/power-amplifier";

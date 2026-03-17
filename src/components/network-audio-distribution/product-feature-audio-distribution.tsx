@@ -129,7 +129,7 @@ export default function ProductFeatureSection() {
           </div>
 
           {/* Right: Image */}
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-10 flex items-center justify-center sticky top-24">
+          <div className="bg-white border border-white shadow-sm p-10 flex items-center justify-center sticky top-24">
             <Image
               src={product.image}
               alt={product.imageAlt}
