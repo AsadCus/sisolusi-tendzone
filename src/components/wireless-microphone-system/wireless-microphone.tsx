@@ -2,116 +2,43 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
+import { MessageCircle } from 'lucide-react';
 
-const WA_NUMBER = "628XXXXXXXXX";
-
-type BadgeType = "bestselling" | "hot" | "new" | "flagship";
-
-interface Category {
+interface Product {
   id: number;
   name: string;
-  description: string;
-  image: string;
-  slug: string;
-  badge?: { label: string; type: BadgeType };
+  category:{
+    id: number;
+    name: string;
+  }
+  galleries?: { file_url: string }[];
 }
 
-const badgeGradient: Record<BadgeType, string> = {
-  bestselling: "linear-gradient(135deg,#111,#333)",
-  flagship: "linear-gradient(135deg,#111,#333)",
-  hot: "linear-gradient(135deg,#dc2626,#9f1010)",
-  new: "linear-gradient(135deg,#dc2626,#9f1010)",
-};
+const BADGES = ["Best Seller", "Hot", "Popular", "New", "Top Pick"];
+const TAGLINES = ["Premium Quality", "High Durability", "Best Value", "Trusted Choice", "Top Rated"];
 
-const categories: Category[] = [
-  {
-    id: 1,
-    name: "8CH Wireless Handheld Microphone System",
-    description: "The wireless system uses UHF band wireless transmission signals, four",
-    image: "https://www.tendzone.net/uploads/43135/small/8ch-wireless-handheld-microphone-system9783f.jpg?size=380x0",
-    slug: "all-in-one",
-    badge: { label: "Best Selling", type: "bestselling" },
-  },
-  {
-    id: 2,
-    name: "4CH Wireless Handheld Microphone System",
-    description: "The wireless system uses UHF band wireless transmission signals, four",
-    image: "https://www.tendzone.net/uploads/43135/small/4ch-wireless-handheld-microphone-system79f51.jpg?size=380x0",
-    slug: "all-in-one",
-    badge: { label: "Best Selling", type: "bestselling" },
-  },
-  {
-    id: 3,
-    name: "2CH Wireless Handheld Microphone System",
-    description: "The wireless system uses UHF band wireless transmission signals, two",
-    image: "https://www.tendzone.net/uploads/43135/small/2ch-wireless-handheld-microphone-system62f5a.jpg?size=380x0",
-    slug: "all-in-one",
-    badge: { label: "Best Selling", type: "bestselling" },
-  },
-];
+const getImage = (p: Product) => p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
+const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
 
-function ProductCard({ product }: { product: Category }) {
-  const waText = "Hi, I'm interested in: " + product.name;
-  const waUrl = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(waText);
-
-  const handleWaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(waUrl, "_blank");
-  };
-
-  return (
-    <Link href={"/products/" + product.slug} className="product-card group block">
-      <div className="relative overflow-hidden bg-white aspect-square">
-        <Image
-          unoptimized
-          fill
-          src={product.image}
-          alt={product.name}
-          className="card-img object-contain px-4 pt-10 pb-4 sm:px-5 sm:pt-11 sm:pb-5"
-        />
-
-        {product.badge && (
-          <div className="absolute top-2 left-2 z-10">
-            <span
-              className="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 text-white leading-none"
-              style={{ background: badgeGradient[product.badge.type] }}
-            >
-              {product.badge.label}
-            </span>
-          </div>
-        )}
-
-        <div className="overlay absolute inset-x-0 bottom-0 z-20">
-          <div className="flex items-center justify-end gap-2 px-3 py-3">
-            <a
-              href={waUrl}
-              onClick={handleWaClick}
-              className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
-            >
-              <MessageCircle size={15} color="white" />
-            </a>
-          </div>
-        </div>
-
-        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-30" />
-      </div>
-
-      <div className="pt-3 px-0.5 pb-1">
-        <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
-          {product.name}
-        </p>
-        <p className="text-[11px] text-gray-400 mt-0.5 font-light leading-relaxed line-clamp-2">
-          {product.description}
-        </p>
-      </div>
-    </Link>
-  );
-}
+const WA_NUMBER = "6281234567890";
 
 export default function WirelessMicrophoneProduct() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
+      .then((r) => r.json())
+      .then((data) => {
+        const list: Product[] = data.data || data;
+        const withImage = list.filter(hasImage);
+        const withoutImage = list.filter((p) => !hasImage(p));
+        setProducts([...withImage, ...withoutImage].slice(0, 8));
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <LazyMotion features={domAnimation}>
       <style>{`
@@ -121,10 +48,10 @@ export default function WirelessMicrophoneProduct() {
         .product-card:hover .overlay { transform: translateY(0); }
       `}</style>
 
-      <section className="w-full py-2">
-        <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
 
-          <div className="text-center max-w-6xl mx-auto mb-8">
+         <div className="text-center max-w-6xl mx-auto mb-8">
             <h1 className="text-2xl md:text-xl font-medium text-red-600">
               Your Professional Wireless Microphone System Manufacturer!
             </h1>
@@ -137,26 +64,110 @@ export default function WirelessMicrophoneProduct() {
               Control Systems. Our solutions are trusted across industries such as
               conference rooms, command centers, education, multi-functional halls, and stadiums.
             </p>
-            <div className="flex items-center justify-center gap-2 mt-6">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-semibold tracking-widest uppercase bg-red-50 text-red-500 border border-red-200">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
-                Audio Accessories Collection
-              </span>
-            </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-            {categories.map((product, i) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {products.map((product, i) => (
               <m.div
                 key={product.id}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="product-card group"
               >
-                <ProductCard product={product} />
+              <Link key={product.id} href={`/catalogue/${product?.category?.name}/${product.id}`} className="product-card group">
+                <div className="relative overflow-hidden bg-gray-50" style={{ aspectRatio: "1/1" }}>
+                  <Image
+                    unoptimized fill
+                    src={getImage(product)}
+                    alt={product.name}
+                    className="card-img object-cover"
+                  />
+
+                  <div className="absolute top-2.5 left-2.5 z-10">
+                    <span
+                      className="text-[7px] lg:text-[9px] font-black uppercase tracking-widest px-2 py-1 text-white"
+                      style={{
+                        background: i % 2 === 0
+                          ? "linear-gradient(135deg,#dc2626,#9f1010)"
+                          : "linear-gradient(135deg,#111,#333)",
+                        clipPath: "polygon(0 0,calc(100% - 5px) 0,100% 100%,5px 100%)",
+                      }}
+                    >
+                      {BADGES[i % BADGES.length]}
+                    </span>
+                  </div>
+
+                  <div className="absolute top-2.5 right-2.5 z-10">
+                    <div className="relative h-5 w-14 bg-white/90 backdrop-blur-sm px-1 py-0.5">
+                      <Image
+                        src="/images/logo/tendzone.png"
+                        alt="Tendzone"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className="overlay absolute inset-x-0 bottom-0 z-20"
+                  >
+                    <div className="flex items-center gap-2 px-3 py-3 justify-end">
+
+                      {/* View Detail */}
+                      {/* <Link
+                        href="/catalogue/23"
+                        className="flex flex-1 items-center justify-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors duration-150 rounded py-1.5"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest whitespace-nowrap">
+                          View Detail
+                        </span>
+                      </Link> */}
+
+                      <span className="w-px h-5 bg-white/20 shrink-0" />
+                      <a
+                        href={`https://wa.me/${WA_NUMBER}?text=Halo,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                          <MessageCircle size={15} color="white" />
+                      </a>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 px-0.5 pb-1">
+                  <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
+                    {product.name}
+                  </p>
+                  <p className="text-[11px] text-gray-400 mt-0.5 font-light tracking-wide">
+                    {TAGLINES[i % TAGLINES.length]}
+                  </p>
+                </div>
+
+            </Link>
               </m.div>
             ))}
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <Link
+              href="/products"
+              className="group flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-red-600 transition-colors duration-200"
+            >
+              <span className="border-b border-gray-300 group-hover:border-red-500 pb-px transition-colors duration-200">
+                View All Products
+              </span>
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
+                className="transition-transform duration-200 group-hover:translate-x-0.5">
+                <path d="M1 6.5h11M7 2l5 4.5L7 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
           </div>
 
         </div>

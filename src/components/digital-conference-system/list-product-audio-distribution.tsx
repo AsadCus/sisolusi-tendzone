@@ -2,186 +2,208 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { MessageCircle } from "lucide-react";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-
-// ─── Config ───────────────────────────────────────────────────────────────────
-
-const WA_NUMBER = "628XXXXXXXXX";
-const ITEMS_PAGE = 8;
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-type BadgeType = "hot" | "new" | "bestselling";
+import { useState, useEffect } from "react";
+import { LazyMotion, domAnimation, m } from "framer-motion";
+import { MessageCircle } from 'lucide-react';
+import { Pagination, PaginationNext, PaginationItem, PaginationContent, PaginationPrevious, PaginationLink } from "../ui/pagination";
 
 interface Product {
   id: number;
   name: string;
-  slug: string;
-  description: string;
-  image: string;
-  badge?: BadgeType;
+  category:{
+    id: number;
+    name: string;
+  }
+  galleries?: { file_url: string }[];
 }
 
+const BADGES = ["Best Seller", "Hot", "Popular", "New", "Top Pick"];
+const TAGLINES = ["Premium Quality", "High Durability", "Best Value", "Trusted Choice", "Top Rated"];
 
-const badgeGradient: Record<BadgeType, string> = {
-  hot: "linear-gradient(135deg,#dc2626,#9f1010)",
-  new: "linear-gradient(135deg,#dc2626,#9f1010)",
-  bestselling: "linear-gradient(135deg,#111,#333)",
-};
+const getImage = (p: Product) => p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
+const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
 
-
-const PRODUCTS: Product[] = [
-  { id: 1, name: "5G Wireless Digital AP", slug: "digital-conference-system", description: "5G wireless digital AP — The Advanced Wireless Access Point is engineered to deliver seamless connectivity.", image: "https://www.tendzone.net/uploads/43135/small/5g-wireless-digital-ap.jpg?size=380x0" },
-  { id: 2, name: "5G Wired Conference Unit", slug: "digital-conference-system", description: "5G Wired Conference Unit — Elegant design with prestige and high-end conference performance.", image: "https://www.tendzone.net/uploads/43135/small/5g-wired-conference-unit.jpg?size=380x0" },
-  { id: 3, name: "5G Wireless Conference Unit", slug: "digital-conference-system", description: "High-quality audio capture 5G Wireless Conference unit with Advanced Touch interface.", image: "https://www.tendzone.net/uploads/43135/small/5g-wireless-conference-unit.jpg?size=380x0" },
-  { id: 4, name: "5G Wireless Conference System Host", slug: "digital-conference-system", description: "5G Wireless Conference system host with dual connectivity — offers wired and 5G wireless modes.", image: "https://www.tendzone.net/uploads/43135/small/5g-wireless-conference-system-host.jpg?size=380x0" },
-  { id: 5, name: "Wireless Desktop Delegate Rectangular Columnar Unit", slug: "digital-conference-system", description: "The Tendzone Z-3101C/Z-3101D rectangular columnar unit is an ultra-directional delegate microphone.", image: "https://www.tendzone.net/uploads/43135/small/wireless-desktop-delegate-rectangular-columnar-unit.jpg?size=380x0", badge: "hot" },
-  { id: 6, name: "Wireless Desktop Chairman Rectangular Columnar Unit", slug: "digital-conference-system", description: "The Tendzone Z-3101C/Z-3101D rectangular columnar unit is an ultra-directional chairman microphone.", image: "https://www.tendzone.net/uploads/43135/small/wireless-desktop-chairman-rectangular-columnar-unit.jpg?size=380x0" },
-  { id: 7, name: "Wireless Desktop Delegate Gooseneck Unit", slug: "digital-conference-system", description: "Built-in DSP audio processing capabilities with howling suppression for wireless delegate use.", image: "https://www.tendzone.net/uploads/43135/small/wireless-desktop-delegate-gooseneck-unit.jpg?size=380x0" },
-  { id: 8, name: "Wireless Desktop Chairman Gooseneck Unit", slug: "digital-conference-system", description: "The Tendzone Z-5001C/Z-5001D gooseneck unit is an ultra-directional chairman wireless microphone.", image: "https://www.tendzone.net/uploads/43135/small/wireless-desktop-chairman-gooseneck-unit.jpg?size=380x0" },
-  { id: 9, name: "2.4G Wireless Conference Host", slug: "digital-conference-system", description: "The Tendzone Z-3001 digital wireless conference system is a complete set based on 2.4G standard.", image: "https://www.tendzone.net/uploads/43135/small/2-4g-wireless-conference-host.jpg?size=380x0", badge: "hot" },
-  { id: 10, name: "Desktop Delegate Rectangular Columnar Unit", slug: "digital-conference-system", description: "The Tendzone MTZ-921C&MTZ-921D all-digital network conference system delegate unit.", image: "https://www.tendzone.net/uploads/43135/small/desktop-delegate-rectangular-columnar-unit.jpg?size=380x0" },
-  { id: 11, name: "Desktop Chairman Rectangular Columnar Unit", slug: "digital-conference-system", description: "The Tendzone MTZ-921C&MTZ-921D all-digital network conference system chairman unit.", image: "https://www.tendzone.net/uploads/43135/small/desktop-chairman-rectangular-columnar-unit.jpg?size=380x0" },
-  { id: 12, name: "Desktop Delegate Gooseneck Unit", slug: "digital-conference-system", description: "The Tendzone MTZ-910C&MTZ-910D all-digital network conference system gooseneck delegate unit.", image: "https://www.tendzone.net/uploads/43135/small/desktop-delegate-gooseneck-unit.jpg?size=380x0" },
-];
-
-
-function SkeletonCard() {
-  return (
-    <div className="bg-white border border-gray-100 animate-pulse">
-      <div className="aspect-square bg-gray-100" />
-      <div className="p-3 space-y-2">
-        <div className="h-3 bg-gray-100 rounded w-3/4" />
-        <div className="h-3 bg-gray-100 rounded w-1/2" />
-      </div>
-    </div>
-  );
-}
-
-
-function ProductCard({ product }: { product: Product }) {
-  return (
-    <div className="product-card group relative bg-white border border-gray-100 overflow-hidden">
-
-      <a
-        href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in: ${product.name}`)}`}
-        target="_blank" rel="noopener noreferrer"
-        onClick={(e) => e.stopPropagation()}
-        className="absolute top-2 right-2 z-10 w-8 h-8 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200"
-      >
-        <MessageCircle size={14} className="text-white" fill="white" />
-      </a>
-
-      <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative overflow-hidden bg-white aspect-square">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill unoptimized
-            className="card-img object-contain p-5 transition-transform duration-500 group-hover:scale-105"
-          />
-
-          {product.badge && (
-            <div className="absolute top-2 left-2 z-10">
-              <span
-                className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 text-white leading-none"
-                style={{ background: badgeGradient[product.badge] }}
-              >
-                {product.badge}
-              </span>
-            </div>
-          )}
-
-          <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-        </div>
-
-        <div className="p-4 flex flex-col gap-2">
-          <h3 className="text-[13px] font-bold text-gray-900 leading-snug group-hover:text-red-600 transition-colors duration-200 line-clamp-2">
-            {product.name}
-          </h3>
-          <p className="text-[11px] text-gray-400 font-light leading-relaxed line-clamp-2">
-            {product.description}
-          </p>
-          <div className="mt-1 flex items-center justify-end pt-2 border-t border-gray-100">
-            <span className="text-[11px] font-semibold text-gray-500 group-hover:text-red-600 transition-colors duration-200 tracking-wide uppercase">
-              Selengkapnya
-            </span>
-          </div>
-        </div>
-      </Link>
-    </div>
-  );
-}
-
+const WA_NUMBER = "6281234567890";
 
 export default function ProductGridDigitalReference() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(PRODUCTS.length / ITEMS_PAGE);
-  const currentProducts = PRODUCTS.slice(
-    (currentPage - 1) * ITEMS_PAGE,
-    currentPage * ITEMS_PAGE
-  );
+  const [products, setProducts] = useState<Product[]>([]);
+   const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 4;
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
+      .then((r) => r.json())
+      .then((data) => {
+        const list: Product[] = data.data || data;
+        const withImage = list.filter(hasImage);
+        const withoutImage = list.filter((p) => !hasImage(p));
+        setProducts([...withImage, ...withoutImage].slice(0, 8));
+      })
+      .catch(console.error);
+  }, []);
 
   return (
-    <section className="w-full pt-4 pb-4 bg-white">
+    <LazyMotion features={domAnimation}>
       <style>{`
-        .card-img { transition: transform 500ms cubic-bezier(.25,.46,.45,.94); }
-        .product-card:hover .card-img { transform: scale(1.05); }
+        .card-img { transition: transform 600ms cubic-bezier(.25,.46,.45,.94); }
+        .product-card:hover .card-img { transform: scale(1.06); }
+        .overlay { transform: translateY(100%); transition: transform 320ms ease-out; }
+        .product-card:hover .overlay { transform: translateY(0); }
       `}</style>
 
-      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {currentProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {currentProducts.map((product, i) => (
+              <m.div
+                key={product.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="product-card group"
+              >
+              <Link key={product.id} href={`/catalogue/${product?.category?.name}/${product.id}`} className="product-card group">
+                <div className="relative overflow-hidden bg-gray-50" style={{ aspectRatio: "1/1" }}>
+                  <Image
+                    unoptimized fill
+                    src={getImage(product)}
+                    alt={product.name}
+                    className="card-img object-cover"
+                  />
+
+                  <div className="absolute top-2.5 left-2.5 z-10">
+                    <span
+                      className="text-[7px] lg:text-[9px] font-black uppercase tracking-widest px-2 py-1 text-white"
+                      style={{
+                        background: i % 2 === 0
+                          ? "linear-gradient(135deg,#dc2626,#9f1010)"
+                          : "linear-gradient(135deg,#111,#333)",
+                        clipPath: "polygon(0 0,calc(100% - 5px) 0,100% 100%,5px 100%)",
+                      }}
+                    >
+                      {BADGES[i % BADGES.length]}
+                    </span>
+                  </div>
+
+                  <div className="absolute top-2.5 right-2.5 z-10">
+                    <div className="relative h-5 w-14 bg-white/90 backdrop-blur-sm px-1 py-0.5">
+                      <Image
+                        src="/images/logo/tendzone.png"
+                        alt="Tendzone"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className="overlay absolute inset-x-0 bottom-0 z-20"
+                  >
+                    <div className="flex items-center gap-2 px-3 py-3 justify-end">
+
+                      {/* View Detail */}
+                      {/* <Link
+                        href="/catalogue/23"
+                        className="flex flex-1 items-center justify-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors duration-150 rounded py-1.5"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest whitespace-nowrap">
+                          View Detail
+                        </span>
+                      </Link> */}
+
+                      <span className="w-px h-5 bg-white/20 shrink-0" />
+                      <a
+                        href={`https://wa.me/${WA_NUMBER}?text=Halo,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                          <MessageCircle size={15} color="white" />
+                      </a>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 px-0.5 pb-1">
+                  <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
+                    {product.name}
+                  </p>
+                  <p className="text-[11px] text-gray-400 mt-0.5 font-light tracking-wide">
+                    {TAGLINES[i % TAGLINES.length]}
+                  </p>
+                </div>
+
+            </Link>
+              </m.div>
+            ))}
+          </div>
+                  <div className="mt-10 flex justify-center">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage > 1) setCurrentPage(currentPage - 1);
+                  }}
+                />
+              </PaginationItem>
+              {Array.from({ length: totalPages }).map((_, i) => {
+                const page = i + 1;
+                return (
+                  <PaginationItem key={page}>
+                    <PaginationLink
+                      href="#"
+                      isActive={currentPage === page}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage(page);
+                      }}
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                );
+              })}
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                  }}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </div>
 
-        {totalPages > 1 && (
-          <div className="mt-10 flex justify-center">
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious
-                    href="#"
-                    onClick={(e) => { e.preventDefault(); if (currentPage > 1) setCurrentPage(currentPage - 1); }}
-                  />
-                </PaginationItem>
-                {Array.from({ length: totalPages }).map((_, i) => {
-                  const page = i + 1;
-                  return (
-                    <PaginationItem key={page}>
-                      <PaginationLink
-                        href="#"
-                        isActive={currentPage === page}
-                        onClick={(e) => { e.preventDefault(); setCurrentPage(page); }}
-                      >
-                        {page}
-                      </PaginationLink>
-                    </PaginationItem>
-                  );
-                })}
-                <PaginationItem>
-                  <PaginationNext
-                    href="#"
-                    onClick={(e) => { e.preventDefault(); if (currentPage < totalPages) setCurrentPage(currentPage + 1); }}
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
+          <div className="mt-12 flex justify-center">
+            <Link
+              href="/products"
+              className="group flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-red-600 transition-colors duration-200"
+            >
+              <span className="border-b border-gray-300 group-hover:border-red-500 pb-px transition-colors duration-200">
+                View All Products
+              </span>
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
+                className="transition-transform duration-200 group-hover:translate-x-0.5">
+                <path d="M1 6.5h11M7 2l5 4.5L7 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
           </div>
-        )}
 
-      </div>
-    </section>
+        </div>
+      </section>
+    </LazyMotion>
   );
 }

@@ -2,131 +2,43 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
+import { MessageCircle } from 'lucide-react';
 
-const WA_NUMBER = "628XXXXXXXXX";
-
-type BadgeType = "flagship" | "hot" | "bestselling" | "new";
-
-interface Category {
+interface Product {
   id: number;
   name: string;
-  description: string;
-  image: string;
-  slug: string;
-  badge?: { label: string; type: BadgeType };
-  logo?: string;
-  company?: string;
-}
-
-const badgeGradient: Record<BadgeType, string> = {
-  bestselling: "linear-gradient(135deg,#111,#333)",
-  flagship: "linear-gradient(135deg,#111,#333)",
-  hot: "linear-gradient(135deg,#dc2626,#9f1010)",
-  new: "linear-gradient(135deg,#dc2626,#9f1010)",
-};
-
-const categories: Category[] = [
-  {
-    id: 1,
-    name: "Hybrid Modular Video Matrix",
-    description: "The Tendzone SW31-BYOD is a 3-input 1-output multi-format signal switcher.",
-    image: "https://www.tendzone.net/uploads/43135/small/byod-video-switcherd85ff.jpg?size=380x0",
-    slug: "all-in-one",
-    badge: { label: "Best Selling", type: "bestselling" },
-    logo: "/icon.png",
-    company: "Tendzone",
-  },
-];
-
-function CategoryCard({ category }: { category: Category }) {
-  function handleWaClick(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    e.stopPropagation();
-    window.open(
-      `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
-        `Hi, I'm interested in: ${category.name}`
-      )}`,
-      "_blank"
-    );
+  category:{
+    id: number;
+    name: string;
   }
-
-  return (
-    <Link href={`/products/${category.slug}`} className="product-card group block">
-
-      {/* Image area */}
-      <div className="relative overflow-hidden bg-white aspect-square">
-        <Image
-          unoptimized
-          fill
-          src={category.image}
-          alt={category.name}
-          className="card-img object-contain px-4 pt-10 pb-4 sm:px-5 sm:pt-11 sm:pb-5"
-        />
-
-        {/* Badge */}
-        {category.badge && (
-          <div className="absolute top-2 left-2 z-10">
-            <span
-              className="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 text-white leading-none"
-              style={{ background: badgeGradient[category.badge.type] }}
-            >
-              {category.badge.label}
-            </span>
-          </div>
-        )}
-
-        {/* Logo / company */}
-        <div className="absolute top-2 right-2 z-10">
-          {category.logo ? (
-            <div className="relative h-6 w-16 bg-white p-0.5">
-              <Image
-                src={category.logo}
-                alt={category.company ?? "Brand"}
-                fill
-                className="object-contain"
-              />
-            </div>
-          ) : category.company ? (
-            <span className="text-[10px] font-semibold text-red-500 tracking-widest uppercase bg-white/80 px-1.5 py-0.5">
-              {category.company}
-            </span>
-          ) : null}
-        </div>
-
-     
-        <div className="overlay absolute inset-x-0 bottom-0 z-20">
-          <div className="flex items-center justify-end gap-2 px-3 py-3">
-            <button
-              type="button"
-              onClick={handleWaClick}
-              className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
-            >
-              <MessageCircle size={15} color="white" />
-            </button>
-          </div>
-        </div>
-
-    
-        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-30" />
-      </div>
-
-   
-      <div className="pt-3 px-0.5 pb-1">
-        <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
-          {category.name}
-        </p>
-        <p className="text-[11px] text-gray-400 mt-0.5 font-light leading-relaxed line-clamp-2">
-          {category.description}
-        </p>
-      </div>
-
-    </Link>
-  );
+  galleries?: { file_url: string }[];
 }
 
-export default function ProductVideoAccessories() {
+const BADGES = ["Best Seller", "Hot", "Popular", "New", "Top Pick"];
+const TAGLINES = ["Premium Quality", "High Durability", "Best Value", "Trusted Choice", "Top Rated"];
+
+const getImage = (p: Product) => p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
+const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
+
+const WA_NUMBER = "6281234567890";
+
+export default function ProductVideoAccesories() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
+      .then((r) => r.json())
+      .then((data) => {
+        const list: Product[] = data.data || data;
+        const withImage = list.filter(hasImage);
+        const withoutImage = list.filter((p) => !hasImage(p));
+        setProducts([...withImage, ...withoutImage].slice(0, 1));
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <LazyMotion features={domAnimation}>
       <style>{`
@@ -136,11 +48,9 @@ export default function ProductVideoAccessories() {
         .product-card:hover .overlay { transform: translateY(0); }
       `}</style>
 
-      <section className="w-full py-2">
-        <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-
-      
-          <div className="text-center max-w-7xl mx-auto mb-8">
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
+           <div className="text-center max-w-7xl mx-auto mb-8">
             <h1 className="text-2xl md:text-xl font-medium text-red-600">
               Your Professional Video Accessories Supplier!
             </h1>
@@ -153,29 +63,95 @@ export default function ProductVideoAccessories() {
               Control Systems. Our solutions are trusted across industries such as
               conference rooms, command centers, education, multi-functional halls, and stadiums.
             </p>
-            <div className="flex items-center justify-center mt-6">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-semibold tracking-widest uppercase bg-red-50 text-red-500 border border-red-200">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
-                Video Accessories Collection
-              </span>
-            </div>
           </div>
-
-         
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-            {categories.map((category, i) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {products.map((product, i) => (
               <m.div
-                key={category.id}
+                key={product.id}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="product-card group"
               >
-                <CategoryCard category={category} />
+              <Link key={product.id} href={`/catalogue/${product?.category?.name}/${product.id}`} className="product-card group">
+                <div className="relative overflow-hidden bg-gray-50" style={{ aspectRatio: "1/1" }}>
+                  <Image
+                    unoptimized fill
+                    src={getImage(product)}
+                    alt={product.name}
+                    className="card-img object-cover"
+                  />
+
+                  <div className="absolute top-2.5 left-2.5 z-10">
+                    <span
+                      className="text-[7px] lg:text-[9px] font-black uppercase tracking-widest px-2 py-1 text-white"
+                      style={{
+                        background: i % 2 === 0
+                          ? "linear-gradient(135deg,#dc2626,#9f1010)"
+                          : "linear-gradient(135deg,#111,#333)",
+                        clipPath: "polygon(0 0,calc(100% - 5px) 0,100% 100%,5px 100%)",
+                      }}
+                    >
+                      {BADGES[i % BADGES.length]}
+                    </span>
+                  </div>
+
+                  <div className="absolute top-2.5 right-2.5 z-10">
+                    <div className="relative h-5 w-14 bg-white/90 backdrop-blur-sm px-1 py-0.5">
+                      <Image
+                        src="/images/logo/tendzone.png"
+                        alt="Tendzone"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className="overlay absolute inset-x-0 bottom-0 z-20"
+                  >
+                    <div className="flex items-center gap-2 px-3 py-3 justify-end">
+
+                      {/* View Detail */}
+                      {/* <Link
+                        href="/catalogue/23"
+                        className="flex flex-1 items-center justify-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors duration-150 rounded py-1.5"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest whitespace-nowrap">
+                          View Detail
+                        </span>
+                      </Link> */}
+
+                      <span className="w-px h-5 bg-white/20 shrink-0" />
+                      <a
+                        href={`https://wa.me/${WA_NUMBER}?text=Halo,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                          <MessageCircle size={15} color="white" />
+                      </a>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 px-0.5 pb-1">
+                  <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
+                    {product.name}
+                  </p>
+                  <p className="text-[11px] text-gray-400 mt-0.5 font-light tracking-wide">
+                    {TAGLINES[i % TAGLINES.length]}
+                  </p>
+                </div>
+
+            </Link>
               </m.div>
             ))}
           </div>
-
         </div>
       </section>
     </LazyMotion>

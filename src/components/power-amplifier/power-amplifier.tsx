@@ -2,103 +2,43 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
+import { useState, useEffect } from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
-
-const WA_NUMBER = "628XXXXXXXXX";
+import { MessageCircle } from 'lucide-react';
 
 interface Product {
   id: number;
   name: string;
-  slug: string;
-  description?: string;
-  image: string;
+  category:{
+    id: number;
+    name: string;
+  }
+  galleries?: { file_url: string }[];
 }
 
-const PRODUCTS: Product[] = [
-  {
-    id: 1,
-    name: "8CH Digital Power Amplifier",
-    slug: "all-in-one",
-    description: "The Tendzone AMD8150 amplifier is a 8-channel fixed impedance digital.",
-    image: "https://www.tendzone.net/uploads/43135/small/8ch-digital-power-amplifier50a6d.jpg?size=380x0",
-  },
-  {
-    id: 2,
-    name: "4CH Digital Power Amplifier",
-    slug: "audio-processor",
-    description: "The Tendzone AMD4350 amplifier is a 4-channel fixed impedance digital.",
-    image: "https://www.tendzone.net/uploads/43135/small/4ch-digital-power-amplifier12b9f0.jpg?size=380x0",
-  },
-  {
-    id: 3,
-    name: "4CH Digital Power Amplifier",
-    slug: "audio-processor",
-    description: "The Tendzone AMD4350 amplifier is a 4-channel fixed impedance digital.",
-    image: "https://www.tendzone.net/uploads/43135/small/4ch-digital-power-amplifier12b9f0.jpg?size=380x0",
-  },
-  {
-    id: 4,
-    name: "2CH Digital Power Amplifier",
-    slug: "audio-processor",
-    description: "The Tendzone AMD4350 amplifier is a 4-channel fixed impedance digital.",
-    image: "https://www.tendzone.net/uploads/43135/small/2ch-digital-power-amplifier3a1af3.jpg?size=380x0",
-  },
-  {
-    id: 5,
-    name: "2CH Digital Power Amplifier",
-    slug: "audio-processor",
-    description: "The Tendzone AMD4350 amplifier is a 4-channel fixed impedance digital.",
-    image: "https://www.tendzone.net/uploads/43135/small/2ch-digital-power-amplifier3a1af3.jpg?size=380x0",
-  },
-  {
-    id: 6,
-    name: "2CH Digital Power Amplifier",
-    slug: "audio-processor",
-    description: "The Tendzone AMD4350 amplifier is a 4-channel fixed impedance digital.",
-    image: "https://www.tendzone.net/uploads/43135/small/2ch-digital-power-amplifier3a1af3.jpg?size=380x0",
-  },
-];
+const BADGES = ["Best Seller", "Hot", "Popular", "New", "Top Pick"];
+const TAGLINES = ["Premium Quality", "High Durability", "Best Value", "Trusted Choice", "Top Rated"];
 
-function ProductCard({ product }: { product: Product }) {
-  return (
-    <Link href={`/products/${product.slug}`} className="product-card group block">
-      <div className="relative overflow-hidden bg-white aspect-square">
-        <Image
-          unoptimized fill
-          src={product.image}
-          alt={product.name}
-          className="card-img object-contain px-4 pt-4 pb-4 sm:px-5"
-        />
-        <div className="overlay absolute inset-x-0 bottom-0 z-20">
-          <div className="flex items-center justify-end gap-2 px-3 py-3">
-            <a
-              href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I'm interested in: ${product.name}`)}`}
-              target="_blank" rel="noopener noreferrer"
-              className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
-              onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-            >
-              <MessageCircle size={15} color="white" />
-            </a>
-          </div>
-        </div>
-        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-30" />
-      </div>
-      <div className="pt-3 px-0.5 pb-1">
-        <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
-          {product.name}
-        </p>
-        {product.description && (
-          <p className="text-[11px] text-gray-400 mt-0.5 font-light leading-relaxed line-clamp-2">
-            {product.description}
-          </p>
-        )}
-      </div>
-    </Link>
-  );
-}
+const getImage = (p: Product) => p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
+const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
+
+const WA_NUMBER = "6281234567890";
 
 export default function ProductPowerAmplifier() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
+      .then((r) => r.json())
+      .then((data) => {
+        const list: Product[] = data.data || data;
+        const withImage = list.filter(hasImage);
+        const withoutImage = list.filter((p) => !hasImage(p));
+        setProducts([...withImage, ...withoutImage].slice(0, 4));
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <LazyMotion features={domAnimation}>
       <style>{`
@@ -108,13 +48,11 @@ export default function ProductPowerAmplifier() {
         .product-card:hover .overlay { transform: translateY(0); }
       `}</style>
 
-      <section className="w-full py-2">
-        <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-
-          {/* About */}
-          <div className="text-center max-w-6xl mx-auto mb-8">
+      <section className="w-full bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-16">
+ <div className="text-center max-w-6xl mx-auto mb-8">
             <h1 className="text-2xl md:text-xl font-medium text-red-600">
-              Your Professional Network Speaker Supplier!
+            Your Professional Power Amplifer Supplier!
             </h1>
             <div className="flex justify-center mt-3 mb-6">
               <span className="block w-12 h-1 rounded-full bg-red-500" />
@@ -128,22 +66,94 @@ export default function ProductPowerAmplifier() {
               centers, education, multi-functional halls, and stadiums.
             </p>
           </div>
-
-          {/* Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-            {PRODUCTS.map((product, i) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {products.map((product, i) => (
               <m.div
                 key={product.id}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="product-card group"
               >
-                <ProductCard product={product} />
+              <Link key={product.id} href={`/catalogue/${product?.category?.name}/${product.id}`} className="product-card group">
+                <div className="relative overflow-hidden bg-gray-50" style={{ aspectRatio: "1/1" }}>
+                  <Image
+                    unoptimized fill
+                    src={getImage(product)}
+                    alt={product.name}
+                    className="card-img object-cover"
+                  />
+
+                  <div className="absolute top-2.5 left-2.5 z-10">
+                    <span
+                      className="text-[7px] lg:text-[9px] font-black uppercase tracking-widest px-2 py-1 text-white"
+                      style={{
+                        background: i % 2 === 0
+                          ? "linear-gradient(135deg,#dc2626,#9f1010)"
+                          : "linear-gradient(135deg,#111,#333)",
+                        clipPath: "polygon(0 0,calc(100% - 5px) 0,100% 100%,5px 100%)",
+                      }}
+                    >
+                      {BADGES[i % BADGES.length]}
+                    </span>
+                  </div>
+
+                  <div className="absolute top-2.5 right-2.5 z-10">
+                    <div className="relative h-5 w-14 bg-white/90 backdrop-blur-sm px-1 py-0.5">
+                      <Image
+                        src="/images/logo/tendzone.png"
+                        alt="Tendzone"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className="overlay absolute inset-x-0 bottom-0 z-20"
+                  >
+                    <div className="flex items-center gap-2 px-3 py-3 justify-end">
+
+                      {/* View Detail */}
+                      {/* <Link
+                        href="/catalogue/23"
+                        className="flex flex-1 items-center justify-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors duration-150 rounded py-1.5"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest whitespace-nowrap">
+                          View Detail
+                        </span>
+                      </Link> */}
+
+                      <span className="w-px h-5 bg-white/20 shrink-0" />
+                      <a
+                        href={`https://wa.me/${WA_NUMBER}?text=Halo,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.name)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-8 h-8 bg-red-500 hover:bg-red-600 transition-colors duration-150 rounded shrink-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                          <MessageCircle size={15} color="white" />
+                      </a>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 px-0.5 pb-1">
+                  <p className="text-[13px] font-bold text-gray-900 line-clamp-1 group-hover:text-red-600 transition-colors duration-200">
+                    {product.name}
+                  </p>
+                  <p className="text-[11px] text-gray-400 mt-0.5 font-light tracking-wide">
+                    {TAGLINES[i % TAGLINES.length]}
+                  </p>
+                </div>
+
+            </Link>
               </m.div>
             ))}
           </div>
-
         </div>
       </section>
     </LazyMotion>

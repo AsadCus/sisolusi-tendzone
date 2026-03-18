@@ -21,7 +21,7 @@ export default function ProductsPage() {
   return (
     <>
     <NavbarProductLanding/>
-      <PageHero title="Network Adapters" />
+      <PageHero title="Power Amplifer" />
     <ProductPowerAmplifier />
       <WhyChooseUsSectionSubcategory />
       <OemOdmSubcategorySection/>
