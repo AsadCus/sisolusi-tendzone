@@ -10,7 +10,7 @@ import HonorQualification from "@/components/section/honor-qualification";
 import AfterSalesServices from "@/components/section/after-sales";
 import PackagingAndShippingSection from "@/components/section/Packaging-and-Shipping";
 import PopularProductsCarousel from "@/components/section/popularProducts";
-import FAQSection from "@/components/section/faq";
+import PowerAmplifierFAQ from "@/components/power-amplifier/faq";
 import ProductPowerAmplifier from "@/components/power-amplifier/power-amplifier";
 import FeaturesPowersAmplifier from "@/components/power-amplifier/FeaturesPowerAmplifier";
 import PowerAmplifierClassesSection from "@/components/power-amplifier/power-amplifier-classes";
@@ -33,7 +33,7 @@ export default function ProductsPage() {
       <AfterSalesServices />
       <PackagingAndShippingSection />
       <HonorQualification />
-       <FAQSection />
+       <PowerAmplifierFAQ />
             <PopularProductsCarousel />
       <SendInquirySection />
       <Footer/>

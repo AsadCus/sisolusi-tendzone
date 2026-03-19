@@ -42,7 +42,7 @@ export default function BestSellingDigitalConferenceSection() {
       <div className="max-w-7xl mx-auto px-8 md:px-6">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-medium text-gray-900 tracking-tight">
-            Our Best-Selling Network Audio Distribution
+         Our Best-Selling Digital Conference System
           </h2>
           <div className="flex justify-center mt-3">
             <span className="block w-10 h-1 rounded-full bg-red-500" />

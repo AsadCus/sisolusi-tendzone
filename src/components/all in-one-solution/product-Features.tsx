@@ -1,8 +1,18 @@
-const products = [
+"use client"
+
+import { useState, useEffect } from "react";
+
+interface Product {
+  id: number;
+  name: string;
+  category: { id: number; name: string };
+  galleries?: { file_url: string }[];
+}
+
+const productts = [
   {
     id: "twelve-in-one",
     title: "Twelve-In-One Integrated Processor",
-    image: "https://www.tendzone.net/uploads/43135/4ch-8k60-4-2-0-hdr-hdmi-switcher9f3a1.jpg",
     features: [
       "12 Analog Inputs",
       "8 Analog Outputs",
@@ -17,7 +27,6 @@ const products = [
   {
     id: "thirteen-in-one",
     title: "Thirteen-In-One Integrated Processor",
-    image: "https://www.tendzone.net/uploads/43135/16ch-4k60-4-4-4-hdr-hdmi-distributorda297.jpg",
     features: [
       "Stereo graphic equalization",
       "Low frequency controls",
@@ -35,7 +44,6 @@ const products = [
   {
     id: "touch-panel",
     title: "Wired Control Touch Panel",
-    image: "https://www.tendzone.net/uploads/43135/4ch-4k60-4-4-4-hdr-hdmi-distributored7e8.jpg",
     features: [
       "10.1 inches, ARM architecture, up to 1.8Ghz main frequency",
       "Android 9.0 or above, 8GB Emmc Flash, 2GB DDR4 RAM",
@@ -51,7 +59,6 @@ const products = [
   {
     id: "nine-in-one",
     title: "Nine-In-One Integrated Processor",
-    image: "https://www.tendzone.net/uploads/43135/2ch-2k60-4-4-4-network-av-encoder-decoderd608c.jpg",
     features: [
       "Engineered to deliver exceptional pro audio performance with faster, easier implementation",
       "Ready to go out of the box and extensively configurable",
@@ -71,7 +78,6 @@ const products = [
   {
     id: "workspaces",
     title: "Workspaces",
-    image: "https://www.tendzone.net/uploads/43135/expansion-midis-system-serveredbbf.jpg",
     features: [
       "Conference rooms",
       "Training rooms",
@@ -84,7 +90,6 @@ const products = [
   {
     id: "operation",
     title: "Operation Condition",
-    image: "https://www.tendzone.net/uploads/43135/4k-av-over-ip-encoder-decoder351b2.jpg",
     features: [
       "Standard operating temperature: 0°C to 40°C (32°F to 104°F)",
       "Non-operating temperature: -10°C to 60°C (14°F to 140°F)",
@@ -94,12 +99,20 @@ const products = [
   },
 ];
 
-function FeatureCard({ product }: { product: (typeof products)[0] }) {
+const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
+
+function FeatureCard({
+  product,
+  imageUrl,
+}: {
+  product: (typeof productts)[0];
+  imageUrl: string;
+}) {
   return (
     <div className="group flex flex-col bg-white border border-gray-100 overflow-hidden transition-all duration-300 hover:border-gray-200 hover:shadow-lg hover:-translate-y-0.5">
       <div className="relative w-full h-44 overflow-hidden">
         <img
-          src={product.image}
+          src={imageUrl || "/images/categories/placeholder.jpg"}
           alt={product.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
@@ -120,22 +133,41 @@ function FeatureCard({ product }: { product: (typeof products)[0] }) {
           ))}
         </ul>
       </div>
-
     </div>
   );
 }
 
+// ✅ Fetch SATU KALI di sini, bagi imageUrl per card by index
 export default function ProductFeatures() {
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
+      .then((r) => r.json())
+      .then((data) => {
+        const list: Product[] = data.data || data;
+        const withImage = list.filter(hasImage);
+        const withoutImage = list.filter((p) => !hasImage(p));
+        const sorted = [...withImage, ...withoutImage].slice(0, productts.length);
+
+        // Ambil hanya URL-nya, urut sesuai jumlah card
+        setImageUrls(sorted.map((p) => p.galleries?.[0]?.file_url ?? ""));
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <section className="bg-white pt-8 px-6 font-sans">
       <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {products.map((p) => (
-            <FeatureCard key={p.id} product={p} />
+          {productts.map((p, i) => (
+            <FeatureCard
+              key={p.id}
+              product={p}
+              imageUrl={imageUrls[i] ?? ""}  // ✅ 1 gambar per card
+            />
           ))}
         </div>
-
       </div>
     </section>
   );

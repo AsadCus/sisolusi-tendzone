@@ -187,21 +187,6 @@ export default function AudioProcessorProduct() {
           </Pagination>
         </div>
 
-          <div className="mt-12 flex justify-center">
-            <Link
-              href="/products"
-              className="group flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-red-600 transition-colors duration-200"
-            >
-              <span className="border-b border-gray-300 group-hover:border-red-500 pb-px transition-colors duration-200">
-                View All Products
-              </span>
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
-                className="transition-transform duration-200 group-hover:translate-x-0.5">
-                <path d="M1 6.5h11M7 2l5 4.5L7 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </div>
-
         </div>
       </section>
     </LazyMotion>

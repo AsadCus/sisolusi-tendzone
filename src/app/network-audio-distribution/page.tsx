@@ -10,7 +10,7 @@ import NetworkAudioFeatureSections from "@/components/network-audio-distribution
 import ProductApplicationNetworkAudio from "@/components/network-audio-distribution/application-network-distribution";
 import OurServiceSection from "@/components/section/ourServices";
 import HonorQualification from "@/components/section/honor-qualification";
-import FaqSection from "@/components/section/faq";
+import NetworkAudioDistributionFAQ from "@/components/network-audio-distribution/faq";
 import PopularProductsCarousel from "@/components/section/popularProducts";
 import SendInquirySection from "@/components/section/SendInquirySection";
 import NetworkAudioDistributionSection from "@/components/network-audio-distribution/network-audio-distribution";
@@ -33,7 +33,7 @@ export default function ProductsPage() {
       <ProductApplicationNetworkAudio />
       <OurServiceSection />
       <HonorQualification />
-      <FaqSection />
+      <NetworkAudioDistributionFAQ />
       <PopularProductsCarousel />
       <SendInquirySection />
       <Footer/>

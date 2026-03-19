@@ -5,7 +5,7 @@ import WhyChooseUsCategory from "@/components/section/whyChooseCategory";
 import ProductGridDigitalReference from "@/components/digital-conference-system/list-product-audio-distribution";
 import OemOdmCategory from "@/components/section/oem-odm-category";
 import BestSellingDigitalConferenceSection from "@/components/digital-conference-system/best-selling-digital-conference";
-import FaqSection from "@/components/section/faq";
+import DigitalConferenceFAQ from "@/components/digital-conference-system/faq";
 import PopularProductsCarousel from "@/components/section/popularProducts";
 import SendInquirySection from "@/components/section/SendInquirySection";
 import DigitalReferenceSystem from "@/components/digital-conference-system/digital-reference-system";
@@ -31,7 +31,7 @@ export default function ProductsPage() {
       <ProductApplicationFeatureConference />
       <HonorQualification />
       <OurServiceSection />
-      <FaqSection />
+      <DigitalConferenceFAQ />
       <PopularProductsCarousel />
       <SendInquirySection />
       <Footer/>

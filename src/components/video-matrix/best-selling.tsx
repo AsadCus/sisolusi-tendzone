@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LazyMotion, domAnimation, m } from "framer-motion";
+import { useState, useEffect } from "react";
 
 
 type BadgeType = "bestselling" | "hot" | "new" | "flagship";
@@ -14,6 +15,11 @@ interface Product {
   description: string;
   image: string;
   badge?: { label: string; type: BadgeType };
+category:{
+    id: number;
+    name: string;
+  }
+  galleries?: { file_url: string }[];
 }
 
 
@@ -26,42 +32,9 @@ const badgeGradient: Record<BadgeType, string> = {
 };
 
 
-
-const PRODUCTS: Product[] = [
-  {
-    id: 1,
-    name: "32x32 Hybrid Modular Video Matrix",
-    slug: "all-in-one",
-    description:
-      "This high-performance professional switching device effectively manages audio and video signals, making it ideal for a variety of applications including broadcasting and television projects, multimedia conference halls, large-screen displays, television teaching, and command/control centers.",
-    image: "https://www.tendzone.net/uploads/43135/small/hybrid-modular-video-matrix557ba.jpg?size=380x0",
-    badge: { label: "Best Selling", type: "bestselling" },
-  },
-  {
-    id: 2,
-    name: "Fixed Seamless Video Matrix",
-    slug: "audio-processor",
-    description:
-      "The FSVM1616-HD430 is a high-performance 4K HDMI seamless switching matrix engineered for managing HDMI signals with impressive efficiency. With 16 inputs and 16 outputs, it stands out as a robust solution for various professional AV environments.",
-    image: "https://www.tendzone.net/uploads/43135/small/fixed-seamless-video-matrixac1a6.jpg?size=380x0",
-    badge: { label: "Hot", type: "hot" },
-  },
-  {
-    id: 3,
-    name: "8x8 Fixed Seamless Video Matrix",
-    slug: "audio-processor",
-    description:
-      "FSVM88-HD430 is a professional 4K HD fixed seamless switching matrix, which supports 8 HDMI inputs and 8 HDMI outputs. The equipment control mode is flexible and diverse, including bidirectional serial port control, button, IR, RJ45 and other control.",
-    image: "https://www.tendzone.net/uploads/43135/small/8x8-fixed-seamless-video-matrix5bf8c.jpg?size=380x0",
-    badge: { label: "Best Selling", type: "bestselling" },
-  },
-];
-
-
-
 function ProductCard({ product, index }: { product: Product; index: number }) {
   return (
-    <Link href={`/products/${product.slug}`} className="group block">
+    <Link href={`/catalogue/${product?.category?.name}/${product.id}`} className="group block">
       <div className="border border-gray-100 bg-white hover:border-red-200 transition-colors duration-200 overflow-hidden h-full flex flex-col">
 
  
@@ -69,7 +42,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           <Image
             unoptimized
             fill
-            src={product.image}
+            src={getImage(product)}
             alt={product.name}
             className="object-contain px-6 pt-8 pb-4 transition-transform duration-500 group-hover:scale-105"
           />
@@ -122,26 +95,43 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
   );
 }
 
+const getImage = (p: Product) => p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
+const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
+
 
 export default function BestSellingVideoMatrix() {
+ const [products, setProducts] = useState<Product[]>([]);
+  
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
+      .then((r) => r.json())
+      .then((data) => {
+        const list: Product[] = data.data || data;
+        const withImage = list.filter(hasImage);
+        const withoutImage = list.filter((p) => !hasImage(p));
+        setProducts([...withImage, ...withoutImage].slice(0, 3));
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <LazyMotion features={domAnimation}>
       <section className="w-full bg-white py-8">
         <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
 
           {/* Header */}
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-xl font-medium text-red-600">
-              Our Best-Selling Video Matrix
-            </h2>
-            <div className="flex justify-center mt-3">
-              <span className="block w-8 h-0.5 bg-red-500" />
-            </div>
+             <div className="max-w-7xl mx-auto px-6 lg:px-16">
+ <div className="mb-6 text-center">
+          <h2 className="text-2xl md:text-xl mx-15 font-medium text-black">
+            Our Best-Selling Video Matrix
+          </h2>
+        </div>
           </div>
 
        
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {PRODUCTS.map((product, i) => (
+            {products.map((product, i) => (
               <m.div
                 key={product.id}
                 initial={{ opacity: 0, y: 16 }}

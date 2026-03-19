@@ -1,73 +1,151 @@
 "use client";
 
-const products = [
-  {
-    tag: "01",
-    name: "8x8 Web Based Audio Processor",
-    model: "WebGem 0808 DSP",
-    description:
-      "A comprehensive suite of versatile audio DSP tools designed specifically for AV integrators. Features eight analog audio input channels and eight analog audio output channels.",
-  },
-  {
-    tag: "02",
-    name: "16x16 Web Based Audio Processor",
-    model: "WebGem 1616 DSP",
-    description:
-      "A thorough array of adaptable audio DSP tools tailored for AV integrators. Features 16 analog audio inputs and outputs, meeting a wide range of audio processing requirements.",
-  },
-  {
-    tag: "03",
-    name: "8x8 Web Based Dante Audio Processor",
-    model: "WebGem 0808D DSP",
-    description:
-      "An extensive range of adaptable audio DSP tools for AV integrators. Eight channels for analog audio I/O plus a 16×16 model supporting Dante™ signal extension for diverse processing needs.",
-  },
-  {
-    tag: "04",
-    name: "DANTE DSP",
-    model: "RUBY T16 DSP",
-    description:
-      "A medium-sized network audio processor adopting Dante protocol, supporting 32-in/32-out audio channels over network for mixing, routing, and general audio processing in medium to large venues.",
-  },
-];
+import Image from "next/image";
+import Link from "next/link";
+import { LazyMotion, domAnimation, m } from "framer-motion";
+import { useState, useEffect } from "react";
+
+
+type BadgeType = "bestselling" | "hot" | "new" | "flagship";
+
+interface Product {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  image: string;
+  badge?: { label: string; type: BadgeType };
+category:{
+    id: number;
+    name: string;
+  }
+  galleries?: { file_url: string }[];
+}
+
+
+
+const badgeGradient: Record<BadgeType, string> = {
+  bestselling: "linear-gradient(135deg,#111,#333)",
+  flagship: "linear-gradient(135deg,#111,#333)",
+  hot: "linear-gradient(135deg,#dc2626,#9f1010)",
+  new: "linear-gradient(135deg,#dc2626,#9f1010)",
+};
+
+
+function ProductCard({ product, index }: { product: Product; index: number }) {
+  return (
+    <Link href={`/catalogue/${product?.category?.name}/${product.id}`} className="group block">
+      <div className="border border-gray-100 bg-white hover:border-red-200 transition-colors duration-200 overflow-hidden h-full flex flex-col">
+
+ 
+        <div className="relative overflow-hidden bg-white aspect-[4/3]">
+          <Image
+            unoptimized
+            fill
+            src={getImage(product)}
+            alt={product.name}
+            className="object-contain px-6 pt-8 pb-4 transition-transform duration-500 group-hover:scale-105"
+          />
+
+     
+          {product.badge && (
+            <div className="absolute top-3 left-3 z-10">
+              <span
+                className="text-[9px] font-black uppercase tracking-widest px-2.5 py-1 text-white leading-none"
+                style={{ background: badgeGradient[product.badge.type] }}
+              >
+                {product.badge.label}
+              </span>
+            </div>
+          )}
+
+       
+          <div className="absolute bottom-3 right-3 z-10">
+            <span className="text-[28px] font-black text-gray-100 leading-none select-none group-hover:text-red-100 transition-colors duration-200">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
+
+      
+          <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left z-20" />
+        </div>
+
+\
+        <div className="p-5 flex flex-col gap-3 flex-1">
+          <h3 className="text-sm font-bold text-gray-900 leading-snug group-hover:text-red-600 transition-colors duration-200">
+            {product.name}
+          </h3>
+
+          <p className="text-xs text-gray-500 leading-relaxed line-clamp-3 flex-1">
+            {product.description}
+          </p>
+
+          <div className="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300 group-hover:text-red-300 transition-colors duration-200">
+              Tendzone
+            </span>
+            <span className="text-xs font-semibold text-gray-600 group-hover:text-red-600 transition-colors duration-200 uppercase tracking-wide">
+              Selengkapnya →
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </Link>
+  );
+}
+
+const getImage = (p: Product) => p.galleries?.[0]?.file_url ?? "/images/categories/placeholder.jpg";
+const hasImage = (p: Product) => !!p.galleries?.[0]?.file_url;
+
 
 export default function BestSellingAudioProcessor() {
-  return (
-    <section className="bg-white py-8 px-4 font-sans">
-      <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto">
+ const [products, setProducts] = useState<Product[]>([]);
+  
 
-        <div className="mb-6">
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_PRODUCT_URL || "")
+      .then((r) => r.json())
+      .then((data) => {
+        const list: Product[] = data.data || data;
+        const withImage = list.filter(hasImage);
+        const withoutImage = list.filter((p) => !hasImage(p));
+        setProducts([...withImage, ...withoutImage].slice(0, 3));
+      })
+      .catch(console.error);
+  }, []);
+
+  return (
+    <LazyMotion features={domAnimation}>
+      <section className="w-full bg-white py-8">
+        <div className="max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4">
+
+          {/* Header */}
+             <div className="max-w-7xl mx-auto px-6 lg:px-16">
+ <div className="mb-6 text-center">
           <h2 className="text-2xl md:text-xl mx-15 font-medium text-black">
             Our Best-Selling Audio Processor
           </h2>
         </div>
+          </div>
 
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {products.map((p, i) => (
-            <div
-              key={i}
-              className="group border border-gray-100 bg-gray-50 hover:border-red-200 hover:bg-red-50 transition-colors duration-200 px-5 py-5 flex gap-4"
-            >
-              <span className="text-[28px] font-bold text-gray-100 group-hover:text-red-100 leading-none select-none shrink-0 transition-colors duration-200">
-                {p.tag}
-              </span>
-              <div>
-                <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest mb-1">
-                  {p.model}
-                </p>
-                <p className="text-[12.5px] font-bold text-gray-900 mb-2 group-hover:text-gray-900 leading-snug">
-                  {p.name}
-                </p>
-                <p className="text-[11.5px] text-gray-800 leading-relaxed text-justify">
-                  {p.description}
-                </p>
-              </div>
-            </div>
-          ))}
+       
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {products.map((product, i) => (
+              <m.div
+                key={product.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+              >
+                <ProductCard product={product} index={i} />
+              </m.div>
+            ))}
+          </div>
+
         </div>
-
-      </div>
-    </section>
+      </section>
+    </LazyMotion>
   );
 }

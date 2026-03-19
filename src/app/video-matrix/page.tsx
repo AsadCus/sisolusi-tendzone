@@ -7,7 +7,7 @@ import HonorQualification from "@/components/section/honor-qualification";
 import AfterSalesServices from "@/components/section/after-sales";
 import PackagingAndShippingSection from "@/components/section/Packaging-and-Shipping";
 import PopularProductsCarousel from "@/components/section/popularProducts";
-import FAQSection from "@/components/section/faq";
+import VideoMatrixFAQ from "@/components/video-matrix/faq";
 import VideoMatrixSpecificationTable from "@/components/video-matrix/table-speficication";
 import NavbarProductLanding from "@/components/navbar-landing-product";
 import ProductVideoMatrix from "@/components/video-matrix/video-matrix";
@@ -34,7 +34,7 @@ export default function ProductsPage() {
       <AfterSalesServices />
       <PackagingAndShippingSection />
       <HonorQualification />
-       <FAQSection />
+       <VideoMatrixFAQ />
             <PopularProductsCarousel />
       <SendInquirySection />
       <Footer/>
