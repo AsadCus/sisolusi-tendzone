@@ -92,23 +92,41 @@ const KEYFRAMES = `
 export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
   const [done, setDone]         = useState(false);
+  const [show, setShow]       = useState(false); 
+
+
 
   useEffect(() => {
-    const steps = DURATION_MS / INTERVAL_MS;
-    let current = 0;
+  const hasSeen = localStorage.getItem("hasSeenLoading");
 
-    const timer = setInterval(() => {
-      current++;
-      const p = Math.min(100, Math.round(easeOutQuart(current / steps) * 100));
-      setProgress(p);
-      if (current >= steps) {
-        clearInterval(timer);
-        setTimeout(() => setDone(true), EXIT_DELAY);
-      }
-    }, INTERVAL_MS);
+  if (hasSeen) {
+    setDone(true); // langsung skip loading
+    return;
+  }
 
-    return () => clearInterval(timer);
-  }, []);
+  setShow(true);
+
+  const steps = DURATION_MS / INTERVAL_MS;
+  let current = 0;
+
+  const timer = setInterval(() => {
+    current++;
+    const p = Math.min(100, Math.round(easeOutQuart(current / steps) * 100));
+    setProgress(p);
+
+    if (current >= steps) {
+      clearInterval(timer);
+
+      localStorage.setItem("hasSeenLoading", "true"); // simpan flag
+
+      setTimeout(() => setDone(true), EXIT_DELAY);
+    }
+  }, INTERVAL_MS);
+
+  return () => clearInterval(timer);
+}, []);
+
+if (!show) return null;
 
   const stage = getStage(progress);
 
@@ -117,7 +135,7 @@ export default function LoadingScreen() {
       <AnimatePresence>
         {!done && (
           <m.div
-            className="fixed inset-0 z-[999] flex items-center justify-center overflow-hidden"
+            className="fixed inset-0 z-999 flex items-center justify-center overflow-hidden"
             style={{ background: "#0d0d0d" }}
             exit={{ y: "-100%", transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] } }}
           >
@@ -161,7 +179,7 @@ export default function LoadingScreen() {
 
              
               <m.p
-                className="mb-[22px] font-mono text-[9px] tracking-[0.44em] uppercase"
+                className="mb-5.5 font-mono text-[9px] tracking-[0.44em] uppercase"
                 style={{ color: "rgba(255,255,255,0.2)" }}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -192,7 +210,7 @@ export default function LoadingScreen() {
 
                
                 <div
-                  className="mt-2.5 h-[2px] w-full rounded-full"
+                  className="mt-2.5 h-0.5 w-full rounded-full"
                   style={{
                     background: "linear-gradient(90deg,#8b0000,#c41a1a,rgba(255,255,255,0.35))",
                     transformOrigin: "left",
@@ -207,9 +225,9 @@ export default function LoadingScreen() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: 0.22 }}
               >
-                <span className="w-[3px] h-[3px] rounded-full bg-white/15" />
-                <span className="w-[3px] h-[3px] rounded-full bg-red-600/55" />
-                <span className="w-[3px] h-[3px] rounded-full bg-white/15" />
+                <span className="w-0.75 h-0.75 rounded-full bg-white/15" />
+                <span className="w-0.75 h-0.75 rounded-full bg-red-600/55" />
+                <span className="w-0.75 h-0.75 rounded-full bg-white/15" />
               </m.div>
 
              
@@ -223,7 +241,7 @@ export default function LoadingScreen() {
                 Industrial &amp; Commercial Products
               </m.p>
               <m.div
-                className="mt-11 w-[260px] flex flex-col"
+                className="mt-11 w-65 flex flex-col"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.35 }}
@@ -269,9 +287,9 @@ export default function LoadingScreen() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-[7px] mt-[11px]">
+                <div className="flex items-center gap-1.75 mt-2.75">
                   <span
-                    className="w-[5px] h-[11px] flex-shrink-0"
+                    className="w-0.75 h-1.75 shrink-0"
                     style={{ background: "#c41a1a", animation: "ls-blink 1s step-end infinite" }}
                   />
                   <span

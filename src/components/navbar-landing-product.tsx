@@ -118,13 +118,13 @@ export default function NavbarProductLanding() {
 
       <div className="font-sans">
         {/* z-[200] — di atas semua section, sticky element, dsb */}
-        <header className="fixed top-0 left-0 w-full z-[200] flex flex-col">
+        <header className="fixed top-0 left-0 w-full z-200 flex flex-col">
 
           {/* Utility bar */}
           <div className={cn(
             "transition-all duration-300 overflow-hidden",
             isTransparent
-              ? "bg-transparent border-b border-white/10 h-9 opacity-100"
+              ? "bg-black border-b border-white/10 h-9 opacity-100"
               : scrolled
                 ? "h-0 opacity-0"
                 : "bg-white border-b border-gray-100 h-9 opacity-100"
@@ -157,7 +157,7 @@ export default function NavbarProductLanding() {
           {/* Main nav */}
           <nav className={cn(
             "transition-all duration-300",
-            isTransparent ? "bg-transparent" : "bg-white shadow-sm border-b border-gray-100"
+            isTransparent ? "bg-black" : "bg-white shadow-sm border-b border-gray-100"
           )}>
             <div className="max-w-7xl mx-auto px-6 flex items-center h-16">
 
@@ -245,7 +245,7 @@ export default function NavbarProductLanding() {
 
                       {/* Other dropdowns — z-[210] */}
                       {link.label !== "Products" && link.dropdown && megaData[link.label as keyof typeof megaData] && (
-                        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-[210]"
+                        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible z-210"
                           style={{ transition: "opacity 150ms ease, visibility 150ms ease" }}>
                           <div className="mega-enter bg-white rounded-2xl shadow-xl shadow-black/10 border border-gray-100 overflow-hidden min-w-47.5">
                             <div className="px-5 pt-4 pb-2.5">
@@ -317,7 +317,7 @@ export default function NavbarProductLanding() {
 
           {/* Mobile drawer — z-[210] biar di atas semua konten */}
           <div className={cn(
-            "lg:hidden fixed inset-x-3 bottom-3 z-[210] bg-white rounded-2xl shadow-2xl overflow-y-auto transition-all duration-300 border border-gray-100",
+            "lg:hidden fixed inset-x-3 bottom-3 z-210 bg-white rounded-2xl shadow-2xl overflow-y-auto transition-all duration-300 border border-gray-100",
             mobileOpen ? "opacity-100 pointer-events-auto top-30" : "opacity-0 pointer-events-none top-30"
           )}>
             <div className="px-4 py-5 flex flex-col">
